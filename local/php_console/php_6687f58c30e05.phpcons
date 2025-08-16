@@ -1,0 +1,35 @@
+
+// https://www.unisender.com/ru/support/category/api/
+
+use \Bitrix\Main\Web\Json;
+
+\Bitrix\Main\Loader::includeModule('acrit.unisender');
+
+dump($apiKey = \Bitrix\Main\Config\Option::get('acrit.unisender', 'ACRIT_UNISENDER_API_KEY'));
+dump($listId = \Bitrix\Main\Config\Option::get('acrit.unisender', 'ACRIT_UNISENDER_LIST'));
+dump($charset = \Bitrix\Main\Config\Option::get('acrit.unisender', 'ACRIT_UNISENDER_CHARSET'));
+$unisender = new \Unisender\ApiWrapper\UnisenderApi($apiKey, $charset);
+dump(Json::decode($unisender->importContacts([
+	'field_names' => [
+		'email',
+		'email_availability',
+		'email_list_ids',
+		'email_status',
+		'tags',
+		'Name',
+		'last_name',
+	],
+	'data' => [
+		[
+			'nw2krus@gmail.com',
+			1,
+			[$listId],
+			'new',
+			'bitrix,ClanBeauty,test',
+			'Дмитрий',
+			'Шрам',
+		],
+	],
+])));
+dump(Json::decode($unisender->getFields()));
+dump(Json::decode($unisender->getContact(['email' => 'nw2krus@gmail.com', 'include_fields' => 1, 'include_lists' => 1])));

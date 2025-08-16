@@ -1,0 +1,123 @@
+.adm-s-order-person-choose .adm-s-bus-morelinkqhsw {
+    display: inline-block;
+}
+
+#bigdatabar {
+    display: none;
+}
+
+.adm-shipment-block-short-info .shipment-status, .adm-shipment-block-short-info .delivery-status {
+    display: none;
+}
+
+.adm-container-draggable[data-id="shipmentStatus"] {
+    display: none;
+}
+
+#fav_cont_fav, #fav_cont_item {
+    display: none !important;
+}
+
+@media print {
+    .adm-header-wrap, .adm-navchain, .adm-left-side-wrap, .adm-footer-wrap, .adm-info-message-wrap {
+        display: none;
+    }
+}
+
+.confirm-personal-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.confirm-personal-data .adm-btn {
+    min-width: 200px;
+    margin-bottom: 15px;
+    padding: 6px 15px 5px;
+    text-align: center;
+    height: 29px;
+    min-height: 29px;
+    box-sizing: border-box;
+    text-decoration: none !important;
+    color: black !important;
+}
+
+.confirm-personal-data .adm-btn-save {
+    color: white !important;
+}
+
+.cb_marketing_tools {
+    background: url("img/cb_marketing_tools.svg") no-repeat center;
+    background-size: 16px;
+}
+
+.cb_audience_facebook {
+    background: url("img/cb_menu_facebook.svg") no-repeat center;
+    background-size: 16px;
+}
+
+.autocomplete-suggestions {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #999;
+    background: #FFF;
+    cursor: default;
+    overflow: auto;
+    -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    line-height: 2em;
+}
+
+.autocomplete-suggestion {
+    padding: 2px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.autocomplete-no-suggestion {
+    padding: 2px 5px;
+}
+
+.autocomplete-selected {
+    background: white;
+}
+
+.autocomplete-suggestions strong {
+    font-weight: bold;
+    color: #000;
+}
+
+.autocomplete-group {
+    padding: 2px 5px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #000;
+    display: block;
+    border-bottom: 1px solid #000;
+}
+
+.autocomplete-selected {
+    background: #00aaff;
+}
+
+.custom-current-shop {
+    display: inline-block;
+    position: relative;
+    background: #ffca00;
+    vertical-align: middle;
+    padding: 7px 20px;
+    margin-right: 10px;
+    border-radius: 2px;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.adm-list-table-cell img {
+    max-height: 200px;
+    max-width: 100px;
+    width: auto !important;
+    height: auto !important;
+}

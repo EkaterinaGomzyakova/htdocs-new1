@@ -1,0 +1,106 @@
+.faq_desc {
+    margin-left: 183px;
+    margin-top: -4px
+}
+
+.faq_ask .form {
+    margin: 23px 0 0
+}
+
+.faq_ask .form_head h4 {
+    display: none
+}
+
+.faq.list {
+    margin: 36px 0 0
+}
+
+.faq_section {
+    border: 1px solid #f2f2f2;
+    margin: 28px 0 26px
+}
+
+.faq.list .item {
+    padding: 19px 24px 22px;
+    border-bottom: 1px solid #f2f2f2
+}
+
+.faq.list .item:last-of-type {
+    border: none
+}
+
+.faq.list .item.opened {
+    background-color: #f7f7f7
+}
+
+.faq.list .item .q {
+    font-weight: 700;
+    position: relative
+}
+
+.faq.list .item .q .opener_icon {
+    position: absolute;
+    right: -3px;
+    top: -5px
+}
+
+.faq.list .item .q a {
+    display: block;
+    padding: 0 20px 0 0
+}
+
+.faq.list .item .a {
+    display: none;
+    padding-top: 14px
+}
+
+.faq_ask {
+    border: 1px solid #f2f2f2;
+    padding: 44px
+}
+
+.faq_ask .maxwidth-theme {
+    padding: 0
+}
+
+.faq_ask .form .form_footer {
+    margin-bottom: 0
+}
+
+.button.faq_button {
+    float: left;
+    padding: 9px 18px 10px 39px;
+    text-align: center;
+    position: relative;
+    white-space: nowrap
+}
+
+.button.faq_button>span {
+    display: inline
+}
+
+.button.faq_button>span:last-of-type {
+    display: none
+}
+
+.button.faq_button.opened>span {
+    display: none
+}
+
+.button.faq_button.opened>span:last-of-type {
+    display: inline
+}
+
+.button.faq_button i {
+    background: rgba(0, 0, 0, 0) url(images/arrows.png) repeat scroll 1px -441px;
+    display: block;
+    height: 9px;
+    left: 18px;
+    position: absolute;
+    top: 13px;
+    width: 12px
+}
+
+.button.faq_button.opened i {
+    background-position: -17px -441px
+}

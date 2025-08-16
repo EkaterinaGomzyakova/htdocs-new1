@@ -1,0 +1,4 @@
+<?php
+$MESS['G_WL_GENERATE_CERTIFIACTE_COUPON'] = 'Купон:&emsp;';
+$MESS['G_WL_GENERATE_CERTIFIACTE_DESIGN'] = 'Дизайн:&nbsp;';
+$MESS['G_WL_GENERATE_CERTIFIACTE_DOWNLOAD'] = 'Скачать';

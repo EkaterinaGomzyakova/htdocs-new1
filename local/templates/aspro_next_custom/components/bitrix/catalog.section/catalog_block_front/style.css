@@ -1,0 +1,45 @@
+.catalog-section-carousel-dots {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100%;
+    opacity: 0;
+    justify-content: center;
+}
+
+.catalog-section-carousel-dots:hover {
+    opacity: 1;
+}
+
+.catalog-section-carousel-dot {
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 100%;
+    position: relative;
+}
+
+.catalog-section-carousel-dot::before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    height: 1px;
+    width: 100%;
+    background: #ffeee7;
+    opacity: 0.6;
+}
+
+.catalog-section-carousel-dot:hover::before {
+    background: #235C4E;
+}
+
+.catalog-section-carousel-dot:first-child::before {
+    border-radius: 10px 0px 0px 10px;
+}
+
+.catalog-section-carousel-dot:last-child::before {
+    border-radius: 0px 10px 10px 0px;
+}

@@ -1,0 +1,99 @@
+Order Allow,Deny
+Deny from 158.69.225.124
+Deny from 51.195.42.82
+Deny from 180.76.146.169
+Deny from 81.17.20.50
+Deny from 165.227.71.244
+Deny from 45.115.39.18
+Deny from 51.155.3.184
+Deny from 205.185.116.54
+Deny from 91.250.62.180
+Deny from 188.166.104.152
+Allow from all
+
+
+Options -Indexes
+ErrorDocument 404 /404.php
+
+php_flag allow_call_time_pass_reference 1
+php_flag session.use_trans_sid off
+php_value max_input_vars 10000
+php_value display_errors 1
+php_value session.gc_maxlifetime 31536000 
+php_value session.cookie_lifetime 31536000
+php_value default_charset UTF-8
+
+<IfModule mod_rewrite.c>
+	Options +FollowSymLinks
+	RewriteEngine On
+
+	#Добавляем слеш в конце
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-l
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_URI} ^(.*/[^/\.]+)$
+	RewriteCond %{REQUEST_URI} !^/bitrix/
+	RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1/ [R=301,L]
+
+
+	#Убираем www
+	RewriteCond %{HTTP_HOST} ^www\.(.*)$
+	RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+	
+	# ASPRO_ROBOTS Serve robots.txt with robots.php only if the latter exists
+	RewriteCond %{REQUEST_FILENAME} robots.txt
+	RewriteCond %{DOCUMENT_ROOT}/robots.php -f
+	RewriteRule ^(.*)$ /robots.php [L]
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-l
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !/bitrix/urlrewrite.php$
+	RewriteRule ^(.*)$ /bitrix/urlrewrite.php [L]
+	RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization}]
+
+	#HTTPS
+  	RewriteCond %{HTTPS} off
+	RewriteCond %{HTTP:X-Forwarded-Proto} !https
+	RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+<IfModule mod_dir.c>
+	DirectoryIndex index.php index.html
+</IfModule>
+
+<IfModule mod_expires.c>
+	ExpiresActive on
+	ExpiresByType image/jpeg "access plus 30 day"
+	ExpiresByType image/gif "access plus 30 day"
+	ExpiresByType image/png "access plus 30 day"
+	ExpiresByType image/webp "access plus 30 day"
+</IfModule>
+
+<IfModule mod_deflate.c>
+	# Compress HTML, CSS, JavaScript, Text, XML and fonts
+	AddOutputFilterByType DEFLATE application/javascript
+	AddOutputFilterByType DEFLATE application/rss+xml
+	AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+	AddOutputFilterByType DEFLATE application/x-font
+	AddOutputFilterByType DEFLATE application/x-font-opentype
+	AddOutputFilterByType DEFLATE application/x-font-otf
+	AddOutputFilterByType DEFLATE application/x-font-truetype
+	AddOutputFilterByType DEFLATE application/x-font-ttf
+	AddOutputFilterByType DEFLATE application/x-javascript
+	AddOutputFilterByType DEFLATE application/xhtml+xml
+	AddOutputFilterByType DEFLATE application/xml
+	AddOutputFilterByType DEFLATE font/opentype
+	AddOutputFilterByType DEFLATE font/otf
+	AddOutputFilterByType DEFLATE font/ttf
+	AddOutputFilterByType DEFLATE image/svg+xml
+	AddOutputFilterByType DEFLATE image/x-icon
+	AddOutputFilterByType DEFLATE text/css
+	AddOutputFilterByType DEFLATE text/html
+	AddOutputFilterByType DEFLATE text/javascript
+	AddOutputFilterByType DEFLATE text/plain
+	AddOutputFilterByType DEFLATE text/xml
+	#The following line is enough for .js and .css
+	AddOutputFilter DEFLATE js css
+	AddOutputFilterByType DEFLATE text/plain text/xml application/xhtml+xml text/css application/javascript application/xml application/rss+xml application/atom_xml application/x-javascript
+</IfModule>

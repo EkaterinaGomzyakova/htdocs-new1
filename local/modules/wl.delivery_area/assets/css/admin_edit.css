@@ -1,0 +1,11 @@
+.delivery-info {
+    padding: 10px 0;
+}
+
+.delivery-info__btn {
+    margin-bottom: 15px !important;
+}
+
+.delivery-info__value {
+    font-weight: bold;
+}

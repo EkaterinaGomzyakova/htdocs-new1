@@ -1,0 +1,65 @@
+.check-wrapper {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+
+}
+
+.check-wrapper .icon {
+    width: 12px;
+    height: 12px;
+    background: url("/bitrix/themes/.default/images/checklist/checklist-sprite.png");
+    display: inline-block;
+}
+
+.check-error .icon {
+    background-position: 0 -111px;
+}
+
+.check-success .icon {
+    background-position: 0 -123px;
+}
+
+.check-heading {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.check-heading+.check-errors {
+    margin-top: 10px;
+}
+
+.check-success {
+    color: forestgreen;
+}
+
+.check-error {
+    color: red;
+}
+
+.check-wrapper li {
+    padding: 10px;
+    border: 1px solid #e6e6e6;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.check-errors a {
+    color: dodgerblue;
+    text-decoration: underline;
+    font-size: 10pt;
+    line-height: 1.5em;
+}
+
+.show-items {
+    color: #aaa;
+    margin-top: 10px;
+    font-size: 9pt;
+}
+
+.time {
+    color: #aaa;
+    margin-top: 5px;
+    font-size: 9pt;
+}

@@ -1,0 +1,25 @@
+.wl-gadget-generate-certificate .error{
+    background-color: #fdecec;
+    color: #e00202;
+    font-size: 14px;
+    padding: 0 0 0 5px;
+}
+
+.wl-gadget-generate-certificate__info{
+    margin-bottom: 15px;
+}
+
+.wl-gadget-generate-certificate__generate-block{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.wl-gadget-generate-certificate__field-label{
+    margin-right: 15px;
+}
+
+.wl-gadget-generate-certificate .status.fail{
+    color: #e00202;
+    font-weight: 600;
+}

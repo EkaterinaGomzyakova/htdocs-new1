@@ -1,0 +1,7 @@
+$dbUsers = Bitrix\Main\UserTable::getList([
+	'filter' => ['ACTIVE' => 'Y', 'UF_DENY_SMS' => false],
+	'select' => ['ID', 'NAME', 'LAST_NAME', 'PERSONAL_PHONE', 'LOGIN']
+]);
+while($arUser = $dbUsers->Fetch()) {
+	dump($arUser);
+}

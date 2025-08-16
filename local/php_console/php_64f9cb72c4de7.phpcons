@@ -1,0 +1,52 @@
+CModule::IncludeModule('sale');
+
+$arUsers = [];
+$arLocations = [];
+$dbOrders = \Bitrix\Sale\Order::getList([]);
+
+while($arOrder = $dbOrders->fetch()) {
+	$userId = $arOrder['USER_ID'];
+	if(empty($arUsers[$userId])) {
+		$arUser = CUser::GetList(($by="personal_country"), ($order="desc"), ['ID' => $userId], ['SELECT' => ['NAME', 'LAST_NAME']])->Fetch();
+
+		$userPhone = \Bitrix\Main\UserPhoneAuthTable::getList([
+			'filter'=> ['USER_ID' => $arUser['ID']],
+		])->fetch();
+		$phone = $userPhone['PHONE_NUMBER'];
+
+		$fio = $arUser['NAME'] . " " . $arUser['LAST_NAME'];
+
+		$locationValue = false;
+		$locationName = false;
+
+		$arLocationProp = \Bitrix\sale\Internals\OrderPropsValueTable::getList(['filter' => ['ORDER_ID' => $arOrder['ID'], 'CODE' => 'LOCATION', '!VALUE' => '0000177609']])->fetch();
+		$locationValue = $arLocationProp['VALUE'];
+		if($locationValue && empty($arLocations[$locationValue])) {
+			$parameters = [];
+			$parameters['filter']['=CODE'] = $locationValue;
+			$parameters['filter']['NAME.LANGUAGE_ID'] = "ru";
+	
+			$parameters['limit'] = 1;
+			$parameters['select'] = array('LNAME' => 'NAME.NAME');
+
+			$arVal = Bitrix\Sale\Location\LocationTable::getList($parameters)->fetch();
+	
+			if ( $arVal && strlen($arVal['LNAME']) > 0 ) {
+				$locationName = $arVal['LNAME'];
+			}
+		} else {
+			continue;
+		}
+
+		$arUsers[$userId] = [
+			"NAME" => trim($fio),
+			"PHONE" => $phone,
+			"LOCATION" => $locationName,
+		];
+
+		if(!empty($locationName) && !empty($phone)) {
+			print_r(implode(";", [$fio, $phone, $locationName])."\n");
+		}
+	}
+
+}

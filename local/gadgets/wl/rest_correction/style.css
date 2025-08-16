@@ -1,0 +1,25 @@
+.wl-gadget-rest-correction-error{
+    background-color: #fdecec;
+    color: #e00202;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.wl-gadget-rest-correction-info{
+    background-color: #bfffcf;
+    color: #049e2b;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.wl-gadget-generate-certificate .input-group {
+    margin-top: 5px;
+}
+
+.wl-gadget-rest-correction {
+    font-size: 13px;
+}
+
+.wl-gadget-rest-correction__block {
+    margin-bottom: 10px;
+}

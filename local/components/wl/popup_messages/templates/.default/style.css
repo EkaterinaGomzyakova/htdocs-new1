@@ -1,0 +1,26 @@
+.popup_message .msg-content__btn-wrap {
+    margin-top: 15px;
+}
+
+.popup_message .msg-content__title {
+    margin-bottom: 15px;
+}
+
+.popup_message .msg-content__img img {
+    max-width: 100%;
+}
+
+.popup_message .msg-content__img {
+    margin-bottom: 15px;
+}
+
+.popup_message .close {
+    font-size: 32px;
+    font-weight: 400;
+    margin-top: -17px;
+    margin-right: -12px;
+}
+
+.popup_message .modal-dialog {
+    padding-top: 40px;
+}

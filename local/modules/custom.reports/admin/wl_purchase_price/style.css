@@ -1,0 +1,31 @@
+.report-purchasing-price .save {
+    pointer-events: none;
+    background-color: lightgray;
+    transition: all 0.3s;
+}
+
+
+.report-purchasing-price.success .main-grid-editor-text {
+    background-color: #e7fce7;
+}
+
+.report-purchasing-price.changed .save {
+    pointer-events: all;
+    background-color: white;
+    opacity: 1;
+}
+
+.report-purchasing-price.changed .save:hover {
+    background-color: #d9ffce;
+}
+
+.report-purchasing-price {
+    display: flex;
+    justify-content: right;
+    justify-content: flex-start;
+}
+
+.js-price {
+    width: 90px;
+    margin-left: 0;
+}

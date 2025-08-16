@@ -1,0 +1,108 @@
+.owl-dots .owl-dot.active {
+    width: 10px;
+    height: 10px;
+    background: #285b4d;
+    border-radius: 100%;
+}
+
+.owl-dots .owl-dot {
+    width: 10px;
+    height: 10px;
+    border: 2px solid #285b4d !important;
+    border-radius: 100%;
+    margin-right: 20px;
+}
+
+.owl-carousel.owl-carousel-reviews .owl-item img {
+    width: unset;
+}
+
+.owl-carousel-reviews-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.owl-carousel-reviews-item img {
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+.owl-carousel.owl-carousel-reviews.owl-loaded.owl-drag .owl-item {
+    background: white;
+    padding: 15px 10px;
+    border-radius: 4px;
+    min-height: 112px;
+    max-height: 125px;
+}
+
+.owl-carousel-reviews-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 18px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.owl-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.owl-carousel-reviews {
+    margin-bottom: 50px;
+}
+
+.owl-carousel-reviews-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-shrink: 1;
+    flex-grow: 1;
+    align-self: normal;
+}
+
+.owl-nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+button.owl-prev {
+    display: block;
+    width: 30px;
+    height: 35px;
+    background: url(/local/templates/aspro_next_custom/images/arrows2.png) 3px -20px no-repeat !important;
+    border: none !important;
+    border-radius: 2px 0 0 2px;
+    border: 1px solid #e5e5e5 !important;
+    background-position: 5px -18px !important;
+}
+
+button.owl-prev span {
+    display: none;
+}
+
+button.owl-next {
+    display: block;
+    width: 30px;
+    height: 35px;
+    border: none !important;
+    border-radius: 2px 0 0 2px;
+    border: 1px solid #e5e5e5 !important;
+    background: url(/local/templates/aspro_next_custom/images/arrows2.png) 3px -20px no-repeat !important;
+    background-position: -74px -18px !important;
+}
+
+button.owl-next span {
+    display: none;
+}
+
+.reviews-carousel img {
+    width: 80px !important;
+}

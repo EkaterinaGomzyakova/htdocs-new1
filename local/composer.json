@@ -1,0 +1,24 @@
+{
+    "config": {
+        "platform": {
+            "php": "8.1"
+        }
+    },
+    "require": {
+        "hflabs/dadata": "^20.12",
+        "longman/telegram-bot": "^0.82.0",
+        "setasign/tfpdf": "1.33",
+        "setasign/fpdf": "^1.8",
+        "setasign/fpdi": "^2.6",
+
+        "symfony/var-dumper": "^5.4",
+      "unisender/api-wrapper": "^1.6",
+      "monolog/monolog": "^3.9"
+    },
+    "replace": {
+        "psr/log": "*",
+        "psr/http-message": "*",
+        "php-http/message-factory": "*",
+        "mdf/psr-http-message-shim": "*"
+    }
+}

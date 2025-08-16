@@ -1,0 +1,50 @@
+.scope-switch-list {
+    margin-bottom: 16px !important;
+}
+
+.scope-switch-list .item {
+    color: #3a3a3a;
+    font: 14px "Open Sans", Arial, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    height: auto !important;
+    text-align: center;
+    border: 1px solid #285B4D;
+    border-radius: 50px;
+    transition: all ease .2s;
+    margin-bottom: 15px;
+}
+
+.scope-switch-list .item:hover {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, .15);
+}
+
+.scope-switch-list .item .name {
+    color: #3a3a3a;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    font-size: 1.071em;
+    line-height: 20px;
+}
+
+.scope-switch-list .item .name a {
+    text-align: center;
+    font-weight: 700;
+    line-height: 20px;
+    box-sizing: border-box;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color ease-out .07s;
+    color: #3a3a3a !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    padding: 10px;
+}

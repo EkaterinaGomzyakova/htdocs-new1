@@ -1,0 +1,150 @@
+<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
+<? $this->setFrameMode(true); ?>
+<?
+$arProperty = CIBlockPropertyEnum::GetList(['VALUE' => 'ASC'], ['CODE' => 'SCOPE', $this->arParams['IBLOCK_ID'], 'XML_ID' => $arResult['VARIABLES']['ELEMENT_CODE']])->Fetch();
+?>
+<?php
+$APPLICATION->IncludeComponent('wl:section.list.filter.by.property', '', [
+	'PROPERTY_CODE' => 'SCOPE',
+	'PROPERTY_VALUE' => $arProperty['ID'],
+	'CATALOG_IBLOCK_ID' => GOODS_IBLOCK_ID,
+	'CACHE_TIME' => $arParams['CACHE_TIME'],
+	'FILTER_NAME' => 'arScopeFilter',
+	'SORT' => ['SORT' => 'ASC'],
+], false);
+?>
+<?
+include_once(__DIR__ . "/sort.php");
+?>
+<?
+$this->setFrameMode(true);
+?>
+<div class="detail <?= ($templateName = $component->{"__parent"}->{"__template"}->{"__name"}) ?>">
+	<?
+	global $arTheme, $APPLICATION;
+
+	$dbPropertyVariant = CIBlockPropertyEnum::GetList(['VALUE' => 'ASC'], ['CODE' => 'SCOPE', 'XML_ID' => $arResult['VARIABLES']['ELEMENT_CODE']]);
+	$arVariant = $dbPropertyVariant->Fetch();
+	$APPLICATION->SetTitle($arVariant['VALUE']);
+	$APPLICATION->AddChainItem($arVariant['VALUE']);
+
+
+	$GLOBALS['arScopeFilter']['PROPERTY_SCOPE'] = $arVariant['ID'];
+	$GLOBALS['arScopeFilter']['!SECTION_ID'][] = 167; //Пробники
+	$GLOBALS['arScopeFilter']['!SECTION_ID'][] = 152; //Архив
+	$GLOBALS['arScopeFilter']['!SECTION_ID'][] = false; //корень Каталога
+	?>
+	<? $APPLICATION->IncludeComponent(
+		"bitrix:catalog.section",
+		"catalog_block",
+		array(
+			"USE_REGION" => "N",
+			"STORES" => ["1"],
+			"IBLOCK_TYPE" => "catalog",
+			"IBLOCK_ID" => "2",
+			"SECTION_ID" => "",
+			"SECTION_CODE" => "",
+			"AJAX_REQUEST" => "N",
+			"ELEMENT_SORT_FIELD" => $GLOBALS['sort'],
+			"ELEMENT_SORT_ORDER" => $GLOBALS['order'],
+			"ELEMENT_SORT_FIELD2" => "shows",
+			"ELEMENT_SORT_ORDER2" => "desc",
+			"FILTER_NAME" => "arScopeFilter",
+			"INCLUDE_SUBSECTIONS" => "Y",
+			"PAGE_ELEMENT_COUNT" => "200",
+			"LINE_ELEMENT_COUNT" => "4",
+			"DISPLAY_TYPE" => "catalog_block",
+			"TYPE_SKU" => $arTheme["TYPE_SKU"]["VALUE"],
+			"PROPERTY_CODE" => array(
+				0 => "SCOPE",
+				1 => "",
+			),
+			"OFFERS_LIMIT" => "0",
+			"SECTION_URL" => "",
+			"DETAIL_URL" => "",
+			"BASKET_URL" => "/basket/",
+			"ACTION_VARIABLE" => "ACTION_VARIABLE",
+			"PRODUCT_ID_VARIABLE" => "PRODUCT_ID_VARIABLE",
+			"PRODUCT_QUANTITY_VARIABLE" => "quantity",
+			"PRODUCT_PROPS_VARIABLE" => "prop",
+			"SECTION_ID_VARIABLE" => "SECTION_ID",
+			"SET_LAST_MODIFIED" => "Y",
+			"AJAX_MODE" => "N",
+			"AJAX_OPTION_JUMP" => "N",
+			"AJAX_OPTION_STYLE" => "N",
+			"AJAX_OPTION_HISTORY" => "N",
+			"CACHE_TYPE" => "N",
+			"CACHE_TIME" => "3600",
+			"CACHE_GROUPS" => "N",
+			"CACHE_FILTER" => "Y",
+			"META_KEYWORDS" => "-",
+			"META_DESCRIPTION" => "-",
+			"BROWSER_TITLE" => "-",
+			"ADD_SECTIONS_CHAIN" => "N",
+			"HIDE_NOT_AVAILABLE" => "L",
+			"HIDE_NOT_AVAILABLE_OFFERS" => "N",
+			"DISPLAY_COMPARE" => "N",
+			"SET_TITLE" => "N",
+			"SET_STATUS_404" => "N",
+			"SHOW_404" => "N",
+			"MESSAGE_404" => "",
+			"PRICE_CODE" => array(
+				0 => "BASE",
+			),
+			"USE_PRICE_COUNT" => "N",
+			"SHOW_PRICE_COUNT" => "1",
+			"PRICE_VAT_INCLUDE" => "N",
+			"USE_PRODUCT_QUANTITY" => "N",
+			"DISPLAY_TOP_PAGER" => "N",
+			"DISPLAY_BOTTOM_PAGER" => "N",
+			"PAGER_TITLE" => "",
+			"PAGER_SHOW_ALWAYS" => "N",
+			"PAGER_TEMPLATE" => "main",
+			"PAGER_DESC_NUMBERING" => "N",
+			"PAGER_DESC_NUMBERING_CACHE_TIME" => "3600",
+			"PAGER_SHOW_ALL" => "N",
+			"AJAX_OPTION_ADDITIONAL" => "",
+			"ADD_CHAIN_ITEM" => "N",
+			"CONVERT_CURRENCY" => "N",
+			"USE_MAIN_ELEMENT_SECTION" => "N",
+			"ADD_PROPERTIES_TO_BASKET" => "N",
+			"PARTIAL_PRODUCT_PROPERTIES" => "N",
+			"PRODUCT_PROPERTIES" => array(),
+			"COMPONENT_TEMPLATE" => "catalog_block",
+			"SECTION_USER_FIELDS" => array(
+				0 => "",
+				1 => "",
+			),
+			"SHOW_ALL_WO_SECTION" => "Y",
+			"CUSTOM_FILTER" => "{\"CLASS_ID\":\"CondGroup\",\"DATA\":{\"All\":\"AND\",\"True\":\"True\"},\"CHILDREN\":[]}",
+			"BACKGROUND_IMAGE" => "-",
+			"SEF_MODE" => "N",
+			"SET_BROWSER_TITLE" => "N",
+			"SET_META_KEYWORDS" => "N",
+			"SET_META_DESCRIPTION" => "N",
+			"PAGER_BASE_LINK_ENABLE" => "N",
+			"COMPATIBLE_MODE" => "Y",
+			"DISABLE_INIT_JS_IN_COMPONENT" => "N",
+			"SHOW_COUNTER_LIST" => "Y",
+			"SHOW_DISCOUNT_TIME" => 'Y',
+			"SHOW_DISCOUNT_TIME_EACH_SKU" => 'Y',
+			"SHOW_OLD_PRICE" => "Y",
+			"STIKERS_PROP" => "HIT",
+			"SHOW_ADD_FAVORITES" => "Y",
+			"SHOW_MEASURE" => "Y",
+			"SHOW_MEASURE_WITH_RATIO" => "N",
+			'SHOW_DISCOUNT_PERCENT' => 'Y',
+			"SHOW_RATING" => "N",
+			"TABS_CODE" => "HIT",
+		),
+		$component,
+		array(
+			"HIDE_ICONS" => "N"
+		)
+	); ?>
+
+	<? if (is_array($arElement["IBLOCK_SECTION_ID"]) && count($arElement["IBLOCK_SECTION_ID"]) > 1) {
+		CNext::CheckAdditionalChainInMultiLevel($arResult, $arParams, $arElement);
+	}
+	?>
+</div>

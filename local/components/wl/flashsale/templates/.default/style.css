@@ -1,0 +1,57 @@
+.flashsale_container.flashsale_outer {
+    background-color: #FF6974;
+    padding: 20px 4px;
+    cursor: pointer;
+}
+
+.flashsale_container .flashsale_title h2 {
+    margin: 0px 10px 10px 10px;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.flashsale_container .flashsale_timer_outer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.flashsale_container .flashsale_timer_container {
+    width: 80px;
+    height: 100%;
+}
+
+.flashsale_container .flashsale_timer_digits {
+    border: solid 1px #fff;
+    border-radius: 20px;
+    font-size: 40px;
+    font-weight: 600;
+    height: 80px;
+    line-height: 80px;
+    color: #fff;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.flashsale_container .flashsale_timer_description {
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+}
+
+.flashsale_container .flashsale_footer p {
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.1;
+    margin: 15px 15px 0px 15px;
+}

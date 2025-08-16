@@ -1,0 +1,11 @@
+.cumulative-discount {
+    display: inline-block;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 10px;
+    border: 1px solid #e1e5e4;
+}
+
+.cumulative-discount h3 {
+    margin-top: 0;
+}

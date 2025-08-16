@@ -1,0 +1,121 @@
+.adm-detail-tab .adm-detail-files {
+    padding: 10px;
+    margin: -10px;
+}
+
+.adm-detail-files-wrapper {
+    position: absolute;
+    top: -7px;
+    left: -1px;
+    width: 400px;
+    height: 570px;
+    z-index: 1000;
+    background-color: #f5f9f9;
+    cursor: default;
+    border: solid 1px #ced7d8;
+    border-radius: 4px;
+}
+
+.adm-detail-files-wrapper .files-panel-title {
+    display: block;
+    width: 100%;
+    margin-top: 3px;
+}
+
+.adm-detail-files-wrapper h3 {
+    padding: 0;
+    margin: 0px 0 0 15px;
+    line-height: 39px;
+    font-weight: normal;
+    font-size: 18px;
+    width: 330px;
+}
+
+.adm-detail-files-wrapper .adm-detail-files-content {
+    overflow-y: scroll;
+    height: 490px;
+    margin: 5px 11px 5px 15px;
+    padding: 10px;
+    border: solid 1px #ced7d8;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 1px 1px 5px #ced7d8;
+}
+
+.adm-detail-content-wrap .adm-detail-content-item-block {
+    position: relative;
+}
+
+.adm-detail-content-wrap .adm-detail-file-actions {
+    position: absolute;
+    top: -3px;
+    left: 15px;
+    width: 500px;
+    height: 20px;
+    z-index: 100;
+}
+
+.adm-detail-content-wrap .adm-detail-file-actions .adm-detail-file-action {
+    padding: 4px 8px;
+    margin: 0 5px;
+    border: solid 1px #ced7d8;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px #ced7d8;
+    background-color: #fff;
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.adm-detail-content-wrap .adm-detail-file-actions .adm-detail-file-action:hover {
+    text-decoration: none;
+    color: #000;
+    border-color: #bbb;
+}
+
+.adm-detail-content-wrap .adm-detail-file-actions .adm-detail-file-action-delete:hover {
+    color: #D00;
+}
+
+.adm-detail-content-item-block .adm-detail-file-description {
+    position: absolute;
+    z-index: 300;
+    width: 430px;
+    height: 350px;
+    top: 30px;
+    left: 73px;
+    background-color: #fff;
+    border: solid 1px #ced7d8;
+    box-shadow: 1px 1px 3px #ced7d8;
+    border-radius: 4px;
+}
+
+.adm-detail-content-item-block .adm-detail-file-description textarea {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 10px auto;
+    height: 285px;
+}
+
+
+.adm-detail-content-item-block .adm-detail-file-description .adm-detail-file-description-panel {
+    margin: 3px 9px;
+}
+
+.adm-detail-content-item-block .adm-detail-file-description .adm-detail-file-description-panel .adm-detail-file-description-action {
+    padding: 4px 8px;
+    margin: 0 5px;
+    border: solid 1px #ced7d8;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px #ced7d8;
+    background-color: #fff;
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.adm-detail-content-item-block .adm-detail-file-description .adm-detail-file-description-panel .adm-detail-file-description-action:hover {
+    text-decoration: none;
+    color: #000;
+    border-color: #bbb;
+}

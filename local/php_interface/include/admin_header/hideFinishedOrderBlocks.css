@@ -1,0 +1,35 @@
+.adm-bus-pay-section-action-block [id*=_DELETE] {
+    display: none !important;
+}
+
+.adm-bus-pay-section-action-block [id*=EDIT] {
+    display: none !important;
+}
+
+.adm-bus-statusorder .adm-s-gray-title-btn-container {
+    display: none !important;
+}
+
+.bx-adm-promocode-container {
+    display: none !important;
+}
+
+[id^=sale_order_basketsale-order-basket-product-] {
+    pointer-events: none !important;
+}
+
+#sale_order_edit_buttons_div {
+    display: none !important;
+}
+
+[onclick*=choosePerson], [onclick*=showChooseBuyerWindow], [onclick*=clearBuyer] {
+    display: none !important;
+}
+
+.adm-order-block-add-button {
+    display: none !important;
+}
+
+.payment-status, .deducted-status {
+    pointer-events: none;
+}

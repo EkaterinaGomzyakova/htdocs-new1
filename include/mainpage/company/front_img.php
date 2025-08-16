@@ -1,0 +1,1 @@
+<img loading="lazy" alt="ClanBeauty: косметика онлайн" src="/upload/square-light-logo.svg" title="ClanBeauty: косметика онлайн">

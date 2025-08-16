@@ -1,0 +1,74 @@
+require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/classes/general/csv_data.php");
+
+$filePath = $_SERVER['DOCUMENT_ROOT'] . '/upload/pricetags.csv';
+$fp = fopen($filePath, 'w+');
+@fclose($fp);
+
+$csvFile = new \CCSVData('R', false);
+$csvFile->SetFieldsType('R');
+$csvFile->SetDelimiter(";");
+$csvFile->SetFirstHeader(true);
+
+$arBrands = [];
+$dbBrands = CIBlockElement::GetList([], ['CODE' => ['shik', 'hempz', 'angiopharm'], 'IBLOCK_ID' => BRANDS_IBLOCK_ID], false, false, ['ID', 'NAME']);
+while($arBrand = $dbBrands->Fetch()) {
+	$arBrands[$arBrand['ID']][] = $arBrand;
+}
+
+$arElements = [];
+$arHeaders = ['NAME' => 'NAME', 'ALT_NAME' => 'ALT_NAME', 'ID' => 'ID', 'BARCODE' => 'BARCODE', 'PRICE' => 'PRICE', 'OLD_PRICE' => 'OLD_PRICE', 'VOLUME' => 'VOLUME'];
+$arElements[] = $arHeaders;
+
+$dbElements = CIblockElement::GetList(
+	[],
+	[
+		'IBLOCK_ID' => GOODS_IBLOCK_ID,
+		'ACITVE' => 'Y',
+		'CATALOG_AVAILABLE' =>'Y',
+		'!SECTION_ID' => [188, 123],
+		'GLOBAL_ACTIVE' => 'Y',
+		'!PROPERTY_BRAND' => array_keys($arBrands),
+		'!ID' => [6021, 18215, 6962, 22556, 18313, 18305, 18288, 23292, 23276, 23288, 18307, 23286, 6958, 9602, 9641, 9609, 1053, 4007, 18466, 4425, 4426, 18223, 23285, 21192, 22558, 18304, 18289, 18994, 18340, 18339, 18338, 18310, 18290, 20610, 20897, 18038, 18992, 19794, 21195, 4615, 18187, 22346, 4613, 11167, 13233, 7095, 17074, 1209, 9603, 9626, 9628, 2865, 3056, 3057, 23384, 9605, 858]
+	],
+	false,
+	false,
+	['ID', 'IBLOCK_ID', 'NAME', 'PROPERTY_BARCODE', 'PROPERTY_ALT_NAME', 'PROPERTY_VOLUME']
+);
+while($arElement = $dbElements->Fetch()) {
+
+	$price = 0.0;
+	$oldPrice = '';
+
+	$arDiscountPrice = CCatalogProduct::GetOptimalPrice($arElement['ID'], 1, [2], 'N', [], 's1');
+	if($arDiscountPrice['RESULT_PRICE']['DISCOUNT'] > 0) {
+		$price  = $arDiscountPrice['RESULT_PRICE']['DISCOUNT_PRICE'];
+		$oldPrice = $arDiscountPrice['RESULT_PRICE']['BASE_PRICE'];
+	} else {
+		$price  = $arDiscountPrice['RESULT_PRICE']['DISCOUNT_PRICE'];
+	}
+
+	$arElements[] = [
+		'NAME' => $arElement['NAME'],
+		'ALT_NAME' => $arElement['PROPERTY_ALT_NAME_VALUE'],
+		'ID' => $arElement['ID'],
+		'BARCODE' => $arElement['PROPERTY_BARCODE_VALUE'],
+		'PRICE' => $price,
+		'OLD_PRICE' => $oldPrice,
+		'VOLUME' => $arElement['PROPERTY_VOLUME_VALUE']
+	];
+}
+
+
+foreach ($arElements as $element)
+{
+	$row = [];
+	foreach ($arHeaders as $header)
+	{
+		$row[] = $element[$header];
+	}
+
+	$csvFile->SaveFile($filePath, $row);
+}
+echo '<a class="adm-btn adm-btn-green" href="/upload/pricetags.csv" download>Скачать</a>';
+
+

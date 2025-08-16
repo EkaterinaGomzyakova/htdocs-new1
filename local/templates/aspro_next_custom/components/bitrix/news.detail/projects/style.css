@@ -1,0 +1,51 @@
+.item .head-block .inner .slides {
+    position: relative;
+}
+
+.item .head-block .inner .slides .owl-nav {
+    position: absolute;
+    width: 100%;
+    top: 48%;
+}
+
+.item .head-block .inner .slides .owl-nav .owl-prev {
+    position: absolute;
+    left: 5px;
+}
+.item .head-block .inner .slides .owl-nav .owl-next {
+    position: absolute;
+    right: 5px;
+}
+
+.item .head-block .inner .owl-nav button {
+    width: 29px;
+    height: 29px;
+    background-color: #5F806A;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.item .head-block .inner .flex-nav-prev a,
+.item .head-block .inner .flex-nav-next a {
+    color: #fff;
+    background: url(/local/templates/aspro_next_custom/images/arrows.png) 0 0 no-repeat;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+.item .head-block .inner .flex-nav-prev a {
+    background-position: -27px -26px;
+}
+
+.item .head-block .inner .flex-nav-next a {
+    background-position: 10px -26px;
+}
+
+.item .head-block .inner img {
+    border-radius: 10px;
+}
+
+.item .head-block .inner li {
+    padding: 0;
+}

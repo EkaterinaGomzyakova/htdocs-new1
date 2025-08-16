@@ -1,0 +1,157 @@
+.brands-first-char-list{
+    display: flex;
+    list-style-type: none;
+    justify-content: flex-start;
+    max-width: 100%;
+    gap: 5px;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 0px !important;!i;!;
+}
+
+.brands-first-char-list a{
+    color: black;
+
+    padding: 5px;
+}
+
+.brands-first-char-list a.active{
+    color: #e66200;
+}
+
+.brands-first-char-list a:hover{
+    color: #285b4d;
+}
+
+.brands-first-char-list span{
+    color: black;
+    opacity: 0.4;
+}
+
+.brands-first-char-list li::before{
+    display: none !important;
+}
+
+.brands-first-char-list li{
+    margin-right: 10px !important;
+    padding: 0 !important;
+    font-size: 20px;
+    margin-bottom: 10px !important;
+}
+.brands-first-char-list li:last-child {
+    margin-right: 0px !important;
+}
+
+.table-type-block.item-views.items-list5 .item{
+    padding: 35px !important;
+}
+
+.brand-icon {
+    height: 16px;
+    display: inline-block;
+    vertical-align: baseline!important;
+    margin-left: 7px;
+    margin-bottom: -1px;
+    opacity: 0.5;
+}
+
+.brand_wrapper .brands_list.brands_list--with-headers {
+    font-size: 18px;
+}
+
+.brand_wrapper .brands_list .item.partner-item {
+    display: block;
+    text-align: left;
+    height: unset!important;
+}
+
+.brand_wrapper .brands_list .item.partner-item {
+    display: block;
+    text-align: left;
+}
+
+.brand_wrapper .brands_list .item.partner-item>div {
+    left: unset;
+    top: unset;
+    width: unset;
+    position: unset;
+    transform: translateX(0) translateY(0);
+    margin: 0;
+    padding: 0;
+    max-height: unset;
+    overflow: unset;
+    text-overflow: unset;
+}
+
+.brand_wrapper .brands_list .item.partner-item a {
+    font-size: 18px;
+    display: inline;
+}
+
+.brands-switch-list {
+    margin-bottom: 16px!important;
+    max-width: 100%;
+}
+
+.brands-switch-list .item {
+    color: #3a3a3a;
+    font: 14px "Open Sans", Arial, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    height: auto !important;
+    text-align: center;
+    border: 1px solid #285B4D;
+    border-radius: 50px;
+    transition: all ease .2s;
+}
+
+.brands-switch-list .item:hover {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, .15);
+}
+
+.brands-switch-list .item.active {
+    background: #285b4d;
+}
+
+.brands-switch-list .item .name {
+    color: #3a3a3a;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    font-size: 1.071em;
+    line-height: 20px;
+}
+
+.brands-switch-list .item.active .name .brand-icon {
+    filter: invert(1);
+    opacity: 0.8;
+}
+
+.brands-switch-list .item .name a {
+    text-align: center;
+    font-weight: 700;
+    line-height: 20px;
+    box-sizing: border-box;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color ease-out .07s;
+    color: #3a3a3a !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    padding: 10px;
+}
+
+.brands-switch-list .item.active .name a {
+    color: #FFF !important;
+}
+
+.brand_wrapper .group {
+    margin-top: 10px;
+}

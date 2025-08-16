@@ -1,0 +1,71 @@
+
+07.09.2017 15:10:39 START UPDATE 1.0.0 -> 1.0.1
+
+
+07.09.2017 15:10:43 START UPDATE 1.0.1 -> 1.0.2
+
+
+07.09.2017 15:10:49 START UPDATE 1.0.2 -> 1.0.3
+
+
+07.09.2017 15:10:55 START UPDATE 1.0.3 -> 1.0.4
+
+
+07.09.2017 15:11:00 START UPDATE 1.0.4 -> 1.0.5
+
+
+07.09.2017 15:11:28 START UPDATE 1.0.5 -> 1.0.6
+
+
+19.09.2017 16:13:04 START UPDATE 1.0.6 -> 1.0.7
+
+19.09.2017 16:13:04 Update /include/share_buttons.php
+19.09.2017 16:13:04 Update /ajax/fast_view.php
+19.09.2017 16:13:04 Update /ajax/productStoreAmount.php
+19.09.2017 16:13:04 Update /include/left_block/comp_news.php
+19.09.2017 16:13:04 Update /include/left_block/comp_news_articles.php
+19.09.2017 16:13:04 Update /include/mainpage/comp_blog.php
+19.09.2017 16:13:04 Update /include/mainpage/comp_news_akc.php
+19.09.2017 16:13:04 Update /sale/index.php
+19.09.2017 16:13:04 Update /company/news/index.php
+19.09.2017 16:13:04 Update /sale/index.php
+19.09.2017 16:13:04 Update /services/index.php
+19.09.2017 16:13:04 Update /services/.left.menu_ext.php
+19.09.2017 16:13:04 IBLOCK_TYPE: aspro_next_articles. Add LINK_REGION property=547
+19.09.2017 16:13:04 IBLOCK_TYPE: aspro_next_news. Add LINK_REGION property=548
+19.09.2017 16:13:04 IBLOCK_TYPE: aspro_next_services. Add LINK_REGION property=549
+19.09.2017 16:13:04 IBLOCK_TYPE: aspro_next_stock. Add LINK_REGION property=550
+19.09.2017 16:13:04 IBLOCK_TYPE: aspro_next_banners_inner. Add LINK_REGION property=551
+19.09.2017 16:13:04 IBLOCK_TYPE: aspro_next_adv_content. Add LINK_REGION property=552
+19.09.2017 16:13:04 IBLOCK_TYPE: aspro_next_banners. Add LINK_REGION property=553
+19.09.2017 16:13:04 IBLOCK_TYPE: aspro_next_bg_images. Add LINK_REGION property=554
+19.09.2017 16:13:04 Add ADDRESS property=555
+19.09.2017 16:13:04 Add EMAIL property=556
+19.09.2017 16:13:04 Update /bitrix/templates/aspro_next/header.php
+
+30.12.2017 11:01:00 START UPDATE 1.0.7 -> 1.0.8
+
+30.12.2017 11:01:01 Update /services/.left.menu_ext.php
+
+30.12.2017 11:01:02 START UPDATE 1.0.8 -> 1.0.9
+
+
+30.12.2017 11:01:04 START UPDATE 1.0.9 -> 1.0.10
+
+30.12.2017 11:01:04 Update /personal/subscribe/index.php
+30.12.2017 11:01:04 Update /ajax/item.php
+30.12.2017 11:01:04 Update /ajax/subscribe.php
+30.12.2017 11:01:04 Update /ajax/subscribe_sync.php
+30.12.2017 11:01:04 Update /ajax/form.php
+30.12.2017 11:01:04 Update /404.php
+30.12.2017 11:01:04 Update /bitrix/templates/aspro_next/footer.php
+
+30.12.2017 11:01:05 START UPDATE 1.0.10 -> 1.0.11
+
+
+30.12.2017 11:01:07 START UPDATE 1.0.11 -> 1.0.12
+
+30.12.2017 11:01:07 Update /ajax/item.php
+30.12.2017 11:01:07 Update /form/index.php
+30.12.2017 11:01:07 Update /include/logo_svg.php
+30.12.2017 11:01:07 Update /include/top_page/regionality.list.php

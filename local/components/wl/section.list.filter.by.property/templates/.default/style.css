@@ -1,0 +1,11 @@
+.brands-filter .item.active {
+    background: #285b4d;
+}
+
+.brands-filter .item.active a {
+    color: white !important;
+}
+
+.sections_wrapper.brands-filter .list .item .name a {
+    font-size: 13px;
+}
