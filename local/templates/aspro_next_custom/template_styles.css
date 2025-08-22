@@ -26595,3 +26595,34 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 .menu-row.middle-block.bgcolored .mega-menu table td.dropdown .wrap > a::after {
     display: none !important;
 }
+
+
+/* --- Стили для готовых кнопок-картинок на главной --- */
+
+/* 1. Контейнер: задаем ширину, центрируем, распределяем кнопки */
+.homepage-buttons-container {
+    max-width: 1710px;
+    margin: 40px auto; /* Центрирование блока и отступы */
+    display: flex;
+    justify-content: space-between; /* Прижимает кнопки к краям */
+}
+
+/* 2. Стили для ссылок-оберток */
+.homepage-button-link {
+    display: block; /* Важно для применения эффектов */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 20px; /* Скругление для тени */
+}
+
+/* 3. Стили для самих изображений-кнопок */
+.homepage-button-link img {
+    display: block; /* Убирает лишний отступ снизу */
+    width: 100%;    /* Заставляет картинку занимать всю ширину ссылки */
+    height: auto;   /* Сохраняет пропорции */
+}
+
+/* 4. Эффект при наведении */
+.homepage-button-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}

@@ -61,7 +61,20 @@ $APPLICATION->IncludeComponent(
 	);
 	?>
 </div>
+<!-- Блок с кнопками-картинками "Бренды" и "Sale" -->
+<div class="homepage-buttons-container">
 
+    <!-- Ссылка-кнопка "Бренды" -->
+    <a href="/catalog/brands/" class="homepage-button-link">
+        <img src="<?=SITE_TEMPLATE_PATH?>/images/Brands.svg" alt="Бренды">
+    </a>
+    
+    <!-- Ссылка-кнопка "Sale" -->
+    <a href="/sale/" class="homepage-button-link">
+        <img src="<?=SITE_TEMPLATE_PATH?>/images/Sale.svg" alt="Sale">
+    </a>
+
+</div>
 <div class="maxwidth-theme">
 	<div class="move-to-catalog visible-xs visible-sm">
 		<a class="btn social-btn social-btn-vk" target="_blank" href="https://vk.com/clanbeauty">VK</a>
