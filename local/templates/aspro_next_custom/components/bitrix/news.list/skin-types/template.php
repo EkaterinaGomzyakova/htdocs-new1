@@ -1,6 +1,5 @@
 <? if(!empty($arResult['ITEMS'])) {?>
     <div class="maxwidth-theme">
-        <h3 class="mt-0 title_block">Подборки</h3>
         <div class="skin-types-scroller">
             <div class="skin-types-container">
                 <?foreach($arResult['ITEMS'] as $arItem) {?>

@@ -65,12 +65,12 @@ $APPLICATION->IncludeComponent(
 <div class="homepage-buttons-container">
 
     <!-- Ссылка-кнопка "Бренды" -->
-    <a href="/catalog/brands/" class="homepage-button-link">
+    <a href="/info/brands/index.php" class="homepage-button-link">
         <img src="<?=SITE_TEMPLATE_PATH?>/images/Brands.svg" alt="Бренды">
     </a>
     
     <!-- Ссылка-кнопка "Sale" -->
-    <a href="/sale/" class="homepage-button-link">
+    <a href="/offers/discount/" class="homepage-button-link">
         <img src="<?=SITE_TEMPLATE_PATH?>/images/Sale.svg" alt="Sale">
     </a>
 

@@ -1,46 +1,70 @@
-.skin-types-container {
-    max-width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    align-content: flex-start;
-    margin-bottom: 20px;
-    gap: 20px;
+/* --- Стили для блока "Подборки" (с центрированием и отступами) --- */
+
+/* 1. ГЛАВНЫЙ КОНТЕЙНЕР-ОБЕРТКА. Задаем отступы здесь. */
+/* (Это новый селектор, просто добавьте его) */
+.skin-types-scroller {
+    margin-top: 120px !important;    /* <<== ВЕРХНИЙ ОТСТУП */
+    margin-bottom: 120px !important; /* <<== НИЖНИЙ ОТСТУП */
+    
+    /* Убираем лишние стили, которые могут мешать */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow: auto;
 }
 
+
+/* 2. Скроллер теперь тоже будет участвовать в центрировании */
+.skin-types-scroller {
+    overflow: auto; /* Оставляем возможность скролла на мобильных */
+    padding: 10px 0;
+}
+
+
+/* 3. КОНТЕЙНЕР С ЭЛЕМЕНТАМИ. Центрируем его содержимое. */
+.skin-types-container {
+    display: flex;
+    justify-content: center; /* <<== ЭТО ЦЕНТРИРУЕТ ВСЕ ЭЛЕМЕНТЫ */
+    gap: 20px;
+    
+    /* Важно: делаем так, чтобы контейнер не был шире необходимого */
+    margin: 0 auto; 
+    width: fit-content; 
+    max-width: 100%;
+}
+
+
+/* 4. Стили для одного элемента (без изменений, но включаем для полноты) */
 .skin-types-item {
     display: flex;
-    padding: 0px 10px;
-    text-align: center;
     flex-direction: column;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
     align-items: center;
-    flex-grow: 0;
     flex-shrink: 0;
+    width: 150px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
 }
-
+.skin-types-item:hover {
+    transform: translateY(-10px);
+}
 .skin-types-item .image {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background-size: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 24px;
+    background-color: #FAF5EF;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    border: 6px solid white;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px; 
+    box-sizing: border-box;
+    border: none;
+    box-shadow: none;
 }
-
 .skin-types-item .title {
-    margin-top: 10px;
-    font-weight: 600;
-}
-
-.skin-types-scroller {
-    overflow: auto;
-    touch-action: manipulation;
-    padding-top: 10px;
-}
-
-.skin-types-item:hover {
-    opacity: 0.9;
+    margin-top: 12px;
+    padding: 0 5px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.2;
+    color: #333;
+    text-align: center;
 }

@@ -26603,6 +26603,7 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 .homepage-buttons-container {
     max-width: 1710px;
     margin: 40px auto; /* Центрирование блока и отступы */
+    margin-top: 60px;
     display: flex;
     justify-content: space-between; /* Прижимает кнопки к краям */
 }
