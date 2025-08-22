@@ -7707,8 +7707,7 @@ body .top-block .info-text .search-block {
 
 .logo_and_menu-row .personal-link .wrap {
     margin: 2px 0 0 14px;
-    display: inline-block;
-    vertical-align: top;
+    display: none !important;
     white-space: nowrap;
     max-width: 80px
 }
@@ -26133,3 +26132,17 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 .header-v3 .menu-row.middle-block {
     margin-top: 40px !important; /* Можете изменить 20px на любое другое значение */
 }
+
+
+.icons-block .svg-inline-cabinet svg {
+    width: 24px !important; /* Задаем новую ширину */
+    height: 24px !important; /* Задаем новую высоту */
+}
+
+.icons-block .svg-inline-cabinet {
+    position: relative;
+    top: 2px; /* Можете изменить это значение (например, на 1px или 3px) */
+}
+.icons-block .svg-inline-cabinet svg * {
+    stroke-width: 1px !important;
+} 

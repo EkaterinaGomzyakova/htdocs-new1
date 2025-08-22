@@ -122,6 +122,13 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
                                 </div>
                             </div>
                         <? endif; ?>
+
+                        <div class="pull-right block-link">
+                            <div class="wrap_icon inner-table-block big-padding">
+                                <?= CNext::ShowCabinetLink(true, true); ?>
+                            </div>
+                        </div>
+
                         <div class="pull-right block-link">
                             <div class="wrap_icon inner-table-block baskets big-padding">
                                 <? if ($USER->IsAuthorized()): ?>
