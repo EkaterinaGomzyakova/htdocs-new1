@@ -3,7 +3,7 @@ body {
     position: relative;
     margin: 0 auto;
     padding: 0;
-    color: #ffffff;
+    color: #969595;
 }
 
 button, input[type='submit'], input[type='button'], .basket_button, .basket_button span {
@@ -16,7 +16,7 @@ button, input[type='submit'], input[type='button'], .basket_button, .basket_butt
 }
 
 h1 {
-    color: #ffffff;
+    color: #424242;
     font-size: 36px;
     font-weight: bold;
     line-height: 38px;
@@ -27,7 +27,7 @@ h1.shifted {
 }
 
 h2, h3, h4, h5 {
-    color: #ffffff;
+    color: #424242;
     line-height: 20px;
     font-weight: 600;
     margin: 30px 0 26px;
@@ -766,7 +766,7 @@ a.icon-text:focus {
     line-height: 32px;
     vertical-align: top;
     width: 32px;
-    *display: inline;
+    display: inline;
     zoom: 1;
     font-size: 13px;
 }
@@ -776,7 +776,7 @@ a.icon-text:focus {
     padding: 6px 12px 5px 0px;
     line-height: 19px;
     vertical-align: top;
-    *display: inline;
+    display: inline;
     zoom: 1;
     font-size: 13px;
 }

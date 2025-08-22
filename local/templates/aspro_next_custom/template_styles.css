@@ -725,8 +725,8 @@ a:hover i.arrow.down b {
 
 .jobs_wrapp .item .icon, .jobs_wrapp .item .icon i, .differences_table .left_arrow, .differences_table .right_arrow {
     display: inline-block;
-    height: 30px;
-    width: 30px;
+    height: 24px;
+    width: 24px;
     vertical-align: top;
 }
 
@@ -2134,7 +2134,7 @@ table.offers_table td {
     font-size: 13px;
     padding-left: 0;
     transition: background-color .07s ease-out 0;
-    background: #f7f7f7
+    background: #ffffff
 }
 
 .left_menu>li:first-child {
@@ -2427,7 +2427,7 @@ body .left_block .left_menu li.exit a:before {
 }
 
 .filter_opener:not(.opened) {
-    background: #fff7ec
+    background: #ffffff
 }
 
 .filter_opener:not(.opened) span {
@@ -2475,7 +2475,7 @@ body .left_block .left_menu li.exit a:before {
     padding: 5px 10px 10px 10px;
     border: 1px solid #285B4D;
     border-radius: 16px;
-    background: #fff5e8;
+    background: #ffffff;
     margin: 5px;
 }
 
@@ -4231,7 +4231,7 @@ div[id^="CatalogSetConstructor"] .popup-window {
     position: relative;
     z-index: 115;
     padding: 10px;
-    background: #fafafa;
+    background: #ffffff;
     border: 1px solid #e7e7e7
 }
 
@@ -4669,7 +4669,7 @@ a:hover, a:focus {
 }
 
 .print body {
-    background: #fff !important
+    background: #ffffff !important
 }
 
 .title_block {
@@ -4739,7 +4739,7 @@ a:focus {
 }
 
 .fill_bg_n .grey_block, .grey_block .maxwidth-theme {
-    background: #f9f9fa
+    background: #ffffff
 }
 
 .front.wide_page .grey_block.small-padding .adv_list.small_banners {
@@ -5029,7 +5029,7 @@ form label {
 }
 
 .alert-danger {
-    background: #fee;
+    background: #ffffff;
     color: #e83333
 }
 
@@ -5650,7 +5650,7 @@ body .wrapper_inner.wide_page>.middle.error-page div.maxwidth-theme {
     position: relative;
     z-index: 2;
     clear: both;
-    background-color: #fffbf8;
+    background-color: #ffffff;
 }
 
 .sidebar, .sidearea {
@@ -5775,7 +5775,7 @@ input.medium {
 
 input.error, textarea.error {
     border-color: #e62222;
-    background: #ffefef
+    background: #ffffff
 }
 
 .bxml-dialog input[type="text"] {
@@ -6245,7 +6245,7 @@ ul.menu .see_more, ul.menu .see_more a, a.dark_link {
 }
 
 .h_color_colored .header_wrap #header, .colored #header .catalog_menu ul.menu>li, .module-cart .remove-cell a:hover, .cart_shell .remove-cell a:hover, .bx_item_set_hor .bx_item_set_hor_item a.remove, .start_promo .item i.title span, .start_promo .item p span, .block_wr.dark, .stores .all_map, .registraion-page .top p:after, .more_text_ajax:before, .captcha_reload:before, .left_block .internal_sections_list .child_wrapp ul.child li.cur:after, .left_block .internal_sections_list .child_wrapp ul.child li:hover:after, .left_block .internal_sections_list li.cur, .left_block .internal_sections_list li:hover, .left_block .internal_sections_list .title .inner_block:before, .bx_filter .bx_filter_popup_result {
-    background-color: #ddd
+    background-color: #ffffff
 }
 
 .top-h-row .menu li a, .cost.prices .price_name, .news .item .info .preview, .form-control label, .social_block .row .title, .module-cart thead tr, .count-cell div.error, .module-cart table td.name-cell div[class^="bx_item_detail_"] .values, .item-title .props .item_prop .title, .display_list .list_item .preview_text, .display_list .list_item .props_list td, .catalog_detail .stock_board .txt, .file_type .description, .catalog_detail .form_wr, .reviews-post-reply-buttons a, .reviews-post-table, .bx_order_make .bx_block.r1x3.pt8, .bx_order_make .float .bx_description .name, .module-order-history .module-orders-list td.drop-cell .item-shell thead td, .module-order-history .order_property.d td, .orderdetail .module-orders-list.colored tbody td:first-child, .soc-avt, .module-cart table td.name-cell .item_props .item_prop .property_value, .colored_table thead tr {
@@ -6387,11 +6387,7 @@ table.colored.item-shell thead td, .popup .form-description-wrapp, .differences 
 }
 
 body {
-    background: #fff
-}
-
-body {
-    background: #fff
+    background: #ffffff
 }
 
 #footer .phone .icon {
@@ -7482,7 +7478,7 @@ body .top-block .info-text .ajax_basket {
 }
 
 .top-block .social-icons {
-    background: #fff4e9;
+    background: #ffffff;
 }
 
 .top-block .social-icons li {
@@ -7858,7 +7854,7 @@ body .top-block .info-text .search-block {
 }
 
 .header-wrapper .maxwidth-theme {
-    background: #fff5e8;
+    background: #ffffff;
 }
 
 .logo_and_menu-row .search .search-input {
@@ -8757,7 +8753,7 @@ ul.mobile_menu .search .search-input-div input {
 }
 
 #mobileheader .mobileheader-v1 {
-    background: #fff4e9;
+    background: #ffffff;
     border-bottom: 1px solid #f5f5f5
 }
 
@@ -9441,7 +9437,7 @@ body .soc-avt .row a {
     #headerfixed {
         opacity: 0;
         transition: opacity ease .01s;
-        background: #fff4e9;
+        background: #ffffff;
         display: none;
         box-shadow: 0 1px 5px rgba(0, 0, 0, .136)
     }
@@ -10188,7 +10184,7 @@ body.fill_bg_y .header_wrap header .header-wrapper {
 }
 
 .mega-menu ul.nav li, .mega-menu ul.nav .dropdown-menu {
-    background-color: #fafafa
+    background-color: #ffffff
 }
 
 .mega-menu ul.nav li>a {
@@ -13543,7 +13539,7 @@ body .flexslider li, body .flex-direction-nav li {
 }
 
 .tabs .tab-content {
-    background-color: #fff4e9;
+    background-color: #ffffff;
     border: none;
     padding: 40px 0 0
 }
@@ -13562,7 +13558,7 @@ body .flexslider li, body .flex-direction-nav li {
 }
 
 .tabs .nav.nav-tabs a {
-    background: #f9f9fa;
+    background: #ffffff;
     border: 1px solid #f2f2f2;
     color: #222;
     margin: 0 -1px -1px 0;
@@ -15100,7 +15096,7 @@ body .wrapper .catalog_item .item_info .buttons_block {
 }
 
 .viewed_block .item_block .item.has-item {
-    background: #fff4e9;
+    background: #ffffff;
     opacity: 1
 }
 
@@ -20741,14 +20737,14 @@ body .items-services.item-views .item .body-info .previewtext {
     border-bottom-width: 0;
     box-sizing: border-box;
     border-radius: 2px 2px 0 0;
-    background-color: #f7f7f7
+    background-color: #fff
 }
 
 .reviews-reply-field iframe {
-    border: 1px solid #f2f2f2 !important;
+    border: 1px solid #fff !important;
     box-sizing: border-box;
     border-radius: 0 0 2px 2px;
-    background-color: #f7f7f7
+    background-color: #fff
 }
 
 .reviews-reply-field-upload {
@@ -20834,13 +20830,13 @@ body .items-services.item-views .item .body-info .previewtext {
 }
 
 .forum-quote {
-    background: #f8f2d4;
+    background: #ffffff;
     width: 100%;
     margin: 5px 0 0
 }
 
 blockquote.bx-quote {
-    background: #f8f2d4 !important
+    background: #ffffff !important
 }
 
 .forum-quote tr th {
@@ -20882,7 +20878,7 @@ div.reviews-code-box {
     font-size: 12px;
     width: 100%;
     border-width: 1px solid #ddd;
-    background: #f8f2d4
+    background: #ffffff
 }
 
 div.reviews-code-box ol, div.reviews-code-box ol li, div.reviews-code-box ol li span {
@@ -25769,7 +25765,7 @@ table.contacts-stores tr.item td:last-of-type {
 .item-stock .icon.last {
     background: none;
     border-radius: 50%;
-    background-color: #ffb100;
+    background-color: #fff;
     width: 10px;
     height: 10px;
     margin-top: 3px;
@@ -25802,15 +25798,15 @@ table.contacts-stores tr.item td:last-of-type {
   display: flex !important;
   align-items: center;
   justify-content: center;
-  height: 48px !important;
+  height: 44px !important;
   padding: 0 25px !important; /* Внутренние отступы */
-  background-color: #f0f0f0 !important; /* Светло-серый фон */
-  border: 1px solid #e0e0e0 !important;
+  background-color: #fff !important; /* Светло-серый фон */
+  border: 1px solid #fff !important;
   border-radius: 12px !important; /* Скругление углов */
   color: #222222 !important; /* Цвет текста */
   font-size: 16px !important;
   font-weight: 500 !important;
-  line-height: 48px !important;
+  line-height: 44px !important;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
@@ -26113,11 +26109,12 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 
 .header-v3 .logo-row .logo-block{
     max-height: 44px !important;  
-    width: auto !important;        
+    width: auto !important;
+    text-align: center; /* Центрируем сам логотип (img) внутри этого блока */        
 }
 
 .header-v3 .logo-row .logo img {
-    max-height: 44px !important;  
+    max-height: 29px !important;  
     width: auto !important;   
 }  
 
@@ -26146,3 +26143,335 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 .icons-block .svg-inline-cabinet svg * {
     stroke-width: 1px !important;
 } 
+
+
+.header-catalog-button {
+  /* Обязательно задаем размеры вашей картинки */
+  width: 170px;  /* Задайте точную ширину вашей картинки */
+  height: 44px;  /* Задайте точную высоту вашей картинки */
+  
+
+  background-image: url('./images/catalog_bt.svg');
+  
+  /* Настройки отображения фона */
+  background-size: contain;   /* Масштабирует картинку, чтобы она полностью влезла */
+  background-repeat: no-repeat; /* Запрещает повторение картинки */
+  
+  display: block; /* Делаем ссылку блочным элементом, чтобы применились размеры */
+  border: none;   /* Убираем рамку, если она была */
+  text-indent: -9999px; /* Скрываем любой случайный текст, который мог остаться */
+
+  /* --- Магия для плавного увеличения --- */
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Эффект при наведении курсора */
+.header-catalog-button:hover {
+  transform: scale(1.05); /* Увеличиваем на 5% */
+  cursor: pointer;
+}
+
+
+/* --- 1. Новый родительский контейнер для поиска --- */
+.search-container-relative {
+  position: relative; /* <<== ЭТО КЛЮЧЕВОЕ ПРАВИЛО! */
+  display: flex;
+  align-items: center;
+  margin: 0 15px; /* Отступ от других иконок */
+}
+
+/* --- Стили для ИКОНКИ-ТРИГГЕРА (теперь с вашим фото) --- */
+.search-icon-wrapper {
+  /* !!! ВАЖНО: Укажите точные размеры вашей картинки !!! */
+  width: 18px;  
+  height: 18px; 
+
+  /* !!! ВАЖНО: Замените путь на реальный путь к вашему файлу !!! */
+  background-image: url('./images/search.svg');
+  
+  /* Настройки отображения фона */
+  background-size: contain;   /* Картинка полностью помещается в блок */
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  cursor: pointer; /* Сохраняем курсор в виде руки */
+  position: relative;
+  z-index: 1001; /* Иконка должна быть поверх поля */
+
+  /* Плавный переход для эффекта при наведении */
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+/* Эффект при наведении */
+.search-icon-wrapper:hover {
+  transform: scale(1.1); /* Немного увеличиваем */
+  opacity: 0.85;       /* Делаем чуть прозрачнее */
+}
+
+/* --- 3. Выдвигающийся блок поиска (ИЗМЕНЕНА ЛОГИКА ПОЗИЦИОНИРОВАНИЯ) --- */
+.header-search-popup-wrapper {
+  position: absolute;
+  top: 50%;
+  
+  /* === ВОТ ГЛАВНОЕ ИЗМЕНЕНИЕ === */
+  right: 100%; /* Позиционируем правый край блока у левого края родителя (.search-container-relative) */
+  margin-right: 10px !important; /* Добавляем отступ между иконкой и полем */
+  
+  transform: translateY(-50%);
+  height: 44px;
+  z-index: 1000;
+  
+  /* Начальное состояние: скрыто и нулевая ширина */
+  width: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: width 0.4s ease, opacity 0.3s ease-out;
+}
+
+/* Состояние, когда поиск активен */
+.header-search-popup-wrapper.show {
+  width: 320px;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Контейнер от компонента Битрикса */
+.header-search-popup-wrapper .bx-title-search {
+    position: relative;
+    height: 100%;
+}
+
+/* Стили для ПОЛЯ ВВОДА */
+.header-search-popup-wrapper #title-search-input-popup {
+  width: 320px;
+  height: 100%;
+  font-size: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 24px;
+  padding: 0 60px 0 20px;
+  box-sizing: border-box;
+  background: #FFFFFF !important;
+}
+.header-search-popup-wrapper #title-search-input-popup:focus {
+    border-color: #285B4D;
+    outline: none;
+}
+
+#title-search-popup .bx_search_submit {
+    /* 1. Агрессивный сброс ВСЕХ стандартных стилей */
+    appearance: none !important;
+    background: transparent !important; /* <-- Это убирает серый фон */
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-shadow: none !important;
+    color: transparent !important;
+    
+    /* 2. Позиционирование кнопки ВНУТРИ поля */
+    position: absolute !important;
+    top: 50% !important;
+    right: 4px !important;
+    transform: translateY(-50%) !important;
+    
+    /* 3. Новый внешний вид */
+    width: 40px !important;
+    height: 40px !important;
+    background-color: #285B4D !important; /* Ваш фирменный зеленый цвет */
+    border-radius: 50% !important; /* Круг */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    
+    /* 4. Наша красивая SVG-иконка */
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17.5 17.5L13.875 13.875' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
+
+/* 5. На всякий случай убираем псевдоэлементы, которые могли содержать старую иконку */
+#title-search-popup .bx_search_submit::before,
+#title-search-popup .bx_search_submit::after {
+    display: none !important;
+    content: "" !important;
+}
+
+/* 6. Стиль при наведении */
+#title-search-popup .bx_search_submit:hover {
+    background-color: #1c4a3b !important; /* Более темный оттенок зеленого */
+}
+
+
+.header-wrapper .header-search-block,
+.header-wrapper .search-block {
+    display: none !important;
+}
+
+#title-search-popup .bx_search_submit {
+    display: none !important; 
+}
+
+/* Скрываем стандартную кнопку формы (актуально, если компонент title:search был вложен в форму search.form) */
+.header-v3 button.btn.btn-default,
+.header-v3 button.btn-default {
+    display: none !important;
+}
+
+/* На всякий случай скрываем ее родителя (обертку pull-right, если она есть) */
+.search-icon-container .pull-right {
+
+    display: none !important;
+}
+
+
+/* 1. Стили для КОНТЕЙНЕРА иконки. Превращаем его в flex-контейнер для идеального центрирования. */
+.icons-block .personal-link .wrap_icon {
+    display: flex !important;
+    align-items: center !important;     /* <<== ВЕРТИКАЛЬНОЕ ЦЕНТРИРОВАНИЕ */
+    justify-content: center !important; /* <<== ГОРИЗОНТАЛЬНОЕ ЦЕНТРИРОВАНИЕ */
+    padding: 0 !important;              /* Убираем лишние отступы */
+}
+
+/* 2. Стили для самой КАРТИНКИ-ИКОНКИ */
+.icons-block .personal-link .svg.svg-cabinet,
+.icons-block .personal-link .svg.svg-cabinet-login,
+.icons-block .personal-link .svg.svg-inline-cabinet {
+    
+    /* Сброс стандартных стилей позиционирования */
+    position: static !important;
+    top: auto !important;
+    margin: 0 !important;
+
+    /* Агрессивный сброс фонов и старой иконки */
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    font-size: 0 !important;
+    
+    /* Ваши кастомные стили */
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+
+    /* !!! ОБЯЗАТЕЛЬНО УКАЖИТЕ СВОЙ ПУТЬ К КАРТИНКЕ !!! */
+    background-image: url('./images/User.svg') !important;
+    
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+
+    transition: transform 0.2s ease-in-out;
+}
+
+/* 3. Гарантированно прячем старую SVG-иконку внутри */
+.icons-block .personal-link .svg-inline-cabinet svg {
+    display: none !important;
+}
+
+/* 4. Эффект при наведении */
+.icons-block .personal-link:hover .svg-inline-cabinet {
+    transform: scale(1.1);
+}
+
+.catalog_page .left_block {
+    display: none !important;
+}
+
+/* Растягиваем правую (основную) колонку на всю ширину */
+.catalog_page .right_block {
+    width: 100% !important;
+    padding-left: 0 !important;
+}
+
+.icons-block .baskets .basket-link span.wrap {
+    display: none !important;
+}
+
+
+.icons-block .js-favorites-block .svg.svg-inline-wish svg {
+    display: none !important;
+}
+
+/* Теперь превращаем её родительский контейнер (тег 'i') в нашу картинку */
+.icons-block .js-favorites-block .svg.svg-inline-wish {
+    /* !!! ВАЖНО: Задайте точные размеры вашей картинки !!! */
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important; /* На всякий случай */
+
+    /* !!! ВАЖНО: Замените путь на реальный путь к вашему файлу !!! */
+    background-image: url('./images/favourites.svg') !important;
+    
+    /* --- Настройки и агрессивный сброс --- */
+    background: url('./images/favourites.svg') center / contain no-repeat !important; /* Укороченная запись для максимального приоритета */
+    border: none !important;
+    font-size: 0 !important;
+    transition: transform 0.2s ease;
+    
+    /* Сбрасываем позиционирование */
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+/* === 2. ИКОНКА КОРЗИНЫ (аналогичный подход) === */
+
+/* Скрываем стандартную SVG иконку */
+.icons-block .baskets .basket-link .svg-inline-basket svg {
+    display: none !important;
+}
+
+/* Превращаем её контейнер в нашу картинку */
+.icons-block .baskets .basket-link .svg-inline-basket {
+    /* !!! ВАЖНО: Задайте точные размеры вашей картинки !!! */
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+
+    /* !!! ВАЖНО: Замените путь на реальный путь к вашему файлу !!! */
+    background-image: url('./images/basket.svg') !important;
+    
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    transition: transform 0.2s ease;
+}
+
+/* === 3. ОБЩИЙ ЭФФЕКТ ПРИ НАВЕДЕНИИ === */
+.icons-block .wish-link:hover .svg-inline-wish,
+.icons-block .basket-link:hover .svg-inline-basket {
+    transform: scale(1.1);
+}
+
+.header-v3 .logo-row .icons-block {
+    display: flex !important;           /* Включаем Flexbox */
+    align-items: center !important;     /* Выравниваем все иконки по вертикальной оси */
+    gap: 24px !important;               /* <<== ВОТ ВАШИ 10px МЕЖДУ ИКОНКАМИ */
+    
+    /* Убираем базовую ширину, чтобы блок подстраивался под контент */
+    flex-basis: auto !important; 
+}
+
+/* 2. Убираем стандартные отступы у оберток каждой иконки,
+   чтобы свойство 'gap' работало корректно и отступы были одинаковыми. */
+.header-v3 .logo-row .icons-block .block-link,
+.header-v3 .logo-row .icons-block .search-container-relative {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 3. Дополнительно убираем отступы у внутренних оберток, если они есть */
+.header-v3 .logo-row .icons-block .wrap_icon {
+    padding: 0 !important;
+}
+
+.search-container-relative {
+  position: relative; /* Включаем возможность сдвига */
+  top: 2px;         /* Сдвигаем ВЕСЬ блок с иконкой поиска вниз на 2 пикселя */
+}
+
+
+.header-v3 .logo-row .icons-block {
+    margin-right: 20px !important; /* Можете изменить значение 20px на нужное вам */
+}

@@ -71,27 +71,9 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
                 <div class="row">
 
                     <!-- Блок каталога слева -->
-                    <div class="catalog-menu-left" style="min-width: 100px;"> <!-- Добавил min-width для стабильности -->
-                        <nav class="mega-menu sliced">
-                            <?$APPLICATION->IncludeComponent(
-                                "bitrix:menu",
-                                "top_catalog_wide", // Шаблон для кнопки "Каталог" с выпадающим меню
-                                array(
-                                    "ROOT_MENU_TYPE" => "top_catalog",
-                                    "MENU_CACHE_TYPE" => "A",
-                                    "MENU_CACHE_TIME" => "36000000",
-                                    "MENU_CACHE_USE_GROUPS" => "Y",
-                                    "MENU_CACHE_GET_VARS" => array(),
-                                    "MAX_LEVEL" => "2",
-                                    "CHILD_MENU_TYPE" => "left",
-                                    "USE_EXT" => "Y",
-                                    "DELAY" => "N",
-                                    "ALLOW_MULTI_SELECT" => "N",
-                                    "COMPONENT_TEMPLATE" => "top_catalog_wide"
-                                ),
-                                false
-                            );?>
-                        </nav>
+                   <!-- Блок каталога слева (теперь кастомная картинка-кнопка) -->
+                    <div class="header-catalog-button-wrapper">
+                        <a href="/catalog/" class="header-catalog-button" title="Перейти в каталог"></a>
                     </div>
 
                     <!-- Центральный блок с логотипом -->
@@ -103,6 +85,48 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
 
                     <!-- Блок с иконками справа -->
                     <div class="icons-block" style="display: flex; align-items: center; justify-content: flex-end; min-width: 200px;"> <!-- Добавил min-width для симметрии -->
+                         <!-- НАЧАЛО БЛОКА ВЫПАДАЮЩЕГО ПОИСКА -->
+                    <div class="search-container-relative">
+                        <div class="header-search-popup-wrapper">
+                            <?$APPLICATION->IncludeComponent(
+                                "bitrix:search.title",
+                                "visual",
+                                array(
+                                    "NUM_CATEGORIES" => "1",
+                                    "TOP_COUNT" => "5",
+                                    "ORDER" => "date",
+                                    "USE_LANGUAGE_GUESS" => "Y",
+                                    "CHECK_DATES" => "Y",
+                                    "SHOW_OTHERS" => "N",
+                                    "PAGE" => SITE_DIR."catalog/",
+                                    "SHOW_INPUT" => "Y",
+                                    "INPUT_ID" => "title-search-input-popup",
+                                    "CONTAINER_ID" => "title-search-popup",
+                                    "CATEGORY_0_TITLE" => "Товары",
+                                    "CATEGORY_0" => array(
+                                        0 => "iblock_catalog",
+                                    ),
+                                    "CATEGORY_0_iblock_catalog" => array(
+                                        0 => "all",
+                                    ),
+                                    "PRICE_CODE" => array( 0 => "BASE", ),
+                                    "PRICE_VAT_INCLUDE" => "Y",
+                                    "PREVIEW_TRUNCATE_LEN" => "",
+                                    "SHOW_PREVIEW" => "Y",
+                                    "CONVERT_CURRENCY" => "N",
+                                ),
+                                false
+                            );?>
+                        </div>
+
+                        <!-- 2. ИКОНКА-ТРИГГЕР, которая включает поиск -->
+                        <div class="pull-right block-link search-icon-container">
+                            <div class="wrap_icon inner-table-block">
+                               <div class="search-icon-wrapper" title="Поиск по сайту"></div>
+                            </div>
+                        </div>
+                    </div> <!-- КОНЕЦ ОБЩЕГО КОНТЕЙНЕРА -->
+                        <!-- КОНЕЦ НОВОГО БЛОКА -->
                         <? if ($arTheme['ORDER_BASKET_VIEW']['VALUE'] !== 'NORMAL'): ?>
                             <div class="pull-right block-link">
                                 <div class="phone-block with_btn">
@@ -158,3 +182,34 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
     </div>
     <div class="line-row visible-xs"></div>
 </div>
+
+<script>
+$(document).ready(function(){
+    // Находим иконку-триггер и сам блок поиска
+    var searchIcon = $('.search-icon-wrapper');
+    var searchPopup = $('.header-search-popup-wrapper');
+    
+    // Клик по иконке поиска
+    searchIcon.on('click', function(e) {
+        e.stopPropagation(); // Останавливаем всплытие, чтобы клик по иконке не закрывал сразу же открытый блок
+        
+        searchPopup.toggleClass('show');
+        
+        // Если блок стал видимым, ставим фокус в поле ввода
+        if (searchPopup.hasClass('show')) {
+            searchPopup.find('#title-search-input-popup').focus();
+        }
+    });
+    
+    // Клик где угодно на документе
+    $(document).on('click', function(e) {
+        // Если поиск открыт и мы кликнули НЕ по нему и НЕ по его иконке-триггеру
+        if (searchPopup.hasClass('show') && 
+            !$(e.target).closest('.header-search-popup-wrapper').length && 
+            !$(e.target).closest('.search-icon-wrapper').length) 
+        {
+            searchPopup.removeClass('show'); // Прячем поиск
+        }
+    });
+});
+</script>

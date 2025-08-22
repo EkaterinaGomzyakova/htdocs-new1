@@ -181,7 +181,7 @@
 }
 
 .sale_order_full_table form input[type="submit"]:hover {
-    background-color: #fff7ec;
+    background-color: #ffffff;
     border-color: #285b4d;
     color: #285b4d
 }
@@ -550,7 +550,7 @@
 }
 
 .mobile-app-menu .icon:active {
-    background-color: #fff7ec;
+    background-color: #ffffff;
 }
 
 .sale-personal-section-index-block-name {
@@ -782,7 +782,7 @@
 }
 
 .menu-item.new_year.active .wrap {
-    background: #FFF6ED;
+    background: #ffffff;
 }
 
 .menu-item.new_year.active .wrap a {
@@ -966,7 +966,7 @@
 }
 
 .section-new_year .btn.btn-default {
-    background-color: wheat;
+    background-color: rgb(255, 255, 255);
     color: black;
     border-radius: 50px;
 }
@@ -980,7 +980,7 @@
 }
 
 .section-new_year .footer_button {
-    color: wheat;
+    color: #ffffff;
 }
 
 .bx-ui-sls-pane {
@@ -1008,7 +1008,7 @@
     height: 50px;
     border-radius: 50%;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-    background-color: #F5F4F9;
+    background-color: #ffffff;
     cursor: pointer;
     padding: 12px;
     transition: all 0.2s ease-in;
@@ -1137,7 +1137,7 @@
 }
 
 #unisender-subscribe-form td {
-    background-color: #fff5e9;
+    background-color: #ffffff;
 }
 
 @media (min-width: 992px) {
