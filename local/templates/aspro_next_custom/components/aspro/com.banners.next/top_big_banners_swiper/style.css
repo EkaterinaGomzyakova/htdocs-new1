@@ -1,9 +1,9 @@
 .banner-top-swiper {
-    height: 300px;
+    height: 600px;
 }
 @media (min-width: 992px) {
     .banner-top-swiper {
-        height: 350px;
+        height: 600px;
         margin: 0 -30px;
     }
 }
@@ -23,8 +23,8 @@
 
 .banner-top-slide-text {
     width: 100%;
-    height: 300px;
-    margin-top: -300px;
+    height: 600px;
+    margin-top: -600px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,11 +33,11 @@
 
 @media (min-width: 992px) {
     .banner-top-slide-image {
-        height: 350px;
+        height: 600px;
     }
     .banner-top-slide-text {
-        height: 350px;
-        margin-top: -350px;
+        height: 600px;
+        margin-top: -600px;
     }
 }
 

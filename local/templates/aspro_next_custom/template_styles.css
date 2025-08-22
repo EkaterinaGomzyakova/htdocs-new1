@@ -26172,6 +26172,16 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 }
 
 
+.header-v3 .logo-row .logo-block .logo {
+    display: flex !important;           /* Включаем Flexbox-выравнивание */
+    align-items: center !important;     /* <<== ЭТО ВЫРАВНИВАЕТ ЛОГОТИП ПО ВЕРТИКАЛИ */
+    justify-content: center !important; /* Это выравнивает по горизонтали (на всякий случай) */
+    
+    /* Убедимся, что у контейнера есть высота, в которой можно центрировать */
+    height: 100% !important; 
+}
+
+
 /* --- 1. Новый родительский контейнер для поиска --- */
 .search-container-relative {
   position: relative; /* <<== ЭТО КЛЮЧЕВОЕ ПРАВИЛО! */
@@ -26215,7 +26225,7 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
   
   /* === ВОТ ГЛАВНОЕ ИЗМЕНЕНИЕ === */
   right: 100%; /* Позиционируем правый край блока у левого края родителя (.search-container-relative) */
-  margin-right: 10px !important; /* Добавляем отступ между иконкой и полем */
+  margin-right: 50px !important; /* Добавляем отступ между иконкой и полем */
   
   transform: translateY(-50%);
   height: 44px;
@@ -26395,24 +26405,18 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 
 /* Теперь превращаем её родительский контейнер (тег 'i') в нашу картинку */
 .icons-block .js-favorites-block .svg.svg-inline-wish {
-    /* !!! ВАЖНО: Задайте точные размеры вашей картинки !!! */
+     /* !!! ВАЖНО: Задайте точные размеры вашей картинки !!! */
     width: 18px !important;
     height: 18px !important;
-    min-width: 18px !important; /* На всякий случай */
+    min-width: 18px !important;
 
     /* !!! ВАЖНО: Замените путь на реальный путь к вашему файлу !!! */
     background-image: url('./images/favourites.svg') !important;
     
-    /* --- Настройки и агрессивный сброс --- */
-    background: url('./images/favourites.svg') center / contain no-repeat !important; /* Укороченная запись для максимального приоритета */
-    border: none !important;
-    font-size: 0 !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
     transition: transform 0.2s ease;
-    
-    /* Сбрасываем позиционирование */
-    position: relative !important;
-    top: 0 !important;
-    left: 0 !important;
 }
 
 /* === 2. ИКОНКА КОРЗИНЫ (аналогичный подход) === */
@@ -26439,8 +26443,12 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 }
 
 /* === 3. ОБЩИЙ ЭФФЕКТ ПРИ НАВЕДЕНИИ === */
-.icons-block .wish-link:hover .svg-inline-wish,
-.icons-block .basket-link:hover .svg-inline-basket {
+.icons-block .js-favorites-block:hover .svg.svg-inline-wish,
+.icons-block .basket-link:hover .svg-inline-basket{
+    transform: scale(1.1);
+}
+
+.icons-block .js-favorites-block a:hover .svg.svg-inline-wish {
     transform: scale(1.1);
 }
 
@@ -26474,4 +26482,116 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 
 .header-v3 .logo-row .icons-block {
     margin-right: 20px !important; /* Можете изменить значение 20px на нужное вам */
+}
+
+.menu-row.middle-block.bgcolored,
+.menu-row.middle-block.bgcolored .maxwidth-theme,
+.menu-row.middle-block.bgcolored .menu-only,
+.menu-row.middle-block.bgcolored nav.mega-menu,
+.menu-row.middle-block.bgcolored .mega-menu table,
+.menu-row.middle-block.bgcolored .mega-menu table td,
+.menu-row.middle-block.bgcolored .mega-menu table .wrap {
+    background: transparent !important;
+    background-color: transparent !important; /* <<== ГЛАВНОЕ ИЗМЕНЕНИЕ */
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* 2. Добавляем отступ сверху, чтобы меню не "липло" к шапке */
+.menu-row.middle-block.bgcolored {
+    margin-top: 20px !important; /* Можете изменить это значение */
+}
+
+/* 3. Меняем цвет ТЕКСТА пунктов меню на фирменный зеленый */
+.menu-row.middle-block.bgcolored .mega-menu table td .wrap > a {
+    color: #285B4D !important; /* Ваш фирменный зеленый */
+}
+
+/* 4. Меняем цвет СТРЕЛОЧЕК выпадающего меню */
+.menu-row.middle-block.bgcolored .mega-menu table td.dropdown .wrap > a:after {
+    color: #285B4D !important;
+}
+
+/* 5. Меняем цвет ИКОНОК в меню (например, иконка SALE) */
+.menu-row.middle-block.bgcolored .svg path,
+.menu-row.middle-block.bgcolored .svg rect {
+    fill: #285B4D !important;
+}
+
+/* 6. (Опционально) Эффект при наведении на пункт меню */
+.menu-row.middle-block.bgcolored .mega-menu table td .wrap > a:hover {
+    color: #1c4a3b !important; /* Более темный оттенок при наведении */
+    text-decoration: underline;
+}
+
+
+
+/* 1. Обнуляем стили основного контейнера .menu-row */
+.menu-row.middle-block.bgcolored {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 40px auto 30px auto !important;
+    padding: 0 !important;
+    height: 22px !important;
+    max-width: 992px !important; /* <<== Задаем ширину из макета */
+}
+
+/* 2. Обнуляем стили у вложенных оберток, чтобы они не мешали */
+.menu-row.middle-block.bgcolored .maxwidth-theme,
+.menu-row.middle-block.bgcolored .menu-only,
+.menu-row.middle-block.bgcolored nav.mega-menu {
+    height: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* 3. КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: Заставляем саму таблицу быть Flex-контейнером */
+.menu-row.middle-block.bgcolored nav.mega-menu table {
+    display: flex !important;
+    justify-content: space-between !important; /* Равномерно распределяет элементы */
+    align-items: center !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* 4. Заставляем "исчезнуть" tbody и tr, чтобы td стали прямыми детьми flex-таблицы */
+.menu-row.middle-block.bgcolored nav.mega-menu table > tbody,
+.menu-row.middle-block.bgcolored nav.mega-menu table > tbody > tr {
+    display: contents !important; /* Это заставляет их "раствориться" в верстке */
+}
+
+/* 5. Стилизуем ячейки <td> и ссылки <a> внутри них */
+.menu-row.middle-block.bgcolored .mega-menu table td,
+.menu-row.middle-block.bgcolored .mega-menu table td .wrap > a {
+    height: 22px !important;
+    line-height: 22px !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+    color: #285B4D !important;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* 6. Убираем старые иконки и стрелки */
+.menu-row.middle-block.bgcolored .mega-menu table td .wrap > a::before,
+.menu-row.middle-block.bgcolored .mega-menu table td .wrap > a::after {
+    display: none !important;
+}
+
+
+.menu-row.middle-block .mega-menu table td.dropdown:hover > .wrap > .dropdown-menu {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* 
+  Также убираем визуальные индикаторы (стрелочки),
+  чтобы пользователь не думал, что там что-то есть.
+*/
+.menu-row.middle-block.bgcolored .mega-menu table td.dropdown .wrap > a::after {
+    display: none !important;
 }

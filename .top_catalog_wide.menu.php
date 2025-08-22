@@ -1,7 +1,7 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"SALE", 
+		"Sale", 
 		"/offers/discount/", 
 		Array(), 
 		Array("CLASS"=>"icon sale_icon"), 
