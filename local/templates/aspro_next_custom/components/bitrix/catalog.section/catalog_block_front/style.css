@@ -1,45 +1,99 @@
-.catalog-section-carousel-dots {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100%;
-    opacity: 0;
-    justify-content: center;
+/* --- [ИЗМЕНЕНО] Новое расположение и стиль для стрелок слайдера --- */
+
+/* Убираем боковые отступы у обертки, они больше не нужны для стрелок */
+.a-products-slider-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+    position: relative; /* Добавляем на всякий случай, чтобы позиционирование стрелок работало надежно */
 }
 
-.catalog-section-carousel-dots:hover {
-    opacity: 1;
+/* Основной блок стилей для обеих стрелок */
+.a-slider-btn-prev,
+.a-slider-btn-next {
+    /* 1. "Поднимаем" стрелки наверх, за пределы самого слайдера. */
+    /* Вы можете подобрать значение top, чтобы идеально выровнять их с вашим заголовком. */
+    top: -50px; 
+    
+    /* 2. Убираем старые стили (фон, тень, размеры, вертикальное выравнивание) */
+    background: none;
+    box-shadow: none;
+    width: auto;
+    height: auto;
+    transform: none;
+    bottom: auto; /* сбрасываем */
+    
+    /* 3. Задаем новый цвет стрелок */
+    color: #333 !important;
 }
 
-.catalog-section-carousel-dot {
-    flex-grow: 0;
+/* 4. Располагаем стрелки справа */
+.a-slider-btn-next {
+    right: 0; /* "Следующая" будет самой правой */
+    left: auto;
+}
+
+.a-slider-btn-prev {
+    right: 35px; /* "Предыдущая" будет левее на 35px */
+    left: auto;
+}
+
+/* 5. Настраиваем размер иконок-стрелок */
+.a-slider-btn-prev::after,
+.a-slider-btn-next::after {
+    font-size: 20px !important; 
+    font-weight: bold;
+}
+
+/* 6. Убираем старый стиль для наведения, он больше не нужен */
+.a-slider-btn-prev:hover,
+.a-slider-btn-next:hover {
+    background-color: transparent;
+}
+
+
+/* --- Стили для фиксированной ширины карточек в слайдере --- */
+
+.a-products-slider .swiper-slide {
+    width: 405px; /* Задаем ту самую ширину в 405px */
+    
+    /* Дополнительно, чтобы избежать случайного сжатия на маленьких экранах */
+    flex-shrink: 0; 
+}
+
+
+/* --- Адаптивность для мобильных устройств --- */
+/* На экранах меньше 450px карточка 405px + отступы просто не поместится. */
+/* Сделаем ее поменьше, чтобы сайт выглядел хорошо на телефонах. */
+@media (max-width: 450px) {
+    .a-products-slider .swiper-slide {
+        width: 300px; /* Уменьшаем ширину на маленьких экранах */
+    }
+}
+
+/* --- [ИСПРАВЛЕНО] Новые стили для блока с изображением товара --- */
+
+/* 1. Стилизуем контейнер изображения, принудительно задавая ему размер 405x405px */
+.catalog_item_wrapp .image_wrapper_block {
+    width: 405px !important;  /* <== ДОБАВЛЕНО ЭТО ПРАВИЛО */
+    height: 405px !important;
     flex-shrink: 0;
+    
+    border-radius: 20px;
+    background: rgb(255, 246, 233);
+
+    padding: 50px;
+    box-sizing: border-box;
+
+    /* Добавим авто-отступы, чтобы блок центрировался, если вдруг что-то мешает */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 2. Адаптируем саму картинку внутри нового контейнера (этот блок оставляем как есть) */
+.catalog_item_wrapp .image_wrapper_block .thumb,
+.catalog_item_wrapp .image_wrapper_block .thumb img {
     height: 100%;
-    position: relative;
-}
-
-.catalog-section-carousel-dot::before {
-    content: '';
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
-    height: 1px;
     width: 100%;
-    background: #ffeee7;
-    opacity: 0.6;
-}
-
-.catalog-section-carousel-dot:hover::before {
-    background: #235C4E;
-}
-
-.catalog-section-carousel-dot:first-child::before {
-    border-radius: 10px 0px 0px 10px;
-}
-
-.catalog-section-carousel-dot:last-child::before {
-    border-radius: 0px 10px 10px 0px;
+    object-fit: contain;
+    border-radius: 12px;
 }

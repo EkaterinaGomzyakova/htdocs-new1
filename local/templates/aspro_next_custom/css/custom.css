@@ -201,7 +201,7 @@
 
 .catalog_block .catalog_item, .catalog_item .image_wrapper_block {
     overflow: unset;
-    height: auto !important;
+    height: auto;
 }
 
 .offers-detail-link {

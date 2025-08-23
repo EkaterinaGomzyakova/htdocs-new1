@@ -4941,7 +4941,7 @@ div.blog-comment-hidden .blog-comment-cont-white, div.blog-comment-hidden .blog-
 }
 
 .wrapper_inner, .maxwidth-theme {
-    padding: 0 15px;
+    padding: 0 0px;
     margin: 0 auto;
     float: none
 }
