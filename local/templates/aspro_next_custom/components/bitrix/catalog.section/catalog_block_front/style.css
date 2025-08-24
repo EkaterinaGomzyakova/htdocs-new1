@@ -231,3 +231,51 @@ span.price_measure {
 .item_info .view_sale_block {
     margin-top: 0;
 }
+
+
+/* --- [НОВОЕ] Позиционирование таймера акции на изображении --- */
+
+/* 1. Блок с картинкой делаем "точкой отсчета" для позиционирования.
+   Это правило у вас уже должно быть, но проверяем на всякий случай. */
+.catalog_item_wrapp .image_wrapper_block {
+    position: relative;
+}
+
+/* 2. Контейнер таймера (.view_sale_block) вырываем из потока и позиционируем */
+.catalog_item_wrapp .view_sale_block {
+    position: absolute;
+    bottom: 130px;              /* Отступ от нижнего края картинки */
+    left: 20%;                 /* Смещаем левый край блока на 50% ширины родителя */
+    transform: translateX(-50%); /* Смещаем блок обратно на 50% его СОБСТВЕННОЙ ширины для идеального центрирования */
+    z-index: 2;                /* Размещаем таймер поверх картинки */
+
+    width: 80%;               /* Ширина теперь по содержимому, а не 100% */
+    margin: 0;                 /* Сбрасываем все внешние отступы */
+}
+
+/* 3. Стилизуем сам блок таймера для лучшей читаемости на фото */
+.catalog_item_wrapp .view_sale_block .count_d_block {
+    background-color: rgba(250, 244, 244, 0.0); /* прозрачный белый фон */
+    padding: 8px 16px;
+    border-radius: 12px;
+}
+
+.catalog_item_wrapp .countdown.values .item {
+    background: none !important;
+}
+
+.catalog_item_wrapp .view_sale_block .title,
+.catalog_item_wrapp .view_sale_block .countdown.values,
+.catalog_item_wrapp .view_sale_block .countdown .item,
+.catalog_item_wrapp .view_sale_block .countdown span {
+    color: #c23447!important; /* Яркий золотисто-желтый цвет */
+    /* Добавляем легкую тень, чтобы текст хорошо читался на любой картинке */
+}
+
+.catalog_item_wrapp .item-title,
+.catalog_item_wrapp .dark_link {
+    height: auto !important;         /* <<-- Убираем фиксированную высоту */
+    max-height: none !important;     /* <<-- Убираем ограничение по максимальной высоте */
+    overflow: visible !important;    /* <<-- "Выключаем ножницы", чтобы текст был виден */
+    -webkit-line-clamp: unset !important; /* Убираем возможное ограничение по числу строк */
+}
