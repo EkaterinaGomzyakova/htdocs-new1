@@ -1,95 +1,28 @@
-/* --- [ИЗМЕНЕНО] Новое расположение и стиль для стрелок слайдера --- */
+/* --- [ФИНАЛЬНАЯ ВЕРСИЯ] Стили для карточки товара, слайдера и счетчика --- */
 
-/* Убираем боковые отступы у обертки, они больше не нужны для стрелок */
-.a-products-slider-wrapper {
-    padding-left: 0;
-    padding-right: 0;
-    position: relative; /* Добавляем на всякий случай, чтобы позиционирование стрелок работало надежно */
+/* --- 1. ОБЩИЙ КОНТЕЙНЕР КАРТОЧКИ --- */
+.catalog_item_wrapp .catalog_item.item_wrap {
+    height: 535px;
+}
+.catalog_item_wrapp .catalog_item.item_wrap .inner_wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Основной блок стилей для обеих стрелок */
-.a-slider-btn-prev,
-.a-slider-btn-next {
-    /* 1. "Поднимаем" стрелки наверх, за пределы самого слайдера. */
-    /* Вы можете подобрать значение top, чтобы идеально выровнять их с вашим заголовком. */
-    top: -50px; 
-    
-    /* 2. Убираем старые стили (фон, тень, размеры, вертикальное выравнивание) */
-    background: none;
-    box-shadow: none;
-    width: auto;
-    height: auto;
-    transform: none;
-    bottom: auto; /* сбрасываем */
-    
-    /* 3. Задаем новый цвет стрелок */
-    color: #333 !important;
-}
-
-/* 4. Располагаем стрелки справа */
-.a-slider-btn-next {
-    right: 0; /* "Следующая" будет самой правой */
-    left: auto;
-}
-
-.a-slider-btn-prev {
-    right: 35px; /* "Предыдущая" будет левее на 35px */
-    left: auto;
-}
-
-/* 5. Настраиваем размер иконок-стрелок */
-.a-slider-btn-prev::after,
-.a-slider-btn-next::after {
-    font-size: 20px !important; 
-    font-weight: bold;
-}
-
-/* 6. Убираем старый стиль для наведения, он больше не нужен */
-.a-slider-btn-prev:hover,
-.a-slider-btn-next:hover {
-    background-color: transparent;
-}
-
-
-/* --- Стили для фиксированной ширины карточек в слайдере --- */
-
-.a-products-slider .swiper-slide {
-    width: 405px; /* Задаем ту самую ширину в 405px */
-    
-    /* Дополнительно, чтобы избежать случайного сжатия на маленьких экранах */
-    flex-shrink: 0; 
-}
-
-
-/* --- Адаптивность для мобильных устройств --- */
-/* На экранах меньше 450px карточка 405px + отступы просто не поместится. */
-/* Сделаем ее поменьше, чтобы сайт выглядел хорошо на телефонах. */
-@media (max-width: 450px) {
-    .a-products-slider .swiper-slide {
-        width: 300px; /* Уменьшаем ширину на маленьких экранах */
-    }
-}
-
-/* --- [ИСПРАВЛЕНО] Новые стили для блока с изображением товара --- */
-
-/* 1. Стилизуем контейнер изображения, принудительно задавая ему размер 405x405px */
+/* --- 2. БЛОК С ФОТОГРАФИЕЙ --- */
 .catalog_item_wrapp .image_wrapper_block {
-    width: 405px !important;  /* <== ДОБАВЛЕНО ЭТО ПРАВИЛО */
+    position: relative; /* ВАЖНО: Делаем его точкой отсчета */
+    width: 405px !important;
     height: 405px !important;
     flex-shrink: 0;
-    
     border-radius: 20px;
-    background: rgb(255, 246, 233);
-
+    background: rgb(254, 244, 234);
     padding: 50px;
     box-sizing: border-box;
-
-    /* Добавим авто-отступы, чтобы блок центрировался, если вдруг что-то мешает */
     margin-left: auto;
     margin-right: auto;
 }
-
-/* 2. Адаптируем саму картинку внутри нового контейнера (этот блок оставляем как есть) */
 .catalog_item_wrapp .image_wrapper_block .thumb,
 .catalog_item_wrapp .image_wrapper_block .thumb img {
     height: 100%;
@@ -97,3 +30,94 @@
     object-fit: contain;
     border-radius: 12px;
 }
+
+/* --- 3. БЛОК С ИНФОРМАЦИЕЙ --- */
+.catalog_item_wrapp .item_info {
+    height: 130px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* --- 4. КНОПКА "В КОРЗИНУ" И СЧЕТЧИК (+/-) --- */
+/* Общий контейнер для кнопки и счетчика теперь позиционируется */
+.catalog_item_wrapp .counter_wrapp {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+}
+
+/* Стилизуем круглую иконку-кнопку "купить" */
+.catalog_item_wrapp .button_block > span {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #285B4D;
+    background-image: url('/local/templates/aspro_next_custom/images/green_basket.svg'); 
+    background-size: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-size: 0;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* НОВЫЙ БЛОК: Стили для самого счетчика (+/-) */
+.catalog_item_wrapp .counter_block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    width: 100px; /* Ширина овального блока */
+    height: 36px; /* Высота, как у круглой кнопки */
+    
+    background-color: #285B4D; /* Ваш фирменный цвет */
+    border-radius: 18px; /* Половина высоты для идеальной овальной формы */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+/* Стили для кнопок "-", "+" и поля с количеством */
+.catalog_item_wrapp .counter_block .minus,
+.catalog_item_wrapp .counter_block .plus {
+    color: white;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+.catalog_item_wrapp .counter_block input.text {
+    width: 25px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    padding: 0;
+    margin: 0 5px;
+}
+/* Убираем стрелочки у поля ввода в некоторых браузерах */
+.catalog_item_wrapp .counter_block input.text::-webkit-outer-spin-button,
+.catalog_item_wrapp .counter_block input.text::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.catalog_item_wrapp .counter_block input.text[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* --- 5. ОБЩИЕ СТИЛИ СЛАЙДЕРА И СТРЕЛОК --- */
+/* (здесь ничего не менялось) */
+.a-products-slider-wrapper { padding-left: 0; padding-right: 0; position: relative; }
+.a-slider-btn-prev, .a-slider-btn-next { top: -50px; background: none; box-shadow: none; width: auto; height: auto; transform: none; bottom: auto; color: #333 !important; }
+.a-slider-btn-next { right: 0; left: auto; }
+.a-slider-btn-prev { right: 35px; left: auto; }
+.a-slider-btn-prev::after, .a-slider-btn-next::after { font-size: 20px !important; font-weight: bold; }
+.a-slider-btn-prev:hover, .a-slider-btn-next:hover { background-color: transparent; }
+.a-products-slider .swiper-slide { width: 405px; flex-shrink: 0; }
+@media (max-width: 450px) { .a-products-slider .swiper-slide { width: 300px; } }
