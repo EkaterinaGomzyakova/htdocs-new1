@@ -3,6 +3,7 @@
 /* --- 1. ОБЩИЙ КОНТЕЙНЕР КАРТОЧКИ --- */
 .catalog_item_wrapp .catalog_item.item_wrap {
     height: 535px;
+    position: relative; /* ВАЖНО: Делаем всю карточку точкой отсчета для кнопки */
 }
 .catalog_item_wrapp .catalog_item.item_wrap .inner_wrap {
     height: 100%;
@@ -12,7 +13,7 @@
 
 /* --- 2. БЛОК С ФОТОГРАФИЕЙ --- */
 .catalog_item_wrapp .image_wrapper_block {
-    position: relative; /* ВАЖНО: Делаем его точкой отсчета */
+    /* Убрали position: relative отсюда */
     width: 405px !important;
     height: 405px !important;
     flex-shrink: 0;
@@ -43,22 +44,22 @@
 }
 
 /* --- 4. КНОПКА "В КОРЗИНУ" И СЧЕТЧИК (+/-) --- */
-/* Общий контейнер для кнопки и счетчика теперь позиционируется */
 .catalog_item_wrapp .counter_wrapp {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    /* Расчет: (Высота блока с картинкой 405px) - (Высота кнопки 54px) - (Желаемый отступ снизу 24px) = 327px */
+    top: 317px;
+    right: 24px;  /* Отступ справа, как по макету */
     z-index: 2;
 }
 
 /* Стилизуем круглую иконку-кнопку "купить" */
 .catalog_item_wrapp .button_block > span {
-    width: 36px;
-    height: 36px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
     background-color: #285B4D;
     background-image: url('/local/templates/aspro_next_custom/images/green_basket.svg'); 
-    background-size: 16px;
+    background-size: 24px;
     background-position: center;
     background-repeat: no-repeat;
     font-size: 0;
@@ -66,42 +67,38 @@
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* НОВЫЙ БЛОК: Стили для самого счетчика (+/-) */
+/* Стили для самого счетчика (+/-) */
 .catalog_item_wrapp .counter_block {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
-    width: 100px; /* Ширина овального блока */
-    height: 36px; /* Высота, как у круглой кнопки */
-    
-    background-color: #285B4D; /* Ваш фирменный цвет */
-    border-radius: 18px; /* Половина высоты для идеальной овальной формы */
+    width: 120px;
+    height: 54px;
+    background-color: #285B4D;
+    border-radius: 27px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    
-    padding: 0 12px;
+    padding: 0 15px;
     box-sizing: border-box;
 }
 /* Стили для кнопок "-", "+" и поля с количеством */
 .catalog_item_wrapp .counter_block .minus,
 .catalog_item_wrapp .counter_block .plus {
     color: white;
-    font-size: 24px;
+    font-size: 28px;
     line-height: 1;
     cursor: pointer;
 }
 .catalog_item_wrapp .counter_block input.text {
-    width: 25px;
+    width: 30px;
     background: transparent;
     border: none;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     text-align: center;
     padding: 0;
     margin: 0 5px;
 }
-/* Убираем стрелочки у поля ввода в некоторых браузерах */
 .catalog_item_wrapp .counter_block input.text::-webkit-outer-spin-button,
 .catalog_item_wrapp .counter_block input.text::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -121,3 +118,135 @@
 .a-slider-btn-prev:hover, .a-slider-btn-next:hover { background-color: transparent; }
 .a-products-slider .swiper-slide { width: 405px; flex-shrink: 0; }
 @media (max-width: 450px) { .a-products-slider .swiper-slide { width: 300px; } }
+
+
+
+/* --- 6. СТИЛИ ДЛЯ КНОПКИ "В КОРЗИНЕ" --- */
+
+.catalog_item_wrapp .button_block .btn.in-cart {
+    /* Цвета из скриншота */
+    background-color: #285B4D;
+    color: white;
+    
+    /* Правила, которые вы прислали */
+    font-size: 16px;
+    font-weight: normal;
+    text-transform: none;
+    text-decoration: none !important; /* !important, чтобы перебить другие стили ссылок */
+    margin: 0;
+    padding: 7px 18px 9px;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+
+    /* Форма кнопки */
+    line-height: 36px !important; /* Задаем явную высоту, как в инспекторе */
+    border: 1px solid #285B4D; /* Делаем границу того же цвета, что и фон */
+    border-radius: 36 px; /* Половина высоты для создания овальной формы */
+    
+    /* Выравнивание текста и иконки по центру */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+/* Отступ для иконки-галочки внутри кнопки */
+.catalog_item_wrapp .button_block .btn.in-cart i {
+    margin-right: 8px;
+}
+
+/* --- 7. СТИЛИ ДЛЯ КНОПКИ "ИЗБРАННОЕ" (ФИНАЛЬНЫЕ ИСПРАВЛЕНИЯ) --- */
+
+/* 1. Блок с картинкой - точка отсчета */
+.catalog_item_wrapp .image_wrapper_block {
+    position: relative;
+}
+
+/* 2. Позиционирование контейнера */
+.catalog_item_wrapp .like_icons {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 3;
+}
+
+/* 3. Невидимая область для клика */
+.catalog_item_wrapp .wish_item_button {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* 4. Центрируем внутренний SPAN */
+.catalog_item_wrapp .wish_item_button .wish_item,
+.catalog_item_wrapp .wish_item_button .wish_item.added {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* 5. Стилизуем саму иконку I (Убрали transition) */
+.catalog_item_wrapp .wish_item_button .wish_item i {
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+
+/* --- ТРИ СОСТОЯНИЯ ИКОНКИ --- */
+
+/* 5.1. СТАТИЧНОЕ СОСТОЯНИЕ (серый контур, цвет #A9A9A9) */
+.catalog_item_wrapp .wish_item_button .wish_item i {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='19' viewBox='0 0 20 19' fill='none'%3e%3cpath d='M9.8125 4.69334C7.8125 -0.00109887 0.8125 0.498901 0.8125 6.49893C0.8125 12.499 9.8125 17.4991 9.8125 17.4991C9.8125 17.4991 18.8125 12.499 18.8125 6.49893C18.8125 0.498901 11.8125 -0.00109887 9.8125 4.69334Z' stroke='%23A9A9A9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e") !important;
+}
+
+/* 5.2. ПРИ НАВЕДЕНИИ (темно-серый контур, цвет #333. Убрали transform) */
+.catalog_item_wrapp .wish_item_button:hover .wish_item i {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='19' viewBox='0 0 20 19' fill='none'%3e%3cpath d='M9.8125 4.69334C7.8125 -0.00109887 0.8125 0.498901 0.8125 6.49893C0.8125 12.499 9.8125 17.4991 9.8125 17.4991C9.8125 17.4991 18.8125 12.499 18.8125 6.49893C18.8125 0.498901 11.8125 -0.00109887 9.8125 4.69334Z' stroke='%23333333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e") !important;
+}
+
+/* 5.3. В ИЗБРАННОМ (зеленая заливка, БЕЗ ФОНА) */
+.catalog_item_wrapp .wish_item_button .wish_item.added i {
+    background-color: transparent !important; /* <<< ВОТ КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='19' viewBox='0 0 20 19' fill='%23285B4D'%3e%3cpath d='M9.8125 4.69334C7.8125 -0.00109887 0.8125 0.498901 0.8125 6.49893C0.8125 12.499 9.8125 17.4991 9.8125 17.4991C9.8125 17.4991 18.8125 12.499 18.8125 6.49893C18.8125 0.498901 11.8125 -0.00109887 9.8125 4.69334Z' stroke='%23285B4D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e") !important;
+}
+
+/* --- 8. СТИЛИ ДЛЯ СТИКЕРОВ ("ХИТ" И ДР.) --- */
+
+/* Стили для каждого отдельного стикера */
+.catalog_item_wrapp .stickers [class*="sticker_"] {
+    /* Увеличиваем размер текста */
+    font-size: 13px;
+    
+    /* Делаем текст чуть жирнее для лучшей читаемости */
+    font-weight: 500;
+    
+    /* Увеличиваем внутренние отступы, чтобы сам стикер стал больше */
+    padding: 6px 14px;
+    
+    /* Сделаем скругление более выраженным */
+    border-radius: 16px; 
+    
+    /* Для лучшего вертикального выравнивания текста */
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+/* Добавляем расстояние между самими стикерами, если их несколько */
+.catalog_item_wrapp .stickers > div {
+    margin-right: 0px;
+}
