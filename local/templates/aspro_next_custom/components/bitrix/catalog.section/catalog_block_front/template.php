@@ -104,76 +104,60 @@
                                             <? } ?>
                                         </a>
                                     </div>
+
                                     <div class="item_info">
+
                                         <? if (is_array($arItem['DISPLAY_PROPERTIES']['BRAND']['LINK_ELEMENT_VALUE'])) { ?>
                                             <div class="brand-title hidden"><?= current($arItem['DISPLAY_PROPERTIES']['BRAND']['LINK_ELEMENT_VALUE'])['NAME'] ?></div>
                                         <? } ?>
+
+                                        <!-- Название товара (остается без изменений) -->
                                         <div class="item-title">
                                             <a href="<?= $arItem["DETAIL_PAGE_URL"] ?>" class="dark_link">
                                                 <p><?= $arItem['DISPLAY_PROPERTIES']['ALT_NAME']['VALUE'] ?></p>
                                                 <span><?= $elementName; ?></span>
                                             </a>
                                         </div>
-                                        <? if ($arParams["SHOW_RATING"] == "Y") : ?>
-                                            <div class="rating">
-                                                <? $APPLICATION->IncludeComponent(
-                                                    "bitrix:iblock.vote",
-                                                    "element_rating_front",
-                                                    array(
-                                                        "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-                                                        "IBLOCK_ID" => $arItem["IBLOCK_ID"],
-                                                        "ELEMENT_ID" => $arItem["ID"],
-                                                        "MAX_VOTE" => 5,
-                                                        "VOTE_NAMES" => array(),
-                                                        "CACHE_TYPE" => $arParams["CACHE_TYPE"],
-                                                        "CACHE_TIME" => $arParams["CACHE_TIME"],
-                                                        "DISPLAY_AS_RATING" => 'vote_avg'
-                                                    ),
-                                                    $component,
-                                                    array("HIDE_ICONS" => "Y")
-                                                ); ?>
-                                            </div>
-                                        <? endif; ?>
 
-                                        <? if (!empty($arItem['DISPLAY_PROPERTIES']['VOLUME']['DISPLAY_VALUE'])) { ?>
-                                            <div class="list-props-wrapper">
-                                                <span class="prop"><?= $arItem['DISPLAY_PROPERTIES']['VOLUME']['NAME'] ?>: </span>
-                                                <span class="value"><?= $arItem['DISPLAY_PROPERTIES']['VOLUME']['DISPLAY_VALUE'] ?></span>
-                                            </div>
-                                        <? } ?>
+                                        <!-- [НОВАЯ СТРУКТУРА] -->
 
-                                        <? if ($arItem['REVIEWS_COUNT'] > 0) { ?>
-                                            <div class="reviews-section">
-                                                <span><?= GetMessage("CATALOG_REVIEWS_COUNT"); ?>:</span> <span class="reviews-count"><?= $arItem['REVIEWS_COUNT'] ?></span>
-                                            </div>
-                                        <? } ?>
-
-                                        <?= $arQuantityData["HTML"]; ?>
-                                        <div class="cost prices clearfix">
-                                            <? if ($arItem["OFFERS"]) { ?>
-                                                <? \Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id, array(), 'N'); ?>
-                                            <? } else { ?>
-                                                <?
-                                                $item_id = $arItem["ID"];
-                                                if (isset($arItem['PRICE_MATRIX']) && $arItem['PRICE_MATRIX']) // USE_PRICE_COUNT
-                                                {
-                                                ?>
-                                                    <? if ($arItem['ITEM_PRICE_MODE'] == 'Q' && count($arItem['PRICE_MATRIX']['ROWS']) > 1) : ?>
-                                                        <?= CNext::showPriceRangeTop($arItem, $arParams, GetMessage("CATALOG_ECONOMY")); ?>
-                                                    <? endif; ?>
-                                                    <?= CNext::showPriceMatrix($arItem, $arParams, $strMeasure, $arAddToBasketData); ?>
-                                                    <? $arMatrixKey = array_keys($arItem['PRICE_MATRIX']['MATRIX']);
-                                                    $min_price_id = current($arMatrixKey); ?>
-                                                <?
-                                                } elseif ($arItem["PRICES"]) {
-                                                    $arCountPricesCanAccess = 0;
-                                                    $min_price_id = 0; ?>
-                                                    <? \Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id, 'N'); ?>
+                                        <!-- СТРОКА 1: Цена + Экономия + Отзывы -->
+                                        <div class="item_info_main_row">
+                                            
+                                            <!-- Левая часть: Цена и стикеры экономии -->
+                                            <div class="cost prices clearfix">
+                                                <? if ($arItem["OFFERS"]) { ?>
+                                                    <? \Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id, array(), 'N'); ?>
+                                                <? } else { ?>
+                                                    <?
+                                                    $item_id = $arItem["ID"];
+                                                    if (isset($arItem['PRICE_MATRIX']) && $arItem['PRICE_MATRIX'])
+                                                    {
+                                                        if ($arItem['ITEM_PRICE_MODE'] == 'Q' && count($arItem['PRICE_MATRIX']['ROWS']) > 1) {
+                                                            echo CNext::showPriceRangeTop($arItem, $arParams, GetMessage("CATALOG_ECONOMY"));
+                                                        }
+                                                        echo CNext::showPriceMatrix($arItem, $arParams, $strMeasure, $arAddToBasketData);
+                                                        $arMatrixKey = array_keys($arItem['PRICE_MATRIX']['MATRIX']);
+                                                        $min_price_id = current($arMatrixKey);
+                                                    } elseif ($arItem["PRICES"]) {
+                                                        $arCountPricesCanAccess = 0;
+                                                        $min_price_id = 0;
+                                                        \Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id, 'N');
+                                                    } ?>
                                                 <? } ?>
+                                            </div>
+
+                                            <!-- Правая часть: Отзывы -->
+                                            <? if ($arItem['REVIEWS_COUNT'] > 0) { ?>
+                                                <div class="reviews-section">
+                                                    <span><?= GetMessage("CATALOG_REVIEWS_COUNT"); ?>:</span> <span class="reviews-count"><?= $arItem['REVIEWS_COUNT'] ?></span>
+                                                </div>
                                             <? } ?>
                                         </div>
-                                        <? if ($arParams["SHOW_DISCOUNT_TIME"] == "Y") { ?>
-                                            <? $arDiscounts = CCatalogDiscount::GetDiscountByProduct($item_id, $USER->GetUserGroupArray(), "N", $min_price_id, SITE_ID);
+
+                                        <!-- СТРОКА 2: Таймер акции -->
+                                        <? if ($arParams["SHOW_DISCOUNT_TIME"] == "Y") {
+                                            $arDiscounts = CCatalogDiscount::GetDiscountByProduct($item_id, $USER->GetUserGroupArray(), "N", $min_price_id, SITE_ID);
                                             $arDiscount = array();
                                             if ($arDiscounts)
                                                 $arDiscount = current($arDiscounts);
@@ -186,8 +170,14 @@
                                                         <span class="countdown values"><span class="item"></span><span class="item"></span><span class="item"></span><span class="item"></span></span>
                                                     </div>
                                                 </div>
-                                            <? } ?>
-                                        <? } ?>
+                                            <? }
+                                        } ?>
+
+                                        <!-- СТРОКА 3: Информация об остатках -->
+                                        <?= $arQuantityData["HTML"]; ?>
+
+                                        <!-- [КОНЕЦ НОВОЙ СТРУКТУРЫ] -->
+                                        
                                     </div>
                                     <div class="footer_button">
                                         <? if (!$arItem["OFFERS"] || ($arItem["OFFERS"] && !$arItem['OFFERS_PROP'])) : ?>

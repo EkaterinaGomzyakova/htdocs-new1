@@ -13896,7 +13896,7 @@ body .catalog_item .footer_button, body .catalog_item.hover .footer_button {
 }
 
 .catalog_item .image_wrapper_block {
-    margin: 0 auto 10px;
+    margin: 0 auto 16px;
     position: relative
 }
 
