@@ -1,5 +1,15 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 
+<?
+// Функция для правильного склонения слов
+if (!function_exists('declension')) {
+    function declension($number, $titles) {
+        $cases = array(2, 0, 1, 1, 1, 2);
+        return $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5)]];
+    }
+}
+?>
+
 <? $this->setFrameMode(true); ?>
 <? if (count($arResult["ITEMS"]) >= 1) { ?>
     <!-- ИЗМЕНЕНИЕ: Добавили position-relative для позиционирования стрелок -->
@@ -148,11 +158,15 @@
                                             </div>
 
                                             <!-- Правая часть: Отзывы -->
-                                            <? if ($arItem['REVIEWS_COUNT'] > 0) { ?>
-                                                <div class="reviews-section">
-                                                    <span><?= GetMessage("CATALOG_REVIEWS_COUNT"); ?>:</span> <span class="reviews-count"><?= $arItem['REVIEWS_COUNT'] ?></span>
-                                                </div>
-                                            <? } ?>
+                                            <!-- Правая часть: Отзывы (НОВАЯ ВЕРСИЯ С ССЫЛКОЙ И СКЛОНЕНИЕМ) -->
+<? if ($arItem['REVIEWS_COUNT'] > 0) { ?>
+    <div class="reviews-section">
+        <a href="<?= $arItem["DETAIL_PAGE_URL"] ?>#reviews" class="reviews-link">
+            <?= $arItem['REVIEWS_COUNT'] ?>
+            <?= declension($arItem['REVIEWS_COUNT'], array('отзыв', 'отзыва', 'отзывов')) ?>
+        </a>
+    </div>
+<? } ?>
                                         </div>
 
                                         <!-- СТРОКА 2: Таймер акции -->

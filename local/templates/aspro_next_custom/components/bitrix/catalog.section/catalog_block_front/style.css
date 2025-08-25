@@ -110,7 +110,7 @@
     text-transform: none;
     text-decoration: none !important;
     margin: 0;
-    padding: 7px 18px 9px;
+    padding: 17px 17px 17px;
     overflow: hidden;
     transition: background-color 0.3s ease;
     border: 1px solid #285B4D;
@@ -219,7 +219,8 @@ span.price_measure {
     display: flex;
     flex-wrap: wrap;       /* Разрешаем перенос на маленьких экранах */
     align-items: center;   /* Выравниваем все по центру */
-    gap: 8px;              /* Расстояние между ценой, старой ценой и стикерами */
+    gap: 5px;              /* Расстояние между ценой, старой ценой и стикерами */
+    
 }
 
 /* 4. Блок с отзывами */
@@ -278,4 +279,78 @@ span.price_measure {
     max-height: none !important;     /* <<-- Убираем ограничение по максимальной высоте */
     overflow: visible !important;    /* <<-- "Выключаем ножницы", чтобы текст был виден */
     -webkit-line-clamp: unset !important; /* Убираем возможное ограничение по числу строк */
+}
+
+/* --- [ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ] Принудительное удаление отступа у цены --- */
+
+/* 1. Нацеливаемся на контейнер цены с максимальной точностью */
+.catalog_item_wrapp .item_info_main_row .cost.prices.clearfix {
+    padding: 0 !important;
+    margin: 0 !important;
+    text-indent: 0 !important;
+    justify-content: flex-start !important;
+}
+
+/* 2. Полностью "выключаем" невидимые элементы, которые создает .clearfix */
+.catalog_item_wrapp .item_info_main_row .cost.prices.clearfix::before,
+.catalog_item_wrapp .item_info_main_row .cost.prices.clearfix::after {
+    display: none !important;
+    content: "" !important;
+}
+
+/* 3. Обнуляем отступы у самого блока с цифрами на всякий случай */
+.catalog_item_wrapp .item_info .price_matrix_wrapper {
+    /* Для дочерних flex-элементов (цена, скидки): прижаться к левому краю */
+    justify-content: flex-start !important;
+
+    /* Для любого текста внутри: прижаться к левому краю */
+    text-align: left !important;
+
+    /* На всякий случай сбрасываем любые внутренние отступы */
+    padding-left: 0 !important;
+}
+
+/* 
+  Этот блок нацелен на ВСЕ дочерние элементы ВНУТРИ блока с ценой 
+  и сбрасывает у них персональные отступы.
+*/
+.catalog_item_wrapp .item_info .price_matrix_wrapper > * {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    text-align: left !important;
+}
+
+
+/* --- [ФИНАЛЬНОЕ ВЫРАВНИВАНИЕ] Исправляем "сломанную" верстку --- */
+
+/* 1. Делаем всю карточку flex-элементом, чтобы она растягивалась */
+.catalog_item_wrapp .swiper-slide {
+    height: auto;
+    display: flex;
+}
+
+/* 2. Заставляем внутреннюю обертку занимать 100% высоты родителя */
+.catalog_item_wrapp .catalog_item_wrapp.item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.catalog_item_wrapp .catalog_item.item_wrap {
+    height: 100%; /* Растягиваемся на всю высоту слайда */
+}
+
+/* 3. Добавляем минимальную высоту для пустых блоков с отзывами и остатками,
+   чтобы они занимали место и не ломали выравнивание. */
+.item_info .reviews-section,
+.item_info .item-stock-wrapper { /* .item-stock-wrapper - предполагаемый класс для "Остался последний" */
+    min-height: 24px; /* Высота примерно одной строки текста */
+}
+
+/* 4. Сбрасываем лишние отступы, которые могут влиять на высоту */
+.item_info .cost.prices {
+    margin-bottom: 0;
+}
+.item_info .item_info_main_row {
+    margin-bottom: 0;
 }
