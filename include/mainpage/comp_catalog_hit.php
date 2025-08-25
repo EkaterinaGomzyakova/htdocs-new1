@@ -22,10 +22,11 @@ $arrFilterSale = array_merge($GLOBALS['arrFilterProp'], ["=PROPERTY_HIT" => 101]
 
 // ОБЩИЕ ПАРАМЕТРЫ для bitrix:catalog.section
 $mainComponentParams = array(
+    // === Ваши существующие параметры (все правильные) ===
     "IBLOCK_TYPE" => "catalog", "IBLOCK_ID" => "2", "SECTION_ID" => "", "SECTION_CODE" => "",
     "INCLUDE_SUBSECTIONS" => "Y", "HIDE_NOT_AVAILABLE" => "Y",
     "ELEMENT_SORT_FIELD" => "rand", "ELEMENT_SORT_ORDER" => "asc", "ELEMENT_SORT_FIELD2" => "id", "ELEMENT_SORT_ORDER2" => "desc",
-    "SHOW_ALL_WO_SECTION" => "Y", // <--- Критически важный параметр!
+    "SHOW_ALL_WO_SECTION" => "Y",
     "PAGE_ELEMENT_COUNT" => "10", "LINE_ELEMENT_COUNT" => "4",
     "PROPERTY_CODE" => array("BRAND","ALT_NAME"), "OFFERS_LIMIT" => "5", "DETAIL_URL" => "",
     "BASKET_URL" => "/basket/", "ACTION_VARIABLE" => "action", "PRODUCT_ID_VARIABLE" => "id",
@@ -36,6 +37,15 @@ $mainComponentParams = array(
     "SHOW_PRICE_COUNT" => "1", "PRICE_VAT_INCLUDE" => "Y", "CONVERT_CURRENCY" => "N",
     "SHOW_OLD_PRICE" => "Y", "DISPLAY_TOP_PAGER" => "N", "DISPLAY_BOTTOM_PAGER" => "N",
     "PAGER_SHOW_ALWAYS" => "N", 'COMPATIBLE_MODE' => 'Y',
+
+    // === [ВОТ ЧТО НУЖНО ДОБАВИТЬ] ===
+    // Эти параметры стандартный компонент проигнорирует, но шаблон их "увидит" и использует.
+    
+    "SHOW_DISCOUNT_TIME" => "Y",      // <--- Самый важный параметр для ТАЙМЕРА
+    "SHOW_DISCOUNT_PERCENT" => "Y",   // <--- Параметр для отображения "-15%"
+    "SALE_STIKER" => "SALE_TEXT",     // <--- Свойство для стикера "Акция"
+    "STIKERS_PROP" => "HIT",          // <--- Свойство для стикеров "Хит" и т.д.
+    "SHOW_MEASURE" => "Y"             // <--- Параметр для отображения единиц измерения (шт, мл)
 );
 ?>
 

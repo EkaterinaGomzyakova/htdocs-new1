@@ -384,3 +384,35 @@ span.price_measure {
 .custom-products-block a.offers-detail-link.btn.btn-default {
     display: none !important;
 }
+
+/* --- [ИСПРАВЛЕНИЕ] Центрируем таймер и его содержимое --- */
+
+/* 1. Блок-обертку таймера (.view_sale_block) центрируем по горизонтали */
+.catalog_item_wrapp .view_sale_block {
+    position: absolute;
+    bottom: 135px;
+    left: 20%;                 /* <<-- Смещаем левый край блока на 50% ширины родителя */
+    transform: translateX(-50%); /* <<-- Смещаем блок обратно на 50% его СОБСТВЕННОЙ ширины */
+    z-index: 2;
+    width: auto;               /* Ширина по содержимому */
+    margin: 0;
+}
+
+/* 2. Внутренний контейнер таймера (.count_d_block) */
+.catalog_item_wrapp .view_sale_block .count_d_block {
+    display: flex;
+    flex-direction: column;   /* Элементы внутри (заголовок, цифры) пойдут в столбик */
+    align-items: center;      /* <<-- Центрируем все содержимое по горизонтали */
+    
+    /* Возвращаем красивый фон для читаемости */
+    background-color: rgba(255, 255, 255, 0.0);
+    padding: 8px 16px;
+    border-radius: 12px;
+}
+
+/* 3. Гарантируем, что заголовок "До конца акции" и сами цифры
+   тоже будут отцентрованы, на всякий случай */
+.catalog_item_wrapp .view_sale_block .title,
+.catalog_item_wrapp .view_sale_block .countdown.values {
+    text-align: center;
+}
