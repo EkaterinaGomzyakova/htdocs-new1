@@ -93,7 +93,7 @@
 
 /* --- 5. ОБЩИЕ СТИЛИ СЛАЙДЕРА И СТРЕЛОК --- */
 .a-products-slider-wrapper { padding-left: 0; padding-right: 0; position: relative; }
-.a-slider-btn-prev, .a-slider-btn-next { top: -50px; background: none; box-shadow: none; width: auto; height: auto; transform: none; bottom: auto; color: #333 !important; }
+.a-slider-btn-prev, .a-slider-btn-next { top: -30px; background: none; box-shadow: none; width: auto; height: auto; transform: none; bottom: auto; color: #333 !important; }
 .a-slider-btn-next { right: 0; left: auto; }
 .a-slider-btn-prev { right: 35px; left: auto; }
 .a-slider-btn-prev::after, .a-slider-btn-next::after { font-size: 20px !important; font-weight: bold; }
@@ -353,4 +353,42 @@ span.price_measure {
 }
 .item_info .item_info_main_row {
     margin-bottom: 0;
+}
+
+/* --- [ФИНАЛЬНОЕ РЕШЕНИЕ] Попиксельное позиционирование кнопки "Показать все" --- */
+
+/* 1. Родительский блок становится "холстом" (системой координат) */
+.custom-products-block {
+    position: relative; /* ОБЯЗАТЕЛЬНОЕ ПРАВИЛО! */
+    min-height: 450px;  /* Задаем минимальную высоту, чтобы кнопка не вылезала за пределы блока */
+}
+
+/* 2. Находим кнопку и позиционируем ее абсолютно внутри "холста" */
+/* Используем точный класс из вашего PHP-кода */
+.custom-products-block a.offers-detail-link.btn.btn-default {
+    position: absolute; /* Вырываем кнопку из ее текущего места */
+    z-index: 10;        /* Размещаем ее поверх всех остальных элементов */
+
+    top: -71px;
+    right: 1625px;
+
+    /* --- Стили для внешнего вида кнопки (из вашего скриншота) --- */
+    background-color: #ffffff;
+    color: #285b4d !important;
+    font: 17px "Open Sans", Arial, sans-serif;
+    padding: 7px 0px 9px;
+    border-radius: 18px;
+    border: none;
+
+    /* === ИЗМЕНЕНИЕ ЗДЕСЬ === */
+    text-decoration: underline; /* <<-- Устанавливаем подчеркивание */
+
+    white-space: nowrap; /* Запрещаем перенос текста */
+    line-height: 1.3;
+    transition: opacity 0.3s ease;
+}
+
+/* 3. Эффект при наведении */
+.custom-products-block a.offers-detail-link.btn.btn-default:hover {
+    opacity: 0.9;
 }

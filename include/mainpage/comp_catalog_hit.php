@@ -39,26 +39,28 @@ $mainComponentParams = array(
 );
 ?>
 
+
 <!-- Блок 1: Хит -->
 <div class="custom-products-block">
-    <div class="title-container"> <h2 class="title">Хит</h2> <a href="/catalog/" class="see-all-link">Все</a> </div>
+    <div class="title-container"> <h2 class="title">Хит</h2></div>
     <? $APPLICATION->IncludeComponent("bitrix:catalog.section", "catalog_block_front", array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterHit"]), false); ?>
 </div>
 
+
 <!-- Блок 2: Блогеры советуют -->
 <div class="custom-products-block">
-    <div class="title-container"> <h2 class="title">Блогеры советуют</h2> <a href="/catalog/" class="see-all-link">Все</a> </div>
+    <div class="title-container"> <h2 class="title">Блогеры советуют</h2></div>
 	<? $APPLICATION->IncludeComponent("bitrix:catalog.section", "catalog_block_front", array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterBloggers"]), false); ?>
 </div>
 
 <!-- Блок 3: Новинка -->
 <div class="custom-products-block">
-    <div class="title-container"> <h2 class="title">Новинка</h2> <a href="/catalog/" class="see-all-link">Все</a> </div>
+    <div class="title-container"> <h2 class="title">Новинка</h2></div>
 	<? $APPLICATION->IncludeComponent("bitrix:catalog.section", "catalog_block_front", array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterNew"]), false); ?>
 </div>
 
 <!-- Блок 4: Скидка -->
 <div class="custom-products-block">
-    <div class="title-container"> <h2 class="title">Скидка</h2> <a href="/catalog/" class="see-all-link">Все</a> </div>
+    <div class="title-container"> <h2 class="title">Скидка</h2></div>
 	<? $APPLICATION->IncludeComponent("bitrix:catalog.section", "catalog_block_front", array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterSale"]), false); ?>
 </div>

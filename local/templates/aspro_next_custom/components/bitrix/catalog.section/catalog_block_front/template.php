@@ -227,7 +227,7 @@
         <!-- === КОНЕЦ БЛОКА SLIDER === -->
         
         <? if (!empty($arResult['DETAIL_SECTION_URL'])) { ?>
-            <a href="<?= $arResult['DETAIL_SECTION_URL'] ?>" class="offers-detail-link btn btn-default">Показать все</a>
+            <a href="<?= $arResult['DETAIL_SECTION_URL'] ?>" class="offers-detail-link btn btn-default">Все</a>
         <? } ?>
     </div>
 <? } ?>
