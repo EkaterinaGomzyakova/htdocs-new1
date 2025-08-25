@@ -243,10 +243,13 @@
                                     <? } ?>
 
                                     <? if ($arItem['REVIEWS_COUNT'] > 0) { ?>
-                                        <div class="reviews-section">
-                                            <span><?= GetMessage("CATALOG_REVIEWS_COUNT"); ?>:</span> <span class="reviews-count"><?= $arItem['REVIEWS_COUNT'] ?></span>
-                                        </div>
-                                    <? } ?>
+    <div class="reviews-section">
+        <a href="<?= $arItem["DETAIL_PAGE_URL"] ?>#reviews" class="reviews-link">
+            <?= $arItem['REVIEWS_COUNT'] ?>
+            <?= declension($arItem['REVIEWS_COUNT'], array('отзыв', 'отзыва', 'отзывов')) ?>
+        </a>
+    </div>
+<? } ?>
 
                                     <div class="sa_block">
                                         <?= $arQuantityData["HTML"]; ?>
