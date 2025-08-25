@@ -46,29 +46,9 @@ $mainComponentParams = array(
     "SALE_STIKER" => "SALE_TEXT",     // <--- Свойство для стикера "Акция"
     "STIKERS_PROP" => "HIT",          // <--- Свойство для стикеров "Хит" и т.д.
     "SHOW_MEASURE" => "Y",             // <--- Параметр для отображения единиц измерения (шт, мл)
-	"DISPLAY_WISH_BUTTONS" => "Y" 
+    "DISPLAY_WISH_BUTTONS" => "Y"      // <--- Этот параметр вернет "сердечко" на место
 );
 ?>
-
-
-<!-- Блок 1: Хит -->
-<div class="custom-products-block">
-    <div class="title-container"> <h2 class="title">Хит  <a href="/offers/hits/" class="see-all-link">Все</a></h2></div>
-    <? $APPLICATION->IncludeComponent("bitrix:catalog.section", "catalog_block_front", array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterHit"]), false); ?>
-</div>
-
-
-<!-- Блок 2: Блогеры советуют -->
-<div class="custom-products-block">
-    <div class="title-container"> <h2 class="title">Блогеры советуют  <a href="/offers/blogger_advice/" class="see-all-link">Все</a></h2></div>
-	<? $APPLICATION->IncludeComponent("bitrix:catalog.section", "catalog_block_front", array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterBloggers"]), false); ?>
-</div>
-
-<!-- Блок 3: Новинка -->
-<div class="custom-products-block">
-    <div class="title-container"> <h2 class="title">Новинка  <a href="/offers/novelty/" class="see-all-link">Все</a></h2></div>
-	<? $APPLICATION->IncludeComponent("bitrix:catalog.section", "catalog_block_front", array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterNew"]), false); ?>
-</div>
 
 <!-- Блок 4: Скидка -->
 <div class="custom-products-block">

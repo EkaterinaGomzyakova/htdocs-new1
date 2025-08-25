@@ -148,9 +148,19 @@ $APPLICATION->IncludeComponent(
 if ($isShowCatalogSections || $isShowCatalogElements || $isShowMiddleAdvBottomBanner) {
 	?>
 	<div class="maxwidth-theme">
-		<h1>Интернет-магазин косметики ClanBeauty.ru</h1>
 		<?php
 		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_catalog_hit.php");
+		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_adv_middle.php");
+		?>
+	</div>
+	<?php
+}
+
+if ($isShowCatalogSections || $isShowCatalogElements || $isShowMiddleAdvBottomBanner) {
+	?>
+	<div class="maxwidth-theme">
+		<?php
+		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_catalog_discount.php");
 		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_adv_middle.php");
 		?>
 	</div>
