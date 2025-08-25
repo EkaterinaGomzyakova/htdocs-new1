@@ -26627,3 +26627,9 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
     transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
+
+
+/* Скрываем панель с вкладками (div.top_blocks) внутри наших новых блоков */
+.custom-products-block .top_blocks {
+    display: none !important;
+}
