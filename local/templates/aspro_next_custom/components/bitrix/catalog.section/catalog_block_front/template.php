@@ -225,10 +225,6 @@
         <div class="swiper-button-next a-slider-btn-next"></div>
         
         <!-- === КОНЕЦ БЛОКА SLIDER === -->
-        
-        <? if (!empty($arResult['DETAIL_SECTION_URL'])) { ?>
-            <a href="<?= $arResult['DETAIL_SECTION_URL'] ?>" class="offers-detail-link btn btn-default">Все</a>
-        <? } ?>
     </div>
 <? } ?>
 
