@@ -225,8 +225,7 @@ span.price_measure {
 }
 
 /* 4. Блок с отзывами */
-.top-brand-block .item_info_main_row .reviews-section {
-    display: none;
+.item_info_main_row .reviews-section {
     flex-shrink: 0; 
 }
 

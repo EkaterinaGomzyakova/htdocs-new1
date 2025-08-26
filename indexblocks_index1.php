@@ -168,7 +168,7 @@ if ($isShowCatalogSections || $isShowCatalogElements || $isShowMiddleAdvBottomBa
 }
 
 $APPLICATION->IncludeFile(
-    $APPLICATION->GetTemplatePath("/include/mainpage/top_brand.php"),
+    $APPLICATION->GetTemplatePath("/include/mainpage/comp_catalog_top_brand.php"),
     array(
         // Здесь мы передаем в наш файл ID бренда по умолчанию.
         // Это значение будет использоваться, если ничего не задано в админке.
@@ -179,6 +179,21 @@ $APPLICATION->IncludeFile(
         "NAME" => "Редактировать Топ-бренд сезона", // Название для всплывающего окна
     )
 );
+
+include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_brands.php");
+
+
+if ($isShowCatalogSections || $isShowCatalogElements || $isShowMiddleAdvBottomBanner) {
+	?>
+	<div class="maxwidth-theme">
+		<?php
+		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_catalog_novelty.php");
+		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_adv_middle.php");
+		?>
+	</div>
+	<?php
+}
+
 
 //TODO включить, если потребуется фильтрация по свойству SHOW_ON_INDEX_PAGE
 //$arShowPromoOnMainFilter = ['PROPERTY_SHOW_ON_INDEX_PAGE_VALUE' => 'Y'];
@@ -264,6 +279,6 @@ include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_bottom_banners.php")
 		</div>
 		<?php
 	}
-	include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_brands.php");
+	
 	?>
 </div>
