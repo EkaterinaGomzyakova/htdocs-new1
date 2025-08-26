@@ -199,6 +199,7 @@ span.price_measure {
 
 /* 2. ГЛАВНАЯ СТРОКА: Цена + Экономия + Отзывы */
 .item_info_main_row {
+    padding-top: 10px;
     display: flex;
     justify-content: space-between; 
     align-items: center;            
@@ -415,4 +416,9 @@ span.price_measure {
 .catalog_item_wrapp .view_sale_block .title,
 .catalog_item_wrapp .view_sale_block .countdown.values {
     text-align: center;
+}
+
+.catalog_item_wrapp .item_info_main_row .cost.prices {
+    position: relative; /* Включаем возможность сдвига */
+    top: 4px;           /* <<-- Сдвигаем его вниз на 2 пикселя */
 }
