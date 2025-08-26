@@ -225,8 +225,7 @@ span.price_measure {
 }
 
 /* 4. Блок с отзывами */
-.top-brand-block .item_info_main_row .reviews-section {
-    display: none;
+.item_info_main_row .reviews-section {
     flex-shrink: 0; 
 }
 
@@ -356,7 +355,6 @@ span.price_measure {
 .item_info .item_info_main_row {
     margin-bottom: 0;
 }
-
 /* 1. Нацеливаемся на правильный класс .see-all-link внутри .title-container */
 .custom-products-block .title-container a.see-all-link {
     
@@ -422,4 +420,150 @@ span.price_measure {
 .catalog_item_wrapp .item_info_main_row .cost.prices {
     position: relative; /* Включаем возможность сдвига */
     top: 4px;           /* <<-- Сдвигаем его вниз на 2 пикселя */
+}
+
+/* --- Стили для блока "Топ-бренд сезона" --- */
+
+.top-brand-block {
+    display: flex;
+    background-color: #285B4D; /* Ваш фирменный зеленый цвет */
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    gap: 65px; /* Расстояние между левой и правой частью */
+}
+
+/* Левая часть с текстом и кнопкой */
+.top-brand-info {
+    flex-shrink: 0;
+    width:  18.58946%; /* Занимает четверть блока */
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.top-brand-title {
+    color: #FFFFFF;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.top-brand-subtitle {
+    display: none;
+}
+
+/* --- [ИСПРАВЛЕНИЕ] Новые стили для кнопки "Посмотреть все" в блоке "Топ-бренд" --- */
+
+/* --- [ФИНАЛЬНАЯ ВЕРСИЯ] Стили для кнопки "Посмотреть все" --- */
+
+/* --- [ИСПРАВЛЕНИЕ] Сдвигаем кнопку "Посмотреть все" вниз --- */
+
+.top-brand-button {
+    /* Основные стили из макета */
+    background-color: #FFFFFF !important;
+    color: #285B4D !important;
+    border-radius: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 60px !important;
+    padding: 0 40px !important;
+
+    /* Текст */
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    
+    /* Сброс и позиционирование */
+    border: 1px solid #FFFFFF !important;
+    box-sizing: border-box;
+    transition: all 0.25s ease-out;
+
+    /* <<-- ВОТ ИЗМЕНЕНИЕ -->> */
+    margin-top: 400px !important; /* Вместо "auto", задаем конкретный отступ сверху */
+}
+
+/* Эффект при наведении курсора (остается без изменений) */
+.top-brand-button:hover {
+    background-color: #5f806a !important;
+    color: #fff !important;
+    border-color: #5f806a00 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.0);
+}
+/* Правая часть с товарами */
+.top-brand-products {
+    flex-grow: 1; /* Занимает все оставшееся место */
+    width: 75%;
+}
+
+.top-brand-block .catalog_item_wrapp .image_wrapper_block {
+    background: #fcf4e9; /* Фон карточек - белый */
+
+}
+/* Переопределяем стили для карточек товаров внутри этого блока */
+.top-brand-block .catalog_item_wrapp .catalog_item.item_wrap{
+    background: #285B4D; /* Фон карточек - белый */
+    border-radius: 12px;
+}
+.top-brand-block .catalog_item_wrapp .item_info {
+    padding-left: 0px; /* Добавляем отступы для текста под картинкой */
+    padding-right: 0px;
+}
+
+/* --- [ИСПРАВЛЕНИЕ] Стили для блока "Топ-бренд сезона" --- */
+
+/* 1. Убираем лишние внутренние отступы у контейнера слайдера,
+   чтобы он прижался к левому краю и поместился полностью. */
+.top-brand-products .a-products-slider-wrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* 2. Прячем стрелки навигации конкретно в этом блоке */
+.top-brand-products .a-slider-btn-prev,
+.top-brand-products .a-slider-btn-next {
+    display: none !important;
+}
+
+/* 3. Стилизуем кнопку "Посмотреть все" под ваш дизайн */
+.top-brand-products a.offers-detail-link.btn.btn-default {
+    /* Сбрасываем стандартные стили */
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 20px; /* Добавляем отступ сверху от слайдера */
+    
+    /* Применяем ваши стили */
+    color: #FFFFFF; /* Белый цвет текста */
+    font-size: 16px;
+    text-decoration: underline; /* Подчеркивание */
+    text-align: right;  /* Выравниваем по правому краю */
+    display: block;     /* Растягиваем на всю ширину для выравнивания */
+    width: 100%;
+    
+    transition: opacity 0.2s ease;
+}
+
+.top-brand-products a.offers-detail-link.btn.btn-default:hover {
+    color: #FFFFFF; /* Цвет при наведении */
+    opacity: 0.8;   /* Небольшой эффект прозрачности */
+}
+
+
+.top-brand-block .catalog_item_wrapp .item_info,
+.top-brand-block .catalog_item_wrapp .item_info .dark_link,
+.top-brand-block .catalog_item_wrapp .item_info .price,
+.top-brand-block .catalog_item_wrapp .item_info .reviews-section a {
+    color: #FFFFFF !important; /* <<-- Делаем весь текст белым */
+}
+
+/* Делаем старую зачеркнутую цену полупрозрачной */
+.top-brand-block .catalog_item_wrapp .item_info .price.discount strike {
+    color: rgba(255, 255, 255, 0.6) !important;
 }

@@ -167,6 +167,19 @@ if ($isShowCatalogSections || $isShowCatalogElements || $isShowMiddleAdvBottomBa
 	<?php
 }
 
+$APPLICATION->IncludeFile(
+    $APPLICATION->GetTemplatePath("/include/mainpage/top_brand.php"),
+    array(
+        // Здесь мы передаем в наш файл ID бренда по умолчанию.
+        // Это значение будет использоваться, если ничего не задано в админке.
+        "TOP_BRAND_ID" => "18192" 
+    ),
+    array(
+        "MODE" => "php", // Указываем, что это PHP-файл
+        "NAME" => "Редактировать Топ-бренд сезона", // Название для всплывающего окна
+    )
+);
+
 //TODO включить, если потребуется фильтрация по свойству SHOW_ON_INDEX_PAGE
 //$arShowPromoOnMainFilter = ['PROPERTY_SHOW_ON_INDEX_PAGE_VALUE' => 'Y'];
 $APPLICATION->IncludeComponent(
