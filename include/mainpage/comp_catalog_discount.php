@@ -1,15 +1,6 @@
 <?php
 if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
-/**
- * =================================================================================
- * Финальное и правильное решение:
- * 1. Используем стандартный компонент bitrix:catalog.section, который предназначен для этой задачи.
- * 2. Используем правильный шаблон "catalog_block_front", который вы нашли.
- * 3. Используем все правильные ID и фильтры из вашего рабочего кода.
- * =================================================================================
- */
-
 // Ваш обязательный глобальный фильтр
 $GLOBALS['arrFilterProp']['!IBLOCK_SECTION_ID'] = 167;
 
@@ -27,7 +18,7 @@ $mainComponentParams = array(
     "INCLUDE_SUBSECTIONS" => "Y", "HIDE_NOT_AVAILABLE" => "Y",
     "ELEMENT_SORT_FIELD" => "rand", "ELEMENT_SORT_ORDER" => "asc", "ELEMENT_SORT_FIELD2" => "id", "ELEMENT_SORT_ORDER2" => "desc",
     "SHOW_ALL_WO_SECTION" => "Y",
-    "PAGE_ELEMENT_COUNT" => "10", "LINE_ELEMENT_COUNT" => "4",
+    "PAGE_ELEMENT_COUNT" => "3", "LINE_ELEMENT_COUNT" => "3",
     "PROPERTY_CODE" => array("BRAND","ALT_NAME"), "OFFERS_LIMIT" => "5", "DETAIL_URL" => "",
     "BASKET_URL" => "/basket/", "ACTION_VARIABLE" => "action", "PRODUCT_ID_VARIABLE" => "id",
     "CACHE_TYPE" => "A", "CACHE_TIME" => "3600", "CACHE_GROUPS" => "Y", "CACHE_FILTER" => "Y",
@@ -46,15 +37,38 @@ $mainComponentParams = array(
     "SALE_STIKER" => "SALE_TEXT",     // <--- Свойство для стикера "Акция"
     "STIKERS_PROP" => "HIT",          // <--- Свойство для стикеров "Хит" и т.д.
     "SHOW_MEASURE" => "Y",             // <--- Параметр для отображения единиц измерения (шт, мл)
-    "DISPLAY_WISH_BUTTONS" => "Y"      // <--- Этот параметр вернет "сердечко" на место
+	"DISPLAY_WISH_BUTTONS" => "Y" 
 );
 ?>
 
-<!-- Блок 4: Скидка -->
-<div class="custom-products-block">
-    <div class="title-container"> <h2 class="title">Скидка  <a href="/offers/discount/" class="see-all-link">Все</a></h2></div>
-	<? $APPLICATION->IncludeComponent("bitrix:catalog.section", "catalog_block_front", array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterSale"]), false); ?>
+
+<!-- ================= НАЧАЛО БЛОКА "СКИДКИ" ================= -->
+<div class="discounts-block">
+    
+    <!-- Левая колонка с информацией -->
+    <div class="discounts-info">
+        <h2 class="discounts-title">Скидки</h2>
+        <a href="/offers/discount/" class="discounts-block-button">
+            Посмотреть все
+        </a>
+    </div>
+
+    <!-- Правая колонка со слайдером товаров -->
+    <div class="discounts-slider">
+        <?
+        // Мы оставляем ВАШ вызов компонента без изменений.
+        // Он просто будет находиться внутри нашей новой обертки.
+        $APPLICATION->IncludeComponent(
+            "bitrix:catalog.section",
+            "catalog_block_discount", // Убедитесь, что это ваш правильный шаблон
+            array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterSale"]),
+            false
+        );
+        ?>
+    </div>
+
 </div>
+<!-- ================= КОНЕЦ БЛОКА "СКИДКИ" ================= -->
 
 
 

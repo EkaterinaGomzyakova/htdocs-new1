@@ -156,16 +156,6 @@ if ($isShowCatalogSections || $isShowCatalogElements || $isShowMiddleAdvBottomBa
 	<?php
 }
 
-if ($isShowCatalogSections || $isShowCatalogElements || $isShowMiddleAdvBottomBanner) {
-	?>
-	<div class="maxwidth-theme">
-		<?php
-		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_catalog_discount.php");
-		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_adv_middle.php");
-		?>
-	</div>
-	<?php
-}
 
 $APPLICATION->IncludeFile(
     $APPLICATION->GetTemplatePath("/include/mainpage/comp_catalog_top_brand.php"),
@@ -193,6 +183,20 @@ if ($isShowCatalogSections || $isShowCatalogElements || $isShowMiddleAdvBottomBa
 	</div>
 	<?php
 }
+
+
+if ($isShowCatalogSections || $isShowCatalogElements || $isShowMiddleAdvBottomBanner) {
+    // Просто подключаем наш готовый файл. Всю HTML-обертку он создаст сам.
+    include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_catalog_discount.php");
+
+    // Рекламный баннер, скорее всего, тоже нужно обернуть, чтобы он не сломал верстку.
+    ?>
+    <div class="maxwidth-theme">
+        <?php include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_adv_middle.php"); ?>
+    </div>
+    <?php
+}
+
 
 
 //TODO включить, если потребуется фильтрация по свойству SHOW_ON_INDEX_PAGE

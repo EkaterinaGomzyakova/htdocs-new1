@@ -1,0 +1,570 @@
+/* --- [ФИНАЛЬНАЯ ВЕРСИЯ] Стили для карточки товара, слайдера и счетчика --- */
+
+/* --- 1. ОБЩИЙ КОНТЕЙНЕР КАРТОЧКИ --- */
+.catalog_item_wrapp .catalog_item.item_wrap {
+    height: 535px;
+    position: relative;
+}
+.catalog_item_wrapp .catalog_item.item_wrap .inner_wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- 2. БЛОК С ФОТОГРАФИЕЙ --- */
+.catalog_item_wrapp .image_wrapper_block {
+    width: 405px !important;
+    height: 405px !important;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: rgb(254, 244, 234);
+    padding: 50px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; /* Возвращаем для позиционирования иконок */
+}
+.catalog_item_wrapp .image_wrapper_block .thumb,
+.catalog_item_wrapp .image_wrapper_block .thumb img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+/* --- 3. БЛОК С ИНФОРМАЦИЕЙ --- */
+.catalog_item_wrapp .item_info {
+    height: 130px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 0px; /* Убираем все паддинги */
+}
+
+/* --- 4. КНОПКА "В КОРЗИНУ" И СЧЕТЧИК (+/-) --- */
+.catalog_item_wrapp .counter_wrapp {
+    position: absolute;
+    top: 317px;
+    right: 24px;
+    z-index: 2;
+}
+.catalog_item_wrapp .button_block > span {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background-color: #285B4D;
+    background-image: url('/local/templates/aspro_next_custom/images/green_basket.svg');
+    background-size: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-size: 0;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.catalog_item_wrapp .counter_block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 120px;
+    height: 54px;
+    background-color: #285B4D;
+    border-radius: 27px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+.catalog_item_wrapp .counter_block .minus,
+.catalog_item_wrapp .counter_block .plus {
+    color: white;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+}
+.catalog_item_wrapp .counter_block input.text {
+    width: 30px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    padding: 0;
+    margin: 0 5px;
+}
+
+/* --- 5. ОБЩИЕ СТИЛИ СЛАЙДЕРА И СТРЕЛОК --- */
+.a-products-slider-wrapper { padding-left: 0; padding-right: 0; position: relative; }
+.a-slider-btn-prev, .a-slider-btn-next { top: -30px; background: none; box-shadow: none; width: auto; height: auto; transform: none; bottom: auto; color: #333 !important; }
+.a-slider-btn-next { right: 0; left: auto; }
+.a-slider-btn-prev { right: 35px; left: auto; }
+.a-slider-btn-prev::after, .a-slider-btn-next::after { font-size: 20px !important; font-weight: bold; }
+.a-slider-btn-prev:hover, .a-slider-btn-next:hover { background-color: transparent; }
+.a-products-slider .swiper-slide { width: 405px; flex-shrink: 0; }
+@media (max-width: 450px) { .a-products-slider .swiper-slide { width: 300px; } }
+
+/* --- 6. СТИЛИ ДЛЯ КНОПКИ "В КОРЗИНЕ" --- */
+.catalog_item_wrapp .button_block .btn.in-cart {
+    background-color: #285B4D;
+    color: white;
+    font-size: 16px;
+    font-weight: normal;
+    text-transform: none;
+    text-decoration: none !important;
+    margin: 0;
+    padding: 17px 17px 17px;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+    border: 1px solid #285B4D;
+    border-radius: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.catalog_item_wrapp .button_block .btn.in-cart i {
+    margin-right: 8px;
+}
+
+/* --- 7. СТИЛИ ДЛЯ КНОПКИ "ИЗБРАННОЕ" --- */
+.catalog_item_wrapp .like_icons {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 3;
+}
+.catalog_item_wrapp .wish_item_button {
+    width: 27px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: none !important;
+    box-shadow: none !important;
+}
+.catalog_item_wrapp .wish_item_button .wish_item,
+.catalog_item_wrapp .wish_item_button .wish_item.added {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.catalog_item_wrapp .wish_item_button .wish_item i {
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='19' viewBox='0 0 20 19' fill='none'%3e%3cpath d='M9.8125 4.69334C7.8125 -0.00109887 0.8125 0.498901 0.8125 6.49893C0.8125 12.499 9.8125 17.4991 9.8125 17.4991C9.8125 17.4991 18.8125 12.499 18.8125 6.49893C18.8125 0.498901 11.8125 -0.00109887 9.8125 4.69334Z' stroke='%23A9A9A9' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e") !important;
+}
+.catalog_item_wrapp .wish_item_button:hover .wish_item i {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='19' viewBox='0 0 20 19' fill='none'%3e%3cpath d='M9.8125 4.69334C7.8125 -0.00109887 0.8125 0.498901 0.8125 6.49893C0.8125 12.499 9.8125 17.4991 9.8125 17.4991C9.8125 17.4991 18.8125 12.499 18.8125 6.49893C18.8125 0.498901 11.8125 -0.00109887 9.8125 4.69334Z' stroke='%23333333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e") !important;
+}
+.catalog_item_wrapp .wish_item_button .wish_item.added i {
+    background-color: transparent !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='19' viewBox='0 0 20 19' fill='%23285B4D'%3e%3cpath d='M9.8125 4.69334C7.8125 -0.00109887 0.8125 0.498901 0.8125 6.49893C0.8125 12.499 9.8125 17.4991 9.8125 17.4991C9.8125 17.4991 18.8125 12.499 18.8125 6.49893C18.8125 0.498901 11.8125 -0.00109887 9.8125 4.69334Z' stroke='%23285B4D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e") !important;
+}
+
+/* --- 8. СТИЛИ ДЛЯ СТИКЕРОВ ("ХИТ" И ДР.) --- */
+.catalog_item_wrapp .stickers [class*="sticker_"] {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 16px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+.catalog_item_wrapp .stickers > div {
+    margin-right: 0px;
+}
+span.price_measure {
+    display: none !important;
+}
+
+/* --- [ФИНАЛЬНЫЙ CSS ВЕРСИЯ 2.0] --- */
+
+/* 1. Главный контейнер .item_info */
+.catalog_item_wrapp .item_info {
+    display: flex;
+    flex-direction: column; 
+    gap: 8px;              
+    padding-top: 8px;      
+    flex-grow: 1; /* [ИЗМЕНЕНИЕ] Разрешаем блоку растягиваться */
+    min-height: 130px; /* [ИЗМЕНЕНИЕ] Вместо жесткой высоты - минимальная */
+}
+
+/* 2. ГЛАВНАЯ СТРОКА: Цена + Экономия + Отзывы */
+.item_info_main_row {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;            
+}
+
+/* 3. Левый блок внутри главной строки (цена + желтые стикеры) */
+.item_info_main_row .cost.prices {
+    display: flex;
+    align-items: center;   
+    flex-wrap: nowrap;     
+    gap: 10px;             
+    padding: 0 !important; 
+    margin: 0 !important;
+}
+
+/* [НОВОЕ ПРАВИЛО] Выравниваем цену, старую цену и стикеры экономии в строку */
+.item_info .price_matrix_wrapper {
+    display: flex;
+    flex-wrap: wrap;       /* Разрешаем перенос на маленьких экранах */
+    align-items: center;   /* Выравниваем все по центру */
+    gap: 5px;              /* Расстояние между ценой, старой ценой и стикерами */
+    
+}
+
+/* 4. Блок с отзывами */
+.discounts-block .item_info_main_row .reviews-section {
+    flex-shrink: 0; 
+}
+
+/* [НОВОЕ ПРАВИЛО] Убираем лишний верхний отступ у таймера, если он есть */
+.item_info .view_sale_block {
+    margin-top: 0;
+}
+
+
+/* --- [НОВОЕ] Позиционирование таймера акции на изображении --- */
+
+/* 1. Блок с картинкой делаем "точкой отсчета" для позиционирования.
+   Это правило у вас уже должно быть, но проверяем на всякий случай. */
+.catalog_item_wrapp .image_wrapper_block {
+    position: relative;
+}
+
+/* 2. Контейнер таймера (.view_sale_block) вырываем из потока и позиционируем */
+.catalog_item_wrapp .view_sale_block {
+    position: absolute;
+    bottom: 130px;              /* Отступ от нижнего края картинки */
+    left: 20%;                 /* Смещаем левый край блока на 50% ширины родителя */
+    transform: translateX(-50%); /* Смещаем блок обратно на 50% его СОБСТВЕННОЙ ширины для идеального центрирования */
+    z-index: 2;                /* Размещаем таймер поверх картинки */
+
+    width: 80%;               /* Ширина теперь по содержимому, а не 100% */
+    margin: 0;                 /* Сбрасываем все внешние отступы */
+}
+
+/* 3. Стилизуем сам блок таймера для лучшей читаемости на фото */
+.catalog_item_wrapp .view_sale_block .count_d_block {
+    background-color: rgba(250, 244, 244, 0.0); /* прозрачный белый фон */
+    padding: 8px 16px;
+    border-radius: 12px;
+}
+
+.catalog_item_wrapp .countdown.values .item {
+    background: none !important;
+}
+
+.catalog_item_wrapp .view_sale_block .title,
+.catalog_item_wrapp .view_sale_block .countdown.values,
+.catalog_item_wrapp .view_sale_block .countdown .item,
+.catalog_item_wrapp .view_sale_block .countdown span {
+    color: #c23447!important; /* Яркий золотисто-желтый цвет */
+    /* Добавляем легкую тень, чтобы текст хорошо читался на любой картинке */
+}
+
+.catalog_item_wrapp .item-title,
+.catalog_item_wrapp .dark_link {
+    height: auto !important;         /* <<-- Убираем фиксированную высоту */
+    max-height: none !important;     /* <<-- Убираем ограничение по максимальной высоте */
+    overflow: visible !important;    /* <<-- "Выключаем ножницы", чтобы текст был виден */
+    -webkit-line-clamp: unset !important; /* Убираем возможное ограничение по числу строк */
+}
+
+/* --- [ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ] Принудительное удаление отступа у цены --- */
+
+/* 1. Нацеливаемся на контейнер цены с максимальной точностью */
+.catalog_item_wrapp .item_info_main_row .cost.prices.clearfix {
+    padding: 0 !important;
+    margin: 0 !important;
+    text-indent: 0 !important;
+    justify-content: flex-start !important;
+}
+
+/* 2. Полностью "выключаем" невидимые элементы, которые создает .clearfix */
+.catalog_item_wrapp .item_info_main_row .cost.prices.clearfix::before,
+.catalog_item_wrapp .item_info_main_row .cost.prices.clearfix::after {
+    display: none !important;
+    content: "" !important;
+}
+
+/* 3. Обнуляем отступы у самого блока с цифрами на всякий случай */
+.catalog_item_wrapp .item_info .price_matrix_wrapper {
+    /* Для дочерних flex-элементов (цена, скидки): прижаться к левому краю */
+    justify-content: flex-start !important;
+
+    /* Для любого текста внутри: прижаться к левому краю */
+    text-align: left !important;
+
+    /* На всякий случай сбрасываем любые внутренние отступы */
+    padding-left: 0 !important;
+}
+
+/* 
+  Этот блок нацелен на ВСЕ дочерние элементы ВНУТРИ блока с ценой 
+  и сбрасывает у них персональные отступы.
+*/
+.catalog_item_wrapp .item_info .price_matrix_wrapper > * {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    text-align: left !important;
+}
+
+
+/* --- [ФИНАЛЬНОЕ ВЫРАВНИВАНИЕ] Исправляем "сломанную" верстку --- */
+
+/* 1. Делаем всю карточку flex-элементом, чтобы она растягивалась */
+.catalog_item_wrapp .swiper-slide {
+    height: auto;
+    display: flex;
+}
+
+/* 2. Заставляем внутреннюю обертку занимать 100% высоты родителя */
+.catalog_item_wrapp .catalog_item_wrapp.item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.catalog_item_wrapp .catalog_item.item_wrap {
+    height: 100%; /* Растягиваемся на всю высоту слайда */
+}
+
+/* 3. Добавляем минимальную высоту для пустых блоков с отзывами и остатками,
+   чтобы они занимали место и не ломали выравнивание. */
+.item_info .reviews-section,
+.item_info .item-stock-wrapper { /* .item-stock-wrapper - предполагаемый класс для "Остался последний" */
+    min-height: 24px; /* Высота примерно одной строки текста */
+}
+
+/* 4. Сбрасываем лишние отступы, которые могут влиять на высоту */
+.item_info .cost.prices {
+    margin-bottom: 0;
+}
+.item_info .item_info_main_row {
+    margin-bottom: 0;
+}
+/* 1. Нацеливаемся на правильный класс .see-all-link внутри .title-container */
+.custom-products-block .title-container a.see-all-link {
+    
+    /* === Возвращаем ваши стили === */
+    color: #285B4D;              /* <<-- Ваш зеленый цвет */
+    font-size: 17px;             /* <<-- Ваш размер шрифта */
+    text-decoration: underline;  /* <<-- Возвращаем подчеркивание */
+    
+    /* Дополнительные стили для аккуратности */
+    font-family: "Open Sans", Arial, sans-serif;
+    margin-left: 10px; /* Добавляем отступ от заголовка */
+}
+
+/* 2. Общий контейнер для выравнивания заголовка и ссылки */
+.custom-products-block .title-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+/* 3. Убираем лишние отступы у самого заголовка */
+.custom-products-block .title-container .title {
+    margin: 0;
+}
+
+/* 4. Прячем старую, ненужную кнопку "Показать все", если она где-то осталась в шаблоне компонента */
+.custom-products-block a.offers-detail-link.btn.btn-default {
+    display: none !important;
+}
+
+/* --- [ИСПРАВЛЕНИЕ] Центрируем таймер и его содержимое --- */
+
+/* 1. Блок-обертку таймера (.view_sale_block) центрируем по горизонтали */
+.catalog_item_wrapp .view_sale_block {
+    position: absolute;
+    bottom: 135px;
+    left: 20%;                 /* <<-- Смещаем левый край блока на 50% ширины родителя */
+    transform: translateX(-50%); /* <<-- Смещаем блок обратно на 50% его СОБСТВЕННОЙ ширины */
+    z-index: 2;
+    width: auto;               /* Ширина по содержимому */
+    margin: 0;
+}
+
+/* 2. Внутренний контейнер таймера (.count_d_block) */
+.catalog_item_wrapp .view_sale_block .count_d_block {
+    display: flex;
+    flex-direction: column;   /* Элементы внутри (заголовок, цифры) пойдут в столбик */
+    align-items: center;      /* <<-- Центрируем все содержимое по горизонтали */
+    
+    /* Возвращаем красивый фон для читаемости */
+    background-color: rgba(255, 255, 255, 0.0);
+    padding: 8px 16px;
+    border-radius: 12px;
+}
+
+/* 3. Гарантируем, что заголовок "До конца акции" и сами цифры
+   тоже будут отцентрованы, на всякий случай */
+.catalog_item_wrapp .view_sale_block .title,
+.catalog_item_wrapp .view_sale_block .countdown.values {
+    text-align: center;
+}
+
+.catalog_item_wrapp .item_info_main_row .cost.prices {
+    position: relative; /* Включаем возможность сдвига */
+    top: 4px;           /* <<-- Сдвигаем его вниз на 2 пикселя */
+}
+
+/* --- Стили для блока "Топ-бренд сезона" --- */
+
+.discounts-block {
+    display: flex;
+    background-color: #285B4D; /* Ваш фирменный зеленый цвет */
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 130px;
+    margin-bottom: 30px;
+    gap: 65px; /* Расстояние между левой и правой частью */
+}
+
+/* Левая часть с текстом и кнопкой */
+.discounts-info {
+    flex-shrink: 0;
+    width:  18.58946%; /* Занимает четверть блока */
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.discounts-title {
+    color: #FFFFFF;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.discounts-subtitle {
+    display: none;
+}
+
+
+.discounts-block-button {
+    /* Основные стили (остаются без изменений) */
+    background-color: #FFFFFF !important;
+    color: #285B4D !important;
+    border-radius: 8px !important;
+    height: 60px !important;
+    padding: 0 40px !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    border: 1px solid #FFFFFF !important;
+    box-sizing: border-box;
+    transition: all 0.25s ease-out;
+
+    /* <<-- 1. ИЗМЕНЕНИЕ: Меняем display -->> */
+    /* Меняем 'inline-flex' на 'flex'. Теперь элемент блочный и будет растягиваться. */
+    display: flex !important;
+
+    /* <<-- Эти правила теперь центрируют текст ВНУТРИ растянутой кнопки -->> */
+    align-items: center !important;
+    justify-content: center !important;
+
+    /* <<-- 2. ИЗМЕНЕНИЕ: Удаляем align-self -->> */
+    /* Строку align-self: flex-start; нужно УДАЛИТЬ, чтобы кнопка могла растянуться. */
+
+    /* Прижимаем кнопку к низу (остается без изменений) */
+    margin-top: auto !important;
+}
+
+/* Эффект при наведении (остается без изменений) */
+.discounts-block-button:hover {
+    background-color: #5f806a !important;
+    color: #285b4d !important;
+    border-color: #5f806a00 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.0);
+}
+/* Правая часть с товарами */
+.discounts-products {
+    flex-grow: 1; /* Занимает все оставшееся место */
+    width: 75%;
+}
+
+.discounts-block .catalog_item_wrapp .image_wrapper_block {
+    background: #fcf4e9; /* Фон карточек - белый */
+
+}
+/* Переопределяем стили для карточек товаров внутри этого блока */
+.discounts-block .catalog_item_wrapp .catalog_item.item_wrap{
+    background: #285B4D; /* Фон карточек - белый */
+    border-radius: 12px;
+}
+.discounts-block .catalog_item_wrapp .item_info {
+    padding-left: 0px; /* Добавляем отступы для текста под картинкой */
+    padding-right: 0px;
+}
+
+/* --- [ИСПРАВЛЕНИЕ] Стили для блока "Топ-бренд сезона" --- */
+
+/* 1. Убираем лишние внутренние отступы у контейнера слайдера,
+   чтобы он прижался к левому краю и поместился полностью. */
+.discounts-products .a-products-slider-wrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* 2. Прячем стрелки навигации конкретно в этом блоке */
+.discounts-products .a-slider-btn-prev,
+.discounts-products .a-slider-btn-next {
+    display: none !important;
+}
+
+/* 3. Стилизуем кнопку "Посмотреть все" под ваш дизайн */
+.discounts-products a.offers-detail-link.btn.btn-default {
+    /* Сбрасываем стандартные стили */
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 20px; /* Добавляем отступ сверху от слайдера */
+    
+    /* Применяем ваши стили */
+    color: #FFFFFF; /* Белый цвет текста */
+    font-size: 16px;
+    text-decoration: underline; /* Подчеркивание */
+    text-align: right;  /* Выравниваем по правому краю */
+    display: block;     /* Растягиваем на всю ширину для выравнивания */
+    width: 100%;
+    
+    transition: opacity 0.2s ease;
+}
+
+.discounts-products a.offers-detail-link.btn.btn-default:hover {
+    color: #FFFFFF; /* Цвет при наведении */
+    opacity: 0.8;   /* Небольшой эффект прозрачности */
+}
+
+
+.discounts-block .catalog_item_wrapp .item_info,
+.discounts-block .catalog_item_wrapp .item_info .dark_link,
+.discounts-block .catalog_item_wrapp .item_info .price,
+.discounts-block .catalog_item_wrapp .item_info .reviews-section a {
+    color: #FFFFFF !important; /* <<-- Делаем весь текст белым */
+}
+
+/* Делаем старую зачеркнутую цену полупрозрачной */
+.discounts-block .catalog_item_wrapp .item_info .price.discount strike {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+
