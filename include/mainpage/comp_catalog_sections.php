@@ -36,7 +36,7 @@
 			1 => "",
 		),
 		"TITLE_BLOCK" => "Популярные категории",
-		"TITLE_BLOCK_ALL" => "Весь каталог",
+		"TITLE_BLOCK_ALL" => "Все",
 		"ALL_URL" => "catalog/"
 	),
 	false
