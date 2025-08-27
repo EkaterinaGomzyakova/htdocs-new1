@@ -41,11 +41,14 @@ $mainComponentParams = array(
 );
 ?>
 
-
-<!-- Блок 1: Хит -->
-<div class="custom-products-block">
-    <div class="title-container"> <h2 class="title">Хит  <a href="/offers/hits/" class="see-all-link">Все</a></h2></div>
-    <? $APPLICATION->IncludeComponent("bitrix:catalog.section", "catalog_block_front", array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterHit"]), false); ?>
+<!-- Блок 2: Блогеры советуют -->
+<div class="custom-products-block blogger-block">
+    <div class="title-container"> <h2 class="title">Блогеры советуют  <a href="/offers/blogger_advice/" class="see-all-link">Все</a></h2></div>
+	<? $APPLICATION->IncludeComponent("bitrix:catalog.section", "catalog_block_blogger", array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterBloggers"]), false); ?>
 </div>
+
+
+
+
 
 
