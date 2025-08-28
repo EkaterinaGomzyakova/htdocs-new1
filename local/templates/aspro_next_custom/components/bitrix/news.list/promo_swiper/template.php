@@ -11,10 +11,11 @@ $this->setFrameMode(true);
 /** @var array $arResult */
 
 if ($arResult['ITEMS']) { ?>
+<div class="promo-section">
     <div class="maxwidth-theme">
         <div class="top_block">
             <h3 class="title_block">Акции и промокоды</h3>
-            <a href="<?= $arParams['CATALOG'] ?>">Все акции</a>
+            <a href="<?= $arParams['CATALOG'] ?>">Все</a>
         </div>
     </div>
     <div class="maxwidth-theme promo-main-swiper-container">
@@ -52,5 +53,6 @@ if ($arResult['ITEMS']) { ?>
             <div class="promo-main-swiper__button-next swiper-button-next"></div>
         </div>
     </div>
+</div>
     <?php
 }

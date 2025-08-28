@@ -1,37 +1,48 @@
 const promoMainSwiper = new Swiper('.promo-main-swiper', {
 	direction: 'horizontal',
-	centeredSlides: true,
-	slidesPerView: 2,
-	spaceBetween: 5,
-	dots: false,
+
+	// --- ГЛАВНЫЕ ИЗМЕНЕНИЯ (ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ) ---
+	slidesPerView: 'auto',  // <-- Включаем режим автоматической ширины. Слайдер будет брать ширину из CSS (наши 831px).
+	spaceBetween: 48,       // <-- Устанавливаем нужный вам отступ.
+	centeredSlides: true,   // <-- Оставляем, чтобы на мобильных слайд был по центру.
+	// ---------------------------------
+	
 	loop: false,
+
 	breakpoints: {
 		630: {
-			slidesPerView: 3,
-			spaceBetween: 20,
+			// --- ИЗМЕНЕНИЯ ДЛЯ ПЛАНШЕТОВ ---
+			slidesPerView: 'auto',      // <-- То же самое
+			spaceBetween: 48,           // <-- То же самое
 			centeredSlides: true,
+			// ------------------------------
+			
 			centeredSlidesBounds: false,
-			loop: false,
 			centerInsufficientSlides: true,
 		},
 		1000: {
-			slidesPerView: 3,
-			spaceBetween: 50,
-			centeredSlides: false,
+			// --- ИЗМЕНЕНИЯ ДЛЯ ДЕСКТОПА ---
+			slidesPerView: 'auto',      // <-- То же самое
+			spaceBetween: 48,           // <-- То же самое
+			centeredSlides: false,      // <-- На десктопе центрирование уже не нужно, слайдер начнется слева.
+			// ------------------------------
+			
 			centeredSlidesBounds: true,
-			loop: false,
 			centerInsufficientSlides: true,
 		},
 		1300: {
-			slidesPerView: 4,
-			spaceBetween: 70,
+			// --- ИЗМЕНЕНИЯ ДЛЯ БОЛЬШИХ ДЕСКТОПОВ ---
+			slidesPerView: 'auto',      // <-- То же самое
+			spaceBetween: 48,           // <-- То же самое
 			centeredSlides: false,
+			// ------------------------------
+			
 			centeredSlidesBounds: true,
-			loop: false,
 			centerInsufficientSlides: true,
 		}
 	},
 
+	// Навигация остается без изменений
 	navigation: {
 		nextEl: '.promo-main-swiper__button-next',
 		prevEl: '.promo-main-swiper__button-prev',

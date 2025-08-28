@@ -1,6 +1,6 @@
 <? $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
-	"front_akc",
+	"front_jor",
 	array(
 		"ACTIVE_DATE_FORMAT" => "j F Y",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -9,7 +9,7 @@
 		"AJAX_OPTION_HISTORY" => "N",
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "Y",
-		"ALL_URL" => "bloger-articles/",
+		"ALL_URL" => "articles/",
 		"CACHE_FILTER" => "Y",
 		"CACHE_GROUPS" => "N",
 		"CACHE_TIME" => "36000000",
@@ -24,7 +24,7 @@
 		"FIELD_CODE" => array("ID", "NAME", ""),
 		"FILTER_NAME" => "arRegionLinkFront",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "38",
+		"IBLOCK_ID" => "21",
 		"IBLOCK_TYPE" => "aspro_next_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "Y",
@@ -55,7 +55,7 @@
 		"SORT_ORDER1" => "DESC",
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N",
-		"TITLE_BLOCK" => "Блогеры рекомендуют",
+		"TITLE_BLOCK" => "Статьи",
 		"TITLE_BLOCK_ALL" => "Все статьи"
 	),
 	false,
@@ -63,4 +63,3 @@
 		'ACTIVE_COMPONENT' => 'Y'
 	)
 ); ?>
-

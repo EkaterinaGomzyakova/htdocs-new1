@@ -213,6 +213,14 @@ if ($isShowCatalogSections || $isShowCatalogElements || $isShowMiddleAdvBottomBa
 	<?php
 }
 
+if ($isShowSale) { ?>
+	<div class="maxwidth-theme">
+		<?php
+		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_articles.php");
+		?>
+	</div>
+	<?php
+}
 //TODO включить, если потребуется фильтрация по свойству SHOW_ON_INDEX_PAGE
 //$arShowPromoOnMainFilter = ['PROPERTY_SHOW_ON_INDEX_PAGE_VALUE' => 'Y'];
 $APPLICATION->IncludeComponent(
@@ -251,12 +259,12 @@ $APPLICATION->IncludeComponent(
 if ($isShowSale) { ?>
 	<div class="maxwidth-theme">
 		<?php
-		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_tizers.php");
-		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_articles.php");
+		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_journal.php");
 		?>
 	</div>
 	<?php
 }
+
 
 if ($isShowBlog) {
 	?>
