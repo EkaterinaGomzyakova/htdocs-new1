@@ -1,6 +1,7 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 <? $this->setFrameMode(true); ?>
 <? if ($arResult["ITEMS"]) { ?>
+<div class="blogger_rec">
 	<div class="news_akc_block clearfix">
 		<div class="top_block">
 			<?
@@ -57,7 +58,6 @@
 												<?= $arItem['PREVIEW_TEXT'] ?>
 											<? endif; ?>
 										</div>
-										<a href="<?= $arItem['DETAIL_PAGE_URL'] ?>" title="<?= $arItem['NAME'] ?>" class="btn btn-info"><?= GetMessage("TO_ALL"); ?></a>
 									<? endif; ?>
 								</div>
 							</div>
@@ -67,4 +67,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 <? } ?>

@@ -1,10 +1,13 @@
 .news_akc_block .top_block {
-    padding: 8px 0 0;
+    padding: 0px 0 0;
     margin: 0 0 2px
 }
 
 .news_akc_block .top_block a {
     font-size: 1em
+}
+.news_akc_block .top_block h3{
+    margin-inline-end: 20px !important;
 }
 
 .news_akc_block .items .item_block {
@@ -75,4 +78,34 @@
 .news_akc_block .item:hover {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, .15);
     border-radius: 16px;
+}
+
+/* --- Стили для блока "Блогеры рекомендуют", чтобы сделать изображения квадратными --- */
+
+/* 1. Задаем контейнеру для картинки точные размеры 550x550px */
+.news_akc_block .item .img.shine {
+    width: 550px;
+    height: 550px;
+    
+    border-radius: 20px; /* Ваше скругление углов */
+    overflow: hidden;    /* Прячем всё, что не помещается в квадрат */
+}
+
+/* 2. Растягиваем саму картинку на весь контейнер и обрезаем лишнее */
+.news_akc_block .item .img.shine img {
+    width: 100%;
+    height: 100%;
+    
+    /* 
+     *  Самое главное свойство! 
+     *  Оно заставляет картинку заполнить всё пространство (550х550), 
+     *  сохраняя пропорции и обрезая лишнее по краям. 
+     *  Это аналог "background-size: cover" для тега <img>.
+     */
+    object-fit: cover; 
+    object-position: top; /* Центрируем картинку перед обрезкой */
+}
+
+.blogger_rec{
+    margin-top: 130px;
 }

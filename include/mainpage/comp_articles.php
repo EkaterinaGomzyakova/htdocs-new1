@@ -56,7 +56,7 @@
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N",
 		"TITLE_BLOCK" => "Блогеры рекомендуют",
-		"TITLE_BLOCK_ALL" => "Все статьи"
+		"TITLE_BLOCK_ALL" => "Все"
 	),
 	false,
 	array(
