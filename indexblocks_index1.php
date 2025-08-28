@@ -217,7 +217,6 @@ if ($isShowSale) { ?>
 	<div class="maxwidth-theme">
 		<?php
 		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_articles.php");
-		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_tizers.php");
 		?>
 	</div>
 	<?php
@@ -277,7 +276,21 @@ if ($isShowBlog) {
 	<?php
 }
 
+$APPLICATION->IncludeFile(
+    SITE_DIR . "include/mainpage/giftcard_banner.php",
+    array(),
+    array(
+        "MODE" => "html",
+        "NAME" => "Редактировать баннер сертификатов",
+    )
+);
+
+
+
+
+
 include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_bottom_banners.php");
+
 ?>
 
 <div class="maxwidth-theme">

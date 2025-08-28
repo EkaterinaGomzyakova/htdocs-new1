@@ -26716,3 +26716,135 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 .popular-categories__name {
 	white-space: nowrap;
 }
+
+
+/* --- Стили для баннера с подарочными сертификатами (ФИНАЛЬНАЯ ВЕРСИЯ v2) --- */
+.gift-card-banner {
+    background: var(--green_accent, #285B4D);
+    height: 500px;
+    border-radius: 20px;
+    padding: 0 35px;
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Левая часть с текстом --- */
+.gift-card-banner__content {
+    color: #fff;
+    flex-shrink: 0;
+    width: 35%;
+    z-index: 10;
+    position: relative;
+    margin-top: 170px; /* Отступ текста вниз */
+    margin-right: 100px
+}
+
+.gift-card-banner__title {
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 1.15;
+    margin: 0 0 28px 0;
+    opacity: 0.95;
+    color: #fff
+}
+
+.gift-card-banner__subtitle {
+    font-size: 16px;
+    opacity: 0.8;
+    margin: 0 0 28px 0;
+}
+
+.gift-card-banner .btn.btn-default {
+    background: #FFFFFF !important;
+    color: var(--green_accent, #285B4D) !important;
+    height: 60px;
+    width: 260px;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Правая часть с коллажем --- */
+.gift-card-banner__collage {
+    position: relative;
+    width: 60%;
+    height: 100%;
+}
+
+.gift-card-banner__image-wrapper {
+    position: absolute;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: -10px 10px 30px rgba(0,0,0,0.25);
+    transition: transform 0.4s ease-out;
+}
+
+.gift-card-banner__image-wrapper:hover {
+    transform: scale(1.05) !important;
+    z-index: 15;
+}
+
+.gift-card-banner__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 
+   ===============================================================
+   ИЗМЕНЕНО: Новое расположение и размеры картинок, как на финальном макете
+   ===============================================================
+*/
+.gift-card-banner__image-wrapper--1 {
+    width: 300px;
+    height: 200px;
+    left: 20%;
+    top: 55%; /* Располагаем ниже */
+    transform: translateY(-50%) rotate(-3deg);
+    z-index: 2; /* Эта картинка поверх */
+}
+
+.gift-card-banner__image-wrapper--2 {
+    width: 280px;
+    height: 180px;
+    left: 0;
+    top: 25%; /* Располагаем выше */
+    transform: translateY(-50%) rotate(3deg);
+    z-index: 1; /* Эта картинка позади */
+}
+
+.gift-card-banner__image-wrapper--3 {
+    width: 420px;
+    height: 280px;
+    left: 45%;
+    top: 40%; /* Располагаем выше */
+    transform: translateY(-50%) rotate(5deg);
+    z-index: 1; /* И эта позади */
+}
+
+/* --- Адаптивность --- */
+@media(max-width: 991px) {
+    .gift-card-banner {
+        flex-direction: column; height: auto; padding: 40px; text-align: center;
+    }
+    .gift-card-banner__content {
+        width: 100%; margin-top: 0; margin-bottom: 300px;
+    }
+    .gift-card-banner__title {
+        font-size: 42px;
+    }
+    .gift-card-banner__collage {
+        position: absolute; bottom: 40px; left: 0; top: auto; width: 100%; height: 300px;
+    }
+    .gift-card-banner__image-wrapper--1 { top: 60%; left: 50%; transform: translateX(-50%) translateY(-50%) rotate(-3deg); width: 200px; height: 130px; z-index: 2;}
+    .gift-card-banner__image-wrapper--2 { top: 20%; left: 10%; transform: rotate(5deg); width: 170px; height: 110px; z-index: 1;}
+    .gift-card-banner__image-wrapper--3 { top: 25%; right: 5%; left: auto; transform: rotate(8deg); width: 220px; height: 150px; z-index: 1;}
+}
