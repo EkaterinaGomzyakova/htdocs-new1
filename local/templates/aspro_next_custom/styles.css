@@ -3,7 +3,7 @@ body {
     position: relative;
     margin: 0 auto;
     padding: 0;
-    color: #969595;
+    color: #000000;
 }
 
 button, input[type='submit'], input[type='button'], .basket_button, .basket_button span {

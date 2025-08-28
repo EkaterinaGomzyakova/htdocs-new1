@@ -1,70 +1,71 @@
-<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
-<? $this->setFrameMode(true); ?>
-<? if ($arResult["ITEMS"]) { ?>
-	<div class="news_akc_block clearfix">
-		<div class="top_block">
-			<?
-			$title_block = ($arParams["TITLE_BLOCK"] ? $arParams["TITLE_BLOCK"] : GetMessage('AKC_TITLE'));
-			$title_all_block = ($arParams["TITLE_BLOCK_ALL"] ? $arParams["TITLE_BLOCK_ALL"] : GetMessage('ALL_AKC'));
-			$url = ($arParams["ALL_URL"] ? $arParams["ALL_URL"] : "sale/");
-			$count = ceil(count($arResult["ITEMS"]) / 4);
-			?>
-			<h3 class="title_block"><?= $title_block; ?></h3>
-			<a href="<?= SITE_DIR . $url; ?>"><?= $title_all_block; ?></a>
-		</div>
-		<? $col = 4;
-		if ($arParams["LINE_ELEMENT_COUNT"] >= 3 && $arParams["LINE_ELEMENT_COUNT"] < 4)
-			$col = 3; ?>
-		<div class="news_wrapp">
-			<div class="flexslider loading_state shadow border custom_flex top_right" data-lg_count="3" data-plugin-options='{"animation": "slide", "directionNav": true, "itemMargin":30, "controlNav" :false, "animationLoop": true, "slideshow": false, "touch": true, "counts": [3,2,2,1,1]}'>
-				<ul class="items slides">
-					<? foreach ($arResult["ITEMS"] as $arItem) {
-						$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
-						$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
-						$img_source = '';
-					?>
-						<li class="item_block visible">
-							<div id="<?= $this->GetEditAreaId($arItem['ID']); ?>" class="item inner_wrap">
-								<? if ($arItem["PREVIEW_PICTURE"]) {
-									$img_source = $arItem["PREVIEW_PICTURE"];
-								} elseif ($arItem["DETAIL_PICTURE"]) {
-									$img_source = $arItem["DETAIL_PICTURE"];
-								}
-								?>
-								<? if ($img_source) { ?>
-									<div class="img shine">
-										<? $img = CFile::ResizeImageGet($img_source, array("width" => 640, "height" => 800), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, true, false, false, 75); ?>
-										<a href="<?= $arItem["DETAIL_PAGE_URL"] ?>">
-											<img src="<?= $img["src"] ?>" alt="<?= $arItem["NAME"]; ?>" loading="lazy" />
-										</a>
-									</div>
-								<? } ?>
-								<div class="info">
-									<? if ($arParams["DISPLAY_DATE"] == "Y") { ?>
-										<? if ($arItem["PROPERTIES"]["PERIOD"]["VALUE"]) { ?>
-											<div class="date"><?= $arItem["PROPERTIES"]["PERIOD"]["VALUE"] ?></div>
-										<? } elseif ($arItem["DISPLAY_ACTIVE_FROM"]) { ?>
-											<div class="date"><?= $arItem["DISPLAY_ACTIVE_FROM"] ?></div>
-										<? } ?>
-									<? } ?>
+<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
+$this->setFrameMode(true);
 
-									<a class="name dark_link" href="<?= $arItem["DETAIL_PAGE_URL"] ?>"><?= $arItem["NAME"] ?></a>
-									<? if (strlen($arItem['PREVIEW_TEXT'])) : ?>
-										<div class="previewtext">
-											<? if ($arItem['PREVIEW_TEXT_TYPE'] == 'text') : ?>
-												<p><?= $arItem['PREVIEW_TEXT'] ?></p>
-											<? else : ?>
-												<?= $arItem['PREVIEW_TEXT'] ?>
-											<? endif; ?>
-										</div>
-										<a href="<?= $arItem['DETAIL_PAGE_URL'] ?>" title="<?= $arItem['NAME'] ?>" class="btn btn-info"><?= GetMessage("TO_ALL"); ?></a>
-									<? endif; ?>
-								</div>
-							</div>
-						</li>
-					<? } ?>
-				</ul>
-			</div>
-		</div>
+// Проверяем, есть ли вообще элементы
+if (!$arResult["ITEMS"]) {
+	return;
+}
+
+// --- ГЛАВНАЯ ЛОГИКА ---
+// "Вынимаем" самый первый элемент из массива. Он и будет нашим главным.
+// Массив $arResult["ITEMS"] при этом уменьшится, и в нем останутся только элементы для нижней сетки.
+$arFirstItem = array_shift($arResult["ITEMS"]);
+?>
+
+<div class="journal-block">
+	<!-- Блок с заголовком -->
+	<div class="top_block">
+		<h3 class="title_block"><?= $arParams["TITLE_BLOCK"] ?: "Журнал Clanbeauty" ?></h3>
+		<a href="<?= SITE_DIR . ($arParams["ALL_URL"] ?: "articles/") ?>">Все</a>
 	</div>
-<? } ?>
+
+	<!-- БОЛЬШОЙ ЭЛЕМЕНТ (первый по сортировке) -->
+	<? if ($arFirstItem) : ?>
+		<?
+		$this->AddEditAction($arFirstItem['ID'], $arFirstItem['EDIT_LINK'], CIBlock::GetArrayByID($arFirstItem["IBLOCK_ID"], "ELEMENT_EDIT"));
+		$this->AddDeleteAction($arFirstItem['ID'], $arFirstItem['DELETE_LINK'], CIBlock::GetArrayByID($arFirstItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+
+		$pic = $arFirstItem["PREVIEW_PICTURE"] ?: $arFirstItem["DETAIL_PICTURE"];
+		$img = CFile::ResizeImageGet($pic, array("width" => 1200, "height" => 600), BX_RESIZE_IMAGE_EXACT, true);
+		?>
+		<div class="journal-featured-item" id="<?= $this->GetEditAreaId($arFirstItem['ID']); ?>">
+			<a href="<?= $arFirstItem["DETAIL_PAGE_URL"] ?>" class="journal-featured-item__link">
+				<? if ($img["src"]) : ?>
+					<img src="<?= $img["src"] ?>" class="journal-featured-item__image" alt="<?= $arFirstItem["NAME"] ?>" loading="lazy" />
+				<? endif; ?>
+				<div class="journal-featured-item__overlay">
+					<div class="journal-featured-item__title"><?= $arFirstItem["NAME"] ?></div>
+					<div class="journal-featured-item__button-wrapper">
+						<span class="btn btn-default">Читать ~5 минут</span>
+					</div>
+				</div>
+			</a>
+		</div>
+	<? endif; ?>
+
+	<!-- СЕТКА ИЗ ОСТАЛЬНЫХ ЭЛЕМЕНТОВ -->
+	<? if ($arResult["ITEMS"]) : ?>
+		<div class="journal-grid">
+			<? foreach ($arResult["ITEMS"] as $arItem) : ?>
+				<?
+				$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
+				$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+
+				$pic = $arItem["PREVIEW_PICTURE"] ?: $arItem["DETAIL_PICTURE"];
+				$img = CFile::ResizeImageGet($pic, array("width" => 600, "height" => 400), BX_RESIZE_IMAGE_EXACT, true);
+				?>
+				<div class="journal-grid-item" id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
+					<a href="<?= $arItem["DETAIL_PAGE_URL"] ?>" class="journal-grid-item__link">
+						<? if ($img["src"]) : ?>
+							<div class="journal-grid-item__image-wrapper">
+								<img src="<?= $img["src"] ?>" class="journal-grid-item__image" alt="<?= $arItem["NAME"] ?>" loading="lazy" />
+							</div>
+						<? endif; ?>
+						<div class="journal-grid-item__title"><?= $arItem["NAME"] ?></div>
+					</a>
+				</div>
+			<? endforeach; ?>
+		</div>
+	<? endif; ?>
+
+</div>

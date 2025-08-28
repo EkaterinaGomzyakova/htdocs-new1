@@ -217,6 +217,7 @@ if ($isShowSale) { ?>
 	<div class="maxwidth-theme">
 		<?php
 		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_articles.php");
+		include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_tizers.php");
 		?>
 	</div>
 	<?php

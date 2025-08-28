@@ -1,78 +1,146 @@
-.news_akc_block .top_block {
-    padding: 8px 0 0;
-    margin: 0 0 2px
+.journal-block {
+    margin: 130px 0;
 }
 
-.news_akc_block .top_block a {
-    font-size: 1em
+/* --- ИСПРАВЛЕННЫЙ КОД ДЛЯ ЗАГОЛОВКА --- */
+.journal-block .top_block {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 24px;
+    gap: 20px; 
 }
 
-.news_akc_block .items .item_block {
+.journal-block .title_block {
+    font-size: 28px;
     margin: 0;
-    text-align: left;
-    float: left;
-    width: 1px
 }
 
-.news_akc_block .items {
-    padding-bottom: 0 !important
-}
-
-.news_akc_block .items>li {
-    overflow: visible
-}
-
-.news_akc_block .slides {
-    padding-bottom: 0
-}
-
-.news_akc_block .slides .item .img {
-    text-align: center;
-    overflow: hidden;
-    width: 100%;
-    border-radius: 10px;
-}
-
-.news_akc_block .img img {
-    vertical-align: middle;
-    border-radius: 0;
-    max-width: 100%
-}
-
-.news_akc_block li:hover .img img {
-    filter: none
-}
-
-.news_akc_block .item .info {
-    padding: 15px 0px;
-    line-height: 18px
-}
-
-.news_akc_block .item .info .date {
-    line-height: 18px;
-    font-size: .929em;
-    margin: 0 0 4px
-}
-
-.news_akc_block .item .info .name {
-    font-size: 1em;
+/* --- Стили для главного (большого) элемента --- */
+.journal-featured-item {
     display: block;
-    font-weight: 700;
-    line-height: 20px
-}
-
-.news_akc_block .item .previewtext {
-    margin-top: 15px;
-    margin-bottom: 20px;
-    -webkit-line-clamp: 10;
-    line-clamp: 10;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box
-}
-
-.news_akc_block .item:hover {
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, .15);
+    position: relative;
     border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.journal-featured-item__link {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+}
+
+.journal-featured-item__image {
+    display: block;
+    width: 100%;
+    height: 500px; /* Оставляем высоту из прошлых правок */
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.journal-featured-item__link:hover .journal-featured-item__image {
+    transform: scale(1.03);
+}
+
+.journal-featured-item__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 60px 40px 40px;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* --- ИЗМЕНЕНИЕ: Стили для заголовка --- */
+.journal-featured-item__title {
+    font-size: 56px; /* <-- Увеличиваем шрифт, как на макете */
+    font-weight: bold;
+    line-height: 1.1; /* <-- Делаем межстрочный интервал плотнее */
+    margin-bottom: 32px; /* <-- Увеличиваем отступ до кнопки */
+    max-width: 685px; /* <-- Ограничиваем ширину, как на макете */
+}
+
+/* ДОБАВЛЕНО: Стили для обертки кнопки (для совместимости) */
+.journal-featured-item__button-wrapper {
+    line-height: 0; /* Убираем лишние отступы */
+}
+
+/* --- ИЗМЕНЕНИЕ: Стили для кнопки --- */
+.journal-featured-item .btn.btn-default {
+    /* Размеры и форма */
+    width: 260px;
+    height: 60px;
+    padding: 0; /* Сбрасываем внутренние отступы */
+    border-radius: 10px; /* Делаем идеальную "пилюлю" */
+    
+    /* Цвета */
+    background: #FFFFFF !important; /* Белый фон */
+    color: #285B4D !important;      /* Темно-зеленый текст */
+
+    /* Выравнивание текста по центру с помощью Flexbox */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Шрифт */
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* --- Стили для сетки маленьких элементов --- */
+.journal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+    gap: 24px; /* Отступ между элементами */
+}
+
+.journal-grid-item__link {
+    display: block;
+    text-decoration: none;
+}
+
+.journal-grid-item__image-wrapper {
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    /* Делаем картинки отзывчивыми и одинаковой высоты */
+    aspect-ratio: 4 / 3; 
+    width: 550px;
+    height: 300px;
+}
+
+.journal-grid-item__image {
+    width: 550px;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.journal-grid-item__link:hover .journal-grid-item__image {
+    transform: scale(1.05);
+}
+
+.journal-grid-item__title {
+    color: #333;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 991px) {
+    .journal-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшетах */
+    }
+}
+@media (max-width: 767px) {
+    .journal-grid {
+        grid-template-columns: 1fr; /* 1 колонка на мобильных */
+    }
+    .journal-featured-item__title {
+        font-size: 24px;
+    }
 }
