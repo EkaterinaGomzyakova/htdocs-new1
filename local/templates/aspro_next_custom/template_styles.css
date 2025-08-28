@@ -26091,6 +26091,7 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 .header-v3 .logo-row > .maxwidth-theme > .row {
     height: 100% !important;
     align-items: center !important; /* Эта команда выравнивает все элементы (лого, каталог, иконки) по центру внутри 44px */
+    width: 100% !important;
 }
 
 /* Уменьшаем непосредственно саму кнопку/ссылку меню */
@@ -26854,4 +26855,10 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 .wrap_md{
     margin-top: 130px;
     margin-bottom: 150px;
+}
+/* Замените .body-class-detail-page на реальный класс вашей страницы */
+/* Замените .menu-table-class на реальный класс вашего меню */
+
+body.detail_page .menu-row.middle-block {
+    display: none;
 }
