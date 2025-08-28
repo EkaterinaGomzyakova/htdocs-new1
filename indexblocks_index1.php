@@ -287,7 +287,7 @@ $APPLICATION->IncludeFile(
 
 
 
-
+include($_SERVER['DOCUMENT_ROOT'] . "/include/footer/comp_viewed.php");
 
 include($_SERVER['DOCUMENT_ROOT'] . "/include/mainpage/comp_bottom_banners.php");
 

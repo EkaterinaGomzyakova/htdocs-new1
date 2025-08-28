@@ -26730,6 +26730,7 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
     justify-content: space-between;
     position: relative;
     overflow: hidden;
+    margin-bottom: 130px;
 }
 
 /* --- Левая часть с текстом --- */
@@ -26847,4 +26848,10 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
     .gift-card-banner__image-wrapper--1 { top: 60%; left: 50%; transform: translateX(-50%) translateY(-50%) rotate(-3deg); width: 200px; height: 130px; z-index: 2;}
     .gift-card-banner__image-wrapper--2 { top: 20%; left: 10%; transform: rotate(5deg); width: 170px; height: 110px; z-index: 1;}
     .gift-card-banner__image-wrapper--3 { top: 25%; right: 5%; left: auto; transform: rotate(8deg); width: 220px; height: 150px; z-index: 1;}
+}
+
+
+.wrap_md{
+    margin-top: 130px;
+    margin-bottom: 150px;
 }

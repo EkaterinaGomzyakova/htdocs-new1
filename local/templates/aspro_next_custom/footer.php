@@ -39,7 +39,7 @@
 </div><? // .wrapper?>
 <footer id="footer">
     <? if ($APPLICATION->GetProperty("viewed_show") == "Y" || $is404): ?>
-        <? include($_SERVER['DOCUMENT_ROOT'] . "/include/footer/comp_viewed.php");?>
+        <? /*include($_SERVER['DOCUMENT_ROOT'] . "/include/footer/comp_viewed.php");*/?>
     <? endif; ?>
     <? CNext::ShowPageType('footer'); ?>
 </footer>
