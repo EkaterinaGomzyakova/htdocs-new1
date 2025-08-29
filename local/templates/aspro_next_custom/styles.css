@@ -175,7 +175,6 @@ ol {
 
 ol li, ul li {
     position: relative;
-    padding-left: 18px;
 }
 
 ol li:before, ul li:before {

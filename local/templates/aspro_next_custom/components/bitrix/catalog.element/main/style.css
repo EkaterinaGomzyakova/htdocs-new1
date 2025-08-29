@@ -1004,8 +1004,8 @@
 }
 
 .catalog_detail .item_main_info .stickers [class*="sticker_"] {
-    padding-top: 5px;
-    font-size: 11px
+    padding: 8px 12px;
+    font-size: 17px
 }
 
 .catalog_detail .offers_price_wrapper .offers_price_old {
@@ -1051,8 +1051,8 @@
 }
 
 .catalog_detail .item_main_info .stickers {
-    top: 0;
-    left: 0;
+    top: 24px;
+    left: 24px;
 }
 
 .catalog_detail .main_item_wrapper div.total_summ {
