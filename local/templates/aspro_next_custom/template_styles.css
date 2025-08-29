@@ -1585,7 +1585,7 @@ body .breadcrumbs .dropdown {
     margin: 0 auto;
     width: 100%;
     max-width: 400px;
-    height: 380px;
+    height: 100%;
     line-height: 397px;
     position: relative;
 }
@@ -1601,8 +1601,8 @@ body .breadcrumbs .dropdown {
     padding: 0;
     margin: 0;
     display: none;
-    width: 100%;
-    height: 784px;
+    width: 564px !important;
+    height: 564px !important;
     overflow: hidden;
     line-height: 400px;
     z-index: 50
@@ -1622,13 +1622,13 @@ body .breadcrumbs .dropdown {
     overflow: hidden;
     vertical-align: bottom;
     list-style: none;
-    width: 54px !important;
-    height: 54px;
+    width: 100%;
+    height: 100%;
     background: none;
     position: relative;
     text-align: center;
-    line-height: 54px;
-    margin: 0 10px 0 0;
+    line-height: 100%;
+    margin: 0 0px 0 0;
     border: 2px solid #fff;
     transition: border-color ease-out .2s;
     box-sizing: border-box;
@@ -1650,13 +1650,13 @@ body .breadcrumbs .dropdown {
 }
 
 .item_slider .slides li img, .item_slider .thumbs li img {
-    position: absolute;
-    margin: auto;
-    top: -120px;
+    position: center;
+    margin: 0px;
+    top: 0px;
     bottom: 0;
     left: 0;
     right: 0;
-    border: 0;
+    border: 0px;
     max-width: 100%
 }
 
@@ -16476,8 +16476,8 @@ div[id^="wait_comp"] {
 }
 
 .breadcrumbs {
-    margin: -7px 0 0;
-    padding: 0 0 11px;
+    font-size: 17px !important;
+    margin: 0px 0 0;
     text-align: left;
 }
 
@@ -16535,9 +16535,9 @@ div[id^="wait_comp"] {
 
 section.page-top {
     padding-top: 30px;
-    min-height: 56px;
+    min-height: 95px;
     position: relative;
-    padding: 0px 15px;
+    padding: 0px 0px;
 }
 
 section.page-top.center {
@@ -16560,7 +16560,7 @@ section.page-top.center {
 
 .title-v3 .page-top.maxwidth-theme, .title-v4 .page-top.maxwidth-theme {
     padding-top: 26px;
-    padding-bottom: 3px
+    padding-bottom: 36px
 }
 
 .title-v3 .page-top.maxwidth-theme h1, .title-v4 .page-top.maxwidth-theme h1 {
@@ -16582,9 +16582,7 @@ section.page-top .line_block+h1 {
     padding-right: 30px
 }
 
-.page-top .page-top-main {
-    position: relative
-}
+
 
 .with_banners #content>.wrapper_inner {
     padding-top: 30px
@@ -22952,7 +22950,7 @@ tr.drop td {
 }
 
 .row {
-    margin: 0 -15px
+    margin: 0 0px
 }
 
 .row .item_block {
@@ -25854,15 +25852,34 @@ table.contacts-stores tr.item td:last-of-type {
 
 /* -- 2. УБИРАЕМ ВРЕДНЫЕ СТИЛИ у внутреннего контейнера .slides -- */
 .catalog_detail .item_main_info .item_slider .slides {
-    max-width: none !important;  /* Снимаем ограничение в 400px */
-    height: auto !important;      /* Высота автоматическая! */
-    line-height: normal !important; /* Убираем центрирование по вертикали */
+    /* Эти три строчки — магия центрирования */
+    display: flex;
+    justify-content: center; /* Центрируем по ГОРИЗОНТАЛИ */
+    align-items: center;     /* Центрируем по ВЕРТИКАЛИ */
+
+    /* Ваши стили для рамки (можно оставить) */
+    border: 65px solid #fff5e9;
+
+    /* Можно задать минимальную высоту, чтобы блок не схлопывался, если картинка маленькая */
+    min-height: 500px; /* Подберите значение по необходимости */
+    
+    /* Сбрасываем старые стили, которые могут мешать */
+    padding: 0;
+    max-width: none !important;
 }
 
-/* -- 3. ЗАСТАВЛЯЕМ САМУ КАРТИНКУ РАСТЯНУТЬСЯ -- */
-.catalog_detail .item_main_info .slides img {
-    width: 100% !important;       /* Растянуться на 100% */
-    height: auto !important;      /* Высота автоматическая для сохранения пропорций */
+/* -- 2. ЗАДАЕМ МАКСИМАЛЬНЫЙ РАЗМЕР ДЛЯ САМОЙ КАРТИНКИ -- */
+.catalog_detail .item_main_info .item_slider .slides img {
+    /* Чтобы картинка не растягивалась и не обрезалась, 
+       ограничиваем ее максимальный размер */
+    max-width: 100%;
+    max-height: 100%;
+    
+    /* Важно, чтобы высота подстраивалась автоматически для сохранения пропорций */
+    height: auto;
+    
+    /* Убедимся, что никакие другие стили не влияют на размеры */
+    width: auto !important; /* Убираем фиксированную ширину, если она была */
 }
 
 .container, .maxwidth-theme {
@@ -25879,7 +25896,7 @@ table.contacts-stores tr.item td:last-of-type {
 
 .catalog_detail .item_main_info {
     /* 1. Задаем ширину, равную 100% ширины окна браузера */
-    width: 100%; 
+    width: 1710px; 
     
     /* 2. Смещаем блок влево ровно на столько, чтобы он начался у края экрана */
     position: relative;
@@ -25930,10 +25947,8 @@ table.contacts-stores tr.item td:last-of-type {
 .item_slider {
   /* --- Размеры из макета --- */
   width: 694px;   /* Width: Fill (694px) */
-  height: 692px;  /* Height: Fixed (692px) */
+  height: 814px;  /* Height: Fixed (692px) */
 
-  /* --- Скругление углов --- */
-  border-radius: 60px; /* Radius: 20px */
   
   /* --- ВАЖНО: скрываем все, что выходит за скругленные углы --- */
   overflow: hidden;
@@ -26861,4 +26876,24 @@ body .header-v3 .logo-block { /* Добавлен селектор .logo-block *
 
 body.detail_page .menu-row.middle-block {
     display: none;
+}
+
+
+
+.maxwidth-theme,
+.page-top-main {
+    /* 
+     * Это самое важное правило. 
+     * Подберите здесь ширину, которая соответствует вашему сайту. 
+     * Чаще всего это 1200px, 1320px или 1400px.
+     * Начните с 1320px.
+    */
+    max-width: 1710px !important; 
+
+    /* Эти правила центрируют блок */
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    /* Это свойство уберет возможное обтекание, которое может мешать */
+    float: none !important;
 }

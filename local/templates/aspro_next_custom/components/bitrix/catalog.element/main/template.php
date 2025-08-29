@@ -2097,3 +2097,35 @@ $without_tags = trim($without_tags);
 }?>
 
 
+<script>
+    // Эта функция будет следить за изменениями в DOM
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            // Проверяем, был ли добавлен атрибут style
+            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                const targetElement = mutation.target;
+
+                // Если Flexslider установил высоту, мы ее переопределяем!
+                if (targetElement.style.height && targetElement.style.height !== '100px') {
+                    targetElement.style.height = '100px';
+                }
+            }
+        });
+    });
+
+    // Ждем, пока документ полностью загрузится
+    document.addEventListener('DOMContentLoaded', function() {
+        // Находим контейнер, который изменяет Flexslider
+        const sliderViewport = document.querySelector('.catalog_detail .wrapp_thumbs .thumbs');
+
+        if (sliderViewport) {
+            // Начинаем наблюдение за изменениями в атрибуте style
+            observer.observe(sliderViewport, {
+                attributes: true // следим только за атрибутами
+            });
+
+            // Первичная установка высоты на случай, если скрипт сработает раньше
+            sliderViewport.style.height = '100px';
+        }
+    });
+</script>

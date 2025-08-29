@@ -3131,10 +3131,13 @@ window.JCCatalogElement.prototype.SetSliderPict = function(obj, slider, config)
 			directionNav: true,
 			controlNav: false,
 			pauseOnHover: true,
-			itemWidth: 54,
+			itemWidth: 100,
 			itemMargin: 10,
 			animationLoop: true,
 			controlsContainer: ".thumbs_navigation",
+			start: function(slider) {
+				$(slider).find('.flex-viewport').css('height', '100px');
+    		}
 		});
 		/* init flexslider end */
 		container.find('.thumbs .slides_block li').first().addClass('current');

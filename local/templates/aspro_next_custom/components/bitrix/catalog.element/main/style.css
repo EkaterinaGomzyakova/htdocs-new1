@@ -651,11 +651,12 @@
 
 .catalog_detail .item_main_info .item_slider {
     box-sizing: border-box;
-    padding: 15px;
+    padding: 0x;
     position: relative;
     z-index: 1;
     text-align: center
 }
+
 
 .catalog_detail .item_main_info .right_info {
     position: relative;
@@ -816,7 +817,7 @@
 }
 
 .catalog_detail .item_slider #thumbs {
-    height: 54px;
+    height: 100%;
     white-space: nowrap;
     width: 256px;
     overflow: hidden;
@@ -1069,9 +1070,6 @@
     margin: 0
 }
 
-.catalog_detail .item_slider {
-    padding-top: 35px
-}
 
 .catalog_detail .item_slider .slides ul {
     margin: 0
@@ -1336,3 +1334,82 @@
   content: none;
 }
 
+
+/* -- 1. ПРЕВРАЩАЕМ РОДИТЕЛЬСКИЙ КОНТЕЙНЕР В FLEX-КОЛОНКУ -- */
+/* Это заставит .slides и .wrapp_thumbs выстроиться друг под другом */
+.catalog_detail .item_slider {
+  display: flex;
+  flex-direction: column;
+}
+
+/* -- 2. СБРАСЫВАЕМ АБСОЛЮТНОЕ ПОЗИЦИОНИРОВАНИЕ У МИНИАТЮР -- */
+/* Возвращаем блок с миниатюрами в нормальный поток документа */
+.catalog_detail .wrapp_thumbs.xzoom-thumbs {
+  position: static;
+  margin-top: 20px;
+  height: 100px;
+  
+  /* Эти 2 строчки красиво отцентрируют миниатюры по вертикали */
+  display: flex;
+  align-items: center;
+}
+
+/* -- 3. ГАРАНТИРУЕМ, ЧТО ОСНОВНАЯ КАРТИНКА ЗАНИМАЕТ МЕСТО -- */
+/* На всякий случай, если у этого блока тоже есть проблемы с позиционированием */
+.catalog_detail .slides {
+    position: relative;
+}
+
+/* 1. Задаем жесткий размер для контейнера <li> */
+.wrapp_thumbs .slides_block > li {
+    width: 100px !important;
+    height: 100px !important;
+    min-width: 100px !important; /* Добавляем min-width для надежности */
+}
+
+/* 2. Задаем размер для <span> внутри <li> */
+.wrapp_thumbs .slides_block > li span {
+    display: block; /* Заставляем span вести себя как блочный элемент */
+    width: 100px !important;
+    height: 100px !important;
+}
+
+/* 3. Адаптируем саму картинку <img> под новые размеры */
+.wrapp_thumbs .slides_block > li span img.xzoom-gallery {
+    width: 100% !important;  /* Растягиваем на всю ширину span (100px) */
+    height: 100% !important; /* Растягиваем на всю высоту span (100px) */
+    object-fit: cover;       /* Сохраняем пропорции, обрезая лишнее */
+}
+
+/* 
+ *  Заставляем родительский контейнер (оранжевый блок) 
+ *  центрировать всё своё содержимое.
+*/
+.catalog_detail .wrapp_thumbs.xzoom-thumbs {
+    display: flex;
+    justify-content: center; /* Центрируем слайдер по горизонтали */
+    align-items: center;     /* Центрируем по вертикали */
+    height: 100px !important; 
+    width: 100%;             /* Занимаем всю доступную ширину */
+}
+
+/* -- 2. ЗАСТАВЛЯЕМ САМ СЛАЙДЕР (СИНИЙ БЛОК) РАСТЯНУТЬСЯ НА 100% -- */
+.catalog_detail .wrapp_thumbs .flexslider {
+    /* ОТМЕНЯЕМ PHP-СТИЛЬ 'max-width', который всё ломает */
+    max-width: none !important; 
+
+    /* Растягиваемся на всю ширину родителя */
+    width: 100% !important;
+
+    /* Сбрасываем лишние отступы */
+    margin: 0 !important;
+}
+
+.catalog_detail .wrapp_thumbs .flexslider {
+    width: 100% !important; /* <--- САМОЕ ВАЖНОЕ: растянуться на 100% */
+    margin: 0 !important;   /* Сбрасываем внешние отступы, которые может добавить скрипт */
+}
+
+.catalog_detail .wrapp_thumbs .flex-viewport {
+    height: 100px !important; /* <--- САМОЕ ВАЖНОЕ! */
+}
