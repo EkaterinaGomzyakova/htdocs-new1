@@ -71,6 +71,10 @@ while($arStoreProduct=$rsStoreProduct->fetch()) {
 		"COMMON_SHOW_CLOSE_POPUP" => "N",
 		"COMPARE_ELEMENT_SORT_FIELD" => "shows",
 		"COMPARE_ELEMENT_SORT_ORDER" => "asc",
+		"DETAIL_BRAND_PROP" => array(
+			"PREVIEW_PICTURE",
+			"DETAIL_PICTURE",
+		),
 		"COMPARE_FIELD_CODE" => array(
 			0 => "NAME",
 			1 => "TAGS",

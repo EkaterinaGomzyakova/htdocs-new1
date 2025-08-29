@@ -1467,3 +1467,59 @@
 }
 
 
+
+/*
+ *  ОБНОВЛЕННЫЕ СТИЛИ для блока "Все товары бренда" (согласно макету)
+*/
+.all-brand-products-link {
+    /* Основные стили контейнера */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    height: 80px;                     /* <<< Новая высота из макета */
+    padding: 20px 19px;               /* <<< Новые отступы из макета */
+    margin-top: 20px;
+    background-color: #F2F2F2;        /* <<< Новый цвет фона из макета */
+    border-radius: 10px;              /* <<< Новое скругление из макета */
+    
+    /* Убираем стили по умолчанию */
+    border: none;
+    text-decoration: none;
+
+    /* Плавный переход для эффекта при наведении */
+    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Эффект тени и небольшого увеличения при наведении */
+.all-brand-products-link:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Текст "Все товары бренда" */
+.all-brand-products-link__text {
+    font-size: 18px;  /* <<< Увеличиваем текст */
+    font-weight: 500;
+    color: #222;
+}
+
+/* Правая часть с логотипом и стрелкой */
+.all-brand-products-link__logo-arrow-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;       /* <<< Отступ между лого и стрелкой */
+}
+
+/* Логотип бренда */
+.all-brand-products-link__logo {
+    max-height: 32px;  /* <<< Увеличиваем максимальную высоту логотипа */
+    width: auto;
+}
+
+/* Иконка-стрелка */
+.all-brand-products-link .fa-angle-right {
+    font-size: 22px;   /* <<< Увеличиваем стрелку */
+    color: #888888;
+}
+

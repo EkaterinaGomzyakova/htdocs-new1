@@ -423,6 +423,7 @@ $without_tags = trim($without_tags);
                         <span class="thumbs_navigation custom_flex"></span>
                     </div>
                 </div>
+
                 <script>
                     $(document).ready(function () {
                         $('.item_slider .thumbs li').first().addClass('current');
@@ -451,6 +452,52 @@ $without_tags = trim($without_tags);
                 </div>
             <? } ?>
         </div>
+<?
+// Проверяем, есть ли информация о бренде у товара
+if (!empty($arResult['BRAND_ITEM'])) {
+    $brand_url = $arResult['BRAND_ITEM']['DETAIL_PAGE_URL'];
+    $brand_name = $arResult['BRAND_ITEM']['NAME'];
+    $brand_logo_src = ''; // Создаем пустую переменную
+
+    // =============================================================
+    //       ФИНАЛЬНЫЙ КОД ПОИСКА ЛОГОТИПА ПО ID (ВЕРСИЯ 4)
+    // =============================================================
+    
+    // Получаем ID картинки из нужного поля
+    $pictureId = false;
+    if (!empty($arResult['BRAND_ITEM']['DETAIL_PICTURE'])) {
+        $pictureId = $arResult['BRAND_ITEM']['DETAIL_PICTURE'];
+    } elseif (!empty($arResult['BRAND_ITEM']['PREVIEW_PICTURE'])) {
+        $pictureId = $arResult['BRAND_ITEM']['PREVIEW_PICTURE'];
+    }
+
+    // Если мы нашли ID, получаем по нему всю информацию о файле
+    if ($pictureId) {
+        $fileArray = CFile::GetFileArray($pictureId);
+        if ($fileArray && !empty($fileArray['SRC'])) {
+            $brand_logo_src = $fileArray['SRC'];
+        }
+    }
+    // =============================================================
+?>
+
+    <!-- Блок-ссылка "Все товары бренда" (HTML не меняется) -->
+    <a href="<?= $brand_url ?>" class="all-brand-products-link">
+        <span class="all-brand-products-link__text">
+            Все товары бренда
+        </span>
+        <span class="all-brand-products-link__logo-arrow-wrapper">
+            <? // Выводим логотип, только если мы его нашли
+            if ($brand_logo_src): ?>
+                <img src="<?= $brand_logo_src ?>" alt="<?= $brand_name ?>" title="<?= $brand_name ?>" class="all-brand-products-link__logo" />
+            <? endif; ?>
+            <i class="fa fa-angle-right"></i>
+        </span>
+    </a>
+
+<?
+} // Закрываем условие if
+?>
         <? /*mobile*/ ?>
         <? if (!$showCustomOffer || empty($arResult['OFFERS_PROP'])) { ?>
             <div class="item_slider color-controls flex flexslider"
