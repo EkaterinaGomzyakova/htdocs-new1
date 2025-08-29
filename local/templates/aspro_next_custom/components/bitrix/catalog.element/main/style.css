@@ -1362,22 +1362,32 @@
 
 /* 1. Задаем жесткий размер для контейнера <li> */
 .wrapp_thumbs .slides_block > li {
-    width: 100px !important;
-    height: 100px !important;
-    min-width: 100px !important; /* Добавляем min-width для надежности */
+    width: 100px;
+    height: 100px;
+    
+    /* Устанавливаем ЦВЕТ РАМКИ через фон. Он всегда будет непрозрачным. */
+    background-color: #fff5e9 !important;
+    
+    /* Устанавливаем РАЗМЕР РАМКИ через внутренний отступ. */
+    padding: 10px; /* 10px выглядит аккуратнее, но вы можете вернуть 13.8px */
+    box-sizing: border-box;
+
+    /* Transition для плавных изменений, если они понадобятся */
+    transition: all 0.2s ease-in-out;
+    border-radius: 10px solid #285B4D;
 }
 
 /* 2. Задаем размер для <span> внутри <li> */
 .wrapp_thumbs .slides_block > li span {
     display: block; /* Заставляем span вести себя как блочный элемент */
-    width: 100px !important;
-    height: 100px !important;
+    width: 100px ;
+    height: 100px ;
 }
 
 /* 3. Адаптируем саму картинку <img> под новые размеры */
 .wrapp_thumbs .slides_block > li span img.xzoom-gallery {
-    width: 100% !important;  /* Растягиваем на всю ширину span (100px) */
-    height: 100% !important; /* Растягиваем на всю высоту span (100px) */
+    width: 100% ;  /* Растягиваем на всю ширину span (100px) */
+    height: 100%; /* Растягиваем на всю высоту span (100px) */
     object-fit: cover;       /* Сохраняем пропорции, обрезая лишнее */
 }
 
@@ -1412,4 +1422,51 @@
 
 .catalog_detail .wrapp_thumbs .flex-viewport {
     height: 100px !important; /* <--- САМОЕ ВАЖНОЕ! */
+}
+
+/* -- 1. СТИЛИ ДЛЯ ВСЕХ МИНИАТЮР (LI) -- */
+.wrapp_thumbs .slides_block > li {
+    width: 100px !important;  /* Общая ширина 100px */
+    height: 100px !important; /* Общая высота 100px */
+    
+    /* Цвет фона, который станет нашей "рамкой" */
+    background-color: #fff5e9; 
+    
+    /* Внутренний отступ создаст рамку в 13.8px */
+    padding: 13.8px;
+    box-sizing: border-box; /* Важно, чтобы padding не увеличивал размер */
+    
+    /* Делаем неактивные слайды немного прозрачными */
+    opacity: 0.6;
+    transition: opacity 0.2s ease-in-out; /* Плавный переход */
+}
+
+/* -- 2. ВЫДЕЛЯЕМ АКТИВНУЮ МИНИАТЮРУ -- */
+.wrapp_thumbs .slides_block > li.current {
+    /* Делаем активный слайд полностью непрозрачным */
+    opacity: 1;
+}
+/* Опционально: делаем слайд непрозрачным при наведении мыши для удобства */
+.wrapp_thumbs .slides_block > li:hover {
+    opacity: 1;
+}
+
+/* -- 3. СТИЛИ ДЛЯ ВНУТРЕННЕГО СОДЕРЖИМОГО (SPAN и IMG) -- */
+.wrapp_thumbs .slides_block > li span,
+.wrapp_thumbs .slides_block > li span img.xzoom-gallery {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.wrapp_thumbs .slides_block > li img.xzoom-gallery {
+    /* Чтобы картинка не искажалась */
+    object-fit: cover;
+}
+
+
+
+.button.transparent, .h_color_white .header_wrap .menu>li.current>a span, .h_color_white.wrapper #header ul.menu li .child .child_wrapp, .m_color_white.wrapper #header ul.menu li .child .child_wrapp, .basket_normal .popup.card_popup_frame .basket_popup_wrapp, .basket_sort ul.tabs li.cur div, .smartfilter .bx_ui_slider_track .bx_ui_slider_handle, .bx_filter .button, .bx_filter_vertical input[type="checkbox"]:checked+label.sku, .sku_props .bx_item_detail_size ul li.active, .bx_size_scroller_container .bx_size ul li.bx_active, .bx_filter .bx_filter_param_label.active .bx_filter_param_btn, .bx_catalog_item_scu .bx_item_detail_scu ul li.active span.cnt, .item_slider .thumbs li.current, .popup-window.popup-window-titlebar .popup-window-top-row .popup-window-left-column, .popup-window.popup-window-titlebar .popup-window-top-row .popup-window-center-column, .popup-window.popup-window-titlebar .popup-window-top-row .popup-window-right-column, .popup-window.popup-window-titlebar-light .popup-window-top-row .popup-window-left-column, .popup-window.popup-window-titlebar-light .popup-window-top-row .popup-window-center-column, .popup-window.popup-window-titlebar-light .popup-window-top-row .popup-window-right-column, .bx_element input[type=radio]:checked+label .bx_logotype, .bx_element label.selected .bx_logotype {
+    border-color: #5F806A;
+    border-radius: 10px;
 }

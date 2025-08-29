@@ -1630,6 +1630,7 @@ body .breadcrumbs .dropdown {
     line-height: 100%;
     margin: 0 0px 0 0;
     border: 2px solid #fff;
+    border-radius: 10px;
     transition: border-color ease-out .2s;
     box-sizing: border-box;
     cursor: pointer;
@@ -25859,6 +25860,7 @@ table.contacts-stores tr.item td:last-of-type {
 
     /* Ваши стили для рамки (можно оставить) */
     border: 65px solid #fff5e9;
+    border-radius: 20px;
 
     /* Можно задать минимальную высоту, чтобы блок не схлопывался, если картинка маленькая */
     min-height: 500px; /* Подберите значение по необходимости */
