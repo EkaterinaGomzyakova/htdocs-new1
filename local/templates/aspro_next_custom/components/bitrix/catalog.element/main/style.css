@@ -1523,3 +1523,109 @@
     color: #888888;
 }
 
+
+
+
+
+
+/* --- 1. Стили для перенесенных табов --- */
+.img_wrapper .tabs_section {
+    margin-top: 30px;
+}
+.catalog_detail .tabs>.tab-content>.tab-pane {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* --- 2. Стили для нового блока "Рекомендуем к заказу" --- */
+.recommend-to-order-wrapper {
+    margin: 40px auto;
+    border-top: 1px solid #f2f2f2;
+    padding-top: 40px;
+}
+.recommend-to-order-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+.recommend-to-order-title .recommend-to-order-count {
+    font-size: 16px;
+    font-weight: 400;
+    color: #888;
+    margin-left: 10px;
+}
+
+.recommend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    padding-right: 30px; /* Место для крестика */
+}
+
+.recommend-item-image {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.recommend-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.recommend-item-info {
+    flex-grow: 1;
+}
+
+.recommend-item-name {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.recommend-item-name:hover {
+    color: #285B4D;
+}
+.recommend-item-price {
+    font-weight: 600;
+}
+
+.recommend-item-remove {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.recommend-item-remove:hover {
+    color: #333;
+}
+
+.recommend-to-order-footer {
+    border-top: 1px solid #f2f2f2;
+    padding-top: 25px;
+    margin-top: 10px;
+}
+.recommend-to-order-total {
+    margin-bottom: 20px;
+}
+.recommend-to-order-total span {
+    font-size: 16px;
+    margin-right: 15px;
+}
+.recommend-to-order-total strong {
+    font-size: 24px;
+    font-weight: 600;
+}
+.recommend-to-order-footer .btn {
+    width: 100%;
+    max-width: 300px; /* Можете задать максимальную ширину */
+}
