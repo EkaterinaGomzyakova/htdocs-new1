@@ -1236,85 +1236,7 @@ if (!empty($arResult['BRAND_ITEM'])) {
                 </div>
             </div>
         </div>
-        <?
-        // =============================================================
-        //      НОВЫЙ БЛОК "РЕКОМЕНДУЕМ К ЗАКАЗУ"
-        // =============================================================
 
-        // Убедимся, что модуль каталога и инфоблоков подключен
-        if (CModule::IncludeModule('iblock') && CModule::IncludeModule('catalog')) {
-            
-            // Получаем ID бренда текущего товара
-            $brandId = false;
-            if (!empty($arResult['BRAND_ITEM']['ID'])) {
-                $brandId = $arResult['BRAND_ITEM']['ID'];
-            }
-
-            // Проверяем, есть ли у нас ID бренда и родительской категории
-            if ($brandId && $arResult['IBLOCK_SECTION_ID']) {
-                
-                // Готовим фильтр для выборки товаров
-                $arFilter = array(
-                    "IBLOCK_ID" => $arResult["IBLOCK_ID"],
-                    "ACTIVE" => "Y",
-                    "SECTION_ID" => $arResult["IBLOCK_SECTION_ID"],
-                    "!ID" => $arResult["ID"], // Исключаем текущий товар
-                    "PROPERTY_BRAND" => $brandId, // ВАЖНО: Убедитесь, что свойство бренда имеет код "BRAND"
-                    "CATALOG_AVAILABLE" => "Y" // Только товары в наличии
-                );
-
-                // Поля, которые нам нужны для каждого товара
-                $arSelect = array(
-                    "ID", "NAME", "PREVIEW_PICTURE", "DETAIL_PAGE_URL",
-                );
-                
-                // Выполняем запрос
-                $rsElements = CIBlockElement::GetList(array("SORT" => "ASC"), $arFilter, false, array("nPageSize" => 2), $arSelect);
-                
-                $arRecommendedItems = [];
-                while ($obElement = $rsElements->GetNextElement()) {
-                    $arItem = $obElement->GetFields();
-                    $arItem['PRICES'] = CIBlockPriceTools::GetItemPrices($arItem['IBLOCK_ID'], $arResult['PRICES'], $arItem, false, $arResult['CURRENCY_ID']);
-                    $arRecommendedItems[] = $arItem;
-                }
-
-                if (!empty($arRecommendedItems)) {
-                ?>
-                    <div class="recommend-to-order-wrapper">
-                        <h3 class="recommend-to-order-title">Рекомендуем к заказу <span class="recommend-to-order-count"><?= count($arRecommendedItems) ?> продукта</span></h3>
-                        
-                        <div class="recommend-to-order-items">
-                            <? foreach ($arRecommendedItems as $arItem): ?>
-                                <div class="recommend-item">
-                                    <a href="<?= $arItem['DETAIL_PAGE_URL'] ?>" class="recommend-item-image">
-                                        <? if ($arItem['PREVIEW_PICTURE']): ?>
-                                            <img src="<?= CFile::GetPath($arItem['PREVIEW_PICTURE']) ?>" alt="<?= $arItem['NAME'] ?>">
-                                        <? else: ?>
-                                            <img src="<?= SITE_TEMPLATE_PATH ?>/images/no_photo_small.png" alt="<?= $arItem['NAME'] ?>">
-                                        <? endif; ?>
-                                    </a>
-                                    <div class="recommend-item-info">
-                                        <a href="<?= $arItem['DETAIL_PAGE_URL'] ?>" class="recommend-item-name"><?= $arItem['NAME'] ?></a>
-                                        <div class="recommend-item-price"><?= $arItem['PRICES']['BASE']['PRINT_DISCOUNT_VALUE'] ?></div>
-                                    </div>
-                                    <div class="recommend-item-remove">×</div>
-                                </div>
-                            <? endforeach; ?>
-                        </div>
-                        
-                        <div class="recommend-to-order-footer">
-                            <div class="recommend-to-order-total">
-                                <span>Цена набора</span>
-                                <strong>3 040 ₽</strong> <!-- Сумму нужно будет считать через JS, пока это плейсхолдер -->
-                            </div>
-                            <a href="javascript:void(0);" class="btn btn-default">Добавить набор в корзину</a>
-                        </div>
-                    </div>
-                <?
-                }
-            }
-        }
-        ?>
          <? if ($arParams["USE_REVIEW"] == "Y") {?>
             <div class="reviews-wrapper-block" id="reviews_block">  <!-- <<== ДОБАВЬТЕ ЭТОТ DIV-ОБЕРТКУ И ID -->
                 <h3 class="recommend-to-order-title">Отзывы</h3> <!-- <<== ДОБАВЬТЕ ЗАГОЛОВОК -->
@@ -2248,5 +2170,20 @@ if (!empty($arResult['BRAND_ITEM'])) {
             // Первичная установка высоты на случай, если скрипт сработает раньше
             sliderViewport.style.height = '100px';
         }
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Эта функция из ядра Aspro.Next заставляет скрипты
+        // заново "просканировать" страницу и найти новые
+        // элементы, которые нужно оживить (цены, кнопки и т.д.)
+        InitLazyLoad();
+
+        // Дополнительно: ждем секунду и снова вызываем, на случай если
+        // первоначальные данные грузились с задержкой
+        setTimeout(function(){
+            InitLazyLoad();
+        }, 1000);
     });
 </script>

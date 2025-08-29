@@ -1534,10 +1534,10 @@
 }
 .catalog_detail .tabs>.tab-content>.tab-pane {
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 200px;
 }
 
-/* --- 2. Стили для нового блока "Рекомендуем к заказу" --- */
+/* --- Стили для УЛУЧШЕННОГО блока "Рекомендуем к заказу" --- */
 .recommend-to-order-wrapper {
     margin: 40px auto;
     border-top: 1px solid #f2f2f2;
@@ -1558,16 +1558,14 @@
 .recommend-item {
     display: flex;
     align-items: center;
+    gap: 20px; /* Расстояние между элементами */
     margin-bottom: 20px;
-    position: relative;
-    padding-right: 30px; /* Место для крестика */
 }
 
 .recommend-item-image {
     width: 60px;
     height: 60px;
     flex-shrink: 0;
-    margin-right: 20px;
 }
 
 .recommend-item-image img {
@@ -1577,7 +1575,7 @@
 }
 
 .recommend-item-info {
-    flex-grow: 1;
+    flex-grow: 1; /* Блок с текстом занимает все свободное место */
 }
 
 .recommend-item-name {
@@ -1594,28 +1592,19 @@
     font-weight: 600;
 }
 
-.recommend-item-remove {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 24px;
-    color: #ccc;
-    cursor: pointer;
-    line-height: 1;
+/* Стили для кнопки "В корзину" у каждого товара */
+.recommend-item-button {
+    flex-shrink: 0;
+}
+.recommend-item-button .button {
+    margin: 0; /* Убираем лишние отступы, если они есть */
 }
 
-.recommend-item-remove:hover {
-    color: #333;
-}
-
+/* Футер блока с общей ценой */
 .recommend-to-order-footer {
     border-top: 1px solid #f2f2f2;
     padding-top: 25px;
     margin-top: 10px;
-}
-.recommend-to-order-total {
-    margin-bottom: 20px;
 }
 .recommend-to-order-total span {
     font-size: 16px;
@@ -1625,7 +1614,15 @@
     font-size: 24px;
     font-weight: 600;
 }
-.recommend-to-order-footer .btn {
-    width: 100%;
-    max-width: 300px; /* Можете задать максимальную ширину */
+
+
+.detail_text ul > li {
+    position: relative;     /* Это необходимо для позиционирования ::before */
+    padding-left: 25px;     /* <<= ОСНОВНОЕ ИЗМЕНЕНИЕ. Создаем отступ слева. Можете изменить значение 25px. */
+    list-style-type: none;  /* Убираем стандартные маркеры браузера */
+    margin-bottom: 10px;    /* Добавляем небольшой отступ между пунктами */
+}
+
+.product-detail-feedback {
+    display: none !important;
 }
