@@ -1187,7 +1187,7 @@ if (!empty($arResult['BRAND_ITEM'])) {
                                 <div class="col-md-3 hidden-sm text_block">
                                     <? $APPLICATION->IncludeFile(SITE_DIR . "include/ask_tab_detail_description.php", array(), array("MODE" => "html", "NAME" => GetMessage('CT_BCE_CATALOG_ASK_DESCRIPTION'))); ?>
                                 </div>
-                                <div class="col-md-9 form_block">
+                                <div class="col-md-12 form_block">
                                     <div id="ask_block"></div>
                                 </div>
                             </div>
@@ -1889,7 +1889,7 @@ if (!empty($arResult['BRAND_ITEM'])) {
 </div>
 <? if ($arParams["WIDE_BLOCK"] == "Y"): ?>
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <? endif; ?>
         
 

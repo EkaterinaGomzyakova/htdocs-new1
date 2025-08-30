@@ -4925,6 +4925,8 @@ div.blog-comment-hidden .blog-comment-cont-white, div.blog-comment-hidden .blog-
 }
 
 .wrapper, .wrapper_inner, .wrapp, .wrapper1>div {
+    width: 1710px;
+    margin: auto;
     box-sizing: border-box;
     position: relative;
     z-index: 2

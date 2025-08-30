@@ -27,34 +27,38 @@ use Bitrix\Main\Loader,
 
 <?$arAllValues=$arSimilar=$arAccessories=array();
 /*similar goods*/
-$arExpValues=CNextCache::CIBlockElement_GetProperty($arParams["IBLOCK_ID"], $ElementID, array("CACHE" => array("TAG" =>CNextCache::GetIBlockCacheTag($arParams["IBLOCK_ID"]))), array("CODE" => "EXPANDABLES"));
+/*$arExpValues=CNextCache::CIBlockElement_GetProperty($arParams["IBLOCK_ID"], $ElementID, array("CACHE" => array("TAG" =>CNextCache::GetIBlockCacheTag($arParams["IBLOCK_ID"]))), array("CODE" => "EXPANDABLES"));
 if($arExpValues){
 	$arAllValues["EXPANDABLES"]=$arExpValues;
+}*/
+$brandValue = false;
+$rsBrand = CIBlockElement::GetProperty($arParams['IBLOCK_ID'], $ElementID, array("sort" => "asc"), Array("CODE"=>"BRAND"));
+if($arBrand = $rsBrand->Fetch()){
+    if($arBrand['VALUE']){
+         $brandValue = $arBrand['VALUE'];
+    }
 }
 /*accessories goods*/
-$arAccessories=CNextCache::CIBlockElement_GetProperty($arParams["IBLOCK_ID"], $ElementID, array("CACHE" => array("TAG" =>CNextCache::GetIBlockCacheTag($arParams["IBLOCK_ID"]))), array("CODE" => "ASSOCIATED"));
-if($arAccessories){
-	$arAllValues["ASSOCIATED"]=$arAccessories;
+/*$arAccessories=CNextCache::CIBlockElement_GetProperty($arParams["IBLOCK_ID"], $ElementID, array("CACHE" => array("TAG" =>CNextCache::GetIBlockCacheTag($arParams["IBLOCK_ID"]))), array("CODE" => "ASSOCIATED"));*/
+$arTab = array();
+if ($brandValue) {
+    // Заголовок для вкладки "С этим товаром рекомендуем"
+    $arTab["EXPANDABLES"] = ($arParams["DETAIL_EXPANDABLES_TITLE"] ? $arParams["DETAIL_EXPANDABLES_TITLE"] : GetMessage("EXPANDABLES_TITLE"));
 }
-?>
-<?if($arAccessories || $arExpValues || (ModuleManager::isModuleInstalled("sale") && (!isset($arParams['USE_BIG_DATA']) || $arParams['USE_BIG_DATA'] != 'N'))){?>
-	<?
-	$arTab=array();
-	if($arExpValues){
-		$arTab["EXPANDABLES"]=($arParams["DETAIL_EXPANDABLES_TITLE"] ? $arParams["DETAIL_EXPANDABLES_TITLE"] : GetMessage("EXPANDABLES_TITLE"));
-	}
-	if($arAccessories){
-		$arTab["ASSOCIATED"]=( $arParams["DETAIL_ASSOCIATED_TITLE"] ? $arParams["DETAIL_ASSOCIATED_TITLE"] : GetMessage("ASSOCIATED_TITLE"));
-	}
-	/* Start Big Data */
-	if(ModuleManager::isModuleInstalled("sale") && (!isset($arParams['USE_BIG_DATA']) || $arParams['USE_BIG_DATA'] != 'N')){
-		$arTab["RECOMENDATION"]=GetMessage("RECOMENDATION_TITLE");
-	}?>
-	<?if($isWideBlock == "Y"):?>
-		<div class="row">
-			<div class="col-md-9">
-	<?endif;?>
-	<div class="bottom_slider specials tab_slider_wrapp">
+// Заголовок для вкладки "Вам может понравиться"
+$arTab["ASSOCIATED"] = "Вам может понравиться";
+
+if (ModuleManager::isModuleInstalled("sale") && (!isset($arParams['USE_BIG_DATA']) || $arParams['USE_BIG_DATA'] != 'N')) {
+    $arTab["RECOMENDATION"] = GetMessage("RECOMENDATION_TITLE");
+}
+
+// ШАГ 2: И ТОЛЬКО ПОТОМ проверяем, не пустой ли он, и открываем HTML
+if (!empty($arTab)) { ?>
+    <? if ($isWideBlock == "Y"): ?>
+    <div class="row">
+    <div class="col-md-12">
+<? endif; ?>
+<div class="bottom_slider specials tab_slider_wrapp">
 		<div class="top_blocks">
 			<ul class="tabs">
 				<?$i=1;
@@ -147,10 +151,24 @@ if($arAccessories){
 					<?}else{?>
 						<div class="flexslider loading_state shadow border custom_flex top_right" data-plugin-options='{"animation": "slide", "animationSpeed": 600, "directionNav": true, "controlNav" :false, "animationLoop": true, "slideshow": false, "controlsContainer": ".tabs_slider_navigation.<?=$code?>_nav", "touch": true, "counts": [4,3,3,2,1]}'>
 						<ul class="tabs_slider <?=$code?>_slides slides">
-							<?$GLOBALS['arrFilter'.$code] = array( "ID" => $arAllValues[$code] );?>
+							<?
+                            // --- НАЧАЛО ИЗМЕНЕНИЙ ---
+
+                            // Умный фильтр: для каждой вкладки своя логика
+                            if ($code === 'EXPANDABLES' && $brandValue) {
+                                // Для вкладки "Рекомендуем": ищем по БРЕНДУ, исключая текущий товар
+                                $GLOBALS['arrFilter'.$code] = array("!ID" => $ElementID, "PROPERTY_BRAND" => $brandValue);
+                            } 
+                            elseif ($code === 'ASSOCIATED') {
+                                // Для вкладки "Вам может понравиться": любые товары, кроме текущего
+                                $GLOBALS['arrFilter'.$code] = array("!ID" => $ElementID);
+                            }
+                            
+                            // --- КОНЕЦ ИЗМЕНЕНИЙ ---
+							?>
 							<?$APPLICATION->IncludeComponent(
-								"bitrix:catalog.top",
-								"main",
+								"bitrix:catalog.section",
+								"catalog_block_detail_page",
 								array(
 									"USE_REGION" => ($arRegion ? "Y" : "N"),
 									"STORES" => $arParams['STORES'],
