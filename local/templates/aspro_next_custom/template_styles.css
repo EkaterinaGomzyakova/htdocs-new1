@@ -12092,7 +12092,7 @@ body .logo_and_menu-row .wrap_icon.inner-table-block .basket-link.delay, body .l
 }
 
 .counter_block.big_basket input[type="text"] {
-    font-size: 13px;
+    font-size: 17px;
     height: 38px;
     width: 65px
 }
@@ -14119,7 +14119,7 @@ hr.bottoms {
 
 .like_icons {
     position: absolute;
-    top: 1px;
+    top: 0px;
     right: 0;
     z-index: 53
 }
@@ -19990,7 +19990,7 @@ body .ajax_load.table .main_item_wrapper .counter_wrapp div.total_summ {
 }
 
 .info_item .middle_info .buy_block .wrapp_one_click {
-    padding-bottom: 22px !important
+    padding-bottom: 0px !important
 }
 
 .info_item .middle_info .buy_block .sku_props+.counter_wrapp, .info_item .middle_info .buy_block .buys_wrapp {

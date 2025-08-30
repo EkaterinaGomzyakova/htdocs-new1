@@ -1575,9 +1575,7 @@ if (!empty($arResult['BRAND_ITEM'])) {
                 <? elseif ($arResult["OFFERS"] && $arParams['TYPE_SKU'] != 'TYPE_1'): ?>
                     <span class="btn btn-default btn-lg slide_offer transition_bg type_block"><i></i><span><?= GetMessage("MORE_TEXT_BOTTOM"); ?></span></span>
                 <? endif; ?>
-            </div>
-
-            <div class="like_wrapper">
+                <div class="like_wrapper">
                     <div class="like_icons iblock">
                         <? if ($arParams["DISPLAY_WISH_BUTTONS"] != "N"): ?>
                             <? if (!$arResult["OFFERS"]): ?>
@@ -1620,6 +1618,9 @@ if (!empty($arResult['BRAND_ITEM'])) {
                     </div>
             </div>
 
+            </div>
+
+            
             <? if ($arResult["COUNT_PRODUCT_IN_BASKET"]) { ?>
                 <div class="count-product-baskets-wrapper">
                     <?= Loc::getMessage('COUNT_PRODUCT_IN_BASKET') ?>

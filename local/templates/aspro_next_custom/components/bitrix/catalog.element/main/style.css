@@ -1879,3 +1879,185 @@ body.detail_page .btn-lg {
 .counter_block input[type="text"] {
     padding: 30px
 }
+
+
+/* --- ФИНАЛЬНЫЕ СТИЛИ ДЛЯ ОБЪЕДИНЕННОГО БЛОКА КНОПОК --- */
+
+/* 1. Главный контейнер `.buy_block` */
+.buy_block {
+    display: flex !important;           /* Превращаем в гибкий контейнер */
+    align-items: center !important;     /* Выравниваем всё по вертикали */
+    gap: 20px !important;               /* Отступ 20px между всеми элементами */
+    
+    width: 840px;                       /* Общая ширина из макета */
+    max-width: 100%;                  
+    height: 60px !important;            /* Высота из макета */
+    margin-top: 30px;
+}
+
+/* 2. Левая часть со счетчиком и кнопкой "В корзину" (.counter_wrapp) */
+.buy_block .counter_wrapp {
+    flex-grow: 1;                 /* <<== ГЛАВНОЕ: Растягивается на всё свободное место */
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    height: 100%;
+    padding: 0 !important;
+}
+
+/* 3. Блок счётчика (+/-) */
+.buy_block .counter_block {
+    display: flex !important;
+    flex-shrink: 0;               /* Запрещаем сжиматься */
+    width: 120px;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* --- Логика скрытия счетчика при добавлении в корзину --- */
+/* Стандартное поведение скрипта Aspro - он добавляет display:none инлайн-стилем */
+.buy_block .counter_block[style*="display: none"] {
+    display: none !important;
+}
+/* Либо если товар уже в корзине при загрузке страницы */
+.buy_block .counter_wrapp > .button_block.wide ~ .counter_block {
+    display: none !important;
+}
+
+
+/* 4. Блок кнопки "В корзину" (.button_block) */
+.buy_block .button_block {
+    flex-grow: 1; /* Растягивается, чтобы занять место счетчика, когда тот пропадает */
+    height: 100%;
+}
+.buy_block .button_block .btn {
+    width: 100% !important; /* Важно, чтобы она занимала всю ширину родителя */
+    height: 100% !important;
+    /* ... остальные стили кнопки ... */
+}
+/* Убираем лишнее правило, которое вызвало проблему */
+.buy_block .button_block.wide {
+    width: auto !important; /* Отменяем жесткую ширину, пусть flex решает */
+}
+
+/* 5. Кнопка "Купить в 1 клик" */
+.buy_block .wrapp_one_click {
+    height: 100%;
+    flex-shrink: 0; /* Не сжимается */
+}
+
+/* 6. Кнопка "В избранное" и ее обертка .like_wrapper */
+.buy_block .like_wrapper,
+.buy_block .wish_item {
+    width: 60px;
+    height: 100%;
+    flex-shrink: 0; /* Не сжимается */
+}
+
+/* --- ФИНАЛЬНАЯ ВЕРСИЯ СТИЛЕЙ ДЛЯ КНОПКИ "В ИЗБРАННОЕ" --- */
+
+/* 1. Контейнер-кнопка (остается без изменений) */
+.like_wrapper .wish_item {
+    width: 60px !important;
+    height: 60px !important;
+    background-color: #285B4D !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    transition: all 0.2s ease;
+    margin: 0px !important; /* Убираем лишние отступы, если они есть */
+}
+.like_wrapper .wish_item:hover {
+    background-color: #1c4a3b !important;
+    transform: scale(1.05);
+}
+
+/* 2. Сбрасываем и стилизуем иконку <i> (КЛЮЧЕВОЕ ИЗМЕНЕНИЕ) */
+.like_wrapper .wish_item i {
+    /* !!! ПОЛНЫЙ СБРОС СТАРЫХ СТИЛЕЙ !!! */
+    background: no !important;
+    border-radius: 0 !important;
+    
+    /* Размеры для нашей новой иконки */
+    width: 32px !important;
+    height:  32px !important;
+    
+    /* Настройки отображения SVG */
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+    transition: transform 0.2s ease;
+}
+
+/* 3. Устанавливаем иконку для ОБЫЧНОГО СОСТОЯНИЯ */
+.like_wrapper .wish_item .value:not(.added) i {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='24' viewBox='0 0 26 24' fill='none'%3E%3Cpath d='M13 5.93519C10.3333 -0.324056 1 0.342611 1 8.34265C1 16.3427 13 23.0096 13 23.0096C13 23.0096 25 16.3427 25 8.34265C25 0.342611 15.6667 -0.324056 13 5.93519Z' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+}
+
+/* 4. Устанавливаем иконку для состояния "ДОБАВЛЕНО" */
+.like_wrapper .wish_item .value.added i {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='24' viewBox='0 0 26 24' fill='white'%3E%3Cpath d='M13 5.93519C10.3333 -0.324056 1 0.342611 1 8.34265C1 16.3427 13 23.0096 13 23.0096C13 23.0096 25 16.3427 25 8.34265C25 0.342611 15.6667 -0.324056 13 5.93519Z'/%3E%3C/svg%3E") !important;
+    background-color: transparent !important;
+}
+
+/* 5. Убираем фон у родительского <span>, который появляется при наведении */
+.like_wrapper .wish_item span.value:hover {
+    background: none !important;
+}
+
+/* 6. Увеличиваем иконку при наведении на всю кнопку */
+.like_wrapper .wish_item:hover i {
+    transform: scale(1.0);
+}
+
+/* 7. Гарантированно прячем все лишние элементы */
+.like_wrapper .wish_item span span,
+.like_wrapper .wish_item i::before,
+.like_wrapper .wish_item i::after {
+    display: none !important;
+    content: '' !important;
+}
+
+
+
+body.detail_page .like_icons span {
+    display: block;
+    border-radius: 2px;
+    background: #00000000 ;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .3s ease;
+    margin: 0 0 0px;
+    overflow: hidden;
+    border-radius: 0
+}
+
+
+
+body.detail_page .counter_wrapp .button_block.wide {
+    display: flex;
+    margin: 0;
+    width: 300px !important
+}
+
+
+
+body.detail_page .buy_block .btn.btn-default:hover {
+    background-color: #ffffff;
+    border-color: #285b4d;
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+.buy_block .wrapp_one_click .one_click:hover {
+    background-color: rgba(245, 245, 245, 1) !important;
+    border-color: #1c4a3b !important; /* Более темная обводка */
+}
+
+/* 2. Стили для ТЕКСТА (<span>) внутри кнопки при наведении */
+.buy_block .wrapp_one_click .one_click:hover span {
+    color: #1c4a3b !important; /* <<== ГЛАВНОЕ ИЗМЕНЕНИЕ: Задаем темный цвет тексту */
+}
