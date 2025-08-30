@@ -1286,7 +1286,95 @@ if (!empty($arResult['BRAND_ITEM'])) {
             <div class="element_title"><?= $arResult['NAME'] ?></div>
             
             <div class="middle_info main_item_wrapper">
-                <div class="prices_block">
+                
+
+                <?// <-- ВОЗВРАЩАЕМ ЭТОТ БЛОК НА МЕСТО ?>
+<? if (true || $isArticle || $arResult["BRAND_ITEM"] || $arParams["SHOW_RATING"] == "Y" || strlen($arResult["PREVIEW_TEXT"])) { ?>
+    <div class="top_info">
+        <div class="rows_block">
+            <? $col = 1;
+            if ($isArticle && $arResult["BRAND_ITEM"] && $arParams["SHOW_RATING"] == "Y") {
+                $col = 3;
+            } elseif (($isArticle && $arResult["BRAND_ITEM"]) || ($isArticle && $arParams["SHOW_RATING"] == "Y") || ($arResult["BRAND_ITEM"] && $arParams["SHOW_RATING"] == "Y")) {
+                $col = 2;
+            } ?>
+            <? if ($arParams["SHOW_RATING"] == "Y"): ?>
+                <div class="item_block col-<?= $col; ?>">
+                    <? $frame = $this->createFrame('dv_' . $arResult["ID"])->begin(''); ?>
+                    <div class="rating">
+                        <? $APPLICATION->IncludeComponent(
+                            "bitrix:iblock.vote",
+                            "element_rating",
+                            array(
+                                "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+                                "IBLOCK_ID" => $arResult["IBLOCK_ID"],
+                                "ELEMENT_ID" => $arResult["ID"],
+                                "MAX_VOTE" => 5,
+                                "VOTE_NAMES" => array(),
+                                "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+                                "CACHE_TIME" => $arParams["CACHE_TIME"],
+                                "DISPLAY_AS_RATING" => 'vote_avg'
+                            ),
+                            $component, array("HIDE_ICONS" => "Y")
+                        ); ?>
+                    </div>
+                    <? $frame->end(); ?>
+                </div>
+            <? endif; ?>
+            <? if ($isArticle): ?>
+                <div class="item_block col-<?= $col; ?>">
+                    <div class="article iblock" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
+                         <? if ($arResult['SHOW_OFFERS_PROPS']){ ?>id="<? echo $arItemIDs["ALL_ITEM_IDS"]['DISPLAY_PROP_ARTICLE_DIV'] ?>" style="display: none;"<? } ?>>
+                        <span class="block_title" itemprop="name"><?= GetMessage("ARTICLE"); ?>:</span>
+                        <span class="value" itemprop="value"><?= $arResult["DISPLAY_PROPERTIES"]["CML2_ARTICLE"]["VALUE"] ?></span>
+                    </div>
+                </div>
+            <? endif; ?>
+        </div>
+        <div class="char_block">
+            <div class="props_list">
+                <? foreach ($arResult["DISPLAY_PROPERTIES"] as $arProp): ?>
+<? if (!in_array($arProp["CODE"], array("CONTENTS", "SERVICES", "HIT", "RECOMMEND", "NEW", "STOCK", "VIDEO", "VIDEO_YOUTUBE", "CML2_ARTICLE", "TIP_KOJI", "COMPONENTS"))): ?>
+                        <? if ((!is_array($arProp["DISPLAY_VALUE"]) && strlen($arProp["DISPLAY_VALUE"])) || (is_array($arProp["DISPLAY_VALUE"]) && implode('', $arProp["DISPLAY_VALUE"]))): ?>
+                            <div class="property property-<?= $arProp["CODE"] ?>" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                                <div class="char_name">
+                                    <? if ($arProp["HINT"] && $arParams["SHOW_HINTS"] == "Y"): ?>
+                                        <div class="hint"><span class="icon"><i>?</i></span>
+                                        <div class="tooltip"><?= $arProp["HINT"] ?></div></div><? endif; ?>
+                                    <div class="props_item <? if ($arProp["HINT"] && $arParams["SHOW_HINTS"] == "Y") { ?>whint<? } ?>">
+                                        <span itemprop="name"><?= $arProp["NAME"] ?></span>
+                                    </div>
+                                </div>
+                                <div class="char_value" itemprop="value">
+                                    <? if ($arProp['CODE'] == 'BRAND'): ?>
+                                        <?// Для свойства "Бренд" выводим только текст до скобок?>
+                                        <?
+                                        $brandText = strip_tags($arProp['DISPLAY_VALUE']);
+                                        $parts = explode('(', $brandText);
+                                        echo trim($parts[0]);
+                                        ?>
+                                    <? else: ?>
+                                        <?// Для всех остальных свойств оставляем стандартный вывод?>
+                                        <span itemprop="value">
+                                            <? if (is_array($arProp["DISPLAY_VALUE"]) && count($arProp["DISPLAY_VALUE"]) > 1): ?>
+                                                <?= implode(', ', $arProp["DISPLAY_VALUE"]); ?>
+                                            <? else: ?>
+                                                <?= $arProp["DISPLAY_VALUE"]; ?>
+                                            <? endif; ?>
+                                        </span>
+                                    <? endif; ?>
+                                </div>
+                            </div>
+                        <? endif; ?>
+                    <? endif; ?>
+                <? endforeach; ?>
+            </div>
+            <table class="props_list" id="<? echo $arItemIDs["ALL_ITEM_IDS"]['DISPLAY_PROP_DIV']; ?>"></table>
+        </div>
+    </div>
+<? } ?>
+
+<div class="prices_block">
                     <div class="cost prices">
                         <div class="price-line-wrapper">
                         <? if (count($arResult["OFFERS"]) > 0) { ?>
@@ -1348,7 +1436,7 @@ if (!empty($arResult['BRAND_ITEM'])) {
                             <span class="countdown values"><span class="item"></span><span class="item"></span><span class="item"></span><span class="item"></span></span>
                         </div>
                     </div>
-                    </div>
+                </div>
                 <? } ?>
                 <? else: ?>
                     <? if ($arResult['JS_OFFERS']) {
@@ -1377,6 +1465,26 @@ if (!empty($arResult['BRAND_ITEM'])) {
                 <? endif; ?>
                 <? } ?>
             </div>
+            <? if(empty($arResult['PROPERTIES']['GIFT_CERTIFICATE']['VALUE'])) {?>
+            <div class="dolyami-wrapper">
+                <div class="left">
+                    <a href="/info/dolyami/" target="_blank">
+                        <img src="<?= SITE_TEMPLATE_PATH?>/images/dolyami-logo-white.svg" alt="" />
+                    </a>
+                    <a href="/info/plati-chastyami/" target="_blank">
+                        <img src="<?= SITE_TEMPLATE_PATH?>/images/chastyami-logo-white.svg" alt="" />
+                    </a>
+                </div>
+                <div class="right">
+                    <?if(!empty($arResult['OFFERS'])) {?>
+                        <p class="heading">4 платежа по <?= CurrencyFormat(ceil($arResult['OFFERS'][0]['PRICES']['BASE']['DISCOUNT_VALUE'] / 4), "RUB");?></p>
+                    <? } else { ?>
+                        <p class="heading">4 платежа по <?= CurrencyFormat(ceil($arResult['PRICES']['BASE']['DISCOUNT_VALUE'] / 4), "RUB");?></p>
+                    <? } ?>
+                    <p class="small">При заказе от 5 000 руб.</p>
+                </div>
+            </div>
+        <? } ?>
             <div class="buy_block">
                 <? if ($arResult["OFFERS"] && $showCustomOffer) { ?>
                     <div class="sku_props">
@@ -1541,26 +1649,7 @@ if (!empty($arResult['BRAND_ITEM'])) {
             </div>
         <? endif; ?>
 
-        <? if(empty($arResult['PROPERTIES']['GIFT_CERTIFICATE']['VALUE'])) {?>
-            <div class="dolyami-wrapper">
-                <div class="left">
-                    <a href="/info/dolyami/" target="_blank">
-                        <img src="<?= SITE_TEMPLATE_PATH?>/images/dolyami-logo-white.svg" alt="" />
-                    </a>
-                    <a href="/info/plati-chastyami/" target="_blank">
-                        <img src="<?= SITE_TEMPLATE_PATH?>/images/chastyami-logo-white.svg" alt="" />
-                    </a>
-                </div>
-                <div class="right">
-                    <?if(!empty($arResult['OFFERS'])) {?>
-                        <p class="heading">4 платежа по <?= CurrencyFormat(ceil($arResult['OFFERS'][0]['PRICES']['BASE']['DISCOUNT_VALUE'] / 4), "RUB");?></p>
-                    <? } else { ?>
-                        <p class="heading">4 платежа по <?= CurrencyFormat(ceil($arResult['PRICES']['BASE']['DISCOUNT_VALUE'] / 4), "RUB");?></p>
-                    <? } ?>
-                    <p class="small">При заказе от 5 000 руб.</p>
-                </div>
-            </div>
-        <? } ?>
+        
     </div>
 </div>
 <? $bPriceCount = ($arParams['USE_PRICE_COUNT'] == 'Y'); ?>
@@ -1635,6 +1724,8 @@ if (!empty($arResult['BRAND_ITEM'])) {
             <? } ?>
         </div>
     </div>
+
+    
 <? } ?>
 
 <? if ($arParams["SHOW_KIT_PARTS"] == "Y" && $arResult["SET_ITEMS"]): ?>
