@@ -321,7 +321,7 @@
 }
 
 .container .bottom_slider.tab_slider_wrapp {
-    max-width: calc(100% - 20px);
+    max-width: calc(100%);
 }
 
 .news.detail img {
