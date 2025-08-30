@@ -1817,3 +1817,65 @@ body.detail_page .info_item .top_info {
 
     margin-right: 8px; /* Отступ от иконки до текста (можете настроить) */
 }
+
+
+
+
+/* --- НОВАЯ ВЕРСИЯ, КОТОРАЯ ИСПРАВИТ ВЫРАВНИВАНИЕ --- */
+
+/* 1. Обнуляем стандартные отступы у всего списка <ul> */
+.detail_text ul {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin: 1em 0; /* Добавляем вертикальные отступы для всего списка */
+}
+
+/* 2. Настраиваем flex-отображение для каждого пункта <li> */
+.detail_text li {
+    display: flex !important;
+    align-items: flex-start !important; /* Выравнивание по верху */
+    margin-bottom: 15px !important;    /* Отступ между пунктами */
+}
+
+/* 3. Создаем точку-маркер, которая теперь и будет формировать левый отступ */
+.detail_text li::before {
+    content: '•';
+    color: #285B4D; 
+    font-size: 24px;
+    line-height: 24px; 
+    
+    /* 
+     * ВОТ КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: 
+     * Вместо margin-right, мы делаем саму точку немного шире. 
+     * Это создаст отступ и для нее, и для текста.
+    */
+    width: 30px; 
+    
+    flex-shrink: 0; 
+}
+
+/* 4. (На всякий случай) Добавляем стили для абзацев внутри li, если они есть */
+.detail_text li p {
+    margin-bottom: 0 !important; /* Убираем лишние отступы, если текст в абзацах */
+}
+
+
+body.detail_page .buy_block .btn.btn-default {
+    background-color: #285b4d;
+    border-color: #285b4d;
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+body.detail_page .btn.btn-lg {
+    font-size: 15px;
+}
+
+body.detail_page .btn-lg {
+    padding: 20px 25px 20px;
+    font-weight: bold;
+}
+
+.counter_block input[type="text"] {
+    padding: 30px
+}

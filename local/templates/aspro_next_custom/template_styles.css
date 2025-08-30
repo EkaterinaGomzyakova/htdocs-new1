@@ -4638,7 +4638,7 @@ div[id^="wait_comp"], .bx-core-waitwindow {
 
 .right_block ul li:before, .right_block ol li:before {
     padding: 0;
-    margin-left: 0;
+    margin-left: -15px;
     width: 20px;
     display: inline-block;
     vertical-align: top;
@@ -12153,7 +12153,7 @@ body .logo_and_menu-row .wrap_icon.inner-table-block .basket-link.delay, body .l
 }
 
 .counter_wrapp .counter_block {
-    margin: 0 10px 15px 0px;
+    margin: 0px;
 }
 
 @media(max-width: 500px) {
@@ -20012,7 +20012,7 @@ body .ajax_load.table .main_item_wrapper .counter_wrapp div.total_summ {
 }
 
 .info_item .middle_info .buy_block .counter_wrapp>div {
-    margin-bottom: 22px !important
+    margin-bottom: 0px !important
 }
 
 .info_item .middle_info .buy_block .counter_wrapp .more_text {

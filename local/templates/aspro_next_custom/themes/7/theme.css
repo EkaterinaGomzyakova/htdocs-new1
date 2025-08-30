@@ -564,7 +564,7 @@ button.button, input.button, .button, #header ul.menu.full.opened li:not(.search
 }
 
 .btn.btn-default.white:not(.grey) {
-    color: #5F806A !important;
+    color: #5F806A;
     border: 1px solid #5F806A;
     background: #ffffff;
 }

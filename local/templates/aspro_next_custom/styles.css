@@ -179,7 +179,7 @@ ol li, ul li {
 
 ol li:before, ul li:before {
     position: absolute;
-    left: 0px;
+    left: -10px;
 }
 
 ol li:before {
