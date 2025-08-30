@@ -1394,7 +1394,87 @@ if (!empty($arResult['BRAND_ITEM'])) {
 
                     <? } // Конец главного условия if-else ?>
                 </div>
-                
+                <div class="top_info">
+                    <div class="rows_block">
+                        <? $col = 1;
+                        if ($isArticle && $arResult["BRAND_ITEM"] && $arParams["SHOW_RATING"] == "Y") {
+                            $col = 3;
+                        } elseif (($isArticle && $arResult["BRAND_ITEM"]) || ($isArticle && $arParams["SHOW_RATING"] == "Y") || ($arResult["BRAND_ITEM"] && $arParams["SHOW_RATING"] == "Y")) {
+                            $col = 2;
+                        } ?>
+                        <? if ($arParams["SHOW_RATING"] == "Y"): ?>
+                            <div class="item_block col-<?= $col; ?>">
+                                <? $frame = $this->createFrame('dv_' . $arResult["ID"])->begin(''); ?>
+                                <div class="rating">
+                                    <? $APPLICATION->IncludeComponent(
+                                        "bitrix:iblock.vote",
+                                        "element_rating",
+                                        array(
+                                            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+                                            "IBLOCK_ID" => $arResult["IBLOCK_ID"],
+                                            "ELEMENT_ID" => $arResult["ID"],
+                                            "MAX_VOTE" => 5,
+                                            "VOTE_NAMES" => array(),
+                                            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+                                            "CACHE_TIME" => $arParams["CACHE_TIME"],
+                                            "DISPLAY_AS_RATING" => 'vote_avg'
+                                        ),
+                                        $component, array("HIDE_ICONS" => "Y")
+                                    ); ?>
+                                </div>
+                                <? $frame->end(); ?>
+                            </div>
+                        <? endif; ?>
+                        <? if ($isArticle): ?>
+                            <div class="item_block col-<?= $col; ?>">
+                                <div class="article iblock" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
+                                     <? if ($arResult['SHOW_OFFERS_PROPS']){ ?>id="<? echo $arItemIDs["ALL_ITEM_IDS"]['DISPLAY_PROP_ARTICLE_DIV'] ?>" style="display: none;"<? } ?>>
+                                    <span class="block_title" itemprop="name"><?= GetMessage("ARTICLE"); ?>:</span>
+                                    <span class="value" itemprop="value"><?= $arResult["DISPLAY_PROPERTIES"]["CML2_ARTICLE"]["VALUE"] ?></span>
+                                </div>
+                            </div>
+                        <? endif; ?>
+                    </div>
+                    <div class="char_block">
+                        <div class="props_list">
+                            <? foreach ($arResult["DISPLAY_PROPERTIES"] as $arProp): ?>
+<? if (!in_array($arProp["CODE"], array("CONTENTS", "SERVICES", "HIT", "RECOMMEND", "NEW", "STOCK", "VIDEO", "VIDEO_YOUTUBE", "CML2_ARTICLE", "TIP_KOJI", "COMPONENTS"))): ?>                                    <? if ((!is_array($arProp["DISPLAY_VALUE"]) && strlen($arProp["DISPLAY_VALUE"])) || (is_array($arProp["DISPLAY_VALUE"]) && implode('', $arProp["DISPLAY_VALUE"]))): ?>
+                                        <div class="property property-<?= $arProp["CODE"] ?>" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                                            <div class="char_name">
+                                                <? if ($arProp["HINT"] && $arParams["SHOW_HINTS"] == "Y"): ?>
+                                                    <div class="hint"><span class="icon"><i>?</i></span>
+                                                    <div class="tooltip"><?= $arProp["HINT"] ?></div></div><? endif; ?>
+                                                <div class="props_item <? if ($arProp["HINT"] && $arParams["SHOW_HINTS"] == "Y") { ?>whint<? } ?>">
+                                                    <span itemprop="name"><?= $arProp["NAME"] ?></span>
+                                                </div>
+                                            </div>
+                                                <div class="char_value" itemprop="value">
+                                                    <? if ($arProp['CODE'] == 'BRAND'): ?>
+                                                        <?// Для свойства "Бренд" выводим только текст до скобок?>
+                                                        <?
+                                                        $brandText = strip_tags($arProp['DISPLAY_VALUE']); // Получаем "MEDI-PEEL(все товары бренда)"
+                                                        $parts = explode('(', $brandText); // Разбиваем строку по символу '('
+                                                        echo trim($parts[0]); // Выводим только первую часть "MEDI-PEEL " и убираем пробел в конце
+                                                        ?>
+                                                    <? else: ?>
+                                                        <?// Для всех остальных свойств оставляем стандартный вывод?>
+                                                        <span itemprop="value">
+                                                            <? if (is_array($arProp["DISPLAY_VALUE"]) && count($arProp["DISPLAY_VALUE"]) > 1): ?>
+                                                                <?= implode(', ', $arProp["DISPLAY_VALUE"]); ?>
+                                                            <? else: ?>
+                                                                <?= $arProp["DISPLAY_VALUE"]; ?>
+                                                            <? endif; ?>
+                                                        </span>
+                                                    <? endif; ?>
+                                                </div>
+                                        </div>
+                                    <? endif; ?>
+                                <? endif; ?>
+                            <? endforeach; ?>
+                        </div>
+                        <table class="props_list" id="<? echo $arItemIDs["ALL_ITEM_IDS"]['DISPLAY_PROP_DIV']; ?>"></table>
+                    </div>
+                </div>
                 <? // Блок с таймером акции (оставляем без изменений) ?>
                 <? if ($arParams["SHOW_DISCOUNT_TIME"] == "Y"){ ?>
                     <? $arUserGroups = $USER->GetUserGroupArray(); ?>
@@ -1538,26 +1618,7 @@ if (!empty($arResult['BRAND_ITEM'])) {
                 <? endif; ?>
             </div>
 
-             <div class="quantity_block_wrapper">
-                <?
-                $amountHtml = $storeItemAmountHtml($arResult["ID"]);
-                if ($amountHtml) {
-                    $arQuantityData['BY_STORE'] = $amountHtml;
-                } else {
-                    $arQuantityData['BY_STORE'] = $arQuantityData['HTML'];
-                }
-                if ($useStores) {
-                    echo '<div class="p_block">' . $arQuantityData["BY_STORE"] . '</div>';
-                } else {
-                    echo $arQuantityData["BY_STORE"];
-                }
-                if ($arParams["SHOW_CHEAPER_FORM"] == "Y") { ?>
-                    <div class="cheaper_form">
-                        <span class="animate-load" data-event="jqm" data-param-form_id="CHEAPER" data-name="cheaper" data-autoload-product_name="<?= $arResult["NAME"]; ?>"
-                              data-autoload-product_id="<?= $arResult["ID"]; ?>"><?= ($arParams["CHEAPER_FORM_NAME"] ? $arParams["CHEAPER_FORM_NAME"] : GetMessage("CHEAPER")); ?></span>
-                    </div>
-                <? } ?>
-            </div>
+             
 
             <? if ($arResult["COUNT_PRODUCT_IN_BASKET"]) { ?>
                 <div class="count-product-baskets-wrapper">
@@ -1571,90 +1632,7 @@ if (!empty($arResult['BRAND_ITEM'])) {
             <? } ?>
 
             <? if (true || $isArticle || $arResult["BRAND_ITEM"] || $arParams["SHOW_RATING"] == "Y" || strlen($arResult["PREVIEW_TEXT"])) { ?>
-                <div class="top_info">
-                    <div class="rows_block">
-                        <? $col = 1;
-                        if ($isArticle && $arResult["BRAND_ITEM"] && $arParams["SHOW_RATING"] == "Y") {
-                            $col = 3;
-                        } elseif (($isArticle && $arResult["BRAND_ITEM"]) || ($isArticle && $arParams["SHOW_RATING"] == "Y") || ($arResult["BRAND_ITEM"] && $arParams["SHOW_RATING"] == "Y")) {
-                            $col = 2;
-                        } ?>
-                        <? if ($arParams["SHOW_RATING"] == "Y"): ?>
-                            <div class="item_block col-<?= $col; ?>">
-                                <? $frame = $this->createFrame('dv_' . $arResult["ID"])->begin(''); ?>
-                                <div class="rating">
-                                    <? $APPLICATION->IncludeComponent(
-                                        "bitrix:iblock.vote",
-                                        "element_rating",
-                                        array(
-                                            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-                                            "IBLOCK_ID" => $arResult["IBLOCK_ID"],
-                                            "ELEMENT_ID" => $arResult["ID"],
-                                            "MAX_VOTE" => 5,
-                                            "VOTE_NAMES" => array(),
-                                            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
-                                            "CACHE_TIME" => $arParams["CACHE_TIME"],
-                                            "DISPLAY_AS_RATING" => 'vote_avg'
-                                        ),
-                                        $component, array("HIDE_ICONS" => "Y")
-                                    ); ?>
-                                </div>
-                                <? $frame->end(); ?>
-                            </div>
-                        <? endif; ?>
-                        <? if ($isArticle): ?>
-                            <div class="item_block col-<?= $col; ?>">
-                                <div class="article iblock" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                                     <? if ($arResult['SHOW_OFFERS_PROPS']){ ?>id="<? echo $arItemIDs["ALL_ITEM_IDS"]['DISPLAY_PROP_ARTICLE_DIV'] ?>" style="display: none;"<? } ?>>
-                                    <span class="block_title" itemprop="name"><?= GetMessage("ARTICLE"); ?>:</span>
-                                    <span class="value" itemprop="value"><?= $arResult["DISPLAY_PROPERTIES"]["CML2_ARTICLE"]["VALUE"] ?></span>
-                                </div>
-                            </div>
-                        <? endif; ?>
-                    </div>
-                    <div class="char_block">
-                        <div class="props_list">
-                            <? foreach ($arResult["DISPLAY_PROPERTIES"] as $arProp): ?>
-                                <? if (!in_array($arProp["CODE"], array("CONTENTS", "SERVICES", "HIT", "RECOMMEND", "NEW", "STOCK", "VIDEO", "VIDEO_YOUTUBE", "CML2_ARTICLE"))): ?>
-                                    <? if ((!is_array($arProp["DISPLAY_VALUE"]) && strlen($arProp["DISPLAY_VALUE"])) || (is_array($arProp["DISPLAY_VALUE"]) && implode('', $arProp["DISPLAY_VALUE"]))): ?>
-                                        <div class="property property-<?= $arProp["CODE"] ?>" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
-                                            <div class="char_name">
-                                                <? if ($arProp["HINT"] && $arParams["SHOW_HINTS"] == "Y"): ?>
-                                                    <div class="hint"><span class="icon"><i>?</i></span>
-                                                    <div class="tooltip"><?= $arProp["HINT"] ?></div></div><? endif; ?>
-                                                <div class="props_item <? if ($arProp["HINT"] && $arParams["SHOW_HINTS"] == "Y") { ?>whint<? } ?>">
-                                                    <span itemprop="name"><?= $arProp["NAME"] ?></span>
-                                                </div>
-                                            </div>
-                                            <div class="char_value">
-												<span itemprop="value">
-													<? if (is_array($arProp["DISPLAY_VALUE"]) && count($arProp["DISPLAY_VALUE"]) > 1): ?>
-                                                        <? if($arProp['CODE'] == "SCOPE") {
-                                                            foreach($arProp["DISPLAY_VALUE"] as $value) {
-                                                                echo "<p>" . $value ."</p>";
-                                                            }
-                                                        } else { ?>
-                                                            <?= implode(', ', $arProp["DISPLAY_VALUE"]); ?>
-                                                        <? } ?>
-                                                    <? else: ?>
-                                                        <?= $arProp["DISPLAY_VALUE"]; ?>
-                                                    <? endif; ?>
-												</span>
-                                            </div>
-                                        </div>
-                                    <? endif; ?>
-                                <? endif; ?>
-                            <? endforeach; ?>
-                        </div>
-                        <table class="props_list" id="<? echo $arItemIDs["ALL_ITEM_IDS"]['DISPLAY_PROP_DIV']; ?>"></table>
-                    </div>
-                    <? if (strlen($arResult["PREVIEW_TEXT"])): ?>
-                        <div class="preview_text dotdot"><?= $arResult["PREVIEW_TEXT"] ?></div>
-                        <? if (strlen($arResult["DETAIL_TEXT"])): ?>
-                            <div class="more_block icons_fa color_link"><span><?= GetMessage('MORE_TEXT_BOTTOM'); ?></span></div>
-                        <? endif; ?>
-                    <? endif; ?>
-                </div>
+                
             <? } ?>
         </div>
         <? if (is_array($arResult["STOCK"]) && $arResult["STOCK"]): ?>
@@ -1688,14 +1666,6 @@ if (!empty($arResult['BRAND_ITEM'])) {
                 </div>
             </div>
         <? } ?>
-
-        <div class="element_detail_text wrap_md">
-            <div class="price_txt">При покупке товара вы получите: <span
-                        class="beauity-ico"></span> <?= number_format($arResult['COUNT_EARN_POINTS'], 0, '.', ' ') ?> <?= $arResult['EARN_POINT_TEXT'] ?>.</div>
-            <div class="price_txt">
-                <? $APPLICATION->IncludeFile(SITE_DIR . "include/element_detail_text.php", array(), array("MODE" => "html", "NAME" => GetMessage('CT_BCE_CATALOG_DOP_DESCR'))); ?>
-            </div>
-        </div>
     </div>
 </div>
 <? $bPriceCount = ($arParams['USE_PRICE_COUNT'] == 'Y'); ?>

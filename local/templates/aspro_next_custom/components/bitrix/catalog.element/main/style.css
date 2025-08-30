@@ -7,7 +7,7 @@
 }
 
 .count-product-baskets-wrapper {
-    font-size: 13px;
+    font-size: 14px;
     display: flex;
     align-items: center;
 }
@@ -165,11 +165,10 @@
 }
 
 .catalog_detail .props_list {
-    width: 100%;
+    width: 32.02%;
     margin: 0;
     color: #555
 }
-
 .catalog_detail .tabs_content .char_block {
     margin-bottom: 30px
 }
@@ -177,13 +176,12 @@
 .catalog_detail .props_list .char_name {
     position: relative;
     vertical-align: bottom;
-    font-size: 14px;
+    font-size: 17px;
     vertical-align: top;
-    background: url(images/dott.png) no-repeat;
     background-position: 0 14px;
     background-repeat: repeat-x;
     flex: 1;
-    min-width: 170px
+    width: 120px
 }
 
 .catalog_detail .props_list .char_value {
@@ -217,9 +215,9 @@
 
 .catalog_detail .props_list .props_item span {
     padding-right: 10px;
-    color: #000;
+    color: #A9A9A9;
     font-weight: 600;
-    background: #fdf4ea;
+    background: #ffffff;
 }
 
 .catalog_detail .props_list .props_item.whint span, .catalog_detail .props_block .char_name .props_item.whint, .catalog_detail .offers_table .property .props_item.whint>span {
@@ -666,7 +664,7 @@
 
 .catalog_detail .item_main_info .right_info .info_item {
     position: relative;
-    padding: 0 30px 0 11px
+    padding: 0 0px 0 0px
 }
 
 .catalog_detail .right_info .price_block_wrapp, .catalog_detail .right_info .info_block {
@@ -1270,9 +1268,10 @@
     }
 }
 
+
 .new_price_block {
   margin-top: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 143px;
 }
 
 /* Контейнер для цен в одну строку */
@@ -1652,4 +1651,169 @@ body.detail_page .swiper-wrapper {
     transition-property: transform;
     transition-timing-function: var(--swiper-wrapper-transition-timing-function,initial);
     box-sizing: content-box
+}
+
+body.detail_page .element_subtitle {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+body.detail_page .element_subtitle {
+   /* --- Свойства из вашего макета --- */
+    font-family: 'Literata', serif; /* Используем новый шрифт. 'serif' — запасной вариант */
+    color: rgba(40, 91, 77, 1);
+    font-size: 44px !important;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: 0;;
+}
+
+body.detail_page .element_title {
+    /* --- Свойства из вашего макета --- */
+    font-family: 'Literata', serif; /* Используем новый шрифт. 'serif' — запасной вариант */
+    color: rgba(40, 91, 77, 1);
+    font-size: 44px !important;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: 0;
+}
+
+
+body.detail_page .info_item .top_info {
+    padding: 0px 0 19px
+}
+
+
+/* 
+   Применяем flex-выравнивание только к пунктам списка (li),
+   которые находятся внутри блока с классом .detail_text.
+   Это основной блок описания товара во вкладке "Описание".
+*/
+.detail_text li {
+  display: flex !important;
+  align-items: flex-start !important; /* Выравниваем по верху */
+  margin-bottom: 10px;
+  
+  /* Убираем стандартные отступы, так как мы задаем свои через ::before */
+  padding-left: 10px !important; 
+  list-style: none !important;
+}
+
+/* 
+   Стилизуем маркер-точку только для тех списков,
+   которые находятся внутри .detail_text
+*/
+.detail_text li::before {
+  content: '•';
+  color: #285B4D; /* Ваш цвет */
+  font-size: 24px;
+  line-height: 24px; /* Важно для вертикального выравнивания */
+  margin-right: 15px !important; /* Отступ от точки до текста */
+  
+  /* Это свойство не дает маркеру "схлопнуться", если места мало */
+  flex-shrink: 0; 
+}
+
+/* --- Стили для блока характеристик --- */
+
+/* 1. Контейнер всей строки */
+.char_block .property {
+    display: flex;                /* Используем Flexbox */
+    justify-content: flex-start;  /* <<== ИЗМЕНЕНО: Начинаем от левого края */
+    align-items: baseline;
+    margin-bottom: 15px;
+    gap: 0;                       /* Обнуляем gap, так как управляем отступами вручную */
+    
+    /* Стили для пунктирной линии */
+    background-image: linear-gradient(to right, #E0E0E0 33%, rgba(255,255,255,0) 0%);
+    background-position: bottom 5px;
+    background-size: 6px 1px;
+    background-repeat: repeat-x;
+}
+
+/* 2. Левая колонка - НАЗВАНИЕ СВОЙСТВА */
+/* --- НОВАЯ ВЕРСИЯ --- */
+
+/* 1. Сначала задаем стиль для общего контейнера НАЗВАНИЯ СВОЙСТВА (.char_name) */
+.char_block .property .char_name {
+    width: 120px !important;       /* <<== ЗАДАЕМ ТОЧНУЮ ШИРИНУ 120px */
+    flex-shrink: 0 !important;     /* <<== ЗАПРЕЩАЕМ СЖИМАТЬСЯ */
+    padding-right: 10px;         /* Отступ от текста до точек */
+    box-sizing: content-box;     /* <<== ВАЖНО: padding не будет влиять на ширину в 120px */
+    background-color: #fff;      
+    text-align: left;
+}
+
+/* 2. Левая колонка (название свойства) */
+.char_block .property .char_name {
+    /* ЗАДАЕМ ШИРИНУ В ПРОЦЕНТАХ. flex-basis - это как width в мире Flexbox */
+    flex-basis: 44.6%; /* (120px / 269px) * 100 */
+
+    flex-shrink: 0;    /* Запрещаем сжиматься */
+    flex-grow: 0;      /* Запрещаем растягиваться */
+
+    /* Визуальные стили и фон для перекрытия точек */
+    background-color: #fff;
+    padding-right: 10px;
+    box-sizing: border-box; 
+    text-align: left;
+}
+
+/* 3. Правая колонка (значение свойства) */
+.char_block .property .char_value {
+    /* Занимает всё оставшееся свободное пространство */
+    flex-grow: 1;
+
+    /* Визуальные стили */
+    text-align: left;
+    background-color: #fff;
+    padding-left: 10px;
+
+    /* Сбрасываем старые стили, которые могут мешать */
+    float: none !important;
+    margin-left: 0 !important;
+}
+
+/* Стили для текста внутри колонок (остаются без изменений) */
+.char_block .props_list .props_item span {
+    color: #A9A9A9 !important;
+    font-size: 17px !important;
+    font-weight: 400 !important;
+    
+    /* Добавляем обрезку длинного текста */
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.char_block .props_list .char_value {
+    color: #555555 !important;
+    font-size: 17px !important;
+}
+
+.char_block .props_list .char_value a {
+    color: #285B4D !important;
+    font-weight: 500;
+}
+
+
+.count-product-baskets-wrapper::before {
+    content: '';
+    display: block;
+
+    /* --- ВАШИ ИЗМЕНЕНИЯ ЗДЕСЬ --- */
+    
+    width: 18px;  
+    height: 18px; 
+
+    /* 3. УКАЖИТЕ ПРАВИЛЬНЫЙ ПУТЬ К ВАШЕЙ НОВОЙ КАРТИНКЕ */
+    background-image: url('/local/templates/aspro_next_custom/images/cart.svg') !important;
+    
+    /* --- Свойства для корректного отображения --- */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; /* <-- Важно, чтобы иконка вписалась в размеры */
+
+    margin-right: 8px; /* Отступ от иконки до текста (можете настроить) */
 }
