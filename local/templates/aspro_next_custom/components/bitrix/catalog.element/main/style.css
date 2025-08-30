@@ -2040,7 +2040,6 @@ body.detail_page .like_icons span {
 body.detail_page .counter_wrapp .button_block.wide {
     display: flex;
     margin: 0;
-    width: 300px !important
 }
 
 
@@ -2060,4 +2059,38 @@ body.detail_page .buy_block .btn.btn-default:hover {
 /* 2. Стили для ТЕКСТА (<span>) внутри кнопки при наведении */
 .buy_block .wrapp_one_click .one_click:hover span {
     color: #1c4a3b !important; /* <<== ГЛАВНОЕ ИЗМЕНЕНИЕ: Задаем темный цвет тексту */
+}
+
+
+/* Полностью скрываем блок с "Экономией" на детальной странице товара */
+.catalog_detail .prices .sale_block {
+    display: none !important;
+}
+
+
+.price-line-wrapper {
+  display: flex;         /* Включаем Flexbox */
+  align-items: center; /* Выравнивает элементы по базовой линии текста (самый красивый вариант для цен) */
+  flex-wrap: wrap;       /* Позволяет блокам переноситься на мобильных устройствах */
+  gap: 20px;             /* Добавляет отступ между блоком цен и таймером */
+}
+
+/* --- 2. Стили для самих цен внутри блока --- */
+/* (Это нужно, чтобы текущая и старая цена тоже встали в одну строку) */
+.price_matrix_wrapper, 
+.price_matrix_wrapper .price-values {
+  display: flex;         /* Включаем Flexbox и здесь */
+  align-items: baseline; /* Выравнивание по базовой линии */
+  gap: 10px;             /* Отступ между старой и новой ценой */
+}
+
+/* --- 3. Стили для блока с таймером --- */
+.view_sale_block {
+  margin-top: 0; /* Убираем стандартный верхний отступ, чтобы он не мешал выравниванию */
+}
+
+
+.prices_block .cost.prices .price {
+    margin-bottom: 0px !important;
+    line-height: 20px;
 }

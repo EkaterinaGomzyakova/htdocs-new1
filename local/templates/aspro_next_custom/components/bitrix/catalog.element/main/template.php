@@ -1287,202 +1287,96 @@ if (!empty($arResult['BRAND_ITEM'])) {
             
             <div class="middle_info main_item_wrapper">
                 <div class="prices_block">
-                <div class="cost prices">
-                    <? // Главное условие: проверяем, есть ли у товара торговые предложения (SKU) ?>
-                    <? if (count($arResult["OFFERS"]) > 0) { ?>
-
-                        <? // --- БЛОК ДЛЯ ТОВАРОВ С ТОРГОВЫМИ ПРЕДЛОЖЕНИЯМИ --- ?>
-                        <? // Здесь мы оставляем стандартный вывод цен от Aspro, т.к. его логика сложнее ?>
-                        <div class="with_matrix" style="display:none;">
-                            <div class="price price_value_block"><span class="values_wrapper"></span></div>
-                            <? if ($arParams["SHOW_OLD_PRICE"] == "Y"): ?>
-                                <div class="price discount"></div>
-                            <? endif; ?>
-                            <? if ($arParams["SHOW_DISCOUNT_PERCENT"] == "Y") { ?>
-                                <div class="sale_block matrix" style="display:none;">
-                                    <span class="title"><?= GetMessage("CATALOG_ECONOMY"); ?></span>
-                                    <div class="text"><span class="values_wrapper"></span></div>
-                                </div>
-                            <? } ?>
-                        </div>
-                        <? \Aspro\Functions\CAsproSku::showItemPrices($arParams, $arResult, $item_id, $min_price_id, $arItemIDs, 'N'); ?>
-
-                    <? } else { ?>
-
-                        <? // --- ИСПРАВЛЕННЫЙ БЛОК ДЛЯ ОБЫЧНЫХ ТОВАРОВ --- ?>
-                        <? // Вот здесь находится наша новая кастомная верстка для цен ?>
-                        <?
-                        $price = $arResult['MIN_PRICE']; // Получаем массив с ценами
-                        ?>
-                        <div class="new_price_block" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                            <? // Проверяем, есть ли скидка, чтобы знать, что отображать ?>
-                            <? if ($price['DISCOUNT_DIFF'] > 0): ?>
-
-                                <div class="price_line">
-                                    <div class="current_price">
-                                        <?= $price['PRINT_DISCOUNT_VALUE']; // Цена со скидкой ?>
-                                    </div>
-                                    <div class="old_price">
-                                        <?= $price['PRINT_VALUE']; // Старая цена ?>
-                                    </div>
-                                </div>
-                                <div class="discount_badges">
-                                    <div class="badge_item">
-                                        Скидка <?= CurrencyFormat($price['DISCOUNT_DIFF'], $price['CURRENCY']); // Сумма скидки ?>
-                                    </div>
-                                    <div class="badge_item">
-                                        &mdash; <?= $price['DISCOUNT_DIFF_PERCENT']; ?>%
-                                    </div>
-                                </div>
-
-                                <meta itemprop="price" content="<?= $price['DISCOUNT_VALUE']; ?>">
-                                <meta itemprop="priceCurrency" content="<?= $price['CURRENCY']; ?>">
-
-                            <? else: // Если скидки нет, выводим только одну цену ?>
-                                <div class="price_line">
-                                    <div class="current_price">
-                                        <?= $price['PRINT_VALUE']; ?>
-                                    </div>
-                                </div>
-                                
-                                <meta itemprop="price" content="<?= $price['VALUE']; ?>">
-                                <meta itemprop="priceCurrency" content="<?= $price['CURRENCY']; ?>">
-                            <? endif; ?>
-                            <link itemprop="availability" href="http://schema.org/<?= ($price['CAN_BUY'] ? 'InStock' : 'OutOfStock') ?>"/>
-                        </div>
-
-                    <? } // Конец главного условия if-else ?>
-                </div>
-                <div class="top_info">
-                    <div class="rows_block">
-                        <? $col = 1;
-                        if ($isArticle && $arResult["BRAND_ITEM"] && $arParams["SHOW_RATING"] == "Y") {
-                            $col = 3;
-                        } elseif (($isArticle && $arResult["BRAND_ITEM"]) || ($isArticle && $arParams["SHOW_RATING"] == "Y") || ($arResult["BRAND_ITEM"] && $arParams["SHOW_RATING"] == "Y")) {
-                            $col = 2;
-                        } ?>
-                        <? if ($arParams["SHOW_RATING"] == "Y"): ?>
-                            <div class="item_block col-<?= $col; ?>">
-                                <? $frame = $this->createFrame('dv_' . $arResult["ID"])->begin(''); ?>
-                                <div class="rating">
-                                    <? $APPLICATION->IncludeComponent(
-                                        "bitrix:iblock.vote",
-                                        "element_rating",
-                                        array(
-                                            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-                                            "IBLOCK_ID" => $arResult["IBLOCK_ID"],
-                                            "ELEMENT_ID" => $arResult["ID"],
-                                            "MAX_VOTE" => 5,
-                                            "VOTE_NAMES" => array(),
-                                            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
-                                            "CACHE_TIME" => $arParams["CACHE_TIME"],
-                                            "DISPLAY_AS_RATING" => 'vote_avg'
-                                        ),
-                                        $component, array("HIDE_ICONS" => "Y")
-                                    ); ?>
-                                </div>
-                                <? $frame->end(); ?>
-                            </div>
-                        <? endif; ?>
-                        <? if ($isArticle): ?>
-                            <div class="item_block col-<?= $col; ?>">
-                                <div class="article iblock" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                                     <? if ($arResult['SHOW_OFFERS_PROPS']){ ?>id="<? echo $arItemIDs["ALL_ITEM_IDS"]['DISPLAY_PROP_ARTICLE_DIV'] ?>" style="display: none;"<? } ?>>
-                                    <span class="block_title" itemprop="name"><?= GetMessage("ARTICLE"); ?>:</span>
-                                    <span class="value" itemprop="value"><?= $arResult["DISPLAY_PROPERTIES"]["CML2_ARTICLE"]["VALUE"] ?></span>
-                                </div>
-                            </div>
-                        <? endif; ?>
-                    </div>
-                    <div class="char_block">
-                        <div class="props_list">
-                            <? foreach ($arResult["DISPLAY_PROPERTIES"] as $arProp): ?>
-<? if (!in_array($arProp["CODE"], array("CONTENTS", "SERVICES", "HIT", "RECOMMEND", "NEW", "STOCK", "VIDEO", "VIDEO_YOUTUBE", "CML2_ARTICLE", "TIP_KOJI", "COMPONENTS"))): ?>                                    <? if ((!is_array($arProp["DISPLAY_VALUE"]) && strlen($arProp["DISPLAY_VALUE"])) || (is_array($arProp["DISPLAY_VALUE"]) && implode('', $arProp["DISPLAY_VALUE"]))): ?>
-                                        <div class="property property-<?= $arProp["CODE"] ?>" itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
-                                            <div class="char_name">
-                                                <? if ($arProp["HINT"] && $arParams["SHOW_HINTS"] == "Y"): ?>
-                                                    <div class="hint"><span class="icon"><i>?</i></span>
-                                                    <div class="tooltip"><?= $arProp["HINT"] ?></div></div><? endif; ?>
-                                                <div class="props_item <? if ($arProp["HINT"] && $arParams["SHOW_HINTS"] == "Y") { ?>whint<? } ?>">
-                                                    <span itemprop="name"><?= $arProp["NAME"] ?></span>
-                                                </div>
-                                            </div>
-                                                <div class="char_value" itemprop="value">
-                                                    <? if ($arProp['CODE'] == 'BRAND'): ?>
-                                                        <?// Для свойства "Бренд" выводим только текст до скобок?>
-                                                        <?
-                                                        $brandText = strip_tags($arProp['DISPLAY_VALUE']); // Получаем "MEDI-PEEL(все товары бренда)"
-                                                        $parts = explode('(', $brandText); // Разбиваем строку по символу '('
-                                                        echo trim($parts[0]); // Выводим только первую часть "MEDI-PEEL " и убираем пробел в конце
-                                                        ?>
-                                                    <? else: ?>
-                                                        <?// Для всех остальных свойств оставляем стандартный вывод?>
-                                                        <span itemprop="value">
-                                                            <? if (is_array($arProp["DISPLAY_VALUE"]) && count($arProp["DISPLAY_VALUE"]) > 1): ?>
-                                                                <?= implode(', ', $arProp["DISPLAY_VALUE"]); ?>
-                                                            <? else: ?>
-                                                                <?= $arProp["DISPLAY_VALUE"]; ?>
-                                                            <? endif; ?>
-                                                        </span>
-                                                    <? endif; ?>
-                                                </div>
-                                        </div>
-                                    <? endif; ?>
+                    <div class="cost prices">
+                        <div class="price-line-wrapper">
+                        <? if (count($arResult["OFFERS"]) > 0) { ?>
+                            <div class="with_matrix" style="display:none;">
+                                <div class="price price_value_block"><span class="values_wrapper"></span></div>
+                                <? if ($arParams["SHOW_OLD_PRICE"] == "Y"): ?>
+                                    <div class="price discount"></div>
                                 <? endif; ?>
-                            <? endforeach; ?>
-                        </div>
-                        <table class="props_list" id="<? echo $arItemIDs["ALL_ITEM_IDS"]['DISPLAY_PROP_DIV']; ?>"></table>
+                                <? if ($arParams["SHOW_DISCOUNT_PERCENT"] == "Y") { ?>
+                                    <div class="sale_block matrix" style="display:none;">
+                                        <span class="title"><?= GetMessage("CATALOG_ECONOMY"); ?></span>
+                                        <div class="text"><span class="values_wrapper"></span></div>
+                                    </div>
+                                <? } ?>
+                            </div>
+                            <? \Aspro\Functions\CAsproSku::showItemPrices($arParams, $arResult, $item_id, $min_price_id, $arItemIDs, 'N'); ?>
+                        <? } else { ?>
+                            <?
+                            $item_id = $arResult["ID"];
+                            if (isset($arResult['PRICE_MATRIX']) && $arResult['PRICE_MATRIX']) // USE_PRICE_COUNT
+                            {
+                                if ($arResult['PRICE_MATRIX']['COLS']) {
+                                    $arCurPriceType = current($arResult['PRICE_MATRIX']['COLS']);
+                                    $arCurPrice = current($arResult['PRICE_MATRIX']['MATRIX'][$arCurPriceType['ID']]);
+                                    $min_price_id = $arCurPriceType['ID']; ?>
+                                    <div class="" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                        <meta itemprop="price"
+                                              content="<?= ($arResult['MIN_PRICE']['DISCOUNT_VALUE'] ? $arResult['MIN_PRICE']['DISCOUNT_VALUE'] : $arResult['MIN_PRICE']['VALUE']) ?>"/>
+                                        <meta itemprop="priceCurrency" content="<?= $arResult['MIN_PRICE']['CURRENCY'] ?>"/>
+                                        <link itemprop="availability" href="http://schema.org/<?= ($arResult['PRICE_MATRIX']['AVAILABLE'] == 'Y' ? 'InStock' : 'OutOfStock') ?>"/>
+                                    </div>
+                                    <?
+                                } ?>
+                                <? if ($arResult['ITEM_PRICE_MODE'] == 'Q' && count($arResult['PRICE_MATRIX']['ROWS']) > 1): ?>
+                                <?= CNext::showPriceRangeTop($arResult, $arParams, GetMessage("CATALOG_ECONOMY")); ?>
+                            <? endif; ?>
+                                <?= CNext::showPriceMatrix($arResult, $arParams, $strMeasure, $arAddToBasketData); ?>
+                                <?
+                            } else {
+                                ?>
+                                <? \Aspro\Functions\CAsproItem::showItemPrices($arParams, $arResult["PRICES"], $strMeasure, $min_price_id, 'N'); ?>
+                            <? } ?>
+                        <? } ?>
                     </div>
-                </div>
-                <? // Блок с таймером акции (оставляем без изменений) ?>
-                <? if ($arParams["SHOW_DISCOUNT_TIME"] == "Y"){ ?>
+                    <? if ($arParams["SHOW_DISCOUNT_TIME"] == "Y"){ ?>
                     <? $arUserGroups = $USER->GetUserGroupArray(); ?>
                     <? if ($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] != 'Y' || ($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] == 'Y' && !$arResult['OFFERS'])): ?>
-                        <? $arDiscounts = CCatalogDiscount::GetDiscountByProduct($item_id, $arUserGroups, "N", $min_price_id, SITE_ID);
-                        $arDiscount = [];
+                    <? $arDiscounts = CCatalogDiscount::GetDiscountByProduct($item_id, $arUserGroups, "N", $min_price_id, SITE_ID);
+                    $arDiscount = [];
 
-                        if ($arDiscounts)
-                            $arDiscount = current($arDiscounts);
-                        if ($arDiscount["ACTIVE_TO"] && $arDiscount['USE_COUPONS'] != "Y"){
-                        ?>
-                        <div class="view_sale_block <?= ($arQuantityData["HTML"] ? '' : 'wq'); ?>">
-                            <div class="count_d_block">
-                                <span class="active_to hidden"><?= $arDiscount["ACTIVE_TO"]; ?></span>
-                                <div class="title"><?= GetMessage("UNTIL_AKC"); ?></div>
-                                <span class="countdown values"><span class="item"></span><span class="item"></span><span class="item"></span><span class="item"></span></span>
-                            </div>
+                    if ($arDiscounts)
+                        $arDiscount = current($arDiscounts);
+                    if ($arDiscount["ACTIVE_TO"] && $arDiscount['USE_COUPONS'] != "Y"){
+                    ?>
+                    <div class="view_sale_block <?= ($arQuantityData["HTML"] ? '' : 'wq'); ?>">
+                        <div class="count_d_block">
+                            <span class="active_to hidden"><?= $arDiscount["ACTIVE_TO"]; ?></span>
+                            <div class="title"><?= GetMessage("UNTIL_AKC"); ?></div>
+                            <span class="countdown values"><span class="item"></span><span class="item"></span><span class="item"></span><span class="item"></span></span>
                         </div>
-                        <? } ?>
-                    <? else: ?>
-                        <? if ($arResult['JS_OFFERS']) {
+                    </div>
+                    </div>
+                <? } ?>
+                <? else: ?>
+                    <? if ($arResult['JS_OFFERS']) {
 
-                            foreach ($arResult['JS_OFFERS'] as $keyOffer => $arTmpOffer2) {
-                                $active_to = '';
-                                $arDiscounts = CCatalogDiscount::GetDiscountByProduct($arTmpOffer2['ID'], $arUserGroups, "N", $min_price_id, SITE_ID);
-                                if ($arDiscounts) {
-                                    foreach ($arDiscounts as $arDiscountOffer) {
-                                        if ($arDiscountOffer['ACTIVE_TO']) {
-                                            $active_to = $arDiscountOffer['ACTIVE_TO'];
-                                            break;
-                                        }
+                        foreach ($arResult['JS_OFFERS'] as $keyOffer => $arTmpOffer2) {
+                            $active_to = '';
+                            $arDiscounts = CCatalogDiscount::GetDiscountByProduct($arTmpOffer2['ID'], $arUserGroups, "N", $min_price_id, SITE_ID);
+                            if ($arDiscounts) {
+                                foreach ($arDiscounts as $arDiscountOffer) {
+                                    if ($arDiscountOffer['ACTIVE_TO']) {
+                                        $active_to = $arDiscountOffer['ACTIVE_TO'];
+                                        break;
                                     }
                                 }
-                                $arResult['JS_OFFERS'][$keyOffer]['DISCOUNT_ACTIVE'] = $active_to;
                             }
-                        } ?>
-                        <div class="view_sale_block" style="display:none;">
-                            <div class="count_d_block">
-                                <span class="active_to_<?= $arResult["ID"] ?> hidden"><?= $arDiscount["ACTIVE_TO"]; ?></span>
-                                <div class="title"><?= GetMessage("UNTIL_AKC"); ?></div>
-                                <span class="countdown countdown_<?= $arResult["ID"] ?> values"></span>
-                            </div>
+                            $arResult['JS_OFFERS'][$keyOffer]['DISCOUNT_ACTIVE'] = $active_to;
+                        }
+                    } ?>
+                    <div class="view_sale_block" style="display:none;">
+                        <div class="count_d_block">
+                            <span class="active_to_<?= $arResult["ID"] ?> hidden"><?= $arDiscount["ACTIVE_TO"]; ?></span>
+                            <div class="title"><?= GetMessage("UNTIL_AKC"); ?></div>
+                            <span class="countdown countdown_<?= $arResult["ID"] ?> values"></span>
                         </div>
-                    <? endif; ?>
+                    </div>
+                <? endif; ?>
                 <? } ?>
             </div>
-            
-            <?if(!$USER->IsAuthorized()):?><div class="price_txt"><a href="/auth/">Войдите, чтобы получать бонусы</a></div><?endif;?>
-
             <div class="buy_block">
                 <? if ($arResult["OFFERS"] && $showCustomOffer) { ?>
                     <div class="sku_props">

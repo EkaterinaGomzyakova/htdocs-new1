@@ -19892,7 +19892,7 @@ body .ajax_load.table .main_item_wrapper .counter_wrapp div.total_summ {
 }
 
 .info_item .middle_info .prices .price:not(.discount) {
-    padding-right: 13px
+    padding-right: 0px
 }
 
 .info_item .middle_info .prices .discount * {
