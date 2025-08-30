@@ -41,13 +41,14 @@ if($arBrand = $rsBrand->Fetch()){
 /*accessories goods*/
 /*$arAccessories=CNextCache::CIBlockElement_GetProperty($arParams["IBLOCK_ID"], $ElementID, array("CACHE" => array("TAG" =>CNextCache::GetIBlockCacheTag($arParams["IBLOCK_ID"]))), array("CODE" => "ASSOCIATED"));*/
 $arTab = array();
+
+// Заголовок для вкладки "Вам может понравиться"
+$arTab["ASSOCIATED"] = "Вам может понравиться";
 if ($brandValue) {
     // Заголовок для вкладки "С этим товаром рекомендуем"
     $arTab["EXPANDABLES"] = ($arParams["DETAIL_EXPANDABLES_TITLE"] ? $arParams["DETAIL_EXPANDABLES_TITLE"] : GetMessage("EXPANDABLES_TITLE"));
+	
 }
-// Заголовок для вкладки "Вам может понравиться"
-$arTab["ASSOCIATED"] = "Вам может понравиться";
-
 if (ModuleManager::isModuleInstalled("sale") && (!isset($arParams['USE_BIG_DATA']) || $arParams['USE_BIG_DATA'] != 'N')) {
     $arTab["RECOMENDATION"] = GetMessage("RECOMENDATION_TITLE");
 }
@@ -305,3 +306,15 @@ if ($arNavParams){
 </script> */?>
 <?/*fix title after ajax form end*/?>
 <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.history.js');?>
+
+<script>
+    // Ждем полной загрузки страницы, включая все картинки
+    $(window).on('load', function() {
+        // Даем еще полсекунды на всякий случай, чтобы все скрипты точно отработали
+        setTimeout(function() {
+            // Имитируем событие изменения размера окна. 
+            // Большинство JS-слайдеров слушают это событие и пересчитывают свои размеры.
+            $(window).trigger('resize'); 
+        }, 600);
+    });
+</script>
