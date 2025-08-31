@@ -630,9 +630,6 @@
     min-height: 300px
 }
 
-.catalog_detail .item_main_info .price_block {
-    overflow: hidden
-}
 
 .catalog_detail .item_main_info .buttons_block {
     border-radius: 2px;
@@ -1680,7 +1677,7 @@ body.detail_page .element_title {
 
 
 body.detail_page .info_item .top_info {
-    padding: 0px 0 19px
+    padding: 0px 0 83px
 }
 
 
@@ -1889,7 +1886,7 @@ body.detail_page .btn-lg {
     align-items: center !important;     /* Выравниваем всё по вертикали */
     gap: 20px !important;               /* Отступ 20px между всеми элементами */
     
-    width: 840px;                       /* Общая ширина из макета */
+    width: 800px;                       /* Общая ширина из макета */
     max-width: 100%;                  
     height: 60px !important;            /* Высота из макета */
     margin-top: 0px;
@@ -2031,7 +2028,7 @@ body.detail_page .like_icons span {
     visibility: visible;
     transition: opacity .3s ease;
     margin: 0 0 0px;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 0
 }
 
@@ -2251,7 +2248,7 @@ body.detail_page .buy_block .btn.btn-default:hover {
 .prices_block .cost.prices {
     display: flex !important;           /* Включаем Flexbox */
     align-items: center !important;     /* <<== ВЕРТИКАЛЬНОЕ ЦЕНТРИРОВАНИЕ */
-    gap: 230px;                          /* Отступ между ценами */
+    gap: 190px;                          /* Отступ между ценами */
     flex-wrap: wrap;                    /* Позволяет переноситься на мобильных */
 }
 
@@ -2281,4 +2278,78 @@ body.detail_page .buy_block .btn.btn-default:hover {
 
 .price-payment-wrapper .count-product-baskets-wrapper{
     margin-top: 22px;
+}
+
+
+
+/* --- Стили для плавного "липкого" блока на чистом CSS --- */
+
+/* 1. Делаем родительскую колонку точкой отсчета. 
+      Это необходимо, чтобы "липкий" блок знал, где ему двигаться. */
+.item_main_info .right_info {
+    position: relative; 
+}
+
+/* 2. Основные стили для нашего "плавающего" блока */
+.price-timer-container {
+    /* "Прилипаем" к верху экрана, когда скролл дойдет до этой точки */
+    position: -webkit-sticky; /* Поддержка для Safari */
+    position: sticky;
+    top: 600px; /* Отступ от верха экрана, когда блок "прилипнет". Можете изменить. */
+    bottom: 3000px;
+    z-index: 100; /* Чтобы блок был поверх другого контента при прокрутке */
+}
+
+
+.catalog_detail .item_main_info {
+    overflow: visible !important;
+}
+
+
+body.detail_page .info_item .middle_info {
+    overflow: visible;
+    height: 100% !important;
+    width: 100%
+}
+
+
+/* --- Стили для карточки с ценой, оплатой и таймером --- */
+
+/* 1. Превращаем контейнер .price-timer-container в саму карточку */
+.price-timer-container {
+    background-color: #F8F8F8; /* Светло-серый фон */
+    border-radius: 12px;       /* Скругление углов */
+    padding: 20px;             /* Внутренние отступы, чтобы контент не "прилипал" к краям */
+    
+    /* Эти свойства уже должны быть, но убедитесь, что они есть */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* 2. (Опционально) Небольшая настройка для блока с таймером */
+.price-timer-container .view_sale_block .count_d_block {
+    background-color: #FFFFFF; /* Можно сделать фон таймера белым, для контраста */
+    /* Остальные стили таймера остаются как есть */
+}
+
+
+body.detail_page .tab_slider_wrapp {
+    padding-top: 20px;
+    margin: 0px 0 0 0 ;
+}
+
+
+
+
+body.detail_page .info_item .top_info, .info_item .middle_info {
+    padding: 143px 0 83px;
+    overflow: hidden
+}
+
+
+body.detail_page .info_item .top_info, .info_item .middle_info {
+    padding-bottom: 150px !important;
 }

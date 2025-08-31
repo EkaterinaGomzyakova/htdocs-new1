@@ -4010,3 +4010,6 @@ window.JCCatalogElement.prototype.allowViewedCount = function(update)
 	}
 };
 })(window);
+
+
+
