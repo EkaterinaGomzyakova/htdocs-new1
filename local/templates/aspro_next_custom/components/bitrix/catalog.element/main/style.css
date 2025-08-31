@@ -1889,7 +1889,7 @@ body.detail_page .btn-lg {
     width: 800px;                       /* Общая ширина из макета */
     max-width: 100%;                  
     height: 60px !important;            /* Высота из макета */
-    margin-top: 0px;
+    margin-top: 22px;
 }
 
 /* 2. Левая часть со счетчиком и кнопкой "В корзину" (.counter_wrapp) */
@@ -2207,11 +2207,6 @@ body.detail_page .buy_block .btn.btn-default:hover {
     margin-top: 24px !important; /* Отступ от цен */
 }
 
-/* 3. (Не обязательно, но для красоты) Убираем отступ у блока с ценами, если он был */
-.prices_block {
-    margin-bottom: 0 !important;
-}
-
 .price-left-wrapper {
     width: 350px; /* <<== ЗАДАЙТЕ ЗДЕСЬ НУЖНУЮ ФИКСИРОВАННУЮ ШИРИНУ */
     
@@ -2273,7 +2268,7 @@ body.detail_page .buy_block .btn.btn-default:hover {
 
 .prices_block{
     width: 100% !important;
-    height: 140px !important;
+    height: 100% !important;
 }
 
 .price-payment-wrapper .count-product-baskets-wrapper{
@@ -2317,7 +2312,7 @@ body.detail_page .info_item .middle_info {
 
 /* 1. Превращаем контейнер .price-timer-container в саму карточку */
 .price-timer-container {
-    background-color: #F8F8F8; /* Светло-серый фон */
+    background-color: #f5f5f7; /* Светло-серый фон */
     border-radius: 12px;       /* Скругление углов */
     padding: 20px;             /* Внутренние отступы, чтобы контент не "прилипал" к краям */
     
@@ -2352,4 +2347,11 @@ body.detail_page .info_item .top_info, .info_item .middle_info {
 
 body.detail_page .info_item .top_info, .info_item .middle_info {
     padding-bottom: 150px !important;
+}
+
+
+
+
+body.detail_page .info_item .middle_info .prices_block {
+    padding: 0 0 0px
 }
