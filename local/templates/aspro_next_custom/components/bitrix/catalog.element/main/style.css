@@ -7,7 +7,7 @@
 }
 
 .count-product-baskets-wrapper {
-    font-size: 14px;
+    font-size: 17px;
     display: flex;
     align-items: center;
 }
@@ -1804,8 +1804,8 @@ body.detail_page .info_item .top_info {
 
     /* --- ВАШИ ИЗМЕНЕНИЯ ЗДЕСЬ --- */
     
-    width: 18px;  
-    height: 18px; 
+    width: 24px;  
+    height: 24px; 
 
     /* 3. УКАЖИТЕ ПРАВИЛЬНЫЙ ПУТЬ К ВАШЕЙ НОВОЙ КАРТИНКЕ */
     background-image: url('/local/templates/aspro_next_custom/images/cart.svg') !important;
