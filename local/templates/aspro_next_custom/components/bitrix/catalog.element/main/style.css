@@ -1892,7 +1892,7 @@ body.detail_page .btn-lg {
     width: 840px;                       /* Общая ширина из макета */
     max-width: 100%;                  
     height: 60px !important;            /* Высота из макета */
-    margin-top: 30px;
+    margin-top: 0px;
 }
 
 /* 2. Левая часть со счетчиком и кнопкой "В корзину" (.counter_wrapp) */
@@ -2093,4 +2093,192 @@ body.detail_page .buy_block .btn.btn-default:hover {
 .prices_block .cost.prices .price {
     margin-bottom: 0px !important;
     line-height: 20px;
+}
+
+
+
+/* --- Стили для кастомного таймера "До конца акции" --- */
+
+/* 1. Основной контейнер таймера */
+.view_sale_block .count_d_block {
+    background-color: #f9f9f9; /* Светло-серый фон */
+    border-radius: 12px;       /* Скругление углов */
+    padding: 15px;             /* Внутренние отступы */
+    text-align: center;        /* Центрируем весь контент */
+    margin-top: 20px;          /* Отступ сверху от цен/плашек */
+    max-width: 250px;          /* Ограничиваем ширину, чтобы не растягивался на всю колонку */
+}
+
+/* 2. Заголовок "До конца акции" */
+.view_sale_block .title {
+    font-size: 15px;
+    color: #555555;      /* Темно-серый цвет */
+    margin-bottom: 12px; /* Отступ до цифр */
+    font-weight: 500;
+}
+
+/* 3. Контейнер для цифр и подписей */
+.view_sale_block .countdown.values {
+    display: flex;           /* Выстраиваем дни/часы/минуты в ряд */
+    justify-content: center; /* Центрируем их в контейнере */
+    gap: 20px;               /* Расстояние между блоками */
+}
+
+/* 4. Каждый отдельный блок (день, час, минута) */
+/* Сбрасываем стандартные стили темы, которые могут мешать */
+.view_sale_block .values .item {
+    display: block !important;
+    background: none !important;
+    padding: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    position: static !important;
+    margin: 0 !important;
+}
+
+/* 5. Сами цифры таймера */
+/* Скрипт вставляет цифры прямо в .item, поэтому стилизуем его текст */
+.view_sale_block .values .item {
+    font-size: 22px;      /* Крупный размер для цифр */
+    font-weight: 600;     /* Полужирный */
+    color: #285B4D;       /* Ваш фирменный зеленый */
+    line-height: 1.1;
+}
+
+/* 6. Подписи "Дней", "Час", "Мин" */
+/* Скрипт добавляет дочерний div с классом .text */
+.view_sale_block .values .item .text {
+    font-size: 13px;
+    font-weight: 400;
+    color: #999999;     /* Светло-серый цвет */
+    display: block;      /* Гарантирует, что подпись будет на новой строке */
+    margin-top: 4px;
+    opacity: 1 !important; /* Убираем эффект прозрачности от темы */
+}
+
+/* 7. Убираем стандартные разделители-двоеточия, если они есть */
+.view_sale_block .values .item::before,
+.view_sale_block .values .item::after {
+    display: none !important;
+    content: none !important;
+}
+
+
+
+
+/* --- Стили для нового блока цен, оплат и таймера --- */
+
+/* 1. Главный контейнер, который все выравнивает */
+.price-timer-container {
+    display: flex;
+    justify-content: space-between; /* Расталкивает левый и правый блоки по краям */
+    align-items: flex-start;      /* Выравнивает по верху, если высота разная */
+    gap: 20px;                      /* Отступ между блоками */
+    margin-bottom: 30px;            /* Отступ до кнопок "В корзину" */
+}
+
+
+/* 3. Блок "Долями", добавляем отступ сверху */
+.price-payment-wrapper .dolyami-wrapper {
+    margin-top: 24px !important; /* Отступ 24px, как на макете */
+}
+
+/* 4. Правая колонка (таймер) */
+.price-timer-container .view_sale_block {
+    flex-shrink: 0; /* Запрещаем таймеру сжиматься */
+    margin-top: 0 !important; /* Сбрасываем старый отступ */
+}
+
+/* 5. (Опционально) Уточняем стили для цен, чтобы они были в одну строку */
+.price-payment-wrapper .cost.prices {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px;
+}
+
+/* --- Стили для расположения блока "Долями" под ценами --- */
+
+/* 1. Заставляем родительский контейнер выстраивать элементы в колонку */
+.price-payment-wrapper {
+    display: flex;
+    flex-direction: column; /* <<== ГЛАВНОЕ ИЗМЕНЕНИЕ: меняем направление на вертикальное */
+    align-items: flex-start; /* Выравниваем все по левому краю */
+}
+
+/* 2. Задаем отступ для блока "Долями", как на макете */
+.dolyami-wrapper {
+    margin-top: 24px !important; /* Отступ от цен */
+}
+
+/* 3. (Не обязательно, но для красоты) Убираем отступ у блока с ценами, если он был */
+.prices_block {
+    margin-bottom: 0 !important;
+}
+
+.price-left-wrapper {
+    width: 350px; /* <<== ЗАДАЙТЕ ЗДЕСЬ НУЖНУЮ ФИКСИРОВАННУЮ ШИРИНУ */
+    
+    /* Свойства ниже не меняем, они отвечают за внутреннее расположение */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.dolyami-wrapper .right{
+    width: 200px;
+
+}
+
+/* --- Стили для основного блока с ценой --- */
+
+/* 1. Стиль для основной (текущей) цены */
+/* Мы выбираем .price, у которого НЕТ класса .discount */
+.catalog_detail .cost.prices .price:not(.discount) {
+    /* 
+      Замените 32px на любой нужный вам размер.
+      !important нужен, чтобы перебить стандартные стили темы. 
+    */
+    font-size: 44px !important;
+    font-style: normal;
+    font-weight: 500 !important; /* Делаем шрифт полужирным */
+    line-height: 1 !important;     /* Убираем лишний межстрочный интервал */
+    color: #285b4d;
+}
+
+/* --- ФИНАЛЬНЫЕ СТИЛИ ДЛЯ ВЫРАВНИВАНИЯ ЦЕН --- */
+
+/* 1. Родительский контейнер для цен */
+.prices_block .cost.prices {
+    display: flex !important;           /* Включаем Flexbox */
+    align-items: center !important;     /* <<== ВЕРТИКАЛЬНОЕ ЦЕНТРИРОВАНИЕ */
+    gap: 230px;                          /* Отступ между ценами */
+    flex-wrap: wrap;                    /* Позволяет переноситься на мобильных */
+}
+
+/* 3. Стиль для НОВОЙ (основной) цены */
+/* Выбираем price, у которого НЕТ класса discount */
+.prices_block .cost.prices .price:not(.discount) {
+    font-size: 32px !important;       /* Размер из вашего макета */
+    color: #285B4D !important;        /* Ваш фирменный зеленый */
+    line-height: 1 !important;        /* <<== ВАЖНО: Убирает лишнюю высоту строки */
+    margin: 0 !important;             /* Сбрасываем лишние отступы */
+}
+
+/* 4. Стиль для СТАРОЙ (зачеркнутой) цены */
+.prices_block .cost.prices .price.discount {
+    color: #A9A9A9 !important;         /* Светло-серый цвет */
+
+}
+
+.prices_block .price_matrix_wrapper, .prices_block .price_matrix_wrapper .price.discount {
+    align-items: center !important;
+}
+
+.prices_block{
+    width: 100% !important;
+    height: 140px !important;
+}
+
+.price-payment-wrapper .count-product-baskets-wrapper{
+    margin-top: 22px;
 }
