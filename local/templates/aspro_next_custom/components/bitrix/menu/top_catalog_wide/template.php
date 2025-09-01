@@ -10,6 +10,20 @@ $iVisibleItemsMenu = ($arTheme['MAX_VISIBLE_ITEMS_MENU']['VALUE'] ? $arTheme['MA
 			<tr>
 				<?foreach($arResult as $arItem):?>
 					<?
+					// Список символьных кодов разделов, которые нужно СКРЫТЬ
+					$arHiddenSections = [
+						'miniatyury',
+						'dlya_doma',
+						'dlya_detey',
+						'dlya_muzhchin' 
+					];
+
+					// Проверяем, есть ли код текущего пункта в нашем "черном списке"
+					if (in_array($arItem['PARAMS']['SECTION']['CODE'], $arHiddenSections)) {
+						continue; // Если есть - пропускаем этот пункт и переходим к следующему
+					}
+					?>
+					<?
 					$bShowChilds = $arParams["MAX_LEVEL"] > 1;
 					$bWideMenu = $arItem["PARAMS"]['FROM_IBLOCK'];
 					?>
