@@ -61,6 +61,13 @@ $APPLICATION->IncludeComponent(
 	);
 	?>
 </div>
+
+<div class="super_simple_menu">
+
+    <div class="simple_menu">
+        <img src="<?=SITE_TEMPLATE_PATH?>/images/my-new-ban.svg">
+    </div>
+</div>
 <!-- Блок с кнопками-картинками "Бренды" и "Sale" -->
 <div class="homepage-buttons-container">
 

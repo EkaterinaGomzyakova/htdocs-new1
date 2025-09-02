@@ -1856,8 +1856,8 @@ body.detail_page .info_item .top_info {
     margin-bottom: 0 !important; /* Убираем лишние отступы, если текст в абзацах */
 }
 
-
-body.detail_page .buy_block .btn.btn-default {
+body.detail_page .buy_block .btn.btn-default,
+body.detail_page .buy_block .btn.btn-default.white.one_click{ 
     background-color: #285b4d;
     border-color: #285b4d;
     color: #ffffff;
@@ -2225,17 +2225,7 @@ body.detail_page .buy_block .btn.btn-default:hover {
 
 /* 1. Стиль для основной (текущей) цены */
 /* Мы выбираем .price, у которого НЕТ класса .discount */
-.catalog_detail .cost.prices .price:not(.discount) {
-    /* 
-      Замените 32px на любой нужный вам размер.
-      !important нужен, чтобы перебить стандартные стили темы. 
-    */
-    font-size: 44px !important;
-    font-style: normal;
-    font-weight: 500 !important; /* Делаем шрифт полужирным */
-    line-height: 1 !important;     /* Убираем лишний межстрочный интервал */
-    color: #285b4d;
-}
+
 
 /* --- ФИНАЛЬНЫЕ СТИЛИ ДЛЯ ВЫРАВНИВАНИЯ ЦЕН --- */
 
@@ -2254,6 +2244,7 @@ body.detail_page .buy_block .btn.btn-default:hover {
     color: #285B4D !important;        /* Ваш фирменный зеленый */
     line-height: 1 !important;        /* <<== ВАЖНО: Убирает лишнюю высоту строки */
     margin: 0 !important;             /* Сбрасываем лишние отступы */
+    font-size: 500;
 }
 
 /* 4. Стиль для СТАРОЙ (зачеркнутой) цены */
@@ -2355,3 +2346,80 @@ body.detail_page .info_item .top_info, .info_item .middle_info {
 body.detail_page .info_item .middle_info .prices_block {
     padding: 0 0 0px
 }
+
+
+
+
+
+
+
+
+
+/* --- НОВЫЕ СТИЛИ ДЛЯ ВЫРАВНИВАНИЯ БЛОКА ПОКУПКИ В ОДНУ СТРОКУ --- */
+
+/* 1. Главный родительский контейнер для цен и кнопок */
+.price-payment-wrapper {
+    /* ЗАСТАВЛЯЕМ ВНУТРЕННИЕ ЭЛЕМЕНТЫ ВЫСТРАИВАТЬСЯ В КОЛОНКУ */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Отступ между блоком цен и блоком кнопок */
+}
+
+/* 2. Контейнер, в котором лежат ВСЕ кнопки и счетчики */
+/* Это может быть как .buy_block для простых товаров, так и .offer_buy_block для товаров с SKU */
+.buy_block,
+.offer_buy_block {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    width: 800px;
+    height: 60px; /* Задаем единую высоту для всех кнопок */
+}
+
+/* 3. Обертка для счетчика и основной кнопки "В корзину" */
+.buy_block .counter_wrapp,
+.offer_buy_block .counter_wrapp {
+    flex-grow: 1; /* Этот блок будет занимать всё доступное место */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 100%;
+}
+
+/* 4. Стилизуем счетчик (+/-) */
+.counter_block.big_basket {
+    width: 120px;
+    flex-shrink: 0; /* Не сжимается */
+    height: 100%;
+    /* ... прочие стили для счетчика остаются ... */
+}
+
+/* 5. Основная кнопка "В корзину" и её обертка */
+.button_block {
+    flex-grow: 1; /* Занимает всё место, особенно когда счетчик скрыт */
+    height: 100%;
+}
+
+.button_block .btn {
+    width: 100%;
+    height: 100%;
+}
+
+/* Когда товар добавлен в корзину, .button_block становится .wide, 
+   и мы гарантируем, что он растянется на всю ширину */
+.button_block.wide {
+   width: auto !important;
+   flex-grow: 1 !important;
+}
+
+/* 6. Кнопки "Купить в 1 клик" и "В избранное" */
+.wrapp_one_click,
+.like_wrapper {
+    flex-shrink: 0; /* Не сжимаются */
+    height: 100%;
+}
+.wish_item,
+.wrapp_one_click .one_click {
+    height: 100% !important;
+}
+

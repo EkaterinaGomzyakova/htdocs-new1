@@ -14316,7 +14316,7 @@ hr.bottoms {
 
 .cost.prices .price, .module-cart .row_titles .item_title, .module-cart .row_values .price {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 15px
 }
 
@@ -26895,4 +26895,17 @@ body.detail_page .menu-row.middle-block {
 
     /* Это свойство уберет возможное обтекание, которое может мешать */
     float: none !important;
+}
+
+
+
+
+/* Стили для простого баннера, добавленного напрямую */
+.super_simple_menu{
+    display: block;      /* Убирает лишние отступы под картинкой */
+    max-width: 100%;     /* Делает картинку адаптивной, чтобы она не вылезала за края экрана */
+    height: auto;        /* Сохраняет пропорции картинки */
+    margin-bottom: 130px ;   /* Добавляет отступы сверху/снизу и центрирует по горизонтали */
+    margin-top: 80px;
+    border-radius: 12px; /* Добавляет скругленные углы, как у других блоков */
 }

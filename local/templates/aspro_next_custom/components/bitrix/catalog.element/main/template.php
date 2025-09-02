@@ -1373,6 +1373,35 @@ if (!empty($arResult['BRAND_ITEM'])) {
         </div>
     </div>
 <? } ?>
+<? if ($arResult["OFFERS"] && $showCustomOffer) { ?>
+                            <div class="sku_props">
+                                <? if (!empty($arResult['OFFERS_PROP'])) { ?>
+                                    <div class="bx_catalog_item_scu wrapper_sku" id="<? echo $arItemIDs["ALL_ITEM_IDS"]['PROP_DIV']; ?>">
+                                        <? foreach ($arSkuTemplate as $code => $strTemplate) {
+                                            if (!isset($arResult['OFFERS_PROP'][$code]))
+                                                continue;
+                                            echo str_replace('#ITEM#_prop_', $arItemIDs["ALL_ITEM_IDS"]['PROP'], $strTemplate);
+                                        } ?>
+                                    </div>
+                                <? } ?>
+                                <? $arItemJSParams = CNext::GetSKUJSParams($arResult, $arParams, $arResult, "Y");
+                                foreach ($arItemJSParams['OFFERS'] as &$jsOffer) {
+                                    $amountHtml = $storeItemAmountHtml($jsOffer['ID']);
+                                    if ($amountHtml) {
+                                        $jsOffer['AVAILABLE']['BY_STORE'] = $amountHtml;
+                                    } else {
+                                        $jsOffer['AVAILABLE']['BY_STORE'] = $jsOffer['AVAILABLE']['HTML'];
+                                    }
+                                }
+                                ?>
+
+                                <script type="text/javascript">
+                                    var <? echo $arItemIDs["strObName"]; ?> =
+                                    new JCCatalogElement(<? echo CUtil::PhpToJSObject($arItemJSParams, false, true); ?>);
+                                </script>
+                                <div class="sku-preview-text js-sku-preview-text" style="display: none"></div>
+                            </div>
+                        <? } ?>
 <div class="price-timer-container">
     <div class="price-payment-wrapper">
         <div class="prices_block">
@@ -1489,37 +1518,9 @@ if (!empty($arResult['BRAND_ITEM'])) {
                         <? endif; ?>
                         <? } ?>
                     </div>
-                    
+                    </div>
                     <div class="buy_block">
-                        <? if ($arResult["OFFERS"] && $showCustomOffer) { ?>
-                            <div class="sku_props">
-                                <? if (!empty($arResult['OFFERS_PROP'])) { ?>
-                                    <div class="bx_catalog_item_scu wrapper_sku" id="<? echo $arItemIDs["ALL_ITEM_IDS"]['PROP_DIV']; ?>">
-                                        <? foreach ($arSkuTemplate as $code => $strTemplate) {
-                                            if (!isset($arResult['OFFERS_PROP'][$code]))
-                                                continue;
-                                            echo str_replace('#ITEM#_prop_', $arItemIDs["ALL_ITEM_IDS"]['PROP'], $strTemplate);
-                                        } ?>
-                                    </div>
-                                <? } ?>
-                                <? $arItemJSParams = CNext::GetSKUJSParams($arResult, $arParams, $arResult, "Y");
-                                foreach ($arItemJSParams['OFFERS'] as &$jsOffer) {
-                                    $amountHtml = $storeItemAmountHtml($jsOffer['ID']);
-                                    if ($amountHtml) {
-                                        $jsOffer['AVAILABLE']['BY_STORE'] = $amountHtml;
-                                    } else {
-                                        $jsOffer['AVAILABLE']['BY_STORE'] = $jsOffer['AVAILABLE']['HTML'];
-                                    }
-                                }
-                                ?>
-
-                                <script type="text/javascript">
-                                    var <? echo $arItemIDs["strObName"]; ?> =
-                                    new JCCatalogElement(<? echo CUtil::PhpToJSObject($arItemJSParams, false, true); ?>);
-                                </script>
-                                <div class="sku-preview-text js-sku-preview-text" style="display: none"></div>
-                            </div>
-                        <? } ?>
+                        
                         <? if (!$arResult["OFFERS"]): ?>
                             <script>
                                 $(document).ready(function () {
@@ -1623,6 +1624,7 @@ if (!empty($arResult['BRAND_ITEM'])) {
                                     <? endif; ?>
                                 <? endif; ?>
                             </div>
+                            
                     </div>
 
                     </div>
