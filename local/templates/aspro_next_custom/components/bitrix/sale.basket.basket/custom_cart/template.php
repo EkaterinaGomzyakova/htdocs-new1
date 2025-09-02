@@ -192,6 +192,42 @@ if (empty($arResult['ERROR_MESSAGE']))
 
     <div class="row">
         <div class="col-xs-9">
+			<?
+			// --- НАЧАЛО НОВОГО БЛОКА ---
+
+			// Получаем количество товаров
+			$goodsCount = count($arResult['GRID']['ROWS']);
+
+			// Функция для правильного склонения слова "товар"
+			function getGoodsMessage($count)
+			{
+				$count = $count % 100;
+				if ($count >= 11 && $count <= 19) {
+					return 'товаров';
+				}
+				$lastDigit = $count % 10;
+				if ($lastDigit == 1) {
+					return 'товар';
+				}
+				if ($lastDigit >= 2 && $lastDigit <= 4) {
+					return 'товара';
+				}
+				return 'товаров';
+			}
+
+			$goodsMessage = getGoodsMessage($goodsCount);
+			?>
+			<div class="basket-main-header">
+				<h2 class="basket-main-header__title">Корзина</h2>
+				<? if ($goodsCount > 0): ?>
+					<span class="basket-main-header__count">
+						<?= $goodsCount ?> <?= $goodsMessage ?>
+					</span>
+				<? endif; ?>
+			</div>
+
+			<? // --- КОНЕЦ НОВОГО БЛОКА --- ?>
+
             <div id="basket-items-list-wrapper">
                 <div class="basket-items-list-container">
                     <div class="basket-items-list" id="basket-item-list">

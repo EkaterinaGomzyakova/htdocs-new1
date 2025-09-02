@@ -138,13 +138,17 @@ $APPLICATION->SetTitle("Корзина");
 );?>
 
 <? $APPLICATION->IncludeComponent(
-	"bitrix:main.include",
-	"",
-	array(
+	"bitrix:main.include", 
+	"", 
+	[
 		"AREA_FILE_SHOW" => "file",
-		"PATH" => SITE_DIR . "include/basket_bottom_description.php",
+		"PATH" => SITE_DIR."include/basket_bottom_description.php",
 		"EDIT_TEMPLATE" => "include_area.php"
-	)
+	],
+	false,
+	[
+		"ACTIVE_COMPONENT" => "N"
+	]
 ); ?>
 
 

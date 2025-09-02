@@ -573,12 +573,16 @@
 	display: flex;
 }
 
+
+
 .basket-item-block-image {
 	position: relative;
 	padding-right: 15px;
 	padding-bottom: 10px;
+	min-height: 48px;
+	max-height: 300px;
 	min-width: 48px;
-	max-width: 148px;
+	max-width: 300px;
 	width: 100%;
 	text-align: center;
 	flex: 1;
@@ -598,18 +602,8 @@
 	display: block;
 }
 
-.basket-item-image {
-	display: block;
-	max-width: 100%;
-	max-height: 100%;
-	width: 100%;
-	height: auto;
-	transition: 300ms all ease;
-}
 
-.basket-items-list-wrapper-compact .basket-item-image {
-	max-width: 100%;
-}
+
 
 .basket-item-image:hover {
 	border-color: #ee9200;
@@ -3278,3 +3272,190 @@ body.bx-theme-yellow .catalog-block-header {
     font-weight: 600;
     color: var(--primary-color, #2c3e50);
 }
+
+
+
+.basket_page .menu-row.middle-block.bgcolored {
+    display: none;
+}
+
+.basket_page .breadcrumbs{
+	display: none;
+}
+
+
+
+.title-v3 .page-top.maxwidth-theme, .title-v4 .page-top.maxwidth-theme {
+    padding-top: 26px;
+    padding-bottom: 56px !important;
+}
+
+
+
+/* --- Стили для нового заголовка корзины --- */
+
+.basket-main-header {
+  display: flex;
+  align-items: baseline; /* Выравнивает текст по базовой линии */
+  margin-bottom: 25px;   /* Отступ снизу до списка товаров */
+  padding-bottom: 15px;  /* Отступ до нижней границы */
+  border-bottom: 0px solid #f2f2f2; /* Разделительная линия */
+}
+
+.basket-main-header__title {
+  font-size: 32px;
+  font-weight: 600;      /* Полужирное начертание */
+  line-height: 1.2;
+  margin: 0 15px 0 0;  /* Убираем стандартные отступы и добавляем справа */
+  color: #2f3435;
+}
+
+.basket-main-header__count {
+  font-size: 16px;
+  font-weight: 400;      /* Обычное начертание */
+  color: #6c757d;       /* Серый цвет текста */
+}
+
+
+
+.col-xs-3 {
+	padding-top: 3%;
+}
+
+
+
+
+.wrapper, .wrapper_inner, .wrapp, .wrapper1>div {
+    width: 100% !important;
+    margin: auto;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2
+}
+
+
+.col-xs-9 {
+	padding-left: 0 !important;
+}
+
+
+
+.basket-items-list-item-container{
+
+}
+
+/* ================================================================ */
+/* ============== НАЧАЛО СТИЛЕЙ ДЛЯ НОВОЙ КОРЗИНЫ ================= */
+/* ================================================================ */
+
+/* 
+ * ШАГ 1: ОСНОВА КАРТОЧКИ ТОВАРА
+ * Переопределяем поведение строки таблицы, чтобы она стала нашей "карточкой".
+*/
+
+/* Скрываем заголовки старой таблицы */
+.basket-items-list-header {
+  display: none !important;
+}
+
+/* Убираем рамки у самой таблицы */
+.basket-items-list-table {
+  border-collapse: separate; /* Обязательно для border-spacing */
+  border-spacing: 0;
+  border: none;
+}
+
+/* Главный контейнер для одного товара */
+tr.basket-items-list-item-container {
+  display: flex; /* САМОЕ ГЛАВНОЕ: заставляем строку вести себя как flex-контейнер */
+  align-items: flex-start; /* Выравниваем дочерние элементы по верху */
+  padding: 32px 0; /* Внутренние отступы сверху и снизу */
+  border-bottom: 1px solid #e8e8e8; /* Линия-разделитель между товарами */
+}
+
+/* Убираем верхнюю границу у самого первого товара в списке */
+tr.basket-items-list-item-container:first-child {
+  border-top: none;
+}
+
+/* Сбрасываем стандартные стили для всех ячеек внутри нашей новой "карточки" */
+tr.basket-items-list-item-container > td {
+  padding: 0;
+  border: none;
+}
+
+
+
+
+/* 
+ * ШАГ 2: БЛОК С ИЗОБРАЖЕНИЕМ ТОВАРА
+ * Создаем "рамку" с серым фоном и центрируем картинку внутри нее.
+*/
+
+/* Ячейка, в которой лежат и картинка, и описание */
+.basket-items-list-item-descriptions {
+  display: flex;       /* Включаем Flexbox, чтобы картинка и текст встали в ряд */
+  align-items: center; /* Выравниваем их по центру вертикально */
+  flex-grow: 1;        /* Заставляем этот блок занять всё доступное место в строке */
+}
+
+/* 
+ * Контейнер для изображения. Он станет нашей "рамкой". 
+ * Именно этот блок мы видим как серый квадрат на вашем макете.
+*/
+
+.basket-item-block-image {
+  flex-shrink: 0;           /* Запрещаем контейнеру сжиматься */
+  width: 300px;             /* Задаем фиксированную ширину. Можно поменять на проценты, например, 25% */
+  height: 300px;            /* Фиксированная высота */
+  background-color: #fff5e9;/* Светло-серый фон для рамки */
+  border-radius: 16px;      /* Скругление углов */
+  margin-right: 32px;       /* Отступ справа до текста с описанием товара */
+  
+  /* Магия центрирования картинки внутри рамки */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px; /* Внутренний отступ - он и создает эффект рамки! */
+  box-sizing: border-box; /* Гарантирует, что padding не увеличит общий размер блока */
+}
+
+/* Само изображение */
+.basket-item-image {
+  max-width: 204px;       /* Картинка не будет вылезать за пределы родителя */
+  max-height: 204px;
+  height: 204px;
+  width: 204px;
+  object-fit: contain; /* Сохраняет пропорции изображения, вписывая его в блок */
+}
+
+
+
+tr.basket-items-list-item-container {
+  position: relative; /* ОБЯЗАТЕЛЬНО. Это создает "контекст позиционирования" */
+}
+
+/* 2. Позиционируем ячейку с крестиком абсолютно */
+td.basket-items-list-item-remove {
+  position: absolute; /* "Вырываем" из потока */
+  top: 32px;          /* Отступ сверху от края родителя */
+  right: 0;           /* Прижимаем к правому краю родителя */
+  padding: 0 !important; /* Убираем лишние отступы, которые могли остаться от таблицы */
+  z-index: 5;         /* На всякий случай, чтобы крестик был поверх других элементов */
+}
+
+/* 3. Делаем сам крестик всегда видимым и немного заметнее */
+.basket-item-actions-remove {
+  opacity: 1; /* Крестик виден всегда, а не только при наведении */
+  width: 24px;
+  height: 24px;
+}
+
+/* Сделаем линии крестика чуть толще и поменяем цвет на более темный */
+.basket-item-actions-remove:after,
+.basket-item-actions-remove:before {
+  background: #2f3435;
+  width: 2px;
+  height: 16px;
+}
+
