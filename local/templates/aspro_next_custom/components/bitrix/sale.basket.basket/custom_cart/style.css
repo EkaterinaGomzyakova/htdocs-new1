@@ -121,12 +121,7 @@
 }
 
 .basket-item-property-custom-value[data-column-property-code="DISCOUNT"], .discount-highlight {
-    display: inline-block;
-    background: #ffd02e;
-    padding: 3px 8px 2px;
-    line-height: 16px;
-    border-radius: 3px;
-    margin: 1px 0 1px 3px;
+    display: none !important;
 }
 
 .basket-coupon-block-field #submit-coupon {
@@ -798,6 +793,9 @@
 .basket-item-block-info {
 	padding: 0;
 	order: 2;
+	display: flex;
+	flex-direction: column;
+	min-height: 300px;
 }
 
 @media (max-width: 580px) {
@@ -3458,4 +3456,73 @@ td.basket-items-list-item-remove {
   width: 2px;
   height: 16px;
 }
+
+/* ================================================================ */
+/* ============== СКРЫТИЕ БЛОКА "СКИДКА" ========================= */
+/* ================================================================ */
+
+/* Скрываем блок с процентом скидки */
+.basket-item-property-custom.basket-item-property-custom-text[data-column-property-code="DISCOUNT"],
+.basket-item-property-custom.basket-item-property-custom-text:contains("Скидка") {
+    display: none !important;
+}
+
+/* Альтернативный способ - скрыть все блоки с процентом скидки */
+.basket-item-property-custom[data-column-property-code="DISCOUNT"] {
+    display: none !important;
+}
+
+/* Дополнительные правила для скрытия блока скидки */
+.basket-item-property-custom[data-column-property-code="DISCOUNT"] .basket-item-property-custom-value,
+.basket-item-property-custom[data-column-property-code="DISCOUNT"] .basket-item-property-custom-name,
+.basket-item-property-custom[data-column-property-code="DISCOUNT"] .basket-item-property-custom-content {
+    display: none !important;
+}
+
+/* Скрываем блоки, содержащие текст "Скидка" */
+.basket-item-property-custom:has(.basket-item-property-custom-value:contains("Скидка")),
+.basket-item-property-custom:has(.basket-item-property-custom-name:contains("Скидка")) {
+    display: none !important;
+}
+
+/* Максимально агрессивные правила для скрытия блока скидки */
+.basket-item-property-custom.basket-item-property-custom-text,
+.basket-item-property-custom[data-column-property-code="DISCOUNT"],
+.basket-item-property-custom:has([data-column-property-code="DISCOUNT"]),
+.basket-item-property-custom:has(.basket-item-property-custom-value:contains("Скидка")),
+.basket-item-property-custom:has(.basket-item-property-custom-name:contains("Скидка")),
+.basket-item-property-custom:has(.basket-item-property-custom-content:contains("Скидка")) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+}
+
+/* Скрываем все дочерние элементы блока скидки */
+.basket-item-property-custom[data-column-property-code="DISCOUNT"] *,
+.basket-item-property-custom.basket-item-property-custom-text * {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Универсальное правило для скрытия всех блоков с текстом "Скидка" */
+.basket-item-property-custom {
+    display: none !important;
+}
+
+
+
+
+
+
+
+
+
+
+
 

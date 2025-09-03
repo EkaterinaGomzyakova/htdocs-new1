@@ -361,5 +361,7 @@ $arBasketJSParams = array(
                 promoContainer.appendChild(promoSection);
             }
         }, 500);
+        
+
     });
 </script>

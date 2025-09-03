@@ -79,29 +79,6 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 							<img class="basket-item-image" alt="{{NAME}}"
 								src="{{{IMAGE_URL}}}{{^IMAGE_URL}}<?=$templateFolder?>/images/no_photo.png{{/IMAGE_URL}}">
 
-							{{#SHOW_LABEL}}
-								<div class="basket-item-label-text basket-item-label-big <?=$labelPositionClass?>">
-									{{#LABEL_VALUES}}
-										<div{{#HIDE_MOBILE}} class="hidden-xs"{{/HIDE_MOBILE}}>
-											<span title="{{NAME}}">{{NAME}}</span>
-										</div>
-									{{/LABEL_VALUES}}
-								</div>
-							{{/SHOW_LABEL}}
-
-							<?
-							if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y')
-							{
-								?>
-								{{#DISCOUNT_PRICE_PERCENT}}
-									<div class="basket-item-label-ring basket-item-label-small <?=$discountPositionClass?>">
-										-{{DISCOUNT_PRICE_PERCENT_FORMATED}}
-									</div>
-								{{/DISCOUNT_PRICE_PERCENT}}
-								<?
-							}
-							?>
-
 							{{#DETAIL_PAGE_URL}}
 								</a>
 							{{/DETAIL_PAGE_URL}}
@@ -129,6 +106,9 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 								</a>
 							{{/DETAIL_PAGE_URL}}
 						</h2>
+						
+
+						
 						{{#NOT_AVAILABLE}}
 							<div class="basket-items-list-item-warning-container">
 								<div class="alert alert-warning text-center">
@@ -324,6 +304,8 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 							}
 							?>
 						</div>
+						
+
 					</div>
 					{{#SHOW_LOADING}}
 						<div class="basket-items-list-item-overlay"></div>

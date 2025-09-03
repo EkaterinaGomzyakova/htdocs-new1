@@ -528,6 +528,26 @@ function updateBasketTable(basketItemId, res) {
 				if (BX('old_price_' + id))
 					BX('old_price_' + id).innerHTML = (item.DISCOUNT_PRICE_PERCENT > 0) ? item.FULL_PRICE_FORMATED : '';
 
+				// Обновляем цены в новом блоке под названием товара
+				if (BX('basket-item-price-current-under-name-' + id))
+					BX('basket-item-price-current-under-name-' + id).innerHTML = item.PRICE_FORMATED;
+
+				if (BX('basket-item-price-old-under-name-' + id))
+					BX('basket-item-price-old-under-name-' + id).innerHTML = (item.DISCOUNT_PRICE_PERCENT > 0) ? item.FULL_PRICE_FORMATED : '';
+
+				if (BX('basket-item-price-difference-under-name-' + id))
+					BX('basket-item-price-difference-under-name-' + id).innerHTML = item.DISCOUNT_PRICE_FORMATED;
+
+				// Обновляем значение в счётчике количества
+				if (BX('basket-item-quantity-input-' + id))
+					BX('basket-item-quantity-input-' + id).value = item.QUANTITY;
+				
+				// Обновляем общую сумму товара (если есть)
+				if (BX('sum_' + id))
+					BX('sum_' + id).innerHTML = item.SUM;
+
+
+
 				if (BX('sum_' + id))
 					BX('sum_' + id).innerHTML = item.SUM;
 
@@ -1262,4 +1282,11 @@ BX.ready(function () {
 			BX.setCookie('santa-request', this.value, { expires: 86400, path: '/' });
 		});
 	}
+
+
 });
+
+/* ================================================================ */
+/* ============== ФУНКЦИИ ДЛЯ СЧЁТЧИКА КОЛИЧЕСТВА ================ */
+/* ================================================================ */
+
