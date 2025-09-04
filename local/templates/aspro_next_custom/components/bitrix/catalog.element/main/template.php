@@ -1486,7 +1486,7 @@ if (!empty($arResult['BRAND_ITEM'])) {
                                 <div class="count_d_block">
                                     <span class="active_to hidden"><?= $arDiscount["ACTIVE_TO"]; ?></span>
                                     <div class="title"><?= GetMessage("UNTIL_AKC"); ?></div>
-                                    <span class="countdown values"><span class="item"></span><span class="item"></span><span class="item"></span><span class="item"></span></span>
+                                    <span class="countdown values"><span class="item"></span><span class="item"></span><span class="item"></span></span>
                                 </div>
                             </div>
                         </div>
@@ -1512,13 +1512,16 @@ if (!empty($arResult['BRAND_ITEM'])) {
                                 <div class="count_d_block">
                                     <span class="active_to_<?= $arResult["ID"] ?> hidden"><?= $arDiscount["ACTIVE_TO"]; ?></span>
                                     <div class="title"><?= GetMessage("UNTIL_AKC"); ?></div>
-                                    <span class="countdown countdown_<?= $arResult["ID"] ?> values"></span>
+                                    <span class="countdown countdown_<?= $arResult["ID"] ?> values"><span class="item"></span><span class="item"></span><span class="item"></span></span>
                                 </div>
                             </div>
                         <? endif; ?>
                         <? } ?>
                     </div>
                     </div>
+                
+                
+                <!-- Блок с кнопками перемещаем внутрь price-payment-wrapper -->
                     <div class="buy_block">
                         
                         <? if (!$arResult["OFFERS"]): ?>
@@ -1627,9 +1630,12 @@ if (!empty($arResult['BRAND_ITEM'])) {
                             
                     </div>
 
+                    <? if (true || $isArticle || $arResult["BRAND_ITEM"] || $arParams["SHOW_RATING"] == "Y" || strlen($arResult["PREVIEW_TEXT"])) { ?>
+                        
+                    <? } ?>
                     </div>
-
                     
+                    <!-- Надпись "В корзине у X человек" под всем блоком с кнопками -->
                     <? if ($arResult["COUNT_PRODUCT_IN_BASKET"]) { ?>
                         <div class="count-product-baskets-wrapper">
                             <?= Loc::getMessage('COUNT_PRODUCT_IN_BASKET') ?>
@@ -1640,11 +1646,9 @@ if (!empty($arResult['BRAND_ITEM'])) {
                             <?= $arResult["COUNT_PRODUCT_IN_BASKET"] . " " . $declension?>
                         </div>
                     <? } ?>
-
-                    <? if (true || $isArticle || $arResult["BRAND_ITEM"] || $arParams["SHOW_RATING"] == "Y" || strlen($arResult["PREVIEW_TEXT"])) { ?>
-                        
-                    <? } ?>
                 </div>
+            </div>
+
                 <? if (is_array($arResult["STOCK"]) && $arResult["STOCK"]): ?>
                     <div class="stock_wrapper">
                         <? foreach ($arResult["STOCK"] as $key => $arStockItem): ?>
@@ -1655,11 +1659,8 @@ if (!empty($arResult['BRAND_ITEM'])) {
                         <? endforeach; ?>
                     </div>
                 <? endif; ?>
-
-                
-            </div>
         </div>
-        
+        </div>
     </div> <?/* Закрывает .price-payment-wrapper */?>
 </div> <?/* Закрывает .price-timer-container */?>
 <? $bPriceCount = ($arParams['USE_PRICE_COUNT'] == 'Y'); ?>

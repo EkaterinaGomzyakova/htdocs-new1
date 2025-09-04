@@ -2098,27 +2098,30 @@ body.detail_page .buy_block .btn.btn-default:hover {
 
 /* 1. Основной контейнер таймера */
 .view_sale_block .count_d_block {
-    background-color: #f9f9f9; /* Светло-серый фон */
+    background-color: #f5f5f7; /* Светло-серый фон как на макете */
     border-radius: 12px;       /* Скругление углов */
-    padding: 15px;             /* Внутренние отступы */
+    padding: 20px;             /* Внутренние отступы */
     text-align: center;        /* Центрируем весь контент */
-    margin-top: 20px;          /* Отступ сверху от цен/плашек */
-    max-width: 250px;          /* Ограничиваем ширину, чтобы не растягивался на всю колонку */
+    margin-top: 0;             /* Убираем отступ сверху */
+    max-width: 200px;          /* Ограничиваем ширину для компактности */
+    height: auto;              /* Автоматическая высота */
 }
 
 /* 2. Заголовок "До конца акции" */
 .view_sale_block .title {
-    font-size: 15px;
-    color: #555555;      /* Темно-серый цвет */
-    margin-bottom: 12px; /* Отступ до цифр */
-    font-weight: 500;
+    font-size: 14px;
+    color: #888888;      /* Светло-серый цвет как на макете */
+    margin-bottom: 15px; /* Отступ до цифр */
+    font-weight: 400;
+    line-height: 1.2;
 }
 
 /* 3. Контейнер для цифр и подписей */
 .view_sale_block .countdown.values {
     display: flex;           /* Выстраиваем дни/часы/минуты в ряд */
     justify-content: center; /* Центрируем их в контейнере */
-    gap: 20px;               /* Расстояние между блоками */
+    gap: 15px;               /* Расстояние между блоками */
+    flex-wrap: wrap;         /* Позволяет переноситься на мобильных */
 }
 
 /* 4. Каждый отдельный блок (день, час, минута) */
@@ -2136,21 +2139,23 @@ body.detail_page .buy_block .btn.btn-default:hover {
 /* 5. Сами цифры таймера */
 /* Скрипт вставляет цифры прямо в .item, поэтому стилизуем его текст */
 .view_sale_block .values .item {
-    font-size: 22px;      /* Крупный размер для цифр */
+    font-size: 24px;      /* Крупный размер для цифр как на макете */
     font-weight: 600;     /* Полужирный */
     color: #285B4D;       /* Ваш фирменный зеленый */
     line-height: 1.1;
+    text-align: center;   /* Центрируем цифры */
 }
 
 /* 6. Подписи "Дней", "Час", "Мин" */
 /* Скрипт добавляет дочерний div с классом .text */
 .view_sale_block .values .item .text {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
-    color: #999999;     /* Светло-серый цвет */
+    color: #888888;     /* Светло-серый цвет как на макете */
     display: block;      /* Гарантирует, что подпись будет на новой строке */
-    margin-top: 4px;
+    margin-top: 6px;
     opacity: 1 !important; /* Убираем эффект прозрачности от темы */
+    line-height: 1.2;
 }
 
 /* 7. Убираем стандартные разделители-двоеточия, если они есть */
@@ -2158,6 +2163,114 @@ body.detail_page .buy_block .btn.btn-default:hover {
 .view_sale_block .values .item::after {
     display: none !important;
     content: none !important;
+}
+
+/* 8. Мобильная адаптивность для таймера */
+@media (max-width: 768px) {
+    .price-timer-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .price-payment-wrapper {
+        flex-direction: column; /* На мобильных цены и таймер в колонку */
+        gap: 15px;
+    }
+    
+    .price-payment-wrapper .prices_block {
+        flex-direction: column; /* На мобильных цены и таймер в колонку */
+        gap: 15px;
+    }
+    
+    .price-timer-container .view_sale_block {
+        align-self: center;
+    }
+    
+    .price-left-wrapper {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .dolyami-wrapper {
+        margin-top: 20px !important;
+    }
+    
+    .view_sale_block .count_d_block {
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    .view_sale_block .countdown.values {
+        gap: 10px;
+    }
+    
+    .view_sale_block .values .item {
+        font-size: 20px;
+    }
+    
+    .view_sale_block .values .item .text {
+        font-size: 11px;
+    }
+    
+    .buy_block,
+    .offer_buy_block {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+/* 9. Адаптивность для очень маленьких экранов */
+@media (max-width: 480px) {
+    .price-timer-container {
+        gap: 10px;
+    }
+    
+    .price-payment-wrapper {
+        gap: 10px;
+    }
+    
+    .price-payment-wrapper .prices_block {
+        gap: 10px;
+    }
+    
+    .view_sale_block .count_d_block {
+        padding: 12px;
+    }
+    
+    .view_sale_block .title {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+    
+    .view_sale_block .values .item {
+        font-size: 18px;
+    }
+    
+    .view_sale_block .values .item .text {
+        font-size: 10px;
+        margin-top: 4px;
+    }
+    
+    .view_sale_block .countdown.values {
+        gap: 8px;
+    }
+    
+    .dolyami-wrapper {
+        margin-top: 15px !important;
+    }
+    
+    .buy_block,
+    .offer_buy_block {
+        gap: 10px;
+    }
+    
+         /* Блок "В корзине у X человек" на мобильных */
+     .price-payment-wrapper .count-product-baskets-wrapper {
+         margin-top: 0px;
+         font-size: 14px;
+         padding: 8px 0;
+         order: 999; /* Обеспечиваем позицию внизу и на мобильных */
+     }
 }
 
 
@@ -2168,22 +2281,41 @@ body.detail_page .buy_block .btn.btn-default:hover {
 /* 1. Главный контейнер, который все выравнивает */
 .price-timer-container {
     display: flex;
-    justify-content: space-between; /* Расталкивает левый и правый блоки по краям */
-    align-items: flex-start;      /* Выравнивает по верху, если высота разная */
-    gap: 20px;                      /* Отступ между блоками */
-    margin-bottom: 30px;            /* Отступ до кнопок "В корзину" */
+    flex-direction: column;        /* <<== ИЗМЕНЕНО: Выстраиваем блоки в колонку */
+    gap: 20px;                     /* Отступ между блоками */
+    margin-bottom: 30px;           /* Отступ до следующего контента */
+    position: relative;            /* Для правильного позиционирования */
 }
 
 
 /* 3. Блок "Долями", добавляем отступ сверху */
 .price-payment-wrapper .dolyami-wrapper {
     margin-top: 24px !important; /* Отступ 24px, как на макете */
+    width: 100%;                  /* Занимает всю ширину */
 }
 
-/* 4. Правая колонка (таймер) */
+/* 4. Создаем контейнер для цен и таймера в одну строку */
+.price-payment-wrapper {
+    display: flex;
+    flex-direction: column;        /* <<== ИЗМЕНЕНО: Выстраиваем блоки в колонку */
+    gap: 20px;                     /* Отступ между блоками */
+    width: 100%;
+}
+
+/* 5. Контейнер для цен и таймера в одну строку */
+.price-payment-wrapper .prices_block {
+    display: flex;
+    justify-content: space-between; /* Расталкиваем цены и таймер по краям */
+    align-items: flex-start;       /* Выравниваем по верху */
+    gap: 30px;                     /* Отступ между блоками */
+    width: 100%;
+}
+
+/* 6. Правая колонка (таймер) */
 .price-timer-container .view_sale_block {
     flex-shrink: 0; /* Запрещаем таймеру сжиматься */
     margin-top: 0 !important; /* Сбрасываем старый отступ */
+    align-self: flex-start; /* Выравниваем по верху */
 }
 
 /* 5. (Опционально) Уточняем стили для цен, чтобы они были в одну строку */
@@ -2198,8 +2330,9 @@ body.detail_page .buy_block .btn.btn-default:hover {
 /* 1. Заставляем родительский контейнер выстраивать элементы в колонку */
 .price-payment-wrapper {
     display: flex;
-    flex-direction: column; /* <<== ГЛАВНОЕ ИЗМЕНЕНИЕ: меняем направление на вертикальное */
+    flex-direction: column; /* Выстраиваем цены и блок "Долями" в колонку */
     align-items: flex-start; /* Выравниваем все по левому краю */
+    width: 100%; /* Занимаем всю доступную ширину */
 }
 
 /* 2. Задаем отступ для блока "Долями", как на макете */
@@ -2208,12 +2341,13 @@ body.detail_page .buy_block .btn.btn-default:hover {
 }
 
 .price-left-wrapper {
-    width: 350px; /* <<== ЗАДАЙТЕ ЗДЕСЬ НУЖНУЮ ФИКСИРОВАННУЮ ШИРИНУ */
+    width: 400px; /* Увеличиваем ширину для лучшего баланса */
     
     /* Свойства ниже не меняем, они отвечают за внутреннее расположение */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex-shrink: 0; /* Запрещаем сжиматься */
 }
 
 .dolyami-wrapper .right{
@@ -2262,8 +2396,26 @@ body.detail_page .buy_block .btn.btn-default:hover {
     height: 100% !important;
 }
 
-.price-payment-wrapper .count-product-baskets-wrapper{
-    margin-top: 22px;
+/* Стили для блока "В корзине у X человек" под всеми кнопками */
+.price-payment-wrapper .count-product-baskets-wrapper {
+    margin-top: 0px; /* Отступ от блока кнопок */
+    text-align: center; /* Центрируем надпись */
+    width: 100%; /* Занимаем всю доступную ширину */
+    
+    font-size: 16px; /* Размер шрифта */
+    color: #555; /* Цвет текста */
+    
+    padding: 0px 0; /* Внутренние отступы для лучшего вида */
+    
+    /* Обеспечиваем правильное позиционирование независимо от наличия таймера */
+    order: 999; /* Ставим в конец flex-контейнера */
+}
+
+
+/* Альтернативный селектор для браузеров без поддержки :has() */
+.price-payment-wrapper .buy_block + .count-product-baskets-wrapper {
+    margin-top: 0px;
+    clear: both;
 }
 
 
@@ -2360,9 +2512,16 @@ body.detail_page .info_item .middle_info .prices_block {
 /* 1. Главный родительский контейнер для цен и кнопок */
 .price-payment-wrapper {
     /* ЗАСТАВЛЯЕМ ВНУТРЕННИЕ ЭЛЕМЕНТЫ ВЫСТРАИВАТЬСЯ В КОЛОНКУ */
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
     gap: 20px; /* Отступ между блоком цен и блоком кнопок */
+    width: 100%;
+    position: relative; /* Для правильного позиционирования дочерних элементов */
+}
+
+/* 1.1. Блок с кнопками внутри price-payment-wrapper */
+.price-payment-wrapper .buy_block {
+    margin-top: 20px; /* Отступ от блока с ценами */
 }
 
 /* 2. Контейнер, в котором лежат ВСЕ кнопки и счетчики */
@@ -2372,7 +2531,8 @@ body.detail_page .info_item .middle_info .prices_block {
     display: flex !important;
     align-items: center !important;
     gap: 15px !important;
-    width: 800px;
+    width: 100%; /* <<== ИЗМЕНЕНО: Занимаем всю доступную ширину */
+    max-width: 800px; /* <<== ДОБАВЛЕНО: Максимальная ширина */
     height: 60px; /* Задаем единую высоту для всех кнопок */
 }
 
