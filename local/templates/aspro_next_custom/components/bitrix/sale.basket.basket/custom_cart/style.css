@@ -3432,7 +3432,8 @@ tr.basket-items-list-item-container > td {
   max-width: calc(100% - 332px); /* Максимальная ширина = полная ширина минус ширина фото и отступ */
   display: flex;            /* Flex для вертикального расположения */
   flex-direction: column;   /* Элементы друг под другом */
-  gap: 12px;                /* Расстояние между элементами */
+  justify-content: space-between; /* Распределяем элементы: название сверху, цена снизу */
+  min-height: 300px;        /* Минимальная высота для выравнивания с изображением */
 }
 
 /* Название товара - обрезаем длинные названия */
@@ -3445,19 +3446,19 @@ tr.basket-items-list-item-container > td {
   margin-bottom: 0;         /* Убираем стандартный отступ */
 }
 
-/* Блок цены под названием товара */
+/* Блок цены внизу блока информации */
 .basket-item-price-under-name {
   display: flex;
   flex-direction: column;
   gap: 8px;
   align-items: flex-start;
-  margin-top: 20px; /* Больший отступ сверху от названия */
+  margin-top: auto; /* Автоматический отступ - прижимает к низу */
 }
 
 /* Блок экономии (сверху) */
 .basket-item-savings {
   font-size: 14px;
-  color: #666;
+  color: #285b4d;
   font-weight: 400;
   margin-bottom: 2px;
 }
@@ -3471,18 +3472,21 @@ tr.basket-items-list-item-container > td {
 
 /* Старая цена (зачеркнутая) */
 .basket-item-old-total-price {
-  font-size: 16px;
+  font-size: 18px;
   color: #999;
   text-decoration: line-through;
-  font-weight: 400;
+  font-weight: 500;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* Общая цена за количество */
 .basket-item-total-price {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
-  color: #2f3435;
+  color: #285B4D;
   line-height: 1.2;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: -0.5px;
 }
 
 /* Прячем оригинальный блок цены справа */
