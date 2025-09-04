@@ -107,6 +107,27 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 							{{/DETAIL_PAGE_URL}}
 						</h2>
 						
+						<!-- Блок цены под названием товара -->
+						<div class="basket-item-price-under-name">
+							{{#SHOW_DISCOUNT_PRICE}}
+								<div class="basket-item-savings">
+									Скидка <span id="basket-item-savings-{{ID}}">{{{SUM_DISCOUNT_PRICE_FORMATED}}}</span>
+								</div>
+								<div class="basket-item-prices-line">
+									<div class="basket-item-old-total-price">
+										<span id="basket-item-old-total-price-{{ID}}">{{{SUM_FULL_PRICE_FORMATED}}}</span>
+									</div>
+									<div class="basket-item-total-price">
+										<span id="basket-item-total-price-{{ID}}">{{{SUM_PRICE_FORMATED}}}</span>
+									</div>
+								</div>
+							{{/SHOW_DISCOUNT_PRICE}}
+							{{^SHOW_DISCOUNT_PRICE}}
+								<div class="basket-item-total-price">
+									<span id="basket-item-total-price-{{ID}}">{{{SUM_PRICE_FORMATED}}}</span>
+								</div>
+							{{/SHOW_DISCOUNT_PRICE}}
+						</div>
 
 						
 						{{#NOT_AVAILABLE}}
