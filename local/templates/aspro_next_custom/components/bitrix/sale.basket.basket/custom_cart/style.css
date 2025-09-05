@@ -801,9 +801,17 @@
 /* Контейнер для счётчика и цен */
 .basket-item-counter-price-container {
 	display: flex;
-	align-items: flex-start;
+	align-items: flex-end;
 	gap: 20px;
 	margin: 15px 0;
+	margin-top: auto;
+}
+
+/* Когда нет скидки, опускаем счётчик ниже */
+.basket-item-counter-price-container:not(:has(.basket-item-price-discount)) {
+	align-items: flex-start;
+	margin-top: auto;
+	padding-top: 20px;
 }
 
 /* Стили для счётчика количества в блоке информации о товаре */
@@ -813,6 +821,9 @@
 	align-items: center;
 	gap: 8px;
 	flex-shrink: 0;
+	background-color: #f5f5f5;
+	border-radius: 100px;
+	padding: 8px 12px;
 }
 
 .basket-item-counter-price-container .basket-item-amount-filed-block {
@@ -821,17 +832,113 @@
 
 .basket-item-counter-price-container .basket-item-amount-btn-minus {
 	order: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	position: relative;
+	border-radius: 4px;
+	transition: background-color 0.2s ease;
+}
+
+.basket-item-counter-price-container .basket-item-amount-btn-minus:hover {
+	background-color: transparent !important;
+	background: none !important;
+}
+
+.basket-item-counter-price-container .basket-item-amount-btn-minus:before {
+	content: '';
+	width: 12px;
+	height: 2px;
+	background-color: #666;
+	border-radius: 1px;
+}
+
+.basket-item-counter-price-container .basket-item-amount-btn-minus:hover:before {
+	background-color: #333;
 }
 
 .basket-item-counter-price-container .basket-item-amount-btn-plus {
 	order: 3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	position: relative;
+	border-radius: 4px;
+	transition: background-color 0.2s ease;
 }
 
-.basket-item-counter-price-container .basket-item-amount-field-description {
-	order: 4;
-	margin-left: 8px;
+
+
+.basket-item-counter-price-container .basket-item-amount-btn-plus:hover {
+	background-color: transparent !important;
+	background: none !important;
+}
+
+.basket-item-counter-price-container .basket-item-amount-btn-plus:before {
+	content: '';
+	width: 10px;
+	height: 2px;
+	background-color: #666;
+	border-radius: 1px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.basket-item-counter-price-container .basket-item-amount-btn-plus:after {
+	content: '';
+	width: 2px;
+	height: 10px;
+	background-color: #666;
+	border-radius: 1px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.basket-item-counter-price-container .basket-item-amount-btn-plus:hover:before,
+.basket-item-counter-price-container .basket-item-amount-btn-plus:hover:after {
+	background-color: #333;
+}
+
+
+
+.basket-item-counter-price-container .basket-item-amount-filed-block {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.basket-item-counter-price-container .basket-item-amount-filed {
+	height: auto;
+	font-size: 13px;
+	padding: 4px 8px;
+	max-width: 60px;
+	width: 100%;
+	border: none;
+	border-radius: 4px;
+	box-shadow: none;
+	color: #3a3a3a;
+	background-color: white;
+	text-align: center;
+}
+
+.basket-item-counter-price-container .basket-item-amount-unit {
 	font-size: 12px;
-	color: #666;
+	color: #999;
+	font-weight: 400;
 }
 
 /* Стили для блока с ценами в контейнере счётчика и цен */
@@ -839,8 +946,9 @@
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 12px;
 	align-items: flex-start;
+	justify-content: flex-end;
 }
 
 /* Контейнер для зачёркнутой и текущей цены в одной строке */
@@ -848,22 +956,28 @@
 	display: flex;
 	align-items: center;
 	gap: 10px;
-	order: 1;
+	order: 2;
 }
 
 .basket-item-counter-price-container .basket-item-block-price-inline .basket-item-price-old {
 	margin: 0;
 	position: static !important;
 	color: #999 !important;
-	font-size: 16px !important;
-	font-weight: 500 !important;
+	font-size: 14px !important;
+	font-weight: 400 !important;
+	text-decoration: line-through;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 }
 
 .basket-item-counter-price-container .basket-item-block-price-inline .basket-item-price-old .basket-item-price-old-text {
 	position: static !important;
-	font-size: 16px !important;
-	font-weight: 500 !important;
+	font-size: 32px !important;
+	font-weight: 400 !important;
 	color: #999 !important;
+	text-decoration: line-through;
 }
 
 .basket-item-counter-price-container .basket-item-block-price-inline .basket-item-price-old .basket-item-price-old-text:after {
@@ -873,20 +987,24 @@
 .basket-item-counter-price-container .basket-item-block-price-inline .basket-item-price-current {
 	font-size: 18px;
 	font-weight: 600;
-	color: #2f3435;
+	color: #285b4d;
 	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 }
 
-.basket-item-counter-price-container .basket-item-block-price-inline .basket-item-price-difference {
-	order: 2;
-	background-color: #ffeb3b;
-	padding: 5px 10px;
+.basket-item-counter-price-container .basket-item-block-price-inline .basket-item-price-discount {
+	order: 1;
+	background-color: #ffffff;
+	padding: 0px 0px;
 	border-radius: 4px;
-	font-size: 12px;
-	font-weight: bold;
-	color: #333;
+	font-size: 17px;
+	font-weight: 500;
+	color: #285b4d;
 	display: inline-block;
-	margin-top: 5px;
+	margin-bottom: 0px;
 }
 
 @media (max-width: 580px) {
@@ -1289,32 +1407,11 @@ h2.basket-item-info-name {
 	}
 }
 
-.basket-item-amount-btn-plus,
-.basket-item-amount-btn-minus {
-	position: relative;
-	width: 28px;
-	height: 28px;
-	cursor: pointer;
-	transition: 300ms all ease;
-	user-select: none;
-	padding: 9px;
-    box-sizing: border-box;
-    top: 4px
-}
 
-.basket-item-amount-btn-plus:hover,
-.basket-item-amount-btn-minus:hover {
-	background-color: #efefef;
-}
 
-.basket-item-block-amount.disabled .basket-item-amount-btn-plus,
-.basket-item-block-amount.disabled .basket-item-amount-btn-minus {
-	background-color: transparent;
-	cursor: default;
-}
 
-.basket-item-amount-btn-plus:before,
-.basket-item-amount-btn-plus:after,
+
+
 .basket-item-amount-btn-minus:after {
 	position: absolute;
 	top: 50%;
@@ -1341,10 +1438,10 @@ h2.basket-item-info-name {
 }
 
 .basket-item-amount-btn-plus:before {
-	margin-top: -5px;
-	margin-left: -1px;
+	margin-top: 0px;
+	margin-left: 0px;
 	width: 2px;
-	height: 10px;
+	height: 2px;
 }
 
 .basket-item-amount-field-description {
@@ -1425,7 +1522,7 @@ h2.basket-item-info-name {
 
 .basket-item-price-current-text {
 	letter-spacing: -.33px;
-	font: 400 20px/24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font: 400 32px/24px "Helvetica Neue", Helvetica, Arial, sans-serif;
 	transition: 180ms text-shadow ease, 180ms color ease;
 }
 
@@ -3648,6 +3745,24 @@ td.basket-items-list-item-remove {
 }
 
 
+.basket-item-counter-price-container input[type="text"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
+    background: #f5f5f5;
+    box-shadow: none;
+    color: #3a3a3a;
+	max-height: 66px;
+    height: 100%;
+    font-size: 13px;
+    padding: 8px 13px 7px;
+    max-width: 50px;
+    width: 100%;
+    border: unset;
+    border: 1px solid #d3d3d3;
+    border-radius: 100px;
+}
+
+.basket-item-block-price-inline{
+	margin-top: 12px;
+}
 
 
 

@@ -118,30 +118,9 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 										{{#NOT_AVAILABLE}} disabled="disabled"{{/NOT_AVAILABLE}}
 										data-value="{{QUANTITY}}" data-entity="basket-item-quantity-field"
 										id="basket-item-quantity-{{ID}}">
+									
 								</div>
 								<span class="basket-item-amount-btn-plus" data-entity="basket-item-quantity-plus"></span>
-								<div class="basket-item-amount-field-description">
-									<?
-									if ($arParams['PRICE_DISPLAY_MODE'] === 'Y')
-									{
-										?>
-										{{MEASURE_TEXT}}
-										<?
-									}
-									else
-									{
-										?>
-										{{#SHOW_PRICE_FOR}}
-											{{MEASURE_RATIO}} {{MEASURE_TEXT}} =
-											<span id="basket-item-price-{{ID}}">{{{PRICE_FORMATED}}}</span>
-										{{/SHOW_PRICE_FOR}}
-										{{^SHOW_PRICE_FOR}}
-											{{MEASURE_TEXT}}
-										{{/SHOW_PRICE_FOR}}
-										<?
-									}
-									?>
-								</div>
 								{{#SHOW_LOADING}}
 									<div class="basket-items-list-item-overlay"></div>
 								{{/SHOW_LOADING}}
@@ -149,6 +128,15 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 
 							<!-- Блок с ценами -->
 							<div class="basket-item-block-price-inline">
+								{{#SHOW_DISCOUNT_PRICE}}
+									<div class="basket-item-price-discount">
+										<?=Loc::getMessage('SBB_BASKET_ITEM_ECONOMY')?>
+										<span id="basket-item-sum-price-difference-{{ID}}" style="white-space: nowrap;">
+											{{{SUM_DISCOUNT_PRICE_FORMATED}}}
+										</span>
+									</div>
+								{{/SHOW_DISCOUNT_PRICE}}
+
 								<!-- Общие цены (сумма) -->
 								<div class="basket-item-price-row">
 									{{#SHOW_DISCOUNT_PRICE}}
@@ -165,15 +153,6 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 										</span>
 									</div>
 								</div>
-
-								{{#SHOW_DISCOUNT_PRICE}}
-									<div class="basket-item-price-difference">
-										<?=Loc::getMessage('SBB_BASKET_ITEM_ECONOMY')?>
-										<span id="basket-item-sum-price-difference-{{ID}}" style="white-space: nowrap;">
-											{{{SUM_DISCOUNT_PRICE_FORMATED}}}
-										</span>
-									</div>
-								{{/SHOW_DISCOUNT_PRICE}}
 							</div>
 						</div>
 
