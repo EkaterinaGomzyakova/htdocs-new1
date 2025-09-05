@@ -73,6 +73,7 @@ $APPLICATION->SetTitle("Корзина");
 			2 => "DELETE",
 			3 => "DELAY",
 			4 => "SUM",
+			5 => "PROPERTY_VOLUME",
 		],
 		"COLUMNS_LIST_MOBILE" => [
 			0 => "PREVIEW_PICTURE",
@@ -80,6 +81,7 @@ $APPLICATION->SetTitle("Корзина");
 			2 => "DELETE",
 			3 => "DELAY",
 			4 => "SUM",
+			5 => "PROPERTY_VOLUME",
 		],
 		"TOTAL_BLOCK_DISPLAY" => [
 			0 => "bottom",
