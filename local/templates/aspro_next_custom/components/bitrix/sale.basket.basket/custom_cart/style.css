@@ -3745,7 +3745,7 @@ td.basket-items-list-item-remove {
 }
 
 
-.basket-item-counter-price-container input[type="text"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
+.basket-item-counter-price-container input[type="text"], input[type="password"], input[type="email"], input[type="tel"]{
     background: #f5f5f5;
     box-shadow: none;
     color: #3a3a3a;
