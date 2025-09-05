@@ -798,12 +798,12 @@
 	min-height: 300px;
 }
 
-/* Контейнер для счётчика и цен */
+/* Контейнер для счётчика и цен - прижимаем к низу */
 .basket-item-counter-price-container {
 	display: flex;
 	align-items: flex-end;
 	gap: 20px;
-	margin: 15px 0;
+	margin: 15px 0 0 0;
 	margin-top: auto;
 }
 
@@ -3678,16 +3678,20 @@ td.basket-items-list-item-remove {
 /* ============== СКРЫТИЕ БЛОКОВ ВЫБОРА ТОВАРОВ И СКИДОК ========= */
 /* ================================================================ */
 
-/* Скрываем все блоки с выбором вариантов товара (размеры, цвета, и т.д.) */
-.basket-item-property,
-.basket-item-property-custom,
+/* Скрываем только блоки с выбором вариантов товара (размеры, цвета, и т.д.), но НЕ скрываем объем и другие важные свойства */
 .basket-item-property-scu-text,
 .basket-item-property-scu-image,
 .basket-item-scu-color,
 .basket-item-scu-list,
-.basket-item-scu-item,
-.basket-item-block-properties {
+.basket-item-scu-item {
     display: none !important;
+}
+
+/* Скрываем блоки свойств, но разрешаем отображение объема */
+.basket-item-block-properties {
+    display: flex !important;
+    flex-flow: column;
+    overflow: visible;
 }
 
 /* Скрываем блок с процентом скидки */
@@ -3714,13 +3718,9 @@ td.basket-items-list-item-remove {
     display: none !important;
 }
 
-/* Максимально агрессивные правила для скрытия блока скидки */
-.basket-item-property-custom.basket-item-property-custom-text,
+/* Скрываем только блоки скидки, но НЕ скрываем объем и другие важные свойства */
 .basket-item-property-custom[data-column-property-code="DISCOUNT"],
-.basket-item-property-custom:has([data-column-property-code="DISCOUNT"]),
-.basket-item-property-custom:has(.basket-item-property-custom-value:contains("Скидка")),
-.basket-item-property-custom:has(.basket-item-property-custom-name:contains("Скидка")),
-.basket-item-property-custom:has(.basket-item-property-custom-content:contains("Скидка")) {
+.basket-item-property-custom:has([data-column-property-code="DISCOUNT"]) {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
@@ -3732,16 +3732,48 @@ td.basket-items-list-item-remove {
     top: -9999px !important;
 }
 
-/* Скрываем все дочерние элементы блока скидки */
-.basket-item-property-custom[data-column-property-code="DISCOUNT"] *,
-.basket-item-property-custom.basket-item-property-custom-text * {
+/* Скрываем только дочерние элементы блока скидки */
+.basket-item-property-custom[data-column-property-code="DISCOUNT"] * {
     display: none !important;
     visibility: hidden !important;
 }
 
-/* Универсальное правило для скрытия всех блоков с текстом "Скидка" */
+/* Убираем универсальное правило, которое скрывало ВСЕ блоки с дополнительными свойствами, включая объем */
+
+/* Стили для отображения блока с объемом в новом месте (между названием и ценой) */
+.basket-item-block-properties {
+    display: flex !important;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+
+    justify-content: center;
+    flex-grow: 1;
+}
+
 .basket-item-property-custom {
-    display: none !important;
+    display: flex !important;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+.basket-item-property-custom-name {
+    color: var(--green_accent, #285B4D);
+    font-family: Onest;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 22.1px */
+    margin-bottom: 2px;
+}
+
+.basket-item-property-custom-value {
+    color: var(--green_accent, #285B4D);
+    font-family: Onest;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 22.1px */
 }
 
 
@@ -3764,6 +3796,12 @@ td.basket-items-list-item-remove {
 	margin-top: 12px;
 }
 
+
+
+.basket-item-property-custom-name{
+	display: none;
+
+}
 
 
 

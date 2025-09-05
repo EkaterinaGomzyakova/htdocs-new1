@@ -107,83 +107,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 							{{/DETAIL_PAGE_URL}}
 						</h2>
 						
-						<!-- Контейнер для счётчика и цен -->
-						<div class="basket-item-counter-price-container">
-							<!-- Блок счётчика количества товара -->
-							<div class="basket-item-block-amount{{#NOT_AVAILABLE}} disabled{{/NOT_AVAILABLE}}"
-								data-entity="basket-item-quantity-block">
-								<span class="basket-item-amount-btn-minus" data-entity="basket-item-quantity-minus"></span>
-								<div class="basket-item-amount-filed-block">
-									<input type="text" class="basket-item-amount-filed" value="{{QUANTITY}}"
-										{{#NOT_AVAILABLE}} disabled="disabled"{{/NOT_AVAILABLE}}
-										data-value="{{QUANTITY}}" data-entity="basket-item-quantity-field"
-										id="basket-item-quantity-{{ID}}">
-									
-								</div>
-								<span class="basket-item-amount-btn-plus" data-entity="basket-item-quantity-plus"></span>
-								{{#SHOW_LOADING}}
-									<div class="basket-items-list-item-overlay"></div>
-								{{/SHOW_LOADING}}
-							</div>
-
-							<!-- Блок с ценами -->
-							<div class="basket-item-block-price-inline">
-								{{#SHOW_DISCOUNT_PRICE}}
-									<div class="basket-item-price-discount">
-										<?=Loc::getMessage('SBB_BASKET_ITEM_ECONOMY')?>
-										<span id="basket-item-sum-price-difference-{{ID}}" style="white-space: nowrap;">
-											{{{SUM_DISCOUNT_PRICE_FORMATED}}}
-										</span>
-									</div>
-								{{/SHOW_DISCOUNT_PRICE}}
-
-								<!-- Общие цены (сумма) -->
-								<div class="basket-item-price-row">
-									{{#SHOW_DISCOUNT_PRICE}}
-										<div class="basket-item-price-old">
-											<span class="basket-item-price-old-text" id="basket-item-sum-price-old-{{ID}}">
-												{{{SUM_FULL_PRICE_FORMATED}}}
-											</span>
-										</div>
-									{{/SHOW_DISCOUNT_PRICE}}
-
-									<div class="basket-item-price-current">
-										<span class="basket-item-price-current-text" id="basket-item-sum-price-{{ID}}">
-											{{{SUM_PRICE_FORMATED}}}
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						
-						{{#NOT_AVAILABLE}}
-							<div class="basket-items-list-item-warning-container">
-								<div class="alert alert-warning text-center">
-									<?=Loc::getMessage('SBB_BASKET_ITEM_NOT_AVAILABLE')?>.
-								</div>
-							</div>
-						{{/NOT_AVAILABLE}}
-						{{#DELAYED}}
-							<div class="basket-items-list-item-warning-container">
-								<div class="alert alert-warning text-center">
-									<?=Loc::getMessage('SBB_BASKET_ITEM_DELAYED')?>.
-									<a href="javascript:void(0)" data-entity="basket-item-remove-delayed">
-										<?=Loc::getMessage('SBB_BASKET_ITEM_REMOVE_DELAYED')?>
-									</a>
-								</div>
-							</div>
-						{{/DELAYED}}
-						{{#WARNINGS.length}}
-							<div class="basket-items-list-item-warning-container">
-								<div class="alert alert-warning alert-dismissable" data-entity="basket-item-warning-node">
-									<span class="close" data-entity="basket-item-warning-close">&times;</span>
-										{{#WARNINGS}}
-											<div data-entity="basket-item-warning-text">{{{.}}}</div>
-										{{/WARNINGS}}
-								</div>
-							</div>
-						{{/WARNINGS.length}}
+						<!-- Блок с дополнительными свойствами (объем) -->
 						<div class="basket-item-block-properties">
 							<?
 							if (!empty($arParams['PRODUCT_BLOCKS_ORDER']))
@@ -353,6 +277,83 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 							?>
 						</div>
 						
+						<!-- Контейнер для счётчика и цен -->
+						<div class="basket-item-counter-price-container">
+							<!-- Блок счётчика количества товара -->
+							<div class="basket-item-block-amount{{#NOT_AVAILABLE}} disabled{{/NOT_AVAILABLE}}"
+								data-entity="basket-item-quantity-block">
+								<span class="basket-item-amount-btn-minus" data-entity="basket-item-quantity-minus"></span>
+								<div class="basket-item-amount-filed-block">
+									<input type="text" class="basket-item-amount-filed" value="{{QUANTITY}}"
+										{{#NOT_AVAILABLE}} disabled="disabled"{{/NOT_AVAILABLE}}
+										data-value="{{QUANTITY}}" data-entity="basket-item-quantity-field"
+										id="basket-item-quantity-{{ID}}">
+									
+								</div>
+								<span class="basket-item-amount-btn-plus" data-entity="basket-item-quantity-plus"></span>
+								{{#SHOW_LOADING}}
+									<div class="basket-items-list-item-overlay"></div>
+								{{/SHOW_LOADING}}
+							</div>
+
+							<!-- Блок с ценами -->
+							<div class="basket-item-block-price-inline">
+								{{#SHOW_DISCOUNT_PRICE}}
+									<div class="basket-item-price-discount">
+										<?=Loc::getMessage('SBB_BASKET_ITEM_ECONOMY')?>
+										<span id="basket-item-sum-price-difference-{{ID}}" style="white-space: nowrap;">
+											{{{SUM_DISCOUNT_PRICE_FORMATED}}}
+										</span>
+									</div>
+								{{/SHOW_DISCOUNT_PRICE}}
+
+								<!-- Общие цены (сумма) -->
+								<div class="basket-item-price-row">
+									{{#SHOW_DISCOUNT_PRICE}}
+										<div class="basket-item-price-old">
+											<span class="basket-item-price-old-text" id="basket-item-sum-price-old-{{ID}}">
+												{{{SUM_FULL_PRICE_FORMATED}}}
+											</span>
+										</div>
+									{{/SHOW_DISCOUNT_PRICE}}
+
+									<div class="basket-item-price-current">
+										<span class="basket-item-price-current-text" id="basket-item-sum-price-{{ID}}">
+											{{{SUM_PRICE_FORMATED}}}
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						
+						{{#NOT_AVAILABLE}}
+							<div class="basket-items-list-item-warning-container">
+								<div class="alert alert-warning text-center">
+									<?=Loc::getMessage('SBB_BASKET_ITEM_NOT_AVAILABLE')?>.
+								</div>
+							</div>
+						{{/NOT_AVAILABLE}}
+						{{#DELAYED}}
+							<div class="basket-items-list-item-warning-container">
+								<div class="alert alert-warning text-center">
+									<?=Loc::getMessage('SBB_BASKET_ITEM_DELAYED')?>.
+									<a href="javascript:void(0)" data-entity="basket-item-remove-delayed">
+										<?=Loc::getMessage('SBB_BASKET_ITEM_REMOVE_DELAYED')?>
+									</a>
+								</div>
+							</div>
+						{{/DELAYED}}
+						{{#WARNINGS.length}}
+							<div class="basket-items-list-item-warning-container">
+								<div class="alert alert-warning alert-dismissable" data-entity="basket-item-warning-node">
+									<span class="close" data-entity="basket-item-warning-close">&times;</span>
+										{{#WARNINGS}}
+											<div data-entity="basket-item-warning-text">{{{.}}}</div>
+										{{/WARNINGS}}
+								</div>
+							</div>
+						{{/WARNINGS.length}}
 
 					</div>
 					{{#SHOW_LOADING}}

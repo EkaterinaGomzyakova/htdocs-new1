@@ -64,7 +64,7 @@ $APPLICATION->SetTitle("Корзина");
 		"GIFTS_CONVERT_CURRENCY" => "N",
 		"GIFTS_HIDE_NOT_AVAILABLE" => "Y",
 		"DEFERRED_REFRESH" => "Y",
-		"USE_DYNAMIC_SCROLL" => "N",
+		"USE_DYNAMIC_SCROLL" => "Y",
 		"SHOW_FILTER" => "N",
 		"SHOW_RESTORE" => "Y",
 		"COLUMNS_LIST_EXT" => [
