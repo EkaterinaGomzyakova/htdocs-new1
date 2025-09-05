@@ -798,9 +798,116 @@
 	min-height: 300px;
 }
 
+/* Контейнер для счётчика и цен */
+.basket-item-counter-price-container {
+	display: flex;
+	align-items: flex-start;
+	gap: 20px;
+	margin: 15px 0;
+}
+
+/* Стили для счётчика количества в блоке информации о товаре */
+.basket-item-counter-price-container .basket-item-block-amount {
+	margin: 0;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-shrink: 0;
+}
+
+.basket-item-counter-price-container .basket-item-amount-filed-block {
+	order: 2;
+}
+
+.basket-item-counter-price-container .basket-item-amount-btn-minus {
+	order: 1;
+}
+
+.basket-item-counter-price-container .basket-item-amount-btn-plus {
+	order: 3;
+}
+
+.basket-item-counter-price-container .basket-item-amount-field-description {
+	order: 4;
+	margin-left: 8px;
+	font-size: 12px;
+	color: #666;
+}
+
+/* Стили для блока с ценами в контейнере счётчика и цен */
+.basket-item-counter-price-container .basket-item-block-price-inline {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	align-items: flex-start;
+}
+
+/* Контейнер для зачёркнутой и текущей цены в одной строке */
+.basket-item-counter-price-container .basket-item-price-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	order: 1;
+}
+
+.basket-item-counter-price-container .basket-item-block-price-inline .basket-item-price-old {
+	margin: 0;
+	position: static !important;
+	color: #999 !important;
+	font-size: 16px !important;
+	font-weight: 500 !important;
+}
+
+.basket-item-counter-price-container .basket-item-block-price-inline .basket-item-price-old .basket-item-price-old-text {
+	position: static !important;
+	font-size: 16px !important;
+	font-weight: 500 !important;
+	color: #999 !important;
+}
+
+.basket-item-counter-price-container .basket-item-block-price-inline .basket-item-price-old .basket-item-price-old-text:after {
+	display: none !important;
+}
+
+.basket-item-counter-price-container .basket-item-block-price-inline .basket-item-price-current {
+	font-size: 18px;
+	font-weight: 600;
+	color: #2f3435;
+	margin: 0;
+}
+
+.basket-item-counter-price-container .basket-item-block-price-inline .basket-item-price-difference {
+	order: 2;
+	background-color: #ffeb3b;
+	padding: 5px 10px;
+	border-radius: 4px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333;
+	display: inline-block;
+	margin-top: 5px;
+}
+
 @media (max-width: 580px) {
 	.basket-item-block-info {
 		max-width: 50%;
+	}
+	
+	/* Адаптивные стили для контейнера счётчика и цен */
+	.basket-item-counter-price-container {
+		flex-direction: column;
+		gap: 15px;
+		align-items: flex-start;
+	}
+	
+	.basket-item-counter-price-container .basket-item-block-amount {
+		align-self: flex-start;
+	}
+	
+	.basket-item-counter-price-container .basket-item-block-price-inline {
+		align-self: flex-start;
+		width: 100%;
 	}
 }
 
@@ -3338,9 +3445,6 @@ body.bx-theme-yellow .catalog-block-header {
 
 
 
-.basket-items-list-item-container{
-
-}
 
 /* ================================================================ */
 /* ============== НАЧАЛО СТИЛЕЙ ДЛЯ НОВОЙ КОРЗИНЫ ================= */
