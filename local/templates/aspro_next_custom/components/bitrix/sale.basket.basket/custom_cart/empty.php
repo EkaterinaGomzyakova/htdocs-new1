@@ -3,24 +3,23 @@
 use Bitrix\Main\Localization\Loc;
 ?>
 <div class="bx-sbb-empty-cart-container">
-	<div class="bx-sbb-empty-cart-image">
-		<img src="<?= $this->__folder?>/images/empty_cart.svg" alt="Empty cart">
+	<!-- Заголовок корзины -->
+	<div class="basket-main-header">
+		<h2 class="basket-main-header__title">Корзина</h2>
 	</div>
-	<div class="bx-sbb-empty-cart-text"><?=Loc::getMessage("SBB_EMPTY_BASKET_TITLE")?></div>
-	<?
-	if (!empty($arParams['EMPTY_BASKET_HINT_PATH']))
-	{
-		?>
-		<div class="bx-sbb-empty-cart-desc">
-			<?=Loc::getMessage(
-				'SBB_EMPTY_BASKET_HINT',
-				[
-					'#A1#' => '<a href="'.$arParams['EMPTY_BASKET_HINT_PATH'].'">',
-					'#A2#' => '</a>',
-				]
-			)?>
-		</div>
+	
+	<!-- Сообщение о пустой корзине -->
+	<div class="bx-sbb-empty-cart-text">В корзине пока пусто</div>
+	
+	<div class="bx-sbb-empty-cart-desc">
+		Посмотрите в каталоге, у нас много интересного!
+	</div>
+	
+	<!-- Блок с товарами, которые ранее смотрели -->
+	<div class="basket-recommendations-container">
 		<?
-	}
-	?>
+		// Подключаем блок с просмотренными товарами как в основном индексе
+		include($_SERVER['DOCUMENT_ROOT'] . "/include/footer/comp_viewed.php");
+		?>
+	</div>
 </div>

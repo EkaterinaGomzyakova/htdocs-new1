@@ -225,15 +225,12 @@ if (empty($arResult['ERROR_MESSAGE']))
 						<?= $goodsCount ?> <?= $goodsMessage ?>
 					</span>
 				<? endif; ?>
-			</div>
-			
-			<? if ($goodsCount > 0): ?>
-				<div class="basket-clear-all-container">
+				<? if ($goodsCount > 0): ?>
 					<button type="button" class="basket-clear-all-btn" onclick="clearAllBasketItems()" title="Очистить корзину">
 						<img src="/local/templates/aspro_next_custom/images/Trash_Empty.svg" alt="Очистить корзину" class="basket-clear-all-btn-image">
 					</button>
-				</div>
-			<? endif; ?>
+				<? endif; ?>
+			</div>
 
 			<? // --- КОНЕЦ НОВОГО БЛОКА --- ?>
 

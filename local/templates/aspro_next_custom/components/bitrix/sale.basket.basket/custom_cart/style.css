@@ -3453,14 +3453,15 @@ body.bx-theme-yellow .catalog-block-header {
 
 .basket-main-header {
   display: flex;
-  align-items: baseline; /* Выравнивает текст по базовой линии */
+  align-items: center;   /* Выравнивает все элементы по центру */
+  justify-content: space-between; /* Распределяет элементы по ширине */
   margin-bottom: 25px;   /* Отступ снизу до списка товаров */
   padding-bottom: 15px;  /* Отступ до нижней границы */
   border-bottom: 0px solid #f2f2f2; /* Разделительная линия */
 }
 
 .basket-main-header__title {
-  font-size: 32px;
+  font-size: 60px;
   font-weight: 600;      /* Полужирное начертание */
   line-height: 1.2;
   margin: 0 15px 0 0;  /* Убираем стандартные отступы и добавляем справа */
@@ -3471,12 +3472,7 @@ body.bx-theme-yellow .catalog-block-header {
   font-size: 16px;
   font-weight: 400;      /* Обычное начертание */
   color: #6c757d;       /* Серый цвет текста */
-}
-
-.basket-clear-all-container {
-  display: flex;
-  justify-content: flex-end; /* Прижимаем кнопку к правому краю */
-  margin-bottom: 15px;       /* Отступ снизу */
+  margin-right: auto;    /* Прижимает счетчик к левой части, а кнопку к правой */
 }
 
 .basket-clear-all-btn {
@@ -4095,6 +4091,65 @@ div#basket-root div.row {
 
 .footer_inner{
 	margin-top: 100px;
+}
+
+/* ================================================================ */
+/* ============== СТИЛИ ДЛЯ ПУСТОЙ КОРЗИНЫ ======================== */
+/* ================================================================ */
+
+.bx-sbb-empty-cart-container {
+  padding: 0px 0;
+}
+
+.bx-sbb-empty-cart-container .basket-main-header {
+  margin-bottom: 20px;
+}
+
+.bx-sbb-empty-cart-text {
+  font-size: 44px;
+  font-weight: 500;
+  color: #2f3435;
+  text-align: center;
+  margin-bottom: 40px;
+  margin-top: 130px;
+}
+
+.bx-sbb-empty-cart-desc {
+  font-size: 17px;
+  color: #6c757d;
+  text-align: center;
+  margin-bottom: 130px;
+}
+
+.basket-recommendations-container {
+  margin-top: 30px;
+}
+
+.basket-recommendations-container .catalog-section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2f3435;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .bx-sbb-empty-cart-text {
+    font-size: 16px;
+  }
+  
+  .bx-sbb-empty-cart-desc {
+    font-size: 14px;
+  }
+  
+  .basket-recommendations-container .catalog-section-title {
+    font-size: 20px;
+  }
+}
+
+
+.bx-sbb-empty-cart-container{
+	margin-bottom: 130px;
 }
 
 
