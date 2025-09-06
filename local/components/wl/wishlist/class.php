@@ -38,6 +38,10 @@ class WishList extends CBitrixComponent
                         $result['count_items'] = $this->getCountItems();
                         $result['text'] = 'Товар удален из <a href="/personal/wishlist/" target="blank">Избранного</a>';
                         break;
+                    case 'check':
+                        $ids = $request->get('ids');
+                        $result['wishlist_ids'] = \WL\WishList::checkItems($ids);
+                        break;
                 }
             } catch (Exception $exception) {
                 $result['success'] = false;

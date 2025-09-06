@@ -472,6 +472,15 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 				?>
 				<td class="basket-items-list-item-remove hidden-xs">
 					<div class="basket-item-block-actions">
+						<!-- Кнопки избранного -->
+						<div class="basket-item-wishlist-buttons">
+							<div class="wish_item_button">
+								<span title="Добавить в избранное" class="wish_item to" data-item="{{PRODUCT_ID}}" data-iblock="2"><i></i></span>
+								<span title="Удалить из избранного" class="wish_item in added" style="display: none;" data-item="{{PRODUCT_ID}}" data-iblock="2"><i></i></span>
+							</div>
+						</div>
+						
+						<!-- Кнопка удаления -->
 						<span class="basket-item-actions-remove" data-entity="basket-item-delete"></span>
 						{{#SHOW_LOADING}}
 							<div class="basket-items-list-item-overlay"></div>

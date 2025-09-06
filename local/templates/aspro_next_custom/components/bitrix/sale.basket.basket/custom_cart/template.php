@@ -363,6 +363,102 @@ $arBasketJSParams = array(
             }
         }, 500);
         
-
+        // Инициализация состояния избранного в корзине
+        function updateWishlistButtons() {
+            console.log('Проверяем кнопки избранного в корзине...');
+            
+            // Получаем все кнопки избранного в корзине
+            var wishlistButtons = document.querySelectorAll('.basket-item-wishlist-buttons .wish_item');
+            console.log('Найдено кнопок избранного:', wishlistButtons.length);
+            
+            var productIds = [];
+            
+            // Собираем ID товаров из кнопок избранного
+            wishlistButtons.forEach(function(button) {
+                var productId = button.getAttribute('data-item');
+                console.log('Найден товар с ID:', productId);
+                if (productId && productIds.indexOf(productId) === -1) {
+                    productIds.push(productId);
+                }
+            });
+            
+            console.log('Список ID товаров для проверки:', productIds);
+            
+            if (productIds.length > 0) {
+                // AJAX запрос для получения списка избранных товаров
+                fetch('/ajax/wishlist.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'action=check&component=wishlist&mode=ajax&ids=' + productIds.join(',')
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.wishlist_ids) {
+                        console.log('Найдены товары в избранном:', data.wishlist_ids);
+                        // Обновляем состояние кнопок
+                        data.wishlist_ids.forEach(function(productId) {
+                            var toButton = document.querySelector('.basket-item-wishlist-buttons .wish_item.to[data-item="' + productId + '"]');
+                            var inButton = document.querySelector('.basket-item-wishlist-buttons .wish_item.in[data-item="' + productId + '"]');
+                            
+                            if (toButton && inButton) {
+                                console.log('Обновляем состояние кнопок для товара:', productId);
+                                toButton.style.display = 'none';
+                                inButton.style.display = 'flex';
+                            } else {
+                                console.log('Кнопки не найдены для товара:', productId);
+                            }
+                        });
+                    } else {
+                        console.log('Нет товаров в избранном или ошибка:', data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка при загрузке избранного:', error);
+                });
+            }
+        }
+        
+        // Обновляем состояние при загрузке страницы
+        setTimeout(updateWishlistButtons, 1000);
+        setTimeout(updateWishlistButtons, 2000); // Дополнительная проверка через 2 секунды
+        setTimeout(updateWishlistButtons, 3000); // Еще одна проверка через 3 секунды
+        
+        // Обновляем состояние при изменении корзины
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList') {
+                    setTimeout(updateWishlistButtons, 500);
+                }
+            });
+        });
+        
+        var basketContainer = document.getElementById('basket-item-list');
+        if (basketContainer) {
+            observer.observe(basketContainer, {
+                childList: true,
+                subtree: true
+            });
+        }
+        
+        // Дополнительная проверка при изменении видимости корзины
+        var basketRoot = document.getElementById('basket-root');
+        if (basketRoot) {
+            var basketObserver = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                        var opacity = basketRoot.style.opacity;
+                        if (opacity === '1' || opacity === '') {
+                            setTimeout(updateWishlistButtons, 100);
+                        }
+                    }
+                });
+            });
+            basketObserver.observe(basketRoot, {
+                attributes: true,
+                attributeFilter: ['style']
+            });
+        }
     });
 </script>

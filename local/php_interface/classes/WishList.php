@@ -36,6 +36,10 @@ class WishList
                     case 'remove':
                         self::remove($request->get('id'));
                         break;
+                    case 'check':
+                        $ids = $request->get('ids');
+                        $result['wishlist_ids'] = self::checkItems($ids);
+                        break;
                     case 'load':
 
                         break;
@@ -133,6 +137,33 @@ class WishList
         }else{
             $result = [];
         }
+        return $result;
+    }
+
+    /**
+     * Проверка нескольких товаров на наличие в избранном
+     * @param array $productIDs
+     * @return array
+     */
+    public static function checkItems($productIDs)
+    {
+        global $USER;
+        $result = [];
+        
+        if($USER->IsAuthorized() && !empty($productIDs)){
+            $ids = is_array($productIDs) ? $productIDs : explode(',', $productIDs);
+            $filter = [
+                'IBLOCK_ID' => FAVORITES_IBLOCK_ID, 
+                'PROPERTY_PRODUCT_ID' => $ids, 
+                'PROPERTY_USER_ID' => $USER->GetID()
+            ];
+            
+            $rows = CIBlockElement::GetList([], $filter, false, false, ['ID', 'PROPERTY_PRODUCT_ID']);
+            while ($row = $rows->fetch()) {
+                $result[] = $row['PROPERTY_PRODUCT_ID_VALUE'];
+            }
+        }
+        
         return $result;
     }
 }
