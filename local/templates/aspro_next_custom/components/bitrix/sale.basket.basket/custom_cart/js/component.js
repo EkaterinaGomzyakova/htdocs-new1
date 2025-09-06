@@ -9,7 +9,7 @@
 		stickyHeaderOffset: 0,
 
 		duration: {
-			priceAnimation: 300,
+			priceAnimation: 100,
 			filterTimer: 300
 		},
 
@@ -565,6 +565,7 @@
 
 			BX.bind(this.getEntity(node, 'basket-coupon-input'), 'change', BX.proxy(this.addCouponAction, this));
 			BX.bind(this.getEntity(node, 'basket-coupon-input'), 'paste', BX.proxy(this.pasteCouponAction, this));
+			BX.bind(this.getEntity(node, 'basket-coupon-input'), 'keypress', BX.proxy(this.couponKeypressAction, this));
 
 			var couponNodes = this.getEntities(node, 'basket-coupon-delete');
 			for (var i = 0, l = couponNodes.length; i < l; i++)
@@ -594,6 +595,14 @@
 			setTimeout(BX.delegate(function() {
 				this.addCouponAction(event);
 			}, this), 10);
+		},
+
+		couponKeypressAction: function(event)
+		{
+			if (event.keyCode === 13 || event.which === 13) { // Enter key
+				event.preventDefault();
+				this.addCouponAction(event);
+			}
 		},
 
 		removeCouponAction: function()

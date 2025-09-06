@@ -408,7 +408,9 @@ $totalData = array(
 	'PRICE' => $result['allSum'],
 	'PRICE_FORMATED' => $result['allSum_FORMATED'],
 	'PRICE_WITHOUT_DISCOUNT_FORMATED' => $result['PRICE_WITHOUT_DISCOUNT'],
-	'CURRENCY' => $result['CURRENCY']
+	'CURRENCY' => $result['CURRENCY'],
+	'BASKET_ITEMS_COUNT' => $result['BASKET_ITEMS_COUNT'],
+	'BONUS_POINTS' => round($result['allSum'] * 0.02) // 2% от суммы заказа
 );
 
 if ($result['DISCOUNT_PRICE_ALL'] > 0)

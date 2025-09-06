@@ -3310,114 +3310,60 @@ body.bx-theme-yellow .catalog-block-header {
 
 /* Основная карточка */
 .checkout-card {
-    background-color: var(--surface-color);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: none;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Расстояние между секциями */
+    gap: 15px;
 }
 
-/* Заголовок "Ваш заказ" */
-.checkout-card_header {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--primary-color);
-}
-
-/* Блок с детализацией цен */
-.checkout-card_details {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* Каждая строка (Товары, Скидка, Доставка) */
-.checkout-card_line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 15px;
-}
-.checkout-card_line span:first-child {
-    color: var(--secondary-color);
-}
-.checkout-card_line span:last-child {
-    font-weight: 500;
-    color: var(--primary-color);
-}
-.checkout-card_line.discount span:last-child {
-    color: var(--success-color);
-}
-.checkout-card_line.delivery span:last-child {
-    font-size: 14px;
-    color: var(--secondary-color);
-}
-
-/* Стиль для надписи "Рассчитывается далее" (теперь красный) */
-
-.checkout-card_line.delivery span:last-child {
-    color: #e74c3c;
-    border-bottom: 1px dashed #e74c3c; 
+/* Количество товаров */
+.checkout-card_items-count {
+    font-size: 16px;
+    color: #495057;
+    font-weight: 400;
 }
 
 /* Блок "Итого" */
 .checkout-card_total {
-    padding-top: 20px;
-    border-top: 1px solid var(--border-color);
+    padding: 0;
+    border: none;
 }
-.checkout-card_line.total span {
-    font-size: 22px;
+.checkout-card_line.total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #495057;
+}
+.checkout-card_line.total span:first-child {
+    color: #495057;
+}
+.checkout-card_line.total span:last-child {
+    color: #495057;
 }
 
-/* --- Стили для блока промокода с кнопкой внутри --- */
+/* --- Стили для блока промокода --- */
 
 .checkout-card_promo {
-    padding-top: 20px;
-    border-top: 1px solid var(--border-color);
-}
-
-/* Контейнер для поля и кнопки */
-.checkout-card_promo .form-group {
-    position: relative; /* Создаем контекст для позиционирования кнопки */
+    padding: 0;
+    border: none;
 }
 
 /* Поле для ввода промокода */
 .checkout-card_promo .form-control {
     width: 100%;
-    border: 1px solid var(--border-color);
-    background-color: #fff;
-    padding: 14px 130px 14px 20px; /* Увеличили правый отступ для кнопки */
-    border-radius: 30px;
+    border: 1px solid #e9ecef;
+    background-color: #f8f9fa;
+    padding: 12px 15px;
+    border-radius: 8px;
     font-size: 14px;
-    height: 50px; /* Задаем фиксированную высоту */
-    box-sizing: border-box; /* Чтобы padding не влиял на общую высоту */
-}
-
-/* Кнопка "Применить" */
-.checkout-card_promo .btn-promo {
-    position: absolute;     /* Позиционируем абсолютно */
-    top: 5px;               /* Отступ сверху внутри поля */
-    right: 5px;             /* Отступ справа внутри поля */
-    bottom: 5px;            /* Отступ снизу внутри поля */
-    
-    border: none;
-    background-color: var(--secondary-color);
-    color: white;
-    font-weight: 600;
-    border-radius: 30px; /* Скругляем саму кнопку */
-    padding: 0 25px;    /* Отступы по бокам */
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    white-space: nowrap;
-}
-
-.checkout-card_promo .btn-promo:hover {
-    background-color: var(--primary-color);
+    height: 45px;
+    box-sizing: border-box;
 }
 
 /* Стили для примененных купонов */
@@ -3434,27 +3380,34 @@ body.bx-theme-yellow .catalog-block-header {
     text-decoration: underline;
     color: var(--secondary-color);
 }
-/* --- Кнопка "Оформить заказ" --- */
+/* Бонусные баллы */
+.checkout-card_bonus {
+    font-size: 14px;
+    color: #495057;
+    font-weight: 400;
+}
+
+/* --- Кнопка "Перейти к оформлению" --- */
 
 .checkout-card_button-wrapper .btn-checkout {
     width: 100%;
-    background-color: var(--primary-color); /* Этот цвет теперь зеленый */
+    background-color: #285b4d;
     color: white;
     border: none;
-    padding: 16px;
+    padding: 14px;
     font-size: 16px;
     font-weight: 600;
-    border-radius: 30px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 .checkout-card_button-wrapper .btn-checkout:hover {
-    background-color: #2ecc71; /* ИЗМЕНЕНО: Более светлый зеленый для hover */
+    background-color: #285b4d;
 }
 
 .checkout-card_button-wrapper .btn-checkout.disabled {
-    background-color: var(--secondary-color);
+    background-color: #6c757d;
     cursor: not-allowed;
 }
 /* --- Стили для строки с бонусными баллами --- */
@@ -3522,6 +3475,7 @@ body.bx-theme-yellow .catalog-block-header {
 
 .col-xs-3 {
 	padding-top: 3%;
+	width: 32% !important;
 }
 
 
@@ -3538,6 +3492,7 @@ body.bx-theme-yellow .catalog-block-header {
 
 .col-xs-9 {
 	padding-left: 0 !important;
+	width: 68% !important;
 }
 
 

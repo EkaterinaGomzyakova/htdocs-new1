@@ -9,35 +9,9 @@ use Bitrix\Main\Localization\Loc;
 <script id="basket-total-template" type="text/html">
     <div class="checkout-card" data-entity="basket-checkout-aligner">
 
-        <div class="checkout-card_header">
-            <span>Ваш заказ</span>
-        </div>
-
-        <div class="checkout-card_details">
-            <div class="checkout-card_line">
-                <span>Товары, шт</span>
-                <span>{{{PRICE_WITHOUT_DISCOUNT_FORMATED}}}</span>
-            </div>
-
-            {{#DISCOUNT_PRICE_FORMATED}}
-            <div class="checkout-card_line discount">
-                <span>Скидка</span>
-                <span>- {{{DISCOUNT_PRICE_FORMATED}}}</span>
-            </div>
-            {{/DISCOUNT_PRICE_FORMATED}}
-            
-            <div class="checkout-card_line delivery">
-                <span>Доставка</span>
-                <span>Рассчитывается далее</span>
-            </div>
-        </div>
-
         <? if ($arParams['HIDE_COUPON'] !== 'Y') { ?>
         <div class="checkout-card_promo">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Введите промокод" data-entity="basket-coupon-input">
-                <button class="btn btn-promo" data-entity="basket-coupon-apply-button">Применить</button>
-            </div>
+            <input type="text" class="form-control" placeholder="Промокод" data-entity="basket-coupon-input">
             <div class="basket-coupon-alert-section">
                 <div class="basket-coupon-alert-inner">
                     {{#COUPON_LIST}}
@@ -55,16 +29,25 @@ use Bitrix\Main\Localization\Loc;
         </div>
         <? } ?>
 
+        <div class="checkout-card_items-count">
+            <span>{{{BASKET_ITEMS_COUNT}}} товара</span>
+        </div>
+
         <div class="checkout-card_total">
             <div class="checkout-card_line total">
                 <span>Итого</span>
                 <span data-entity="basket-total-price">{{{PRICE_FORMATED}}}</span>
             </div>
         </div>
+
+        <div class="checkout-card_bonus">
+            <span>Будет начислено {{BONUS_POINTS}} баллов</span>
+        </div>
+
         <div class="checkout-card_button-wrapper">
             <button class="btn btn-checkout{{#DISABLE_CHECKOUT}} disabled{{/DISABLE_CHECKOUT}}"
                     data-entity="basket-checkout-button">
-                Оформить заказ
+                Перейти к оформлению
             </button>
         </div>
 

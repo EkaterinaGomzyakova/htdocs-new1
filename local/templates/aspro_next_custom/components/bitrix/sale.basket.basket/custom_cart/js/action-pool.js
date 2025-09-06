@@ -191,7 +191,7 @@
 
 		if (!this.isPoolEmpty())
 		{
-			this.updateTimer = setTimeout(BX.proxy(this.trySendPool, this), 300);
+			this.updateTimer = setTimeout(BX.proxy(this.trySendPool, this), 100);
 		}
 		else if (!this.getRefreshStatus())
 		{
