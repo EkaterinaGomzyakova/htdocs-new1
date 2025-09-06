@@ -95,6 +95,25 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 							<?
 						}
 						?>
+						<!-- Блок с текстовым свойством (кроме объема) - РАЗМЕЩЕН ВЫШЕ НАЗВАНИЯ -->
+						{{#COLUMN_LIST}}
+							{{#IS_TEXT}}
+								{{^IS_VOLUME}}
+									{{^IS_VOLUME_PROPERTY}}
+										<div class="high_basket-item-property-custom basket-item-property-custom-text
+											{{#HIDE_MOBILE}}hidden-xs{{/HIDE_MOBILE}}"
+											data-entity="basket-item-property">
+											<div class="basket-item-property-custom-value"
+												data-column-property-code="{{CODE}}"
+												data-entity="basket-item-property-column-value">
+												{{VALUE}}
+											</div>
+										</div>
+									{{/IS_VOLUME_PROPERTY}}
+								{{/IS_VOLUME}}
+							{{/IS_TEXT}}
+						{{/COLUMN_LIST}}
+						
 						<h2 class="basket-item-info-name">
 							{{#DETAIL_PAGE_URL}}
 								<a href="{{DETAIL_PAGE_URL}}" class="basket-item-info-name-link">
@@ -107,7 +126,24 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 							{{/DETAIL_PAGE_URL}}
 						</h2>
 						
-						<!-- Блок с дополнительными свойствами (объем) -->
+						<!-- Блок с объемом - РАЗМЕЩЕН НИЖЕ НАЗВАНИЯ -->
+						{{#COLUMN_LIST}}
+							{{#IS_TEXT}}
+								{{#IS_VOLUME}}
+									<div class="basket-item-property-custom basket-item-property-custom-text
+										{{#HIDE_MOBILE}}hidden-xs{{/HIDE_MOBILE}}"
+										data-entity="basket-item-property">
+										<div class="basket-item-property-custom-value"
+											data-column-property-code="{{CODE}}"
+											data-entity="basket-item-property-column-value">
+											{{VALUE}}
+										</div>
+									</div>
+								{{/IS_VOLUME}}
+							{{/IS_TEXT}}
+						{{/COLUMN_LIST}}
+						
+						<!-- Блок с дополнительными свойствами -->
 						<div class="basket-item-block-properties">
 							<?
 							if (!empty($arParams['PRODUCT_BLOCKS_ORDER']))
@@ -229,16 +265,18 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 												{{/IS_IMAGE}}
 
 												{{#IS_TEXT}}
-													<div class="basket-item-property-custom basket-item-property-custom-text
-														{{#HIDE_MOBILE}}hidden-xs{{/HIDE_MOBILE}}"
-														data-entity="basket-item-property">
-														<div class="basket-item-property-custom-name">{{NAME}}</div>
-														<div class="basket-item-property-custom-value"
-															data-column-property-code="{{CODE}}"
-															data-entity="basket-item-property-column-value">
-															{{VALUE}}
+													{{^IS_VOLUME}}
+														<div class="basket-item-property-custom basket-item-property-custom-text
+															{{#HIDE_MOBILE}}hidden-xs{{/HIDE_MOBILE}}"
+															data-entity="basket-item-property">
+															<div class="basket-item-property-custom-name">{{NAME}}</div>
+															<div class="basket-item-property-custom-value"
+																data-column-property-code="{{CODE}}"
+																data-entity="basket-item-property-column-value">
+																{{VALUE}}
+															</div>
 														</div>
-													</div>
+													{{/IS_VOLUME}}
 												{{/IS_TEXT}}
 
 												{{#IS_HTML}}

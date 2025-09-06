@@ -3807,6 +3807,44 @@ td.basket-items-list-item-remove {
 
 
 
+/* Скрываем блок с объемом */
+.high_basket-item-property-custom .basket-item-property-custom-value[data-column-property-code*="VOLUME"],
+.high_basket-item-property-custom .basket-item-property-custom-value[data-column-property-code*="ОБЪЕМ"],
+.high_basket-item-property-custom .basket-item-property-custom-value[data-column-property-code*="мл"] {
+    display: none !important;
+}
+
+
+
+.high_basket-item-property-custom .basket-item-property-custom-value[data-column-property-code*="ALT_NAME"]{
+    color: #2D2D2D;
+	font-size: 17px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 130%; /* 22.1px */
+}
+
+
+.basket-item-property-custom .basket-item-property-custom-value[data-column-property-code*="ALT_NAME"]{
+    display: none !important;
+}
+
+/* Стилизация названия товара */
+.basket-item-info-name,
+.basket-item-info-name-link {
+    max-width: 500px;
+    color: #2D2D2D;
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 22.1px */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+
+
+
 
 
 
