@@ -20,8 +20,11 @@ class CatalogHelpers
             $items = [];
             $filter = ['IBLOCK_ID' => GOODS_IBLOCK_ID, 'ID' => $id, 'ACTIVE' => 'Y'];
             $row = CIBlockElement::GetList(
-                arFilter      : $filter,
-                arSelectFields: [
+                [],
+                $filter,
+                false,
+                false,
+                [
                     'ID',
                     'IBLOCK_ID',
                     'ACTIVE',
@@ -31,10 +34,10 @@ class CatalogHelpers
             $items[$row['ID']] = $row;
 
             CIBlockElement::GetPropertyValuesArray(
-                result        : $items,
-                iblockID      : $filter['IBLOCK_ID'],
-                filter        : $filter,
-                propertyFilter: ['CODE' => ['BRAND', 'BRAND_TEXT', 'CML2_TRAITS']]
+                $items,
+                $filter['IBLOCK_ID'],
+                $filter,
+                ['CODE' => ['BRAND', 'BRAND_TEXT', 'CML2_TRAITS']]
             );
 
             $item = array_pop($items);
@@ -52,18 +55,16 @@ class CatalogHelpers
                         '=IBLOCK_ID' => IblockUtils::getIdByCode('aspro_next_brands'),
                         'NAME' => $brandName,
                     ];
-                    $brand = CIBlockElement::GetList(arFilter: $filter, arNavStartParams: ['nTopCount' => 1])->fetch();
+                    $brand = CIBlockElement::GetList([], $filter, false, ['nTopCount' => 1])->fetch();
                     if($brand){
                         $brandId = $brand['ID'];
                     } else {
                         $element = new CIBlockElement();
-                        $brandId = $element->Add(
-                            arFields: [
-                                'IBLOCK_ID' => $iblockId,
-                                'NAME'      => $brandName,
-                                'CODE'      => CUtil::translit(str: $brandName, lang: 'ru'),
-                            ]
-                        );
+                        $brandId = $element->Add([
+                            'IBLOCK_ID' => $iblockId,
+                            'NAME'      => $brandName,
+                            'CODE'      => CUtil::translit($brandName, 'ru'),
+                        ]);
 
                         if (!$brandId) {
                             throw new RuntimeException($element->LAST_ERROR);
@@ -74,18 +75,18 @@ class CatalogHelpers
                 //Заполняем Код из 1С
                 $onecCode = null;
                 $index = array_search(
-                    needle  : 'Код',
-                    haystack: $item['PROPERTIES']['CML2_TRAITS']['DESCRIPTION'],
-                    strict  : true
+                    'Код',
+                    $item['PROPERTIES']['CML2_TRAITS']['DESCRIPTION'],
+                    true
                 );
                 if ($index >= 0) {
                     $onecCode = $item['PROPERTIES']['CML2_TRAITS']['VALUE'][$index];
                 }
 
                 CIBlockElement::SetPropertyValuesEx(
-                    ELEMENT_ID: $id,
-                    IBLOCK_ID: GOODS_IBLOCK_ID,
-                    PROPERTY_VALUES: [
+                    $id,
+                    GOODS_IBLOCK_ID,
+                    [
                         'BRAND'   => $brandId,
                         'CODE_1C' => $onecCode,
                     ]
@@ -136,8 +137,11 @@ class CatalogHelpers
             $items = [];
             $filter = ['IBLOCK_ID' => SKU_IBLOCK_ID, 'ID' => $id, 'ACTIVE' => 'Y'];
             $row = CIBlockElement::GetList(
-                arFilter      : $filter,
-                arSelectFields: [
+                [],
+                $filter,
+                false,
+                false,
+                [
                     'ID',
                     'IBLOCK_ID',
                     'ACTIVE',
@@ -147,10 +151,10 @@ class CatalogHelpers
             $items[$row['ID']] = $row;
 
             CIBlockElement::GetPropertyValuesArray(
-                result        : $items,
-                iblockID      : $filter['IBLOCK_ID'],
-                filter        : $filter,
-                propertyFilter: ['CODE' => ['VARIANT_1', 'VARIANT']]
+                $items,
+                $filter['IBLOCK_ID'],
+                $filter,
+                ['CODE' => ['VARIANT_1', 'VARIANT']]
             );
 
             $item = array_pop($items);
@@ -163,7 +167,7 @@ class CatalogHelpers
                     $variantValue = $variant1CValue;
                 } else {
                     $iblockId = IblockUtils::getIdByCode('product_variant');
-                    $code = CUtil::translit(str: $variant1CValue, lang: 'ru');
+                    $code = CUtil::translit($variant1CValue, 'ru');
                     $filter = [
                         '=IBLOCK_ID' => $iblockId,
                         [
@@ -172,19 +176,16 @@ class CatalogHelpers
                             'CODE'  => $code
                         ],
                     ];
-                    $variant = CIBlockElement::GetList(arFilter: $filter, arNavStartParams: ['nTopCount' => 1])->fetch(
-                    );
+                    $variant = CIBlockElement::GetList([], $filter, false, ['nTopCount' => 1])->fetch();
                     if ($variant) {
                         $variantValue = $variant['ID'];
                     } else {
                         $element = new CIBlockElement();
-                        $variantValue = $element->Add(
-                            arFields: [
-                                'IBLOCK_ID' => $iblockId,
-                                'NAME'      => $variant1CValue,
-                                'CODE'      => $code,
-                            ]
-                        );
+                        $variantValue = $element->Add([
+                            'IBLOCK_ID' => $iblockId,
+                            'NAME'      => $variant1CValue,
+                            'CODE'      => $code,
+                        ]);
 
                         if (!$variantValue) {
                             throw new RuntimeException($element->LAST_ERROR);
@@ -193,9 +194,9 @@ class CatalogHelpers
                 }
 
                 CIBlockElement::SetPropertyValuesEx(
-                    ELEMENT_ID     : $id,
-                    IBLOCK_ID      : SKU_IBLOCK_ID,
-                    PROPERTY_VALUES: [
+                    $id,
+                    SKU_IBLOCK_ID,
+                    [
                         'VARIANT' => $variantValue,
                     ]
                 );

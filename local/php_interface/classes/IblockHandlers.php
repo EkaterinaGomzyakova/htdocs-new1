@@ -54,8 +54,11 @@ class IblockHandlers
         switch ($arFields['IBLOCK_ID']) {
             case GOODS_IBLOCK_ID:
                 $originElement = CIBlockElement::GetList(
-                    arFilter: ['IBLOCK_ID' => GOODS_IBLOCK_ID, 'ID' => $arFields['ID']],
-                    arSelectFields: ['ID', 'CODE']
+                    [],
+                    ['IBLOCK_ID' => GOODS_IBLOCK_ID, 'ID' => $arFields['ID']],
+                    false,
+                    false,
+                    ['ID', 'CODE']
                 )->Fetch();
                 if ($originElement['CODE'] === GIFT_CODE) {
                     self::preventDeactivation($arFields);
@@ -63,8 +66,11 @@ class IblockHandlers
                 break;
             case SKU_IBLOCK_ID:
                 $originElement = CIBlockElement::GetList(
-                    arFilter: ['IBLOCK_ID' => SKU_IBLOCK_ID, 'ID' => $arFields['ID']],
-                    arSelectFields: ['ID', 'PROPERTY_GIFT_CERTIFICATE']
+                    [],
+                    ['IBLOCK_ID' => SKU_IBLOCK_ID, 'ID' => $arFields['ID']],
+                    false,
+                    false,
+                    ['ID', 'PROPERTY_GIFT_CERTIFICATE']
                 )->Fetch();
                 if (!empty($originElement['PROPERTY_GIFT_CERTIFICATE_VALUE'])) {
                     self::preventDeactivation($arFields);
@@ -83,8 +89,10 @@ class IblockHandlers
         switch ($arParams['IBLOCK_ID']) {
             case GOODS_IBLOCK_ID:
                 $originElement = CIBlockSection::GetList(
-                    arFilter: ['IBLOCK_ID' => GOODS_IBLOCK_ID, 'ID' => $arParams['ID']],
-                    arSelect: ['ID', 'CODE']
+                    [],
+                    ['IBLOCK_ID' => GOODS_IBLOCK_ID, 'ID' => $arParams['ID']],
+                    false,
+                    ['ID', 'CODE']
                 )->Fetch();
                 if ($originElement['CODE'] === GIFT_SECTION_CODE) {
                     self::preventDeactivation($arParams);
