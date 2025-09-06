@@ -226,6 +226,14 @@ if (empty($arResult['ERROR_MESSAGE']))
 					</span>
 				<? endif; ?>
 			</div>
+			
+			<? if ($goodsCount > 0): ?>
+				<div class="basket-clear-all-container">
+					<button type="button" class="basket-clear-all-btn" onclick="clearAllBasketItems()" title="Очистить корзину">
+						<img src="/local/templates/aspro_next_custom/images/Trash_Empty.svg" alt="Очистить корзину" class="basket-clear-all-btn-image">
+					</button>
+				</div>
+			<? endif; ?>
 
 			<? // --- КОНЕЦ НОВОГО БЛОКА --- ?>
 
@@ -255,6 +263,29 @@ if (empty($arResult['ERROR_MESSAGE']))
     	</div>
 	</div>
 	</div>
+	
+	<!-- Модальное окно для подтверждения очистки корзины -->
+	<div id="clear-basket-modal" class="clear-basket-modal" style="display: none;">
+		<div class="clear-basket-modal-overlay"></div>
+		<div class="clear-basket-modal-content">
+			<div class="clear-basket-modal-header">
+				<h3>Подтвердите действие</h3>
+			</div>
+			<div class="clear-basket-modal-body">
+				<p>Вы точно этого хотите?</p>
+				<p>Корзина будет удалена</p>
+			</div>
+			<div class="clear-basket-modal-footer">
+				<button type="button" class="clear-basket-btn clear-basket-btn-cancel" onclick="closeClearBasketModal()">
+					Нет
+				</button>
+				<button type="button" class="clear-basket-btn clear-basket-btn-confirm" onclick="confirmClearBasket()">
+					Да
+				</button>
+			</div>
+		</div>
+	</div>
+	
 	<?
 	$basketCommentFieldIsActive = \Bitrix\Main\Config\Option::get('wl.snailshop', 'basket_comment_is_active');
 	?>

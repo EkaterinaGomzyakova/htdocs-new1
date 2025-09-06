@@ -1287,6 +1287,165 @@ BX.ready(function () {
 });
 
 /* ================================================================ */
+/* ============== ФУНКЦИЯ ДЛЯ ОЧИСТКИ ВСЕЙ КОРЗИНЫ ================ */
+/* ================================================================ */
+
+function clearAllBasketItems() {
+	// Показываем красивое модальное окно
+	showClearBasketModal();
+	return false;
+}
+
+function showClearBasketModal() {
+	var modal = BX('clear-basket-modal');
+	if (modal) {
+		modal.style.display = 'flex';
+		modal.classList.add('active');
+		document.body.classList.add('modal-active');
+		document.body.style.overflow = 'hidden'; // Блокируем прокрутку страницы
+	}
+}
+
+function closeClearBasketModal() {
+	var modal = BX('clear-basket-modal');
+	if (modal) {
+		modal.style.display = 'none';
+		modal.classList.remove('active');
+		document.body.classList.remove('modal-active');
+		document.body.style.overflow = ''; // Восстанавливаем прокрутку
+	}
+}
+
+function confirmClearBasket() {
+	// Закрываем модальное окно
+	closeClearBasketModal();
+	
+	// Выполняем очистку корзины
+	performClearBasket();
+}
+
+function performClearBasket() {
+	
+	// Проверяем, есть ли компонент корзины
+	if (!window.BX || !window.BX.Sale || !window.BX.Sale.BasketComponent) {
+		alert('Ошибка: компонент корзины не найден');
+		return false;
+	}
+	
+	var basketComponent = window.BX.Sale.BasketComponent;
+	
+	// Получаем все товары из компонента корзины
+	var basketItems = [];
+	if (basketComponent.items) {
+		for (var itemId in basketComponent.items) {
+			if (basketComponent.items.hasOwnProperty(itemId)) {
+				basketItems.push(itemId);
+			}
+		}
+	}
+	
+	// Альтернативный способ - ищем товары в DOM
+	if (basketItems.length === 0) {
+		var basketTable = BX('basket-item-table');
+		if (basketTable && basketTable.rows) {
+			for (var i = 0; i < basketTable.rows.length; i++) {
+				var row = basketTable.rows[i];
+				if (row.id && row.id !== '') {
+					basketItems.push(row.id);
+				}
+			}
+		}
+	}
+	
+	// Еще один способ - ищем по классу товаров
+	if (basketItems.length === 0) {
+		var itemContainers = BX.findChildren(BX('basket-item-list'), {
+			className: 'basket-items-list-item-container'
+		}, true);
+		
+		if (itemContainers) {
+			for (var j = 0; j < itemContainers.length; j++) {
+				if (itemContainers[j].id) {
+					basketItems.push(itemContainers[j].id);
+				}
+			}
+		}
+	}
+	
+	if (basketItems.length === 0) {
+		alert('Корзина уже пуста');
+		return false;
+	}
+	
+	// Показываем индикатор загрузки
+	BX.showWait();
+	
+	// Создаем URL для удаления всех товаров
+	var deleteUrls = [];
+	for (var k = 0; k < basketItems.length; k++) {
+		var deleteUrl = basketJSParams['DELETE_URL'].replace('#ID#', basketItems[k]);
+		deleteUrls.push(deleteUrl);
+	}
+	
+	// Удаляем товары по одному
+	var deletedCount = 0;
+	var totalItems = basketItems.length;
+	
+	function deleteNextItem() {
+		if (deletedCount >= totalItems) {
+			// Все товары удалены, перезагружаем страницу
+			BX.closeWait();
+			window.location.reload();
+			return;
+		}
+		
+		var currentUrl = deleteUrls[deletedCount];
+		
+		// Выполняем AJAX запрос для удаления товара
+		BX.ajax({
+			url: currentUrl,
+			method: 'GET',
+			onsuccess: function() {
+				deletedCount++;
+				// Небольшая задержка между запросами
+				setTimeout(deleteNextItem, 100);
+			},
+			onfailure: function() {
+				BX.closeWait();
+				alert('Произошла ошибка при удалении товаров. Попробуйте еще раз.');
+			}
+		});
+	}
+	
+	// Начинаем удаление
+	deleteNextItem();
+	
+	return false;
+}
+
+// Добавляем обработчики для модального окна
+document.addEventListener('DOMContentLoaded', function() {
+	// Закрытие по клику на overlay
+	var modal = BX('clear-basket-modal');
+	if (modal) {
+		var overlay = modal.querySelector('.clear-basket-modal-overlay');
+		if (overlay) {
+			overlay.addEventListener('click', closeClearBasketModal);
+		}
+	}
+	
+	// Закрытие по клавише Escape
+	document.addEventListener('keydown', function(event) {
+		if (event.key === 'Escape') {
+			var modal = BX('clear-basket-modal');
+			if (modal && modal.style.display === 'flex') {
+				closeClearBasketModal();
+			}
+		}
+	});
+});
+
+/* ================================================================ */
 /* ============== ФУНКЦИИ ДЛЯ СЧЁТЧИКА КОЛИЧЕСТВА ================ */
 /* ================================================================ */
 
