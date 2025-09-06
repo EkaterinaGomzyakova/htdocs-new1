@@ -3476,7 +3476,7 @@ body.bx-theme-yellow .catalog-block-header {
 
 
 .col-xs-3 {
-	padding-top: 3%;
+	padding-top: 6.38%;
 	width: 32% !important;
 }
 
@@ -3864,6 +3864,18 @@ td.basket-items-list-item-remove {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='19' viewBox='0 0 20 19' fill='%23285B4D'%3e%3cpath d='M9.8125 4.69334C7.8125 -0.00109887 0.8125 0.498901 0.8125 6.49893C0.8125 12.499 9.8125 17.4991 9.8125 17.4991C9.8125 17.4991 18.8125 12.499 18.8125 6.49893C18.8125 0.498901 11.8125 -0.00109887 9.8125 4.69334Z' stroke='%23285B4D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e") !important;
 }
 
+
+/* Специфичный селектор для корзины */
+#basket-root .row,
+.bx-basket .row,
+.basket-container .row {
+    margin-bottom: 150px !important;
+}
+
+/* Дополнительный селектор для гарантии применения */
+div#basket-root div.row {
+    margin-bottom: 150px !important;
+}
 
 
 

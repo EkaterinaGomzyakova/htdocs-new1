@@ -115,31 +115,58 @@ $APPLICATION->SetTitle("Корзина");
 	false
 );?>
 
-<?$APPLICATION->IncludeComponent(
-	"bitrix:main.include", 
-	"basket", 
-	array(
-		"COMPONENT_TEMPLATE" => "basket",
-		"PATH" => SITE_DIR."include/comp_basket_bigdata.php",
-		"AREA_FILE_SHOW" => "file",
-		"AREA_FILE_SUFFIX" => "",
-		"AREA_FILE_RECURSIVE" => "Y",
-		"EDIT_TEMPLATE" => "standard.php",
-		"PRICE_CODE" => array(
-			0 => "BASE",
-			1 => "OPT",
-		),
-		"STORES" => array(
-			0 => "1",
-			1 => "2",
-			2 => "",
-		),
-		"BIG_DATA_RCM_TYPE" => "bestsell",
-		"STIKERS_PROP" => "HIT",
-		"SALE_STIKER" => "SALE_TEXT"
-	),
-	false
-);?>
+<?// Убираем привязку к конкретной секции - теперь товары будут из всех категорий
+// $GLOBALS['arrFilterProp']['!IBLOCK_SECTION_ID'] = 167; // Закомментировано
+
+// Создаем фильтры для каждого блока. Предполагаем, что в инфоблоке ID=2 есть свойство HIT с теми же ID значений.
+global $arrFilterHit, $arrFilterBloggers, $arrFilterNew, $arrFilterSale, $arrFilterAll;
+
+// Фильтры по свойствам HIT (если нужны)
+$arrFilterHit = ["=PROPERTY_HIT" => 98]; // Только фильтр по свойству HIT
+$arrFilterBloggers = ["=PROPERTY_HIT" => 183]; // Только фильтр по свойству HIT
+$arrFilterNew = ["=PROPERTY_HIT" => 100]; // Только фильтр по свойству HIT
+$arrFilterSale = ["=PROPERTY_HIT" => 101]; // Только фильтр по свойству HIT
+
+// Фильтр для вывода любых товаров (без привязки к свойствам)
+$arrFilterAll = array(); // Пустой фильтр - выводит любые товары
+
+// ОБЩИЕ ПАРАМЕТРЫ для bitrix:catalog.section
+$mainComponentParams = array(
+    // === Ваши существующие параметры (все правильные) ===
+    "IBLOCK_TYPE" => "catalog", "IBLOCK_ID" => "2", "SECTION_ID" => "", "SECTION_CODE" => "",
+    "INCLUDE_SUBSECTIONS" => "Y", "HIDE_NOT_AVAILABLE" => "Y",
+    "ELEMENT_SORT_FIELD" => "rand", "ELEMENT_SORT_ORDER" => "asc", "ELEMENT_SORT_FIELD2" => "id", "ELEMENT_SORT_ORDER2" => "desc",
+    "SHOW_ALL_WO_SECTION" => "Y",
+    "PAGE_ELEMENT_COUNT" => "10", "LINE_ELEMENT_COUNT" => "4",
+    "PROPERTY_CODE" => array("BRAND","ALT_NAME"), "OFFERS_LIMIT" => "5", "DETAIL_URL" => "",
+    "BASKET_URL" => "/basket/", "ACTION_VARIABLE" => "action", "PRODUCT_ID_VARIABLE" => "id",
+    "CACHE_TYPE" => "A", "CACHE_TIME" => "3600", "CACHE_GROUPS" => "Y", "CACHE_FILTER" => "Y",
+    "DISPLAY_COMPARE" => "N", "SET_TITLE" => "N", "SET_BROWSER_TITLE" => "N",
+    "SET_META_KEYWORDS" => "N", "SET_META_DESCRIPTION" => "N", "SET_LAST_MODIFIED" => "N",
+    "ADD_SECTIONS_CHAIN" => "N", "PRICE_CODE" => array("BASE"), "USE_PRICE_COUNT" => "N",
+    "SHOW_PRICE_COUNT" => "1", "PRICE_VAT_INCLUDE" => "Y", "CONVERT_CURRENCY" => "N",
+    "SHOW_OLD_PRICE" => "Y", "DISPLAY_TOP_PAGER" => "N", "DISPLAY_BOTTOM_PAGER" => "N",
+    "PAGER_SHOW_ALWAYS" => "N", 'COMPATIBLE_MODE' => 'Y',
+
+    // === [ВОТ ЧТО НУЖНО ДОБАВИТЬ] ===
+    // Эти параметры стандартный компонент проигнорирует, но шаблон их "увидит" и использует.
+    
+    "SHOW_DISCOUNT_TIME" => "Y",      // <--- Самый важный параметр для ТАЙМЕРА
+    "SHOW_DISCOUNT_PERCENT" => "Y",   // <--- Параметр для отображения "-15%"
+    "SALE_STIKER" => "SALE_TEXT",     // <--- Свойство для стикера "Акция"
+    "STIKERS_PROP" => "HIT",          // <--- Свойство для стикеров "Хит" и т.д.
+    "SHOW_MEASURE" => "Y",             // <--- Параметр для отображения единиц измерения (шт, мл)
+	"DISPLAY_WISH_BUTTONS" => "Y" 
+);
+?>
+
+
+
+<!-- Блок: Любые товары (пример) -->
+<div class="custom-products-block">
+    <div class="title-container"> <h2 class="title">Вам может понравиться  <a href="/catalog/" class="see-all-link">Все</a></h2></div>
+    <? $APPLICATION->IncludeComponent("bitrix:catalog.section", "catalog_block_front", array_merge($mainComponentParams, ["FILTER_NAME" => "arrFilterAll"]), false); ?>
+</div>
 
 <? $APPLICATION->IncludeComponent(
 	"bitrix:main.include", 
