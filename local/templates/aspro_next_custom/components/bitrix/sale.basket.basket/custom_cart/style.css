@@ -572,8 +572,8 @@
 
 .basket-item-block-image {
 	position: relative;
-	padding-right: 15px;
-	padding-bottom: 10px;
+	padding-right: 0px;
+	padding-bottom: 0px;
 	min-height: 48px;
 	max-height: 300px;
 	min-width: 48px;
@@ -607,8 +607,8 @@
 @media (max-width: 580px) {
 
 	.basket-item-block-image {
-		margin-top: 10px;
-		margin-bottom: 15px;
+		margin-top: 0px;
+		margin-bottom: 0px;
 		padding-right: 0;
 		max-width: 100%;
 		width: 100%;
@@ -3493,6 +3493,13 @@ body.bx-theme-yellow .catalog-block-header {
 .col-xs-9 {
 	padding-left: 0 !important;
 	width: 68% !important;
+}
+
+/* Стили для блока bx_incl_area_19_1_2 */
+#bx_incl_area_19_1_2 {
+	width: 98% !important;
+	margin: 0 auto !important;
+	text-align: left;
 }
 
 
