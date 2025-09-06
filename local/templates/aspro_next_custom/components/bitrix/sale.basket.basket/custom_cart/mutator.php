@@ -403,6 +403,22 @@ foreach ($this->basketItems as $row)
 	$result['BASKET_ITEM_RENDER_DATA'][] = $rowData;
 }
 
+// Функция для правильного склонения слова "товар"
+function getGoodsWord($count) {
+	$count = $count % 100;
+	if ($count >= 11 && $count <= 19) {
+		return 'товаров';
+	}
+	$lastDigit = $count % 10;
+	if ($lastDigit == 1) {
+		return 'товар';
+	}
+	if ($lastDigit >= 2 && $lastDigit <= 4) {
+		return 'товара';
+	}
+	return 'товаров';
+}
+
 $totalData = array(
 	'DISABLE_CHECKOUT' => (int)$result['ORDERABLE_BASKET_ITEMS_COUNT'] === 0,
 	'PRICE' => $result['allSum'],
@@ -410,6 +426,7 @@ $totalData = array(
 	'PRICE_WITHOUT_DISCOUNT_FORMATED' => $result['PRICE_WITHOUT_DISCOUNT'],
 	'CURRENCY' => $result['CURRENCY'],
 	'BASKET_ITEMS_COUNT' => $result['BASKET_ITEMS_COUNT'],
+	'GOODS_WORD' => getGoodsWord($result['BASKET_ITEMS_COUNT']),
 	'BONUS_POINTS' => round($result['allSum'] * 0.02) // 2% от суммы заказа
 );
 

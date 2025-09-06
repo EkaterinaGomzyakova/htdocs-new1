@@ -30,7 +30,7 @@ use Bitrix\Main\Localization\Loc;
         <? } ?>
 
         <div class="checkout-card_items-count">
-            <span>{{{BASKET_ITEMS_COUNT}}} товара</span>
+            <span>{{{BASKET_ITEMS_COUNT}}} {{{GOODS_WORD}}}</span>
         </div>
 
         <div class="checkout-card_total">
