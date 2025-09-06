@@ -2,6 +2,7 @@
 //Инфоблоки
 define("GOODS_IBLOCK_ID", 2);
 define("SKU_IBLOCK_ID", 35);
+define("OFFERS_IBLOCK_ID", 35); // ID инфоблока предложений (тот же что и SKU)
 
 define('ADDITIONAL_CATALOG_IBLOCK_ID', 30);
 define('FAVORITES_IBLOCK_ID', 31);

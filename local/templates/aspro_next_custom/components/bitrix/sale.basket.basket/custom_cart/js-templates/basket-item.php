@@ -475,8 +475,8 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 						<!-- Кнопки избранного -->
 						<div class="basket-item-wishlist-buttons">
 							<div class="wish_item_button">
-								<span title="Добавить в избранное" class="wish_item to" data-item="{{PRODUCT_ID}}" data-iblock="2"><i></i></span>
-								<span title="Удалить из избранного" class="wish_item in added" style="display: none;" data-item="{{PRODUCT_ID}}" data-iblock="2"><i></i></span>
+								<span title="Добавить в избранное" class="wish_item to" data-item="{{PRODUCT_ID}}" data-basket-id="{{ID}}" data-iblock="2"><i></i></span>
+								<span title="Удалить из избранного" class="wish_item in added" style="display: none;" data-item="{{PRODUCT_ID}}" data-basket-id="{{ID}}" data-iblock="2"><i></i></span>
 							</div>
 						</div>
 						

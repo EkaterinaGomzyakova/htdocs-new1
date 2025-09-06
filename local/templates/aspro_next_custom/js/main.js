@@ -3720,12 +3720,27 @@ $(document).ready(function () {
 	$(document).on('click', '.wish_item', function (e) {
 		e.preventDefault();
 		if (USER_AUTH) {
+			var productId = $(this).data('item');
+			var basketItemId = $(this).data('basket-id');
+			
+			// Для товаров в корзине с SKU нужно получить ID основного товара
+			if (basketItemId && window.BX && window.BX.Sale && window.BX.Sale.BasketComponent) {
+				var basketComponent = window.BX.Sale.BasketComponent;
+				if (basketComponent.items && basketComponent.items[basketItemId]) {
+					var itemData = basketComponent.items[basketItemId];
+					// Используем PRODUCT_ID (основной товар) вместо OFFER_ID
+					if (itemData.PRODUCT_ID) {
+						productId = itemData.PRODUCT_ID;
+					}
+				}
+			}
+			
 			if ($(this).hasClass('text')) {
 				if ($(this).hasClass('added')) {
 					$(this).removeClass('added');
 					$(this).children('.value').show();
 					$(this).children('.value.added').hide();
-					$.post('/ajax/wishlist.php', { action: 'remove', component: 'wishlist', mode: 'ajax', id: $(this).data('item') }, function (response) {
+					$.post('/ajax/wishlist.php', { action: 'remove', component: 'wishlist', mode: 'ajax', id: productId }, function (response) {
 						if (response.success) {
 							$('.js-favorites-block .count').text(response.count_items);
 						}
@@ -3734,7 +3749,7 @@ $(document).ready(function () {
 					$(this).addClass('added');
 					$(this).children('.value').hide();
 					$(this).children('.value.added').show();
-					$.post('/ajax/wishlist.php', { action: 'add', component: 'wishlist', mode: 'ajax', id: $(this).data('item') }, function (response) {
+					$.post('/ajax/wishlist.php', { action: 'add', component: 'wishlist', mode: 'ajax', id: productId }, function (response) {
 						if (response.success) {
 							$('.js-favorites-block .count').text(response.count_items);
 						}
@@ -3745,7 +3760,7 @@ $(document).ready(function () {
 			if ($(this).hasClass('to')) {
 				$(this).hide();
 				$(this).parent().children('.added').show();
-				$.post('/ajax/wishlist.php', { action: 'add', component: 'wishlist', mode: 'ajax', id: $(this).data('item') }, function (response) {
+				$.post('/ajax/wishlist.php', { action: 'add', component: 'wishlist', mode: 'ajax', id: productId }, function (response) {
 					if (response.success) {
 						$('.js-favorites-block .count').text(response.count_items);
 						showFavoritesToast(response.text);
@@ -3754,7 +3769,7 @@ $(document).ready(function () {
 			} else if ($(this).hasClass('in')) {
 				$(this).hide();
 				$(this).parent().children('.to').show();
-				$.post('/ajax/wishlist.php', { action: 'remove', component: 'wishlist', mode: 'ajax', id: $(this).data('item') }, function (response) {
+				$.post('/ajax/wishlist.php', { action: 'remove', component: 'wishlist', mode: 'ajax', id: productId }, function (response) {
 					if (response.success) {
 						$('.js-favorites-block .count').text(response.count_items);
 						showFavoritesToast(response.text);

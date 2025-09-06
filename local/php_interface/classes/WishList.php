@@ -82,14 +82,17 @@ class WishList
      * @param $productID - ID продукта
      * @throws Exception
      */
-    private static function add($productID)
+    public static function add($productID)
     {
         global $USER;
         if (empty($productID)) {
             throw new Exception('Не указан ID продукта');
         }
 
-        $oldRow = self::checkItem($productID);
+        // Для товаров с SKU нужно получить ID основного товара
+        $mainProductID = self::getMainProductID($productID);
+        
+        $oldRow = self::checkItem($mainProductID);
         if (!empty($oldRow)) {
             throw new Exception('Товар уже в избранном');
         }
@@ -98,7 +101,7 @@ class WishList
             'IBLOCK_ID' => FAVORITES_IBLOCK_ID,
             'NAME' => 'Элемент',
             'PROPERTY_VALUES' => [
-                'PRODUCT_ID' => $productID,
+                'PRODUCT_ID' => $mainProductID,
                 'USER_ID' => $USER->GetId()
             ]
         ]);
@@ -112,12 +115,16 @@ class WishList
      * @param $productID - ID продукта
      * @throws Exception
      */
-    private static function remove($productID)
+    public static function remove($productID)
     {
         if (empty($productID)) {
             throw new Exception('Не указан ID продукта');
         }
-        $row = self::checkItem($productID);
+        
+        // Для товаров с SKU нужно получить ID основного товара
+        $mainProductID = self::getMainProductID($productID);
+        
+        $row = self::checkItem($mainProductID);
         if (empty($row)) {
             throw new Exception('Товара нет в избранном');
         }
@@ -133,7 +140,10 @@ class WishList
     {
         global $USER;
         if($USER->IsAuthorized()){
-            $result = CIBlockElement::GetList([], ['IBLOCK_ID' => FAVORITES_IBLOCK_ID, 'PROPERTY_PRODUCT_ID' => $productID, 'PROPERTY_USER_ID' => $USER->GetID()], false, false, ['ID'])->fetch();
+            // Для товаров с SKU нужно получить ID основного товара
+            $mainProductID = self::getMainProductID($productID);
+            
+            $result = CIBlockElement::GetList([], ['IBLOCK_ID' => FAVORITES_IBLOCK_ID, 'PROPERTY_PRODUCT_ID' => $mainProductID, 'PROPERTY_USER_ID' => $USER->GetID()], false, false, ['ID'])->fetch();
         }else{
             $result = [];
         }
@@ -152,9 +162,16 @@ class WishList
         
         if($USER->IsAuthorized() && !empty($productIDs)){
             $ids = is_array($productIDs) ? $productIDs : explode(',', $productIDs);
+            
+            // Преобразуем все ID в ID основных товаров
+            $mainIds = [];
+            foreach ($ids as $id) {
+                $mainIds[] = self::getMainProductID($id);
+            }
+            
             $filter = [
                 'IBLOCK_ID' => FAVORITES_IBLOCK_ID, 
-                'PROPERTY_PRODUCT_ID' => $ids, 
+                'PROPERTY_PRODUCT_ID' => $mainIds, 
                 'PROPERTY_USER_ID' => $USER->GetID()
             ];
             
@@ -165,5 +182,28 @@ class WishList
         }
         
         return $result;
+    }
+
+    /**
+     * Получить ID основного товара для товаров с SKU
+     * @param $productID - ID товара или предложения
+     * @return int - ID основного товара
+     */
+    public static function getMainProductID($productID)
+    {
+        // Сначала проверяем, является ли это предложением
+        $offer = CIBlockElement::GetList([], [
+            'ID' => $productID,
+            'IBLOCK_ID' => OFFERS_IBLOCK_ID, // ID инфоблока предложений
+            'ACTIVE' => 'Y'
+        ], false, false, ['ID', 'PROPERTY_CML2_LINK'])->Fetch();
+        
+        if ($offer && $offer['PROPERTY_CML2_LINK_VALUE']) {
+            // Это предложение, возвращаем ID основного товара
+            return $offer['PROPERTY_CML2_LINK_VALUE'];
+        }
+        
+        // Это основной товар, возвращаем его ID
+        return $productID;
     }
 }

@@ -376,7 +376,29 @@ $arBasketJSParams = array(
             // Собираем ID товаров из кнопок избранного
             wishlistButtons.forEach(function(button) {
                 var productId = button.getAttribute('data-item');
-                console.log('Найден товар с ID:', productId);
+                var basketItemId = button.getAttribute('data-basket-id');
+                console.log('Найден товар с ID:', productId, 'Basket ID:', basketItemId);
+                
+                // Для товаров с SKU нужно получить ID основного товара
+                if (productId && basketItemId && window.BX && window.BX.Sale && window.BX.Sale.BasketComponent) {
+                    var basketComponent = window.BX.Sale.BasketComponent;
+                    if (basketComponent.items && basketComponent.items[basketItemId]) {
+                        var itemData = basketComponent.items[basketItemId];
+                        console.log('Данные товара:', itemData);
+                        
+                        // Для товаров с SKU используем PRODUCT_ID (основной товар)
+                        // OFFER_ID - это ID предложения, а нам нужен основной товар
+                        if (itemData.PRODUCT_ID) {
+                            productId = itemData.PRODUCT_ID;
+                            console.log('Используем PRODUCT_ID (основной товар):', productId);
+                        } else if (itemData.OFFER_ID) {
+                            // Если нет PRODUCT_ID, используем OFFER_ID
+                            productId = itemData.OFFER_ID;
+                            console.log('Используем OFFER_ID:', productId);
+                        }
+                    }
+                }
+                
                 if (productId && productIds.indexOf(productId) === -1) {
                     productIds.push(productId);
                 }
