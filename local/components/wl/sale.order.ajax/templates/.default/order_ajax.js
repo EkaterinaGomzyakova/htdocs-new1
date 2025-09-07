@@ -2144,6 +2144,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 return;
 
             if (this.result.DELIVERY.length > 0) {
+                // Блок доставки всегда активен (для отображения полей покупателя)
                 BX.addClass(this.deliveryBlockNode, 'bx-active');
                 this.deliveryBlockNode.removeAttribute('style');
             } else {
@@ -2156,7 +2157,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
             this.checkPickUpShow();
    
-            // 
+            // Блок региона скрыт, так как кнопка "Изменить" теперь в блоке доставки
             BX.removeClass(this.regionBlockNode, 'bx-active');
             this.regionBlockNode.style.display = 'none';
 
@@ -3816,6 +3817,245 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             return;
         },
 
+        showRegionEditForm: function () {
+            // Прокручиваем к блоку доставки, где находится поле города
+            this.animateScrollTo(this.deliveryBlockNode);
+            
+            // Фокусируемся на поле ввода города
+            var cityInput = this.deliveryBlockNode.querySelector('input[type="text"]');
+            if (cityInput) {
+                cityInput.focus();
+            }
+        },
+
+        showCityEditForm: function () {
+            var cityDisplayContainer = BX('city-display-container');
+            if (!cityDisplayContainer) {
+                console.log('city-display-container not found');
+                return;
+            }
+
+            // Скрываем контейнер с кнопкой "Изменить"
+            cityDisplayContainer.style.display = 'none';
+
+            // Показываем скрытое поле выбора местоположения
+            var hiddenLocationContainer = BX('hidden-location-container');
+            if (hiddenLocationContainer) {
+                console.log('hidden-location-container found, showing it');
+                hiddenLocationContainer.style.display = 'block';
+                
+                // Создаем контейнер для кнопки "Применить"
+                var applyContainer = BX.create('DIV', {
+                    props: { className: 'city-apply-container' },
+                    children: [
+                        BX.create('BUTTON', {
+                            props: { 
+                                type: 'button',
+                                className: 'btn btn-primary city-apply-btn'
+                            },
+                            text: 'Применить',
+                            events: {
+                                click: BX.proxy(this.applyCityChange, this)
+                            }
+                        })
+                    ]
+                });
+
+                // Добавляем кнопку "Применить" после поля местоположения
+                hiddenLocationContainer.appendChild(applyContainer);
+                
+                // Добавляем обработчик для автоматического обновления при выборе города
+                this.addLocationChangeHandler(hiddenLocationContainer);
+            } else {
+                console.log('hidden-location-container not found');
+            }
+        },
+
+        applyCityChange: function () {
+            var cityDisplayContainer = BX('city-display-container');
+            var hiddenLocationContainer = BX('hidden-location-container');
+            
+            if (!cityDisplayContainer || !hiddenLocationContainer) return;
+
+            // Получаем выбранное местоположение из скрытого поля
+            var locationString = this.getLocationString(hiddenLocationContainer);
+            
+            if (locationString.length && locationString !== 'не указано' && locationString !== 'Не указано') {
+                // Обновляем отображаемый город
+                var displayText = cityDisplayContainer.querySelector('.region-display-text');
+                if (displayText) {
+                    displayText.textContent = locationString;
+                }
+            } else {
+                // Если город не выбран, оставляем "Липецк"
+                var displayText = cityDisplayContainer.querySelector('.region-display-text');
+                if (displayText) {
+                    displayText.textContent = 'Липецк';
+                }
+            }
+
+            // Удаляем кнопку "Применить"
+            var applyContainer = hiddenLocationContainer.querySelector('.city-apply-container');
+            if (applyContainer) {
+                applyContainer.parentNode.removeChild(applyContainer);
+            }
+
+            // Скрываем поле выбора местоположения
+            hiddenLocationContainer.style.display = 'none';
+
+            // Показываем контейнер с кнопкой "Изменить"
+            cityDisplayContainer.style.display = 'flex';
+        },
+
+        addLocationChangeHandler: function (hiddenLocationContainer) {
+            var self = this;
+            
+            // Универсальный подход - отслеживаем изменения через MutationObserver
+            var observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                        setTimeout(function() {
+                            self.updateCityDisplay();
+                        }, 100);
+                    }
+                });
+            });
+            
+            // Наблюдаем за изменениями в контейнере местоположения
+            observer.observe(hiddenLocationContainer, {
+                childList: true,
+                subtree: true,
+                characterData: true
+            });
+            
+            // Ищем поле ввода местоположения
+            var locationInput = hiddenLocationContainer.querySelector('input[type="text"]');
+            if (locationInput) {
+                // Добавляем обработчик изменения значения
+                BX.bind(locationInput, 'change', function() {
+                    self.updateCityDisplay();
+                });
+                
+                // Добавляем обработчик для событий выбора из подсказок
+                BX.bind(locationInput, 'blur', function() {
+                    setTimeout(function() {
+                        self.updateCityDisplay();
+                    }, 100);
+                });
+                
+                // Добавляем обработчик для событий ввода
+                BX.bind(locationInput, 'input', function() {
+                    setTimeout(function() {
+                        self.updateCityDisplay();
+                    }, 200);
+                });
+                
+                // Добавляем обработчик для клика (выбор из подсказок)
+                BX.bind(locationInput, 'click', function() {
+                    setTimeout(function() {
+                        self.updateCityDisplay();
+                    }, 100);
+                });
+            }
+            
+            // Также отслеживаем изменения в других элементах выбора местоположения
+            var locationElements = hiddenLocationContainer.querySelectorAll('.bx-ui-sls-route, .bx-ui-combobox-fake, .bx-ui-sls-input-block');
+            for (var i = 0; i < locationElements.length; i++) {
+                BX.bind(locationElements[i], 'change', function() {
+                    self.updateCityDisplay();
+                });
+                BX.bind(locationElements[i], 'click', function() {
+                    setTimeout(function() {
+                        self.updateCityDisplay();
+                    }, 100);
+                });
+            }
+            
+            // Добавляем обработчик для событий Bitrix Location Selector
+            BX.addCustomEvent('onLocationChange', function() {
+                setTimeout(function() {
+                    self.updateCityDisplay();
+                }, 100);
+            });
+            
+            // Добавляем обработчик для событий выбора местоположения
+            BX.addCustomEvent('onLocationSelect', function() {
+                setTimeout(function() {
+                    self.updateCityDisplay();
+                }, 100);
+            });
+            
+            // Периодическая проверка изменений (как fallback)
+            var checkInterval = setInterval(function() {
+                if (hiddenLocationContainer.style.display === 'none') {
+                    clearInterval(checkInterval);
+                    return;
+                }
+                self.updateCityDisplay();
+            }, 500);
+        },
+
+        updateCityDisplay: function () {
+            var cityDisplayContainer = BX('city-display-container');
+            var hiddenLocationContainer = BX('hidden-location-container');
+            
+            if (!cityDisplayContainer || !hiddenLocationContainer) return;
+
+            // Получаем выбранное местоположение
+            var locationString = this.getLocationString(hiddenLocationContainer);
+            console.log('updateCityDisplay called, locationString:', locationString);
+            
+            if (locationString.length && locationString !== 'не указано' && locationString !== 'Не указано') {
+                // Обновляем отображаемый город
+                var displayText = cityDisplayContainer.querySelector('.region-display-text');
+                if (displayText) {
+                    console.log('Updating display text to:', locationString);
+                    displayText.textContent = locationString;
+                }
+            }
+        },
+
+        addCityEditButton: function (node) {
+            var locationString = this.getLocationString(this.regionHiddenBlockNode),
+                locationProperty = null,
+                i;
+
+            // Находим свойство локации
+            for (i in this.result.ORDER_PROP.properties) {
+                if (this.result.ORDER_PROP.properties.hasOwnProperty(i)) {
+                    if (this.result.ORDER_PROP.properties[i].IS_LOCATION == 'Y'
+                        && this.result.ORDER_PROP.properties[i].ID == this.deliveryLocationInfo.loc) {
+                        locationProperty = this.result.ORDER_PROP.properties[i];
+                        break;
+                    }
+                }
+            }
+
+            // Создаем контейнер для отображения города
+            var cityContainer = BX.create('DIV', {
+                props: { className: 'region-display-container', id: 'city-display-container' },
+                children: [
+                    BX.create('STRONG', { text: (locationProperty ? locationProperty.NAME : 'Город') + ': ' }),
+                    BX.create('SPAN', { 
+                        props: { className: 'region-display-text' },
+                        text: (locationString.length && locationString !== 'не указано' && locationString !== 'Не указано') ? locationString : 'Липецк'
+                    }),
+                    BX.create('BUTTON', {
+                        props: { 
+                            type: 'button',
+                            className: 'btn btn-link region-edit-btn'
+                        },
+                        text: 'Изменить',
+                        events: {
+                            click: BX.proxy(this.showCityEditForm, this)
+                        }
+                    })
+                ]
+            });
+
+            node.appendChild(cityContainer);
+        },
+
         editFadeRegionBlock: function () {
             var regionContent = this.regionBlockNode.querySelector('.bx-soa-section-content'), newContent;
 
@@ -3832,7 +4072,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
         },
 
         editFadeRegionContent: function (node) {
-            if (!node || !this.locationsInitialized)
+            if (!node)
                 return;
 
             var selectedPersonType = this.getSelectedPersonType(),
@@ -3965,7 +4205,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 insertedLoc = BX.create('DIV', {
                     attrs: { 'data-property-id-row': locationId },
                     props: { className: 'form-group bx-soa-location-input-container' },
-                    style: { visibility: 'hidden' },
                     html: labelHtml + /*quickLocationsLabel +*/ currentLocation.HTML
                 });
                 node.appendChild(insertedLoc);
@@ -4824,8 +5063,18 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
                 this.getErrorContainer(deliveryContent);
 
-                // Отрисовываем поле выбора города здесь, в самом начале блока "Доставка"
-                this.getDeliveryLocationInput(deliveryContent);
+                // Добавляем кнопку "Изменить" для города в начале блока доставки
+                this.addCityEditButton(deliveryContent);
+
+                // Создаем скрытое поле выбора города (для функционала, но не отображаем)
+                var hiddenLocationContainer = BX.create('DIV', { 
+                    props: { 
+                        style: 'display: none;',
+                        id: 'hidden-location-container'
+                    }
+                });
+                deliveryContent.appendChild(hiddenLocationContainer);
+                this.getDeliveryLocationInput(hiddenLocationContainer);
 
                 deliveryNode = BX.create('DIV', { props: { className: 'bx-soa-pp row' } });
                 this.editDeliveryItems(deliveryNode);
@@ -5158,6 +5407,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
             if (warningNode && warningNode.innerHTML)
                 node.appendChild(warningNode.cloneNode(true));
+
+            // Добавляем кнопку "Изменить" для города
+            this.addCityEditButton(node);
 
             if (selectedDelivery && selectedDelivery.NAME) {
                 logotype = this.getImageSources(selectedDelivery, 'LOGOTIP');

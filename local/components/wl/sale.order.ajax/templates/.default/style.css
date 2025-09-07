@@ -2029,6 +2029,97 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     display: none
 }
 
+/* Стили для кнопки "Изменить" в блоке региона */
+.region-display-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.region-display-text {
+    flex: 1;
+}
+
+.region-edit-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.region-edit-btn:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.region-edit-btn:focus {
+    outline: none;
+    color: #0056b3;
+}
+
+/* Стили для формы редактирования города */
+.region-edit-container {
+    margin-bottom: 15px;
+}
+
+.city-edit-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.city-edit-input-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.city-edit-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.city-edit-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.city-apply-btn {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.city-apply-btn:hover {
+    background-color: #0056b3;
+}
+
+.city-apply-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Стили для контейнера кнопки "Применить" */
+.city-apply-container {
+    margin-top: 10px;
+    text-align: right;
+}
+
 #bx-soa-order .alert .row {
     margin-top: 0
 }
