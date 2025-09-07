@@ -95,7 +95,8 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             this.deliveryHiddenBlockNode = BX(parameters.deliveryBlockId + '-hidden');
             this.pickUpBlockNode = BX(parameters.pickUpBlockId);
             this.pickUpHiddenBlockNode = BX(parameters.pickUpBlockId + '-hidden');
-            // Блок properties удален
+            this.propsBlockNode = BX(parameters.propsBlockId);
+            this.propsHiddenBlockNode = BX(parameters.propsBlockId + '-hidden');
 
             if (this.result.SHOW_AUTH) {
                 this.authBlockNode.style.display = '';
@@ -121,7 +122,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
             this.options.totalPriceChanged = false;
 
-            // Всегда инициализируем все блоки
+            if (!this.result.IS_AUTHORIZED || typeof this.result.LAST_ORDER_DATA.FAIL !== 'undefined')
                 this.initFirstSection();
 
             this.initOptions();
@@ -1139,16 +1140,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
         },
 
         initFirstSection: function () {
-            // Все блоки теперь всегда развернуты
-            var sections = this.orderBlockNode.querySelectorAll('.bx-soa-section.bx-active');
-            for (var i = 0; i < sections.length; i++) {
-                BX.addClass(sections[i], 'bx-selected');
-            }
-            // Устанавливаем первый блок как активный для совместимости
             var firstSection = this.orderBlockNode.querySelector('.bx-soa-section.bx-active');
-            if (firstSection) {
+            BX.addClass(firstSection, 'bx-selected');
             this.activeSectionId = firstSection.id;
-            }
         },
 
         initOptions: function () {
@@ -1479,7 +1473,8 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             if (this.activeSectionId !== this.regionBlockNode.id)
                 this.editFadeRegionContent(this.regionBlockNode.querySelector('.bx-soa-section-content'));
 
-            // Блок properties удален
+            if (this.activeSectionId != this.propsBlockNode.id)
+                this.editFadePropsContent(this.propsBlockNode.querySelector('.bx-soa-section-content'));
         },
 
         fixLocationsStyle: function (section, hiddenSection) {
@@ -1576,12 +1571,13 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
          * Showing authentication block node
          */
         showAuthBlock: function () {
-            var showNode = this.authBlockNode;
+            var showNode = this.authBlockNode,
+                fadeNode = BX(this.activeSectionId);
 
-            if (!showNode)
+            if (!showNode || BX.hasClass(showNode, 'bx-selected'))
                 return;
 
-            // Не скрываем другие блоки, просто показываем блок авторизации
+            fadeNode && this.fade(fadeNode);
             this.show(showNode);
         },
 
@@ -1731,15 +1727,18 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
          * Replacing current active block node with generated fade block node
          */
         fade: function (node, nextSection) {
-            if (!node || !node.id)
+            if (!node || !node.id || this.activeSectionId != node.id)
                 return;
 
             this.hasErrorSection[node.id] = false;
 
-            // Не скрываем блоки, только обновляем их содержимое
+            var objHeightOrig = node.offsetHeight,
+                objHeight;
+
             switch (node.id) {
                 case this.authBlockNode.id:
-                    // Не скрываем блок авторизации
+                    this.authBlockNode.style.display = 'none';
+                    BX.removeClass(this.authBlockNode, 'bx-active');
                     break;
                 case this.basketBlockNode.id:
                     this.editFadeBasketBlock();
@@ -1758,7 +1757,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 case this.pickUpBlockNode.id:
                     this.editFadePickUpBlock();
                     break;
-                // Блок properties удален
+                case this.propsBlockNode.id:
+                    this.editFadePropsBlock();
+                    break;
             }
 
             BX.addClass(node, 'bx-step-completed');
@@ -1823,7 +1824,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
          * Showing active data in certain block node
          */
         show: function (node) {
-            if (!node || !node.id)
+            if (!node || !node.id || this.activeSectionId == node.id)
                 return;
 
             this.activeSectionId = node.id;
@@ -1850,7 +1851,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 case this.pickUpBlockNode.id:
                     this.editActivePickUpBlock(true);
                     break;
-                // Блок properties удален
+                case this.propsBlockNode.id:
+                    this.editActivePropsBlock(true);
+                    break;
             }
 
             if (node.getAttribute('data-visited') === 'false') {
@@ -2126,28 +2129,26 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             if (!this.orderBlockNode || !this.result)
                 return;
 
-            // Всегда показываем все блоки
-            if (this.deliveryBlockNode) {
+            if (this.result.DELIVERY.length > 0) {
                 BX.addClass(this.deliveryBlockNode, 'bx-active');
                 this.deliveryBlockNode.removeAttribute('style');
+            } else {
+                BX.removeClass(this.deliveryBlockNode, 'bx-active');
+                this.deliveryBlockNode.style.display = 'none';
             }
 
-            if (this.orderSaveBlockNode) {
             this.orderSaveBlockNode.style.display = this.result.SHOW_AUTH ? 'none' : '';
-            }
-            if (this.mobileTotalBlockNode) {
             this.mobileTotalBlockNode.style.display = this.result.SHOW_AUTH ? 'none' : '';
-            }
 
             this.checkPickUpShow();
    
-            // Всегда показываем блок региона
-            if (this.regionBlockNode) {
-                BX.addClass(this.regionBlockNode, 'bx-active');
-                this.regionBlockNode.removeAttribute('style');
-            }
+            // 
+            BX.removeClass(this.regionBlockNode, 'bx-active');
+            this.regionBlockNode.style.display = 'none';
 
-            // Обрабатываем все активные блоки
+            var sections = this.orderBlockNode.querySelectorAll('.bx-soa-section.bx-active'), i;
+            // 
+
             var sections = this.orderBlockNode.querySelectorAll('.bx-soa-section.bx-active'), i;
             for (i in sections) {
                 if (sections.hasOwnProperty(i)) {
@@ -2169,7 +2170,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             if (!section || !section.id)
                 return;
 
-            // Всегда показываем все блоки
+            if (this.result.SHOW_AUTH && section.id != this.authBlockNode.id && section.id != this.basketBlockNode.id)
+                section.style.display = 'none';
+            else if (section.id != this.pickUpBlockNode.id)
                 section.style.display = '';
 
             var active = section.id == this.activeSectionId,
@@ -2192,28 +2195,30 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             this.hasErrorSection[section.id] = errorContainer && errorContainer.style.display != 'none';
 
             switch (section.id) {
-                case this.authBlockNode && this.authBlockNode.id:
+                case this.authBlockNode.id:
                     this.editAuthBlock();
                     break;
-                case this.basketBlockNode && this.basketBlockNode.id:
-                    this.editBasketBlock(true); // Всегда развернутый
+                case this.basketBlockNode.id:
+                    this.editBasketBlock(active);
                     break;
-                case this.regionBlockNode && this.regionBlockNode.id:
-                    this.editRegionBlock(true); // Всегда развернутый
+                case this.regionBlockNode.id:
+                    this.editRegionBlock(active);
                     break;
-                case this.paySystemBlockNode && this.paySystemBlockNode.id:
-                    this.editPaySystemBlock(true); // Всегда развернутый
+                case this.paySystemBlockNode.id:
+                    this.editPaySystemBlock(active);
                     break;
-                case this.deliveryBlockNode && this.deliveryBlockNode.id:
-                    this.editDeliveryBlock(true); // Всегда развернутый
+                case this.deliveryBlockNode.id:
+                    this.editDeliveryBlock(active);
                     break;
-                case this.pickUpBlockNode && this.pickUpBlockNode.id:
-                    this.editPickUpBlock(true); // Всегда развернутый
+                case this.pickUpBlockNode.id:
+                    this.editPickUpBlock(active);
                     break;
-                // Блок properties удален
+                case this.propsBlockNode.id:
+                    this.editPropsBlock(active);
+                    break;
             }
 
-            // Все блоки всегда считаются посещенными (развернутыми)
+            if (active)
                 section.setAttribute('data-visited', 'true');
         },
 
@@ -4785,7 +4790,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
         editActiveDeliveryBlock: function (activeNodeMode) {
             var node = activeNodeMode ? this.deliveryBlockNode : this.deliveryHiddenBlockNode,
-                deliveryContent, deliveryNode, propsNode, propsItemsContainer;
+                deliveryContent, deliveryNode;
 
             if (this.initialized.delivery) {
                 BX.remove(BX.lastChild(node));
@@ -4800,15 +4805,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
                 this.getErrorContainer(deliveryContent);
 
-                // Поля покупателя теперь в блоке доставки, но функция editPropsItems удалена
-                // if (this.result.ORDER_PROP && this.propertyCollection) {
-                //     propsNode = BX.create('DIV', { props: { className: 'row' } });
-                //     propsItemsContainer = BX.create('DIV', { props: { className: 'col-sm-12 bx-soa-customer' } });
-                //     this.editPropsItems(propsItemsContainer);
-                //     propsNode.appendChild(propsItemsContainer);
-                //     deliveryContent.appendChild(propsNode);
-                // }
-
                 // Отрисовываем поле выбора города здесь, в самом начале блока "Доставка"
                 this.getDeliveryLocationInput(deliveryContent);
 
@@ -4819,9 +4815,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
                 if (this.params.SHOW_COUPONS_DELIVERY == 'Y')
                     this.editCoupons(deliveryContent);
-
-                // Добавляем поля покупателя в самый низ блока доставки
-                this.addBuyerFields(deliveryContent);
 
                 this.getBlockFooter(deliveryContent);
             }
@@ -5053,178 +5046,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 this.editCouponsFade(newContent);
         },
 
-        addBuyerFields: function (container) {
-            // Используем тот же подход, что и в оригинальном скрипте
-            if (!this.result.ORDER_PROP || !this.propertyCollection) {
-                console.log('No ORDER_PROP or propertyCollection available');
-                return;
-            }
-
-            // Создаем контейнер для полей покупателя
-            var buyerFieldsContainer = BX.create('DIV', { 
-                props: { className: 'row buyer-fields-container' },
-                style: { marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #e5e5e5' }
-            });
-
-            // Заголовок секции
-            var titleRow = BX.create('DIV', { props: { className: 'col-sm-12' } });
-            var title = BX.create('H4', { 
-                props: { className: 'buyer-fields-title' },
-                text: 'Данные покупателя',
-                style: { marginBottom: '15px', color: '#333' }
-            });
-            titleRow.appendChild(title);
-            buyerFieldsContainer.appendChild(titleRow);
-
-            // Создаем контейнер для полей
-            var propsItemsContainer = BX.create('DIV', { props: { className: 'col-sm-12 bx-soa-customer' } });
-            
-            // Используем тот же подход, что и в оригинальном скрипте
-            var group, property, groupIterator = this.propertyCollection.getGroupIterator(), propsIterator;
-
-            while (group = groupIterator()) {
-                propsIterator = group.getIterator();
-                while (property = propsIterator()) {
-                    // Пропускаем поля адреса и города, как в оригинальном скрипте
-                    if (
-                        this.deliveryLocationInfo.loc == property.getId()
-                        || this.deliveryLocationInfo.zip == property.getId()
-                        || this.deliveryLocationInfo.city == property.getId()
-                        || property.getId() == 27 // ID свойства "Адрес"
-                        || property.getId() == 7  // ID свойства "Город"
-                    )
-                        continue;
-
-                    // Создаем поле используя оригинальный метод
-                    this.getPropertyRowNode(property, propsItemsContainer, false);
-                }
-            }
-
-            buyerFieldsContainer.appendChild(propsItemsContainer);
-            container.appendChild(buyerFieldsContainer);
-        },
-
-        getPropertyRowNode: function (property, propsItemsContainer, disabled) {
-            var propsItemNode = BX.create('DIV'),
-                textHtml = '',
-                propertyType = property.getType() || '',
-                propertyDesc = property.getDescription() || '',
-                label;
-
-            if (disabled) {
-                propsItemNode.innerHTML = '<strong>' + BX.util.htmlspecialchars(property.getName()) + ':</strong> ';
-            } else {
-                BX.addClass(propsItemNode, "form-group bx-soa-customer-field");
-
-                if (property.isRequired())
-                    textHtml += '<span class="bx-authform-starrequired">*</span> ';
-
-                textHtml += BX.util.htmlspecialchars(property.getName());
-                if (propertyDesc.length && propertyType != 'STRING' && propertyType != 'NUMBER' && propertyType != 'DATE')
-                    textHtml += ' <small>(' + BX.util.htmlspecialchars(propertyDesc) + ')</small>';
-
-                label = BX.create('LABEL', {
-                    attrs: { 'for': 'soa-property-' + property.getId() },
-                    props: { className: 'bx-soa-custom-label' },
-                    html: textHtml
-                });
-                propsItemNode.setAttribute('data-property-id-row', property.getId());
-                propsItemNode.appendChild(label);
-            }
-
-            switch (propertyType) {
-                case 'LOCATION':
-                    this.insertLocationProperty(property, propsItemNode, disabled);
-                    break;
-                case 'DATE':
-                    this.insertDateProperty(property, propsItemNode, disabled);
-                    break;
-                case 'FILE':
-                    this.insertFileProperty(property, propsItemNode, disabled);
-                    break;
-                case 'STRING':
-                    this.insertStringProperty(property, propsItemNode, disabled);
-                    break;
-                case 'ENUM':
-                    this.insertEnumProperty(property, propsItemNode, disabled);
-                    break;
-                case 'Y/N':
-                    this.insertYNProperty(property, propsItemNode, disabled);
-                    break;
-                case 'NUMBER':
-                    this.insertNumberProperty(property, propsItemNode, disabled);
-            }
-
-            propsItemsContainer.appendChild(propsItemNode);
-        },
-
-        insertStringProperty: function (property, propsItemNode, disabled) {
-            var prop, inputs, values, i, propContainer;
-
-            if (disabled) {
-                prop = this.propsHiddenBlockNode ? this.propsHiddenBlockNode.querySelector('div[data-property-id-row="' + property.getId() + '"]') : null;
-                if (prop) {
-                    values = [];
-                    inputs = prop.querySelectorAll('input[type=text]');
-                    if (inputs.length == 0)
-                        inputs = prop.querySelectorAll('textarea');
-
-                    if (inputs.length) {
-                        for (i = 0; i < inputs.length; i++) {
-                            if (inputs[i].value.length)
-                                values.push(inputs[i].value);
-                        }
-                    }
-
-                    propsItemNode.innerHTML += this.valuesToString(values);
-                }
-            } else {
-                propContainer = BX.create('DIV', { props: { className: 'soa-property-container' } });
-                property.appendTo(propContainer);
-                propsItemNode.appendChild(propContainer);
-                this.alterProperty(property.getSettings(), propContainer);
-                this.bindValidation(property.getId(), propContainer);
-            }
-        },
-
-        valuesToString: function (values) {
-            var str = values.join(', ');
-            return str.length ? BX.util.htmlspecialchars(str) : BX.message('SOA_NOT_SELECTED');
-        },
-
-        alterProperty: function (settings, propContainer) {
-            var divs = BX.findChildren(propContainer, { tagName: 'DIV' }),
-                i, textNode, inputs, del, add,
-                fileInputs, accepts, fileTitles;
-
-            if (!settings)
-                return;
-
-            for (i = 0; i < divs.length; i++) {
-                textNode = divs[i].querySelector('input[type=text]');
-                if (textNode) {
-                    textNode.id = 'soa-property-' + settings.ID;
-                    if (settings.IS_ADDRESS == 'Y')
-                        textNode.setAttribute('autocomplete', 'address');
-                    if (settings.IS_EMAIL == 'Y')
-                        textNode.setAttribute('autocomplete', 'email');
-                    if (settings.IS_PAYER == 'Y')
-                        textNode.setAttribute('autocomplete', 'name');
-                    if (settings.IS_PHONE == 'Y')
-                        textNode.setAttribute('autocomplete', 'tel');
-
-                    if (settings.PATTERN && settings.PATTERN.length) {
-                        textNode.removeAttribute('pattern');
-                    }
-                }
-            }
-        },
-
-        bindValidation: function (propertyId, propContainer) {
-            // Простая заглушка для валидации
-            // В оригинальном скрипте здесь более сложная логика
-        },
-
         createDeliveryItem: function (item) {
             var checked = item.CHECKED == 'Y',
                 deliveryId = parseInt(item.ID),
@@ -5318,8 +5139,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
             if (warningNode && warningNode.innerHTML)
                 node.appendChild(warningNode.cloneNode(true));
-
-            // Блок properties удален
 
             if (selectedDelivery && selectedDelivery.NAME) {
                 logotype = this.getImageSources(selectedDelivery, 'LOGOTIP');
@@ -5434,8 +5253,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             if (!this.pickUpBlockNode || !this.pickUpHiddenBlockNode)
                 return;
 
-            // Не скрываем блок pickup, просто очищаем его содержимое
-            this.pickUpBlockNode.style.display = '';
+            if (!BX.hasClass(this.pickUpBlockNode, 'bx-active'))
+                return;
+
+            BX.removeClass(this.pickUpBlockNode, 'bx-active');
+            this.pickUpBlockNode.style.display = 'none';
         },
 
         editPickUpBlock: function (active) {
@@ -5609,8 +5431,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 this.activatePickUp(name);
                 this.editSection(this.pickUpBlockNode);
             } else {
-                // Не деактивируем pickup, просто не показываем его содержимое
-                this.editSection(this.pickUpBlockNode);
+                this.deactivatePickUp();
             }
         },
 
@@ -6047,41 +5868,654 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             return deliveries.concat(problemDeliveries);
         },
 
-        // Функции блока properties удалены
+        editPropsBlock: function (active) {
+            if (!this.propsBlockNode || !this.propsHiddenBlockNode || !this.result.ORDER_PROP)
+                return;
 
-        // Все функции блока properties удалены
+            if (active)
+                this.editActivePropsBlock(true);
+            else
+                this.editFadePropsBlock();
 
-        // Все функции properties удалены
+            this.initialized.props = true;
+        },
 
-        // insertLocationProperty удалена
+        editActivePropsBlock: function(activeNodeMode) {
+            var node = activeNodeMode ? this.propsBlockNode : this.propsHiddenBlockNode,
+                propsContent, propsNode, validationErrors;
 
-        // Все функции properties закомментированы
+            if (this.initialized.props) {
+                BX.remove(BX.lastChild(node));
+                node.appendChild(BX.firstChild(this.propsHiddenBlockNode));
+            } else {
+                propsContent = node.querySelector('.bx-soa-section-content');
+                if (!propsContent) {
+                    propsContent = this.getNewContainer();
+                    node.appendChild(propsContent);
+                } else {
+                    BX.cleanNode(propsContent);
+                }
 
-        // ВСЕ ФУНКЦИИ PROPERTIES ЗАКОММЕНТИРОВАНЫ
-        // insertDateProperty: function (property, propsItemNode, disabled) {
-        //     var prop, dateInputs, values, i,
-        //         propContainer, inputText;
+                this.getErrorContainer(propsContent);
 
-        // ВСЕ ФУНКЦИИ PROPERTIES ЗАКОММЕНТИРОВАНЫ
+                propsNode = BX.create('DIV', { props: { className: 'row' } });
+                var propsItemsContainer = BX.create('DIV', { props: { className: 'col-sm-12 bx-soa-customer' } });
 
-        // ВСЕ ФУНКЦИИ PROPERTIES ЗАКОММЕНТИРОВАНЫ
-        // insertFileProperty: function (property, propsItemNode, disabled) {
-        //     var prop, fileLinks, values, i, html,
-        //         saved, propContainer;
+                // Добавляем выбор типа плательщика и профиля
+                this.getPersonTypeControl(propsItemsContainer);
+                this.getProfilesControl(propsItemsContainer);
 
-        // ВСЕ ФУНКЦИИ PROPERTIES ЗАКОММЕНТИРОВАНЫ
+                // Добавляем остальные поля покупателя (ФИО, Email, Телефон)
+                this.editPropsItems(propsItemsContainer);
 
-        // insertStringProperty: function (property, propsItemNode, disabled) {
-        // ВСЕ ФУНКЦИИ PROPERTIES ЗАКОММЕНТИРОВАНЫ
+                propsNode.appendChild(propsItemsContainer);
 
-        // insertEnumProperty: function (property, propsItemNode, disabled) {
-        // ВСЕ ФУНКЦИИ PROPERTIES ЗАКОММЕНТИРОВАНЫ
+                if (this.params.HIDE_ORDER_DESCRIPTION !== 'Y') {
+                    this.editPropsComment(propsNode); // Эта функция уже пустая и ничего не выведет
+                }
 
-        // insertYNProperty: function (property, propsItemNode, disabled) {
-        // ВСЕ ФУНКЦИИ PROPERTIES ЗАКОММЕНТИРОВАНЫ
+                propsContent.appendChild(propsNode);
+                this.getBlockFooter(propsContent);
 
-        // insertNumberProperty: function (property, propsItemNode, disabled) {
-        // ВСЕ ФУНКЦИИ PROPERTIES ЗАКОММЕНТИРОВАНЫ
+                if (this.propsBlockNode.getAttribute('data-visited') === 'true') {
+                    validationErrors = this.isValidPropertiesBlock(true);
+                    if (validationErrors.length)
+                        BX.addClass(this.propsBlockNode, 'bx-step-error');
+                    else
+                        BX.removeClass(this.propsBlockNode, 'bx-step-error');
+                }
+            }
+        },
+
+        editFadePropsBlock: function () {
+            var propsContent = this.propsBlockNode.querySelector('.bx-soa-section-content'), newContent;
+
+            if (this.initialized.props) {
+                this.propsHiddenBlockNode.appendChild(propsContent);
+            } else {
+                this.editActivePropsBlock(false);
+                BX.remove(BX.lastChild(this.propsBlockNode));
+            }
+
+            newContent = this.getNewContainer();
+            this.propsBlockNode.appendChild(newContent);
+
+            this.editFadePropsContent(newContent);
+        },
+
+        editFadePropsContent: function (node) {
+            if (!node || !this.locationsInitialized)
+                return;
+
+            var errorNode = this.propsHiddenBlockNode.querySelector('.alert'),
+                personType = this.getSelectedPersonType(),
+                fadeParamName, props,
+                group, property, groupIterator, propsIterator, i, validPropsErrors;
+
+            BX.cleanNode(node);
+
+            if (errorNode)
+                node.appendChild(errorNode.cloneNode(true));
+
+            if (personType) {
+                fadeParamName = 'PROPS_FADE_LIST_' + personType.ID;
+                props = this.params[fadeParamName];
+            }
+
+            if (!props || props.length === 0) {
+                node.innerHTML += '<strong>' + BX.message('SOA_ORDER_PROPS') + '</strong>';
+            } else {
+                groupIterator = this.fadedPropertyCollection.getGroupIterator();
+                while (group = groupIterator()) {
+                    propsIterator = group.getIterator();
+                    while (property = propsIterator()) {
+                        for (i = 0; i < props.length; i++)
+                            if (props[i] == property.getId() && property.getSettings()['IS_ZIP'] != 'Y')
+                                this.getPropertyRowNode(property, node, true);
+                    }
+                }
+            }
+
+            if (this.propsBlockNode.getAttribute('data-visited') === 'true') {
+                validPropsErrors = this.isValidPropertiesBlock();
+                if (validPropsErrors.length)
+                    this.showError(this.propsBlockNode, validPropsErrors);
+            }
+
+            BX.bind(node.querySelector('.alert.alert-danger'), 'click', BX.proxy(this.showByClick, this));
+            BX.bind(node.querySelector('.alert.alert-warning'), 'click', BX.proxy(this.showByClick, this));
+        },
+
+        editPropsItems: function (propsItemsContainer) {
+            if (!this.result.ORDER_PROP || !this.propertyCollection)
+                return;
+
+            var group, property, groupIterator = this.propertyCollection.getGroupIterator(), propsIterator;
+
+            if (!propsItemsContainer)
+                propsItemsContainer = this.propsBlockNode.querySelector('.col-sm-12.bx-soa-customer');
+
+            while (group = groupIterator()) {
+                propsIterator = group.getIterator();
+                while (property = propsIterator()) {
+                    if (
+                        this.deliveryLocationInfo.loc == property.getId()
+                        || this.deliveryLocationInfo.zip == property.getId()
+                        || this.deliveryLocationInfo.city == property.getId()
+                        || property.getId() == 27 // ID свойства "Адрес"
+                        || property.getId() == 7  // ID свойства "Город" (на всякий случай)
+                    )
+                        continue;
+
+                    this.getPropertyRowNode(property, propsItemsContainer, false);
+                }
+            }
+        },
+
+        getPropertyRowNode: function (property, propsItemsContainer, disabled) {
+            var propsItemNode = BX.create('DIV'),
+                textHtml = '',
+                propertyType = property.getType() || '',
+                propertyDesc = property.getDescription() || '',
+                label;
+
+            if (disabled) {
+                propsItemNode.innerHTML = '<strong>' + BX.util.htmlspecialchars(property.getName()) + ':</strong> ';
+            } else {
+                BX.addClass(propsItemNode, "form-group bx-soa-customer-field");
+
+                if (property.isRequired())
+                    textHtml += '<span class="bx-authform-starrequired">*</span> ';
+
+                textHtml += BX.util.htmlspecialchars(property.getName());
+                if (propertyDesc.length && propertyType != 'STRING' && propertyType != 'NUMBER' && propertyType != 'DATE')
+                    textHtml += ' <small>(' + BX.util.htmlspecialchars(propertyDesc) + ')</small>';
+
+                label = BX.create('LABEL', {
+                    attrs: { 'for': 'soa-property-' + property.getId() },
+                    props: { className: 'bx-soa-custom-label' },
+                    html: textHtml
+                });
+                propsItemNode.setAttribute('data-property-id-row', property.getId());
+                propsItemNode.appendChild(label);
+            }
+
+            switch (propertyType) {
+                case 'LOCATION':
+                    this.insertLocationProperty(property, propsItemNode, disabled);
+                    break;
+                case 'DATE':
+                    this.insertDateProperty(property, propsItemNode, disabled);
+                    break;
+                case 'FILE':
+                    this.insertFileProperty(property, propsItemNode, disabled);
+                    break;
+                case 'STRING':
+                    this.insertStringProperty(property, propsItemNode, disabled);
+                    break;
+                case 'ENUM':
+                    this.insertEnumProperty(property, propsItemNode, disabled);
+                    break;
+                case 'Y/N':
+                    this.insertYNProperty(property, propsItemNode, disabled);
+                    break;
+                case 'NUMBER':
+                    this.insertNumberProperty(property, propsItemNode, disabled);
+            }
+
+            propsItemsContainer.appendChild(propsItemNode);
+        },
+
+        insertLocationProperty: function (property, propsItemNode, disabled) {
+            var propRow, propNodes, locationString, currentLocation, insertedLoc, propContainer, i, k, values = [];
+
+            if (property.getId() in this.locations) {
+                if (disabled) {
+                    propRow = this.propsHiddenBlockNode.querySelector('[data-property-id-row="' + property.getId() + '"]');
+                    if (propRow) {
+                        propNodes = propRow.querySelectorAll('div.bx-soa-loc');
+                        for (i = 0; i < propNodes.length; i++) {
+                            locationString = this.getLocationString(propNodes[i]);
+                            values.push(locationString.length ? BX.util.htmlspecialchars(locationString) : BX.message('SOA_NOT_SELECTED'));
+                        }
+                    }
+                    propsItemNode.innerHTML += values.join('<br>');
+                } else {
+                    propContainer = BX.create('DIV', { props: { className: 'soa-property-container' } });
+                    propRow = this.locations[property.getId()];
+                    for (i = 0; i < propRow.length; i++) {
+                        currentLocation = propRow[i] ? propRow[i].output : {};
+                        insertedLoc = BX.create('DIV', { props: { className: 'bx-soa-loc' }, html: currentLocation.HTML });
+
+                        if (property.isMultiple())
+                            insertedLoc.style.marginBottom = this.locationsTemplate == 'search' ? '5px' : '20px';
+
+                        propContainer.appendChild(insertedLoc);
+
+                        for (k in currentLocation.SCRIPT) {
+                            if (currentLocation.SCRIPT.hasOwnProperty(k))
+                                BX.evalGlobal(currentLocation.SCRIPT[k].JS);
+                        }
+                    }
+
+                    if (property.isMultiple()) {
+                        propContainer.appendChild(
+                            BX.create('DIV', {
+                                attrs: { 'data-prop-id': property.getId() },
+                                props: { className: 'btn btn-sm btn-default' },
+                                text: BX.message('ADD_DEFAULT'),
+                                events: {
+                                    click: BX.proxy(this.addLocationProperty, this)
+                                }
+                            })
+                        );
+                    }
+
+                    propsItemNode.appendChild(propContainer);
+                }
+            }
+        },
+
+        addLocationProperty: function (e) {
+            var target = e.target || e.srcElement,
+                propId = target.getAttribute('data-prop-id'),
+                lastProp = BX.previousSibling(target),
+                insertedLoc, k, input, index = 0,
+                prefix = 'sls-',
+                randomStr = BX.util.getRandomString(5);
+
+            if (BX.hasClass(lastProp, 'bx-soa-loc')) {
+                if (this.locationsTemplate == 'search') {
+                    input = lastProp.querySelector('input[type=text][class=dropdown-field]');
+                    if (input)
+                        index = parseInt(input.name.substring(input.name.indexOf('[') + 1, input.name.indexOf(']'))) + 1;
+                } else {
+                    input = lastProp.querySelectorAll('input[type=hidden]');
+                    if (input.length) {
+                        input = input[input.length - 1];
+                        index = parseInt(input.name.substring(input.name.indexOf('[') + 1, input.name.indexOf(']'))) + 1;
+                    }
+                }
+            }
+
+            if (this.cleanLocations[propId]) {
+                insertedLoc = BX.create('DIV', {
+                    props: { className: 'bx-soa-loc' },
+                    style: { marginBottom: this.locationsTemplate == 'search' ? '5px' : '20px' },
+                    html: this.cleanLocations[propId].HTML.split('#key#').join(index).replace(/sls-\d{5}/g, prefix + randomStr)
+                });
+                target.parentNode.insertBefore(insertedLoc, target);
+
+                BX.saleOrderAjax.addPropertyDesc({
+                    id: propId + '_' + index,
+                    attributes: {
+                        id: propId + '_' + index,
+                        type: 'LOCATION',
+                        valueSource: 'form'
+                    }
+                });
+
+
+                for (k in this.cleanLocations[propId].SCRIPT)
+                    if (this.cleanLocations[propId].SCRIPT.hasOwnProperty(k))
+                        BX.evalGlobal(this.cleanLocations[propId].SCRIPT[k].JS.split('_key__').join('_' + index).replace(/sls-\d{5}/g, prefix + randomStr));
+
+                BX.saleOrderAjax.initDeferredControl();
+            }
+        },
+
+        insertDateProperty: function (property, propsItemNode, disabled) {
+            var prop, dateInputs, values, i,
+                propContainer, inputText;
+
+            if (disabled) {
+                prop = this.propsHiddenBlockNode.querySelector('div[data-property-id-row="' + property.getId() + '"]');
+                if (prop) {
+                    values = [];
+                    dateInputs = prop.querySelectorAll('input[type=text]');
+
+                    for (i = 0; i < dateInputs.length; i++)
+                        if (dateInputs[i].value && dateInputs[i].value.length)
+                            values.push(dateInputs[i].value);
+
+                    propsItemNode.innerHTML += this.valuesToString(values);
+                }
+            } else {
+                propContainer = BX.create('DIV', { props: { className: 'soa-property-container' } });
+                property.appendTo(propContainer);
+                propsItemNode.appendChild(propContainer);
+                inputText = propContainer.querySelectorAll('input[type=text]');
+
+                for (i = 0; i < inputText.length; i++)
+                    this.alterDateProperty(property.getSettings(), inputText[i]);
+
+                this.alterProperty(property.getSettings(), propContainer);
+                this.bindValidation(property.getId(), propContainer);
+            }
+        },
+
+        insertFileProperty: function (property, propsItemNode, disabled) {
+            var prop, fileLinks, values, i, html,
+                saved, propContainer;
+
+            if (disabled) {
+                prop = this.propsHiddenBlockNode.querySelector('div[data-property-id-row="' + property.getId() + '"]');
+                if (prop) {
+                    values = [];
+                    fileLinks = prop.querySelectorAll('a');
+
+                    for (i = 0; i < fileLinks.length; i++) {
+                        html = fileLinks[i].innerHTML;
+                        if (html.length)
+                            values.push(html);
+                    }
+
+                    propsItemNode.innerHTML += this.valuesToString(values);
+                }
+            } else {
+                saved = this.savedFilesBlockNode.querySelector('div[data-property-id-row="' + property.getId() + '"]');
+                if (saved)
+                    propContainer = saved.querySelector('div.soa-property-container');
+
+                if (propContainer)
+                    propsItemNode.appendChild(propContainer);
+                else {
+                    propContainer = BX.create('DIV', { props: { className: 'soa-property-container' } });
+                    property.appendTo(propContainer);
+                    propsItemNode.appendChild(propContainer);
+                    this.alterProperty(property.getSettings(), propContainer);
+                }
+            }
+        },
+
+        insertStringProperty: function (property, propsItemNode, disabled) {
+            var prop, inputs, values, i, propContainer;
+
+            if (disabled) {
+                prop = this.propsHiddenBlockNode.querySelector('div[data-property-id-row="' + property.getId() + '"]');
+                if (prop) {
+                    values = [];
+                    inputs = prop.querySelectorAll('input[type=text]');
+                    if (inputs.length == 0)
+                        inputs = prop.querySelectorAll('textarea');
+
+                    if (inputs.length) {
+                        for (i = 0; i < inputs.length; i++) {
+                            if (inputs[i].value.length)
+                                values.push(inputs[i].value);
+                        }
+                    }
+
+                    propsItemNode.innerHTML += this.valuesToString(values);
+                }
+            } else {
+                propContainer = BX.create('DIV', { props: { className: 'soa-property-container' } });
+                property.appendTo(propContainer);
+                propsItemNode.appendChild(propContainer);
+                this.alterProperty(property.getSettings(), propContainer);
+                this.bindValidation(property.getId(), propContainer);
+            }
+        },
+
+        insertEnumProperty: function (property, propsItemNode, disabled) {
+            var prop, inputs, values, i, propContainer;
+
+            if (disabled) {
+                prop = this.propsHiddenBlockNode.querySelector('div[data-property-id-row="' + property.getId() + '"]');
+                if (prop) {
+                    values = [];
+                    inputs = prop.querySelectorAll('input[type=radio]');
+                    if (inputs.length) {
+                        for (i = 0; i < inputs.length; i++) {
+                            if (inputs[i].checked)
+                                values.push(inputs[i].nextSibling.nodeValue);
+                        }
+                    }
+                    inputs = prop.querySelectorAll('option');
+                    if (inputs.length) {
+                        for (i = 0; i < inputs.length; i++) {
+                            if (inputs[i].selected)
+                                values.push(inputs[i].innerHTML);
+                        }
+                    }
+
+                    propsItemNode.innerHTML += this.valuesToString(values);
+                }
+            } else {
+                propContainer = BX.create('DIV', { props: { className: 'soa-property-container' } });
+                property.appendTo(propContainer);
+                propsItemNode.appendChild(propContainer);
+                this.bindValidation(property.getId(), propContainer);
+            }
+        },
+
+        insertYNProperty: function (property, propsItemNode, disabled) {
+            var prop, inputs, values, i, propContainer;
+
+            if (disabled) {
+                prop = this.propsHiddenBlockNode.querySelector('div[data-property-id-row="' + property.getId() + '"]');
+                if (prop) {
+                    values = [];
+                    inputs = prop.querySelectorAll('input[type=checkbox]');
+
+                    for (i = 0; i < inputs.length; i += 2)
+                        values.push(inputs[i].checked ? BX.message('SOA_YES') : BX.message('SOA_NO'));
+
+                    propsItemNode.innerHTML += this.valuesToString(values);
+                }
+            } else {
+                propContainer = BX.create('DIV', { props: { className: 'soa-property-container' } });
+                property.appendTo(propContainer);
+                propsItemNode.appendChild(propContainer);
+                this.alterProperty(property.getSettings(), propContainer);
+                this.bindValidation(property.getId(), propContainer);
+            }
+        },
+
+        insertNumberProperty: function (property, propsItemNode, disabled) {
+            var prop, inputs, values, i, propContainer;
+
+            if (disabled) {
+                prop = this.propsHiddenBlockNode.querySelector('div[data-property-id-row="' + property.getId() + '"]');
+                if (prop) {
+                    values = [];
+                    inputs = prop.querySelectorAll('input[type=text]');
+
+                    for (i = 0; i < inputs.length; i++)
+                        if (inputs[i].value.length)
+                            values.push(inputs[i].value);
+
+                    propsItemNode.innerHTML += this.valuesToString(values);
+                }
+            } else {
+                propContainer = BX.create('DIV', { props: { className: 'soa-property-container' } });
+                property.appendTo(propContainer);
+                propsItemNode.appendChild(propContainer);
+                this.alterProperty(property.getSettings(), propContainer);
+                this.bindValidation(property.getId(), propContainer);
+            }
+        },
+
+        valuesToString: function (values) {
+            var str = values.join(', ');
+
+            return str.length ? BX.util.htmlspecialchars(str) : BX.message('SOA_NOT_SELECTED');
+        },
+
+        alterProperty: function (settings, propContainer) {
+            var divs = BX.findChildren(propContainer, { tagName: 'DIV' }),
+                i, textNode, inputs, del, add,
+                fileInputs, accepts, fileTitles;
+
+            if (divs && divs.length) {
+                for (i = 0; i < divs.length; i++) {
+                    divs[i].style.margin = '5px 0';
+                }
+            }
+
+            textNode = propContainer.querySelector('input[type=text]');
+            if (!textNode)
+                textNode = propContainer.querySelector('textarea');
+
+            if (textNode) {
+                textNode.id = 'soa-property-' + settings.ID;
+                if (settings.IS_ADDRESS == 'Y')
+                    textNode.setAttribute('autocomplete', 'address');
+                if (settings.IS_EMAIL == 'Y')
+                    textNode.setAttribute('autocomplete', 'email');
+                if (settings.IS_PAYER == 'Y')
+                    textNode.setAttribute('autocomplete', 'name');
+                if (settings.IS_PHONE == 'Y')
+                    textNode.setAttribute('autocomplete', 'tel');
+
+                if (settings.PATTERN && settings.PATTERN.length) {
+                    textNode.removeAttribute('pattern');
+                }
+            }
+
+            inputs = propContainer.querySelectorAll('input[type=text]');
+            for (i = 0; i < inputs.length; i++) {
+                inputs[i].placeholder = settings.DESCRIPTION;
+                BX.addClass(inputs[i], 'form-control bx-soa-customer-input bx-ios-fix');
+            }
+
+            inputs = propContainer.querySelectorAll('select');
+            for (i = 0; i < inputs.length; i++)
+                BX.addClass(inputs[i], 'form-control');
+
+            inputs = propContainer.querySelectorAll('textarea');
+            for (i = 0; i < inputs.length; i++) {
+                inputs[i].placeholder = settings.DESCRIPTION;
+                BX.addClass(inputs[i], 'form-control bx-ios-fix');
+            }
+
+            del = propContainer.querySelectorAll('label');
+            for (i = 0; i < del.length; i++)
+                BX.remove(del[i]);
+
+            if (settings.TYPE == 'FILE') {
+                if (settings.ACCEPT && settings.ACCEPT.length) {
+                    fileInputs = propContainer.querySelectorAll('input[type=file]');
+                    accepts = this.getFileAccepts(settings.ACCEPT);
+                    for (i = 0; i < fileInputs.length; i++)
+                        fileInputs[i].setAttribute('accept', accepts);
+                }
+
+                fileTitles = propContainer.querySelectorAll('a');
+                for (i = 0; i < fileTitles.length; i++) {
+                    BX.bind(fileTitles[i], 'click', function (e) {
+                        var target = e.target || e.srcElement,
+                            fileInput = target && target.nextSibling && target.nextSibling.nextSibling;
+
+                        if (fileInput)
+                            BX.fireEvent(fileInput, 'change');
+                    });
+                }
+            }
+
+            add = propContainer.querySelectorAll('input[type=button]');
+            for (i = 0; i < add.length; i++) {
+                BX.addClass(add[i], 'btn btn-default btn-sm');
+
+                if (settings.MULTIPLE == 'Y' && i == add.length - 1)
+                    continue;
+
+                if (settings.TYPE == 'FILE') {
+                    BX.prepend(add[i], add[i].parentNode);
+                    add[i].style.marginRight = '10px';
+                }
+            }
+
+            if (add.length) {
+                add = add[add.length - 1];
+                BX.bind(add, 'click', BX.delegate(function (e) {
+                    var target = e.target || e.srcElement,
+                        targetContainer = BX.findParent(target, { tagName: 'div', className: 'soa-property-container' }),
+                        del = targetContainer.querySelector('label'),
+                        add = targetContainer.querySelectorAll('input[type=button]'),
+                        textInputs = targetContainer.querySelectorAll('input[type=text]'),
+                        textAreas = targetContainer.querySelectorAll('textarea'),
+                        divs = BX.findChildren(targetContainer, { tagName: 'DIV' });
+
+                    var i, fileTitles, fileInputs, accepts;
+
+                    if (divs && divs.length) {
+                        for (i = 0; i < divs.length; i++) {
+                            divs[i].style.margin = '5px 0';
+                        }
+                    }
+
+                    this.bindValidation(settings.ID, targetContainer);
+
+                    if (add.length && add[add.length - 2]) {
+                        BX.prepend(add[add.length - 2], add[add.length - 2].parentNode);
+                        add[add.length - 2].style.marginRight = '10px';
+                        BX.addClass(add[add.length - 2], 'btn btn-default btn-sm');
+                    }
+
+                    del && BX.remove(del);
+                    if (textInputs.length) {
+                        textInputs[textInputs.length - 1].placeholder = settings.DESCRIPTION;
+                        BX.addClass(textInputs[textInputs.length - 1], 'form-control bx-soa-customer-input bx-ios-fix');
+                        if (settings.TYPE == 'DATE')
+                            this.alterDateProperty(settings, textInputs[textInputs.length - 1]);
+
+                        if (settings.PATTERN && settings.PATTERN.length)
+                            textInputs[textInputs.length - 1].removeAttribute('pattern');
+                    }
+
+                    if (textAreas.length) {
+                        textAreas[textAreas.length - 1].placeholder = settings.DESCRIPTION;
+                        BX.addClass(textAreas[textAreas.length - 1], 'form-control bx-ios-fix');
+                    }
+
+                    if (settings.TYPE == 'FILE') {
+                        if (settings.ACCEPT && settings.ACCEPT.length) {
+                            fileInputs = propContainer.querySelectorAll('input[type=file]');
+                            accepts = this.getFileAccepts(settings.ACCEPT);
+                            for (i = 0; i < fileInputs.length; i++)
+                                fileInputs[i].setAttribute('accept', accepts);
+                        }
+
+                        fileTitles = targetContainer.querySelectorAll('a');
+                        BX.bind(fileTitles[fileTitles.length - 1], 'click', function (e) {
+                            var target = e.target || e.srcElement,
+                                fileInput = target && target.nextSibling && target.nextSibling.nextSibling;
+
+                            if (fileInput)
+                                setTimeout(function () {
+                                    BX.fireEvent(fileInput, 'change');
+                                }, 10);
+                        });
+                    }
+                }, this));
+            }
+        },
+
+        alterDateProperty: function (settings, inputText) {
+            var parentNode = BX.findParent(inputText, { tagName: 'DIV' }),
+                addon;
+
+            BX.addClass(parentNode, 'input-group');
+            addon = BX.create('DIV', {
+                props: { className: 'input-group-addon' },
+                children: [BX.create('I', { props: { className: 'bx-calendar' } })]
+            });
+            BX.insertAfter(addon, inputText);
+            BX.remove(parentNode.querySelector('input[type=button]'));
+            BX.bind(addon, 'click', BX.delegate(function (e) {
+                var target = e.target || e.srcElement,
+                    parentNode = BX.findParent(target, { tagName: 'DIV', className: 'input-group' });
+
+                BX.calendar({
+                    node: parentNode.querySelector('.input-group-addon'),
+                    field: parentNode.querySelector('input[type=text]').name,
+                    form: '',
+                    bTime: settings.TIME == 'Y',
+                    bHideTime: false
+                });
+            }, this));
+        },
 
         isValidForm: function () {
             if (!this.options.propertyValidation)

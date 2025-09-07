@@ -373,6 +373,27 @@ else
 				<? endif ?>
 
 
+				<!--	BUYER PROPS BLOCK	-->
+				<div id="bx-soa-properties" data-visited="false" class="bx-soa-section bx-active">
+					<div class="bx-soa-section-title-container">
+						<h2 class="bx-soa-section-title col-sm-9">
+							<span class="bx-soa-section-title-count"></span><?=$arParams['MESS_BUYER_BLOCK_NAME']?>
+						</h2>
+						<div class="col-xs-12 col-sm-3 text-right"><a href="" class="bx-soa-editstep"><?=$arParams['MESS_EDIT']?></a></div>
+					</div>
+					<div class="bx-soa-section-content container-fluid"></div>
+				</div>
+
+				<!--	REGION BLOCK	-->
+				<div id="bx-soa-region" data-visited="false" class="bx-soa-section bx-active">
+					<div class="bx-soa-section-title-container">
+						<h2 class="bx-soa-section-title col-sm-9">
+							Адрес доставки
+						</h2>
+						<div class="col-xs-12 col-sm-3 text-right"><a href="" class="bx-soa-editstep"><?=$arParams['MESS_EDIT']?></a></div>
+					</div>
+					<div class="bx-soa-section-content container-fluid"></div>
+				</div>
 
 				<? if ($arParams['DELIVERY_TO_PAYSYSTEM'] === 'p2d'): ?>
 					<!--	PAY SYSTEMS BLOCK	-->
@@ -385,22 +406,42 @@ else
 						</div>
 						<div class="bx-soa-section-content container-fluid"></div>
 					</div>
-					<!--	DELIVERY BLOCK WITH BUYER FIELDS	-->
-					<div id="bx-soa-delivery" data-visited="false" class="bx-soa-section bx-active">
+					<!--	DELIVERY BLOCK	-->
+					<div id="bx-soa-delivery" data-visited="false" class="bx-soa-section bx-active" <?=($hideDelivery ? 'style="display:none"' : '')?>>
 						<div class="bx-soa-section-title-container">
 							<h2 class="bx-soa-section-title col-sm-9">
-								<span class="bx-soa-section-title-count"></span><?=$arParams['MESS_DELIVERY_BLOCK_NAME']?> и <?=$arParams['MESS_BUYER_BLOCK_NAME']?>
+								<span class="bx-soa-section-title-count"></span><?=$arParams['MESS_DELIVERY_BLOCK_NAME']?>
+							</h2>
+							<div class="col-xs-12 col-sm-3 text-right"><a href="" class="bx-soa-editstep"><?=$arParams['MESS_EDIT']?></a></div>
+						</div>
+						<div class="bx-soa-section-content container-fluid"></div>
+					</div>
+					<!--	PICKUP BLOCK	-->
+					<div id="bx-soa-pickup" data-visited="false" class="bx-soa-section" style="display:none">
+						<div class="bx-soa-section-title-container">
+							<h2 class="bx-soa-section-title col-sm-9">
+								<span class="bx-soa-section-title-count"></span>
 							</h2>
 							<div class="col-xs-12 col-sm-3 text-right"><a href="" class="bx-soa-editstep"><?=$arParams['MESS_EDIT']?></a></div>
 						</div>
 						<div class="bx-soa-section-content container-fluid"></div>
 					</div>
 				<? else: ?>
-					<!--	DELIVERY BLOCK WITH BUYER FIELDS	-->
-					<div id="bx-soa-delivery" data-visited="false" class="bx-soa-section bx-active">
+					<!--	DELIVERY BLOCK	-->
+					<div id="bx-soa-delivery" data-visited="false" class="bx-soa-section bx-active" <?=($hideDelivery ? 'style="display:none"' : '')?>>
 						<div class="bx-soa-section-title-container">
 							<h2 class="bx-soa-section-title col-sm-9">
-								<span class="bx-soa-section-title-count"></span><?=$arParams['MESS_DELIVERY_BLOCK_NAME']?> и <?=$arParams['MESS_BUYER_BLOCK_NAME']?>
+								<span class="bx-soa-section-title-count"></span><?=$arParams['MESS_DELIVERY_BLOCK_NAME']?>
+							</h2>
+							<div class="col-xs-12 col-sm-3 text-right"><a href="" class="bx-soa-editstep"><?=$arParams['MESS_EDIT']?></a></div>
+						</div>
+						<div class="bx-soa-section-content container-fluid"></div>
+					</div>
+					<!--	PICKUP BLOCK	-->
+					<div id="bx-soa-pickup" data-visited="false" class="bx-soa-section" style="display:none">
+						<div class="bx-soa-section-title-container">
+							<h2 class="bx-soa-section-title col-sm-9">
+								<span class="bx-soa-section-title-count"></span>
 							</h2>
 							<div class="col-xs-12 col-sm-3 text-right"><a href="" class="bx-soa-editstep"><?=$arParams['MESS_EDIT']?></a></div>
 						</div>
@@ -463,8 +504,11 @@ else
 
 				<div style="display: none;">
 					<div id='bx-soa-basket-hidden' class="bx-soa-section"></div>
+					<div id='bx-soa-region-hidden' class="bx-soa-section"></div>
 					<div id='bx-soa-paysystem-hidden' class="bx-soa-section"></div>
 					<div id='bx-soa-delivery-hidden' class="bx-soa-section"></div>
+					<div id='bx-soa-pickup-hidden' class="bx-soa-section"></div>
+					<div id="bx-soa-properties-hidden" class="bx-soa-section"></div>
 					<div id="bx-soa-auth-hidden" class="bx-soa-section">
 						<div class="bx-soa-section-content container-fluid reg"></div>
 					</div>
@@ -573,7 +617,7 @@ else
 			regionBlockId: 'bx-soa-region',
 			paySystemBlockId: 'bx-soa-paysystem',
 			deliveryBlockId: 'bx-soa-delivery',
-			// pickUpBlockId удален
+			pickUpBlockId: 'bx-soa-pickup',
 			propsBlockId: 'bx-soa-properties',
 			totalBlockId: 'bx-soa-total'
 		});
