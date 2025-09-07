@@ -2029,43 +2029,149 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     display: none
 }
 
-/* Стили для кнопки "Изменить" в блоке региона */
+/* ========================================
+   СТИЛИ ДЛЯ БЛОКА ГОРОДА
+   ======================================== */
+
+/* Основной контейнер блока города */
 .region-display-container {
+    margin-top: 35px;
+    margin-bottom: 35px;           /* Отступ снизу от блока */
+    display: flex;                 /* Flexbox для двухколоночной верстки */
+    align-items: flex-start;       /* Выравнивание по верхнему краю */
+    gap: 170px;                      /* Расстояние между левой и правой колонкой */
+}
+
+/* Левый столбец - метка "Город" */
+.region-city-label {
+    font-weight: bold;             /* Жирный шрифт */
+    color: #333;                   /* Цвет текста (темно-серый) */
+    margin-bottom: 0;              /* Убираем отступ снизу */
+    display: block;                /* Блочный элемент */
+    min-width: 80px;               /* Минимальная ширина левой колонки */
+    flex-shrink: 0;                /* Не сжимается при уменьшении экрана */
+}
+
+/* Правый столбец - контейнер для информации о городе */
+.region-city-info {
+    display: flex;                 /* Flexbox для вертикального расположения */
+    flex-direction: column;        /* Вертикальное направление */
+    gap: 32px;                     /* Расстояние между элементами */
+}
+
+/* Название города */
+.region-city-name {
+    color: #333;                   /* Цвет текста (темно-серый) */
+    margin-bottom: 0;              /* Убираем отступ снизу */
+    display: block;                /* Блочный элемент */
+    font-weight: 500;              /* Полужирный шрифт */
+}
+
+/* Название области/региона */
+.region-city-region {
+    color:  #A9A9A9;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 22.1px */               /* Блочный элемент */
+    }
+
+/* Кнопка "Изменить" (обычное состояние) */
+.region-edit-btn {
     display: flex;
+    height: 60px;
+    padding: 23px 137px;
+    justify-content: center;
     align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
+    align-self: stretch;
+    border-radius: 8px;
+    color: #696969;
 }
 
-.region-display-text {
-    flex: 1;
-}
-
-.region-edit-btn {
-    background: none;
-    border: none;
-    color: #007bff;
-    text-decoration: underline;
-    cursor: pointer;
-    padding: 0;
-    font-size: 14px;
-    white-space: nowrap;
-}
-
+/* Кнопка "Изменить" при наведении */
 .region-edit-btn:hover {
-    color: #0056b3;
-    text-decoration: none;
+    background-color: #ebeaea;     /* Цвет фона при наведении (чуть темнее) */
+    border-color: #adb5bd;         /* Цвет границы при наведении */
+    color: #333;                   /* Цвет текста при наведении */
+    text-decoration: none;         /* Убираем подчеркивание */
+    border-radius: 8px;
 }
 
-.region-edit-btn:focus {
-    outline: none;
-    color: #0056b3;
+
+/* ========================================
+   СТИЛИ ДЛЯ КНОПКИ "ПРИМЕНИТЬ"
+   ======================================== */
+
+/* Кнопка "Применить" (активное состояние) */
+.region-edit-btn[data-state="apply"] {
+    background-color: #285b4d;     /* Цвет фона (синий) */
+    border-color: #285b4d;         /* Цвет границы (синий) */
+    color: white;                  /* Цвет текста (белый) */
+}
+
+/* Кнопка "Применить" при наведении */
+.region-edit-btn[data-state="apply"]:hover {
+    background-color: #285b4d;     /* Цвет фона при наведении (темно-синий) */
+    border-color: #285b4d;         /* Цвет границы при наведении (темно-синий) */
+    color: white;                  /* Цвет текста при наведении (белый) */
 }
 
 /* Стили для формы редактирования города */
 .region-edit-container {
     margin-bottom: 15px;
 }
+
+/* Скрываем лейбл "Город *" и подсказки в поле ввода города */
+#hidden-location-container .bx-soa-custom-label,
+.bx-soa-custom-label {
+    display: none !important;
+}
+
+#hidden-location-container .bx-ui-sls-quick-locations-label,
+.bx-ui-sls-quick-locations-label {
+    display: none !important;
+}
+
+#hidden-location-container .bx-ui-sls-route,
+.bx-ui-sls-route {
+    margin-top: 0 !important;
+}
+
+/* Скрываем подсказки и описания в поле местоположения */
+#hidden-location-container small,
+.bx-soa-location-input-container small {
+    display: none !important;
+}
+
+#hidden-location-container .bx-authform-starrequired,
+.bx-authform-starrequired {
+    display: none !important;
+}
+
+/* Скругление углов для контейнера поля ввода города */
+.bx-soa-location-input-container {
+    border-radius: 8px !important;
+}
+
+/* Дополнительные стили для скрытия элементов в поле местоположения */
+.bx-soa-location-input-container label {
+    display: none !important;
+}
+
+.bx-soa-location-input-container .bx-ui-sls-quick-locations {
+    display: none !important;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+  }
+
+.bx-soa-reference{
+    margin-bottom: 35px;
+}
+
 
 .city-edit-label {
     display: block;
@@ -2163,7 +2269,8 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-order .bx-soa-reference {
-    margin: -8px 0 0;
+    margin-bottom: 60px;
+    margin-left: 8px;
     padding: 0;
     font-size: 12px;
     line-height: 14px;
@@ -2633,10 +2740,17 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 #bx-soa-order .bx-soa-section .bx-soa-section-content {
     padding: 15px 15px 15px 15px;
-    font-size: 15px;
+    font-size: 24px;
     line-height: 20px;
     color: #333;
     transition: none
+}
+.region-city-name{
+    color: #2D2D2D;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
 }
 
 #bx-soa-order .bx-soa-section.bx-active .bx-soa-section-content strong {
@@ -3822,3 +3936,10 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 
 
+.region-city-label{
+    color: #2D2D2D;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 31.2px */
+}

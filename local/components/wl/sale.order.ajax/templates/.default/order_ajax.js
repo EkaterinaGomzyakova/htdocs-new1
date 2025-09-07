@@ -3830,44 +3830,50 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
         showCityEditForm: function () {
             var cityDisplayContainer = BX('city-display-container');
-            if (!cityDisplayContainer) {
-                console.log('city-display-container not found');
-                return;
-            }
+            if (!cityDisplayContainer) return;
 
-            // Скрываем контейнер с кнопкой "Изменить"
-            cityDisplayContainer.style.display = 'none';
+            // Находим кнопку "Изменить"
+            var editButton = cityDisplayContainer.querySelector('.region-edit-btn');
+            if (!editButton) return;
+
+            // Меняем текст кнопки на "Применить"
+            editButton.textContent = 'Применить';
+            editButton.setAttribute('data-state', 'apply');
+            
+            // Меняем обработчик события
+            BX.unbindAll(editButton);
+            BX.bind(editButton, 'click', BX.proxy(this.applyCityChange, this));
 
             // Показываем скрытое поле выбора местоположения
             var hiddenLocationContainer = BX('hidden-location-container');
             if (hiddenLocationContainer) {
-                console.log('hidden-location-container found, showing it');
                 hiddenLocationContainer.style.display = 'block';
                 
-                // Создаем контейнер для кнопки "Применить"
-                var applyContainer = BX.create('DIV', {
-                    props: { className: 'city-apply-container' },
-                    children: [
-                        BX.create('BUTTON', {
-                            props: { 
-                                type: 'button',
-                                className: 'btn btn-primary city-apply-btn'
-                            },
-                            text: 'Применить',
-                            events: {
-                                click: BX.proxy(this.applyCityChange, this)
-                            }
-                        })
-                    ]
-                });
-
-                // Добавляем кнопку "Применить" после поля местоположения
-                hiddenLocationContainer.appendChild(applyContainer);
+                // Принудительно скрываем лейблы и подсказки
+                setTimeout(function() {
+                    var labels = hiddenLocationContainer.querySelectorAll('.bx-soa-custom-label, label');
+                    for (var i = 0; i < labels.length; i++) {
+                        labels[i].style.display = 'none';
+                    }
+                    
+                    var smallElements = hiddenLocationContainer.querySelectorAll('small');
+                    for (var i = 0; i < smallElements.length; i++) {
+                        smallElements[i].style.display = 'none';
+                    }
+                    
+                    var starElements = hiddenLocationContainer.querySelectorAll('.bx-authform-starrequired');
+                    for (var i = 0; i < starElements.length; i++) {
+                        starElements[i].style.display = 'none';
+                    }
+                    
+                    var quickLocations = hiddenLocationContainer.querySelectorAll('.bx-ui-sls-quick-locations-label, .bx-ui-sls-quick-locations');
+                    for (var i = 0; i < quickLocations.length; i++) {
+                        quickLocations[i].style.display = 'none';
+                    }
+                }, 100);
                 
                 // Добавляем обработчик для автоматического обновления при выборе города
                 this.addLocationChangeHandler(hiddenLocationContainer);
-            } else {
-                console.log('hidden-location-container not found');
             }
         },
 
@@ -3880,31 +3886,44 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             // Получаем выбранное местоположение из скрытого поля
             var locationString = this.getLocationString(hiddenLocationContainer);
             
+            // Определяем название города и области
+            var cityName = 'Липецк';
+            var regionName = 'Липецкая область';
+            
             if (locationString.length && locationString !== 'не указано' && locationString !== 'Не указано') {
-                // Обновляем отображаемый город
-                var displayText = cityDisplayContainer.querySelector('.region-display-text');
-                if (displayText) {
-                    displayText.textContent = locationString;
-                }
-            } else {
-                // Если город не выбран, оставляем "Липецк"
-                var displayText = cityDisplayContainer.querySelector('.region-display-text');
-                if (displayText) {
-                    displayText.textContent = 'Липецк';
+                // Парсим строку местоположения для извлечения города и области
+                var parts = locationString.split(',');
+                if (parts.length >= 2) {
+                    cityName = parts[0].trim();
+                    regionName = parts[1].trim();
+                } else {
+                    cityName = locationString;
                 }
             }
+            
+            // Обновляем отображаемый город и область
+            var cityNameElement = cityDisplayContainer.querySelector('.region-city-name');
+            var regionNameElement = cityDisplayContainer.querySelector('.region-city-region');
+            
+            if (cityNameElement) {
+                cityNameElement.textContent = cityName;
+            }
+            
+            if (regionNameElement) {
+                regionNameElement.textContent = regionName;
+            }
 
-            // Удаляем кнопку "Применить"
-            var applyContainer = hiddenLocationContainer.querySelector('.city-apply-container');
-            if (applyContainer) {
-                applyContainer.parentNode.removeChild(applyContainer);
+            // Возвращаем кнопку в исходное состояние "Изменить"
+            var editButton = cityDisplayContainer.querySelector('.region-edit-btn');
+            if (editButton) {
+                editButton.textContent = 'Изменить';
+                editButton.removeAttribute('data-state');
+                BX.unbindAll(editButton);
+                BX.bind(editButton, 'click', BX.proxy(this.showCityEditForm, this));
             }
 
             // Скрываем поле выбора местоположения
             hiddenLocationContainer.style.display = 'none';
-
-            // Показываем контейнер с кнопкой "Изменить"
-            cityDisplayContainer.style.display = 'flex';
         },
 
         addLocationChangeHandler: function (hiddenLocationContainer) {
@@ -4005,13 +4024,33 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             var locationString = this.getLocationString(hiddenLocationContainer);
             console.log('updateCityDisplay called, locationString:', locationString);
             
+            // Определяем название города и области
+            var cityName = 'Липецк';
+            var regionName = 'Липецкая область';
+            
             if (locationString.length && locationString !== 'не указано' && locationString !== 'Не указано') {
-                // Обновляем отображаемый город
-                var displayText = cityDisplayContainer.querySelector('.region-display-text');
-                if (displayText) {
-                    console.log('Updating display text to:', locationString);
-                    displayText.textContent = locationString;
+                // Парсим строку местоположения для извлечения города и области
+                var parts = locationString.split(',');
+                if (parts.length >= 2) {
+                    cityName = parts[0].trim();
+                    regionName = parts[1].trim();
+                } else {
+                    cityName = locationString;
                 }
+            }
+            
+            // Обновляем отображаемый город и область
+            var cityNameElement = cityDisplayContainer.querySelector('.region-city-name');
+            var regionNameElement = cityDisplayContainer.querySelector('.region-city-region');
+            
+            if (cityNameElement) {
+                console.log('Updating city name to:', cityName);
+                cityNameElement.textContent = cityName;
+            }
+            
+            if (regionNameElement) {
+                console.log('Updating region name to:', regionName);
+                regionNameElement.textContent = regionName;
             }
         },
 
@@ -4031,24 +4070,51 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 }
             }
 
+            // Определяем название города и области
+            var cityName = 'Липецк';
+            var regionName = 'Липецкая область';
+            
+            if (locationString.length && locationString !== 'не указано' && locationString !== 'Не указано') {
+                // Парсим строку местоположения для извлечения города и области
+                var parts = locationString.split(',');
+                if (parts.length >= 2) {
+                    cityName = parts[0].trim();
+                    regionName = parts[1].trim();
+                } else {
+                    cityName = locationString;
+                }
+            }
+
             // Создаем контейнер для отображения города
             var cityContainer = BX.create('DIV', {
                 props: { className: 'region-display-container', id: 'city-display-container' },
                 children: [
-                    BX.create('STRONG', { text: (locationProperty ? locationProperty.NAME : 'Город') + ': ' }),
-                    BX.create('SPAN', { 
-                        props: { className: 'region-display-text' },
-                        text: (locationString.length && locationString !== 'не указано' && locationString !== 'Не указано') ? locationString : 'Липецк'
+                    BX.create('DIV', {
+                        props: { className: 'region-city-label' },
+                        text: locationProperty ? locationProperty.NAME : 'Город'
                     }),
-                    BX.create('BUTTON', {
-                        props: { 
-                            type: 'button',
-                            className: 'btn btn-link region-edit-btn'
-                        },
-                        text: 'Изменить',
-                        events: {
-                            click: BX.proxy(this.showCityEditForm, this)
-                        }
+                    BX.create('DIV', {
+                        props: { className: 'region-city-info' },
+                        children: [
+                            BX.create('DIV', {
+                                props: { className: 'region-city-name' },
+                                text: cityName
+                            }),
+                            BX.create('DIV', {
+                                props: { className: 'region-city-region' },
+                                text: regionName
+                            }),
+                            BX.create('BUTTON', {
+                                props: { 
+                                    type: 'button',
+                                    className: 'region-edit-btn'
+                                },
+                                text: 'Изменить',
+                                events: {
+                                    click: BX.proxy(this.showCityEditForm, this)
+                                }
+                            })
+                        ]
                     })
                 ]
             });
