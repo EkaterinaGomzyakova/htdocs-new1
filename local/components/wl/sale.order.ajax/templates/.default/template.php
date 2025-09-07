@@ -336,6 +336,12 @@ else
 		<input type="hidden" name="<?=$arParams['ACTION_VARIABLE']?>" value="saveOrderAjax">
 		<input type="hidden" name="location_type" value="code">
 		<input type="hidden" name="BUYER_STORE" id="BUYER_STORE" value="<?=$arResult['BUYER_STORE']?>">
+		
+		<!-- Заголовок заказа -->
+		<div class="order-title-container">
+			<h1 class="order-title">Оформление заказа</h1>
+		</div>
+		
 		<div id="bx-soa-order" class="row bx-<?=$arParams['TEMPLATE_THEME']?>" style="opacity: 0">
 			<!--	MAIN BLOCK	-->
 			<div class="col-sm-9 bx-soa">
