@@ -87,7 +87,7 @@
 }
 
 .bx-soa-section.bx-step-error {
-    border: 1px solid #db4a29;
+    border: 1px solid #ffffff;
 }
 
 .bx-soa-section.bx-step-error .bx-soa-section-title-count:before {
@@ -3507,6 +3507,157 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     display: none !important;
 }
 
+/* Блоки покупателя, доставки и оплаты всегда раскрыты */
+#bx-soa-properties,
+#bx-soa-delivery,
+#bx-soa-paysystem {
+    display: block !important;
+}
+
+/* Убираем возможность сворачивания для этих блоков */
+#bx-soa-properties .bx-soa-section-title-container,
+#bx-soa-delivery .bx-soa-section-title-container,
+#bx-soa-paysystem .bx-soa-section-title-container {
+    cursor: default !important;
+}
+
+/* Скрываем кнопки редактирования для всегда раскрытых блоков */
+#bx-soa-properties .bx-soa-editstep,
+#bx-soa-delivery .bx-soa-editstep,
+#bx-soa-paysystem .bx-soa-editstep {
+    display: none !important;
+}
+
+/* Обеспечиваем, что контент всегда раскрытых блоков всегда отображается */
+#bx-soa-properties .bx-soa-section-content,
+#bx-soa-delivery .bx-soa-section-content,
+#bx-soa-paysystem .bx-soa-section-content {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Стили для обязательных полей */
+#bx-soa-order input[autocomplete="email"],
+#bx-soa-order input[autocomplete="name"],
+#bx-soa-order input[autocomplete="tel"] {
+    border-left: 3px solid #ff6b6b !important;
+}
+
+#bx-soa-order input[autocomplete="email"]:focus,
+#bx-soa-order input[autocomplete="name"]:focus,
+#bx-soa-order input[autocomplete="tel"]:focus {
+    border-left: 3px solid #4ecdc4 !important;
+    box-shadow: 0 0 0 0.2rem rgba(78, 205, 196, 0.25) !important;
+}
+
+/* Дополнительные стили для обязательных полей */
+#bx-soa-order .bx-soa-customer-field input[type="text"],
+#bx-soa-order .bx-soa-customer-field input[type="tel"],
+#bx-soa-order .bx-soa-customer-field input[type="email"] {
+    border-left: 3px solid #ff6b6b !important;
+}
+
+#bx-soa-order .bx-soa-customer-field input[type="text"]:focus,
+#bx-soa-order .bx-soa-customer-field input[type="tel"]:focus,
+#bx-soa-order .bx-soa-customer-field input[type="email"]:focus {
+    border-left: 3px solid #4ecdc4 !important;
+    box-shadow: 0 0 0 0.2rem rgba(78, 205, 196, 0.25) !important;
+}
+
+/* Стили для полей с звездочкой обязательности */
+#bx-soa-order .bx-authform-starrequired + * + input,
+#bx-soa-order .bx-authform-starrequired + input {
+    border-left: 3px solid #ff6b6b !important;
+}
+
+#bx-soa-order .bx-authform-starrequired + * + input:focus,
+#bx-soa-order .bx-authform-starrequired + input:focus {
+    border-left: 3px solid #4ecdc4 !important;
+    box-shadow: 0 0 0 0.2rem rgba(78, 205, 196, 0.25) !important;
+}
+
+/* Стили для обязательных полей через класс */
+#bx-soa-order .required-field {
+    border-left: 3px solid #ff6b6b !important;
+}
+
+#bx-soa-order .required-field:focus {
+    border-left: 3px solid #4ecdc4 !important;
+    box-shadow: 0 0 0 0.2rem rgba(78, 205, 196, 0.25) !important;
+}
+
+/* Скрываем звездочки для полей ФИО и телефона */
+#bx-soa-order input[autocomplete="name"] + label .bx-authform-starrequired,
+#bx-soa-order input[autocomplete="tel"] + label .bx-authform-starrequired {
+    display: none !important;
+}
+
+/* Дополнительное скрытие звездочек для полей ФИО и телефона */
+#bx-soa-order .bx-soa-customer-field:has(input[autocomplete="name"]) .bx-authform-starrequired,
+#bx-soa-order .bx-soa-customer-field:has(input[autocomplete="tel"]) .bx-authform-starrequired {
+    display: none !important;
+}
+
+/* Универсальное скрытие звездочек для полей с классом required-field */
+#bx-soa-order .required-field + label .bx-authform-starrequired,
+#bx-soa-order .required-field ~ label .bx-authform-starrequired {
+    display: none !important;
+}
+
+/* Стили для контейнера покупателя внутри блока доставки */
+#bx-soa-buyer-inside-delivery {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+#bx-soa-buyer-inside-delivery .bx-soa-section-content {
+    padding: 0 !important;
+}
+
+/* Скрываем заголовок и кнопки навигации для блока покупателя */
+#bx-soa-properties .bx-soa-section-title-container,
+#bx-soa-properties .bx-soa-editstep {
+    display: none !important;
+}
+
+/* Скрываем все кнопки редактирования (Назад/Далее) */
+.bx-soa-editstep {
+    display: none !important;
+}
+
+/* Скрываем контейнеры с кнопками редактирования */
+.col-xs-12.col-sm-3.text-right {
+    display: none !important;
+}
+
+/* Скрываем кнопки навигации в футере блоков */
+.bx-soa-more .btn,
+.bx-soa-more .pull-left,
+.bx-soa-more .pull-right {
+    display: none !important;
+}
+
+/* Скрываем весь футер с кнопками навигации */
+.bx-soa-more {
+	display: none !important;
+}
+
+/* Стили для блоков способ получения и способ оплаты */
+#bx-soa-delivery {
+	background-color: #f5f5f7 !important; /* Фиолетовый фон */
+	margin-bottom: 100px !important; /* Промежуток 100px снизу */
+	padding: 20px !important; /* Внутренние отступы */
+	border-radius: 8px !important; /* Скругленные углы */
+}
+
+#bx-soa-paysystem {
+	background-color: #f5f5f7 !important; /* Фиолетовый фон */
+	padding: 20px !important; /* Внутренние отступы */
+	border-radius: 8px !important; /* Скругленные углы */
+}
+
 #bx-soa-total .bx-soa-legals-agreement {
     margin-top: 15px; /* Отступ сверху от кнопки */
     font-size: 10px;
@@ -3580,7 +3731,3 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 
 
-  .col-sm-9{
-    background-color: #f5f5f7;
-    border-radius: 20px;
-  }
