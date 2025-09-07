@@ -108,7 +108,8 @@
 
 .bx-soa-section-title {
     border-radius: 2px;
-    margin: 0;
+    margin-top: 35px;
+    margin-bottom: 35px;
     color: #000;
     line-height: 15px;
     min-height: 20px;
@@ -1767,12 +1768,11 @@ label[data-bx-user-consent] input {
 
 #bx-soa-order .bx-soa-section .bx-soa-section-title {
     position: relative;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 44px;
     color: #333;
     padding-left: 0 !important;
     padding-top: 1px;
-    font-weight: 700
+    font-weight: 500
 }
 
 #bx-soa-order .bx-soa-section .bx-soa-section-title:before {
@@ -2739,7 +2739,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-order .bx-soa-section .bx-soa-section-content {
-    padding: 15px 15px 15px 15px;
+    padding: 0;
     font-size: 24px;
     line-height: 20px;
     color: #333;
@@ -3827,6 +3827,32 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     display: none !important;
 }
 
+/* Стили для заголовка "Способ получения" - делаем простым текстом */
+#bx-soa-delivery .bx-soa-section-title-container {
+
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    cursor: default !important;
+}
+
+#bx-soa-delivery .bx-soa-section-title {
+    color: #2D2D2D;
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%; /* 48.4px */
+}
+
+#bx-soa-delivery .bx-soa-section-title:before {
+    display: none !important;
+}
+
+#bx-soa-delivery .bx-soa-editstep {
+    display: none !important;
+}
+
 /* Скрываем все кнопки редактирования (Назад/Далее) */
 .bx-soa-editstep {
     display: none !important;
@@ -3853,7 +3879,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 #bx-soa-delivery {
 	background-color: #f5f5f7 !important; /* Фиолетовый фон */
 	margin-bottom: 100px !important; /* Промежуток 100px снизу */
-	padding: 20px !important; /* Внутренние отступы */
+	padding: 0px 46px 46px 46px !important; /* Внутренние отступы */
 	border-radius: 8px !important; /* Скругленные углы */
 }
 
