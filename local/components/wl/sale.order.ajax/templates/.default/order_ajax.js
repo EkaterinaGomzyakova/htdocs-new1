@@ -4052,6 +4052,24 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 console.log('Updating region name to:', regionName);
                 regionNameElement.textContent = regionName;
             }
+            
+            // Обновляем название категории доставки при изменении города
+            this.updateDeliveryCategoryName(cityName);
+        },
+
+        updateDeliveryCategoryName: function (cityName) {
+            // Определяем название категории в зависимости от города
+            var pickupCategoryName = (cityName && cityName.toLowerCase().indexOf('липецк') !== -1) ? 'Самовывоз' : 'Пункт выдачи';
+            
+            // Находим все элементы с названием категории доставки
+            var categoryElements = document.querySelectorAll('.bx-soa-delivery-category-title');
+            for (var i = 0; i < categoryElements.length; i++) {
+                var element = categoryElements[i];
+                // Проверяем, является ли это категорией самовывоза/пункта выдачи
+                if (element.textContent.indexOf('Самовывоз') !== -1 || element.textContent.indexOf('Пункт выдачи') !== -1 || element.textContent.indexOf('Пункт выдачи') !== -1) {
+                    element.textContent = pickupCategoryName;
+                }
+            }
         },
 
         addCityEditButton: function (node) {
@@ -5179,7 +5197,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
             // Получаем текущий город для определения названия категории
             var currentCity = this.getCurrentCity();
-            var pickupCategoryName = (currentCity && currentCity.toLowerCase().indexOf('липецк') !== -1) ? 'Самовывоз' : 'До пункта выдачи';
+            var pickupCategoryName = (currentCity && currentCity.toLowerCase().indexOf('липецк') !== -1) ? 'Самовывоз' : 'Пункт выдачи';
             
             // Группируем доставки по категориям
             var categories = {
@@ -5304,6 +5322,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             
             // Добавляем обработчики событий для радио-кнопок категорий (fallback для старых браузеров)
             this.initDeliveryCategoryAccordion(deliveryItemsContainer);
+            
+            // Обновляем название категории доставки при первоначальной загрузке
+            var currentCity = this.getCurrentCity();
+            this.updateDeliveryCategoryName(currentCity);
         },
 
         editDeliveryInfo: function (deliveryNode) {
@@ -6389,13 +6411,25 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 propsNode = BX.create('DIV', { props: { className: 'row' } });
                 var propsItemsContainer = BX.create('DIV', { props: { className: 'col-sm-12 bx-soa-customer' } });
 
+                // Создаем контейнер для картинки
+                var imageContainer = BX.create('DIV', { 
+                    props: { className: 'bx-soa-customer-image-container' },
+                    style: { backgroundImage: 'url(/local/components/wl/sale.order.ajax/templates/.default/images/Account.svg)' }
+                });
+
+                // Создаем обертку для полей с отступом под картинку
+                var fieldsWrapper = BX.create('DIV', { props: { className: 'bx-soa-customer-fields-wrapper' } });
+
                 // Добавляем выбор типа плательщика и профиля
-                this.getPersonTypeControl(propsItemsContainer);
-                this.getProfilesControl(propsItemsContainer);
+                this.getPersonTypeControl(fieldsWrapper);
+                this.getProfilesControl(fieldsWrapper);
 
                 // Добавляем остальные поля покупателя (ФИО, Email, Телефон)
-                this.editPropsItems(propsItemsContainer);
+                this.editPropsItems(fieldsWrapper);
 
+                // Добавляем картинку и поля в контейнер
+                propsItemsContainer.appendChild(imageContainer);
+                propsItemsContainer.appendChild(fieldsWrapper);
                 propsNode.appendChild(propsItemsContainer);
 
                 if (this.params.HIDE_ORDER_DESCRIPTION !== 'Y') {
@@ -6872,18 +6906,21 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                     textNode.setAttribute('autocomplete', 'address');
                 if (settings.IS_EMAIL == 'Y') {
                     textNode.setAttribute('autocomplete', 'email');
+                    textNode.setAttribute('placeholder', 'Введите ваш email');
                     // Делаем поле E-Mail обязательным
                     settings.REQUIRED = 'Y';
                     BX.addClass(textNode, 'required-field');
                 }
                 if (settings.IS_PAYER == 'Y') {
                     textNode.setAttribute('autocomplete', 'name');
+                    textNode.setAttribute('placeholder', 'Введите ваше ФИО');
                     // Делаем поле ФИО обязательным
                     settings.REQUIRED = 'Y';
                     BX.addClass(textNode, 'required-field');
                 }
                 if (settings.IS_PHONE == 'Y') {
                     textNode.setAttribute('autocomplete', 'tel');
+                    textNode.setAttribute('placeholder', 'Введите ваш телефон');
                     // Делаем поле Телефон обязательным
                     settings.REQUIRED = 'Y';
                     BX.addClass(textNode, 'required-field');
@@ -6896,7 +6933,16 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
             inputs = propContainer.querySelectorAll('input[type=text]');
             for (i = 0; i < inputs.length; i++) {
-                inputs[i].placeholder = settings.DESCRIPTION;
+                // Устанавливаем placeholder в зависимости от типа поля
+                if (settings.IS_EMAIL == 'Y') {
+                    inputs[i].placeholder = 'Введите ваш email';
+                } else if (settings.IS_PAYER == 'Y') {
+                    inputs[i].placeholder = 'Введите ваше ФИО';
+                } else if (settings.IS_PHONE == 'Y') {
+                    inputs[i].placeholder = 'Введите ваш телефон';
+                } else {
+                    inputs[i].placeholder = settings.DESCRIPTION || 'Введите значение';
+                }
                 BX.addClass(inputs[i], 'form-control bx-soa-customer-input bx-ios-fix');
             }
 
@@ -6906,7 +6952,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
             inputs = propContainer.querySelectorAll('textarea');
             for (i = 0; i < inputs.length; i++) {
-                inputs[i].placeholder = settings.DESCRIPTION;
+                inputs[i].placeholder = settings.DESCRIPTION || 'Введите комментарий';
                 BX.addClass(inputs[i], 'form-control bx-ios-fix');
             }
 
@@ -6976,7 +7022,16 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
                     del && BX.remove(del);
                     if (textInputs.length) {
-                        textInputs[textInputs.length - 1].placeholder = settings.DESCRIPTION;
+                        // Устанавливаем placeholder в зависимости от типа поля
+                        if (settings.IS_EMAIL == 'Y') {
+                            textInputs[textInputs.length - 1].placeholder = 'Введите ваш email';
+                        } else if (settings.IS_PAYER == 'Y') {
+                            textInputs[textInputs.length - 1].placeholder = 'Введите ваше ФИО';
+                        } else if (settings.IS_PHONE == 'Y') {
+                            textInputs[textInputs.length - 1].placeholder = 'Введите ваш телефон';
+                        } else {
+                            textInputs[textInputs.length - 1].placeholder = settings.DESCRIPTION || 'Введите значение';
+                        }
                         BX.addClass(textInputs[textInputs.length - 1], 'form-control bx-soa-customer-input bx-ios-fix');
                         if (settings.TYPE == 'DATE')
                             this.alterDateProperty(settings, textInputs[textInputs.length - 1]);
@@ -6986,7 +7041,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                     }
 
                     if (textAreas.length) {
-                        textAreas[textAreas.length - 1].placeholder = settings.DESCRIPTION;
+                        textAreas[textAreas.length - 1].placeholder = settings.DESCRIPTION || 'Введите комментарий';
                         BX.addClass(textAreas[textAreas.length - 1], 'form-control bx-ios-fix');
                     }
 
@@ -7334,10 +7389,15 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             var input0 = BX.type.isElementNode(inputs[0]) ? inputs[0] : inputs[0][0],
                 formGroup = BX.findParent(input0, { tagName: 'DIV', className: 'form-group' }),
                 label = formGroup.querySelector('label'),
-                tooltipId, inputDiv, i;
+                tooltipId, inputDiv, i, isLocationField = false;
 
             if (label)
                 tooltipId = label.getAttribute('for');
+
+            // Проверяем, является ли это полем города/местоположения
+            if (formGroup && formGroup.classList.contains('bx-soa-location-input-container')) {
+                isLocationField = true;
+            }
 
             for (i = 0; i < inputs.length; i++) {
                 inputDiv = BX.findParent(inputs[i], { tagName: 'DIV', className: 'form-group' });
@@ -7347,7 +7407,8 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                     BX.removeClass(inputDiv, 'has-error');
             }
 
-            if (errors.length)
+            // Не показываем tooltip для поля города
+            if (errors.length && !isLocationField)
                 this.showErrorTooltip(tooltipId, label, errors.join('<br>'));
             else
                 this.closeErrorTooltip(tooltipId);

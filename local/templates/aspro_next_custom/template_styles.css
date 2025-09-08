@@ -5747,15 +5747,12 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
 }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="tel"], select, textarea {
-    background: white;
     box-shadow: none;
-    color: #3a3a3a;
     height: auto;
     font-size: 13px;
     padding: 8px 13px 7px;
     width: 100%;
     border: unset;
-    border: 1px solid #d3d3d3;
     border-radius: 4px;
 }
 

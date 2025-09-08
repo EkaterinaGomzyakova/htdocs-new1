@@ -939,8 +939,8 @@
 
 /*FIELDS*/
 .form-control {
-    background-color: #f8fafc;
-    border: 1px solid #d5dadc;
+    background-color: #f8fafc00;
+
     box-shadow: none;
     border-radius: 2px;
 }
@@ -2328,13 +2328,15 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 #bx-soa-order .bx-soa-tooltip {
     position: absolute;
-    bottom: -22px;
-    left: 0;
+    top: 50%;
+    right: -180px;
+    transform: translateY(-50%);
     padding: 0;
     background: none;
-    max-width: 100%;
+    max-width: 160px;
     box-shadow: none;
-    top: auto
+    bottom: auto;
+    left: auto;
 }
 
 #bx-soa-order .bx-soa-tooltip .tooltip-arrow {
@@ -2342,7 +2344,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-order .bx-soa-tooltip .tooltip-inner {
-    max-width: 100%;
+    max-width: 160px;
     padding: 0;
     font-size: 12px;
     line-height: 20px;
@@ -2351,20 +2353,16 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-order .has-error .form-control {
-    border-color: #fe5252
+    border-color: #ffffff00
 }
 
 #bx-soa-order .form-group.has-error {
-    margin-bottom: 41px !important
+    margin-bottom: 0px !important
 }
 
-#bx-soa-order .form-group.has-error input {
-    border-color: #fe5252
-}
 
-#bx-soa-order .form-group.has-error .form-control.dropdown-block {
-    border-color: #fe5252
-}
+
+
 
 #bx-soa-order .form.form-group.bx-soa-customer-field {
     text-align: center;
@@ -3896,55 +3894,21 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     visibility: visible !important;
 }
 
-/* Стили для обязательных полей */
-#bx-soa-order input[autocomplete="email"],
-#bx-soa-order input[autocomplete="name"],
-#bx-soa-order input[autocomplete="tel"] {
-    border-left: 3px solid #ff6b6b !important;
-}
 
-#bx-soa-order input[autocomplete="email"]:focus,
-#bx-soa-order input[autocomplete="name"]:focus,
-#bx-soa-order input[autocomplete="tel"]:focus {
-    border-left: 3px solid #4ecdc4 !important;
-    box-shadow: 0 0 0 0.2rem rgba(78, 205, 196, 0.25) !important;
-}
+
+
 
 /* Дополнительные стили для обязательных полей */
-#bx-soa-order .bx-soa-customer-field input[type="text"],
-#bx-soa-order .bx-soa-customer-field input[type="tel"],
-#bx-soa-order .bx-soa-customer-field input[type="email"] {
-    border-left: 3px solid #ff6b6b !important;
-}
 
-#bx-soa-order .bx-soa-customer-field input[type="text"]:focus,
-#bx-soa-order .bx-soa-customer-field input[type="tel"]:focus,
-#bx-soa-order .bx-soa-customer-field input[type="email"]:focus {
-    border-left: 3px solid #4ecdc4 !important;
-    box-shadow: 0 0 0 0.2rem rgba(78, 205, 196, 0.25) !important;
-}
+
 
 /* Стили для полей с звездочкой обязательности */
-#bx-soa-order .bx-authform-starrequired + * + input,
-#bx-soa-order .bx-authform-starrequired + input {
-    border-left: 3px solid #ff6b6b !important;
-}
 
-#bx-soa-order .bx-authform-starrequired + * + input:focus,
-#bx-soa-order .bx-authform-starrequired + input:focus {
-    border-left: 3px solid #4ecdc4 !important;
-    box-shadow: 0 0 0 0.2rem rgba(78, 205, 196, 0.25) !important;
-}
 
 /* Стили для обязательных полей через класс */
-#bx-soa-order .required-field {
-    border-left: 3px solid #ff6b6b !important;
-}
 
-#bx-soa-order .required-field:focus {
-    border-left: 3px solid #4ecdc4 !important;
-    box-shadow: 0 0 0 0.2rem rgba(78, 205, 196, 0.25) !important;
-}
+
+
 
 /* Скрываем звездочки для полей ФИО и телефона */
 #bx-soa-order input[autocomplete="name"] + label .bx-authform-starrequired,
@@ -3972,6 +3936,160 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 #bx-soa-buyer-inside-delivery .bx-soa-section-content {
     padding: 0 !important;
+}
+
+/* Стили для полей ввода покупателя */
+.bx-soa-customer-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+    max-width: 300px;
+    margin-left: 10px;
+    margin-right: auto;
+    position: relative;
+    padding-right: 0px;
+}
+
+.bx-soa-customer-field label {
+    min-width: 120px;
+    margin-right: 15px;
+    margin-bottom: 0;
+    font-weight: 500;
+    color: #333;
+}
+
+.bx-soa-customer-field input {
+    flex: 1;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Контейнер для картинки слева от полей */
+.bx-soa-customer-image-container {
+    background-color: #285b4d;
+    position: absolute;
+    left: 280px;
+    top: 3%;
+    max-width: 100px;
+    max-height: 100px;
+    width: 100%;
+    height: 100%;
+    border: 30px solid #285b4d;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Контейнер для полей с отступом под картинку */
+.bx-soa-customer-fields-wrapper {
+    position: relative;
+    margin-left: 380px;
+    min-height: 150px;
+}
+
+/* Дополнительные стили для улучшения внешнего вида */
+.bx-soa-customer input[type="text"],
+.bx-soa-customer input[type="email"],
+.bx-soa-customer input[type="tel"] {
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+/* Стили для placeholder'ов */
+.bx-soa-customer input[type="text"]::placeholder,
+.bx-soa-customer input[type="email"]::placeholder,
+.bx-soa-customer input[type="tel"]::placeholder {
+    color: #999;
+    font-style: italic;
+    opacity: 1;
+}
+
+.bx-soa-customer input[type="text"]:focus::placeholder,
+.bx-soa-customer input[type="email"]:focus::placeholder,
+.bx-soa-customer input[type="tel"]:focus::placeholder {
+    color: #ccc;
+    opacity: 0.7;
+}
+
+/* Стили для tooltip'ов в полях покупателя */
+.bx-soa-customer-field .bx-soa-tooltip {
+    position: absolute;
+    top: 50%;
+    right: -180px;
+    transform: translateY(-50%);
+    padding: 0;
+    background: none;
+    max-width: 160px;
+    box-shadow: none;
+    bottom: auto;
+    left: auto;
+}
+
+/* Скрываем tooltip'ы для полей города */
+.bx-soa-location-input-container .bx-soa-tooltip {
+    display: none !important;
+}
+
+.bx-soa-customer-field .bx-soa-tooltip .tooltip-inner {
+    max-width: 160px;
+    padding: 0;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fe5252;
+    background: none;
+    white-space: nowrap;
+}
+
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .bx-soa-customer-image-container {
+        position: static;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 20px auto;
+        border: 15px solid #4ecdc4;
+    }
+    
+    .bx-soa-customer-fields-wrapper {
+        margin-left: 0;
+        min-height: auto;
+    }
+    
+    .bx-soa-customer-field {
+        flex-direction: column;
+        align-items: flex-start;
+        max-width: 100%;
+        padding-right: 0;
+    }
+    
+    .bx-soa-customer-field label {
+        min-width: auto;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    
+    .bx-soa-customer-field input {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    /* На мобильных устройствах tooltip'ы отображаются снизу */
+    .bx-soa-customer-field .bx-soa-tooltip {
+        position: absolute;
+        bottom: -22px;
+        left: 0;
+        right: auto;
+        top: auto;
+        transform: none;
+        max-width: 100%;
+    }
 }
 
 /* Скрываем заголовок и кнопки навигации для блока покупателя */
@@ -4032,7 +4150,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 #bx-soa-delivery {
 	background-color: #f5f5f7 !important; /* Фиолетовый фон */
 	margin-bottom: 100px !important; /* Промежуток 100px снизу */
-	padding: 0px 46px 46px 46px !important; /* Внутренние отступы */
+	padding: 0px 46px 0px 46px !important; /* Внутренние отступы */
 	border-radius: 8px !important; /* Скругленные углы */
 }
 
@@ -4148,3 +4266,9 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 .bx-soa-pp-company-desc .btn{
     border-radius: 8px;
 }
+
+.has-error .form-control {
+    border-color: #b94a48;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.0);
+  }
