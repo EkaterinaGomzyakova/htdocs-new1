@@ -5152,6 +5152,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
                 this.getBlockFooter(deliveryContent);
             }
+            
+            // Восстанавливаем активную категорию после обновления блока
+            this.restoreActiveDeliveryCategory();
         },
 
         editDeliveryItems: function (deliveryNode) {
@@ -5159,17 +5162,135 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 return;
 
             var deliveryItemsContainer = BX.create('DIV', { props: { className: 'col-sm-7 bx-soa-pp-item-container' } }),
-                deliveryItemNode, k;
+                deliveryItemNode, k, i;
 
+            // Получаем текущий город для определения названия категории
+            var currentCity = this.getCurrentCity();
+            var pickupCategoryName = (currentCity && currentCity.toLowerCase().indexOf('липецк') !== -1) ? 'Самовывоз' : 'До пункта выдачи';
+            
+            // Группируем доставки по категориям
+            var categories = {
+                'courier': { name: 'Курьерская доставка', items: [] },
+                'pickup': { name: pickupCategoryName, items: [] },
+                'post': { name: 'Почта России', items: [] }
+            };
+
+            // Распределяем доставки по категориям
             for (k = 0; k < this.deliveryPagination.currentPage.length; k++) {
-                deliveryItemNode = this.createDeliveryItem(this.deliveryPagination.currentPage[k]);
-                deliveryItemsContainer.appendChild(deliveryItemNode);
+                var item = this.deliveryPagination.currentPage[k];
+                var itemName = item.NAME ? item.NAME.toLowerCase() : '';
+                
+                if (itemName.indexOf('почта') !== -1 || itemName.indexOf('россии') !== -1) {
+                    categories.post.items.push(item);
+                } else if (itemName.indexOf('пункт') !== -1 || itemName.indexOf('выдача') !== -1 || itemName.indexOf('самовывоз') !== -1) {
+                    categories.pickup.items.push(item);
+                } else {
+                    categories.courier.items.push(item);
+                }
+            }
+
+            // Определяем активную категорию на основе выбранной доставки
+            var selectedDelivery = this.getSelectedDelivery();
+            var activeCategoryKey = '';
+            
+            if (selectedDelivery) {
+                var selectedDeliveryName = selectedDelivery.NAME ? selectedDelivery.NAME.toLowerCase() : '';
+                if (selectedDeliveryName.indexOf('почта') !== -1 || selectedDeliveryName.indexOf('россии') !== -1) {
+                    activeCategoryKey = 'post';
+                } else if (selectedDeliveryName.indexOf('пункт') !== -1 || selectedDeliveryName.indexOf('выдача') !== -1 || selectedDeliveryName.indexOf('самовывоз') !== -1) {
+                    activeCategoryKey = 'pickup';
+                } else {
+                    activeCategoryKey = 'courier';
+                }
+            }
+
+            // Создаем категории и добавляем элементы
+            var categoryIndex = 0;
+            for (var categoryKey in categories) {
+                var category = categories[categoryKey];
+                if (category.items.length > 0) {
+                    // Создаем контейнер категории
+                    var categoryWrapper = BX.create('DIV', {
+                        props: { className: 'bx-soa-delivery-category-wrapper' }
+                    });
+
+                    // Определяем, должна ли эта категория быть активной
+                    var isActiveCategory = (activeCategoryKey && activeCategoryKey === categoryKey) || 
+                                         (!activeCategoryKey && categoryIndex === 0);
+
+                    // Создаем радио-кнопку для категории
+                    var categoryRadio = BX.create('INPUT', {
+                        props: {
+                            type: 'radio',
+                            name: 'delivery-category',
+                            id: 'delivery-category-' + categoryKey,
+                            value: categoryKey,
+                            checked: isActiveCategory
+                        }
+                    });
+
+                    // Определяем описание для категории
+                    var categoryDescription = '';
+                    if (categoryKey === 'courier') {
+                        categoryDescription = 'Служба доставки – СДЭК или Boxberry';
+                    } else if (categoryKey === 'pickup') {
+                        categoryDescription = 'ПВЗ СДЭК или Boxberry';
+                    } else if (categoryKey === 'post') {
+                        categoryDescription = 'Доставка почтой';
+                    }
+
+                    // Создаем заголовок категории с радио-кнопкой
+                    var categoryHeader = BX.create('LABEL', {
+                        props: { 
+                            className: 'bx-soa-delivery-category-header',
+                            htmlFor: 'delivery-category-' + categoryKey
+                        },
+                        children: [
+                            categoryRadio,
+                            BX.create('DIV', {
+                                props: { className: 'bx-soa-delivery-category-header-content' },
+                                children: [
+                                    BX.create('DIV', {
+                                        props: { className: 'bx-soa-delivery-category-title' },
+                                        text: category.name
+                                    }),
+                                    BX.create('P', {
+                                        props: { className: 'bx-soa-delivery-category-description' },
+                                        text: categoryDescription
+                                    })
+                                ]
+                            })
+                        ]
+                    });
+
+                    // Создаем контейнер для элементов категории
+                    var categoryContainer = BX.create('DIV', {
+                        props: { 
+                            className: 'bx-soa-delivery-category-items' + (isActiveCategory ? ' active' : ''),
+                            'data-category': categoryKey
+                        }
+                    });
+
+                    // Добавляем элементы категории
+                    for (i = 0; i < category.items.length; i++) {
+                        deliveryItemNode = this.createDeliveryItem(category.items[i]);
+                        categoryContainer.appendChild(deliveryItemNode);
+                    }
+
+                    categoryWrapper.appendChild(categoryHeader);
+                    categoryWrapper.appendChild(categoryContainer);
+                    deliveryItemsContainer.appendChild(categoryWrapper);
+                    categoryIndex++;
+                }
             }
 
             if (this.deliveryPagination.show)
                 this.showPagination('delivery', deliveryItemsContainer);
 
             deliveryNode.appendChild(deliveryItemsContainer);
+            
+            // Добавляем обработчики событий для радио-кнопок категорий (fallback для старых браузеров)
+            this.initDeliveryCategoryAccordion(deliveryItemsContainer);
         },
 
         editDeliveryInfo: function (deliveryNode) {
@@ -5542,6 +5663,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 BX.removeClass(selectedSection, 'bx-selected');
                 selectedInput.checked = false;
             }
+
+            // Сохраняем активную категорию перед отправкой запроса
+            this.saveActiveDeliveryCategory();
 
             this.sendRequest();
         },
@@ -7836,6 +7960,65 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                     BX.addCustomEvent(control, BX.UserConsent.events.refused, BX.proxy(this.disallowOrderSave, this));
                 }
             }, this));
+        },
+
+        getCurrentCity: function () {
+            var cityElement = document.querySelector('.region-city-name');
+            return cityElement ? cityElement.textContent.trim() : '';
+        },
+
+        initDeliveryCategoryAccordion: function (container) {
+            var radioButtons = container.querySelectorAll('input[name="delivery-category"]');
+            var categoryItems = container.querySelectorAll('.bx-soa-delivery-category-items');
+            
+            for (var i = 0; i < radioButtons.length; i++) {
+                BX.bind(radioButtons[i], 'change', BX.proxy(function(event) {
+                    var targetRadio = event.target;
+                    var targetValue = targetRadio.value;
+                    
+                    // Закрываем все категории
+                    for (var j = 0; j < categoryItems.length; j++) {
+                        BX.removeClass(categoryItems[j], 'active');
+                    }
+                    
+                    // Открываем выбранную категорию
+                    var targetContainer = container.querySelector('.bx-soa-delivery-category-items[data-category="' + targetValue + '"]');
+                    if (targetContainer) {
+                        BX.addClass(targetContainer, 'active');
+                    }
+                }, this));
+            }
+        },
+
+        saveActiveDeliveryCategory: function () {
+            var activeRadio = this.deliveryBlockNode.querySelector('input[name="delivery-category"]:checked');
+            if (activeRadio) {
+                this.savedActiveDeliveryCategory = activeRadio.value;
+            }
+        },
+
+        restoreActiveDeliveryCategory: function () {
+            if (this.savedActiveDeliveryCategory) {
+                // Небольшая задержка чтобы DOM успел обновиться
+                setTimeout(BX.proxy(function() {
+                    var targetRadio = this.deliveryBlockNode.querySelector('input[name="delivery-category"][value="' + this.savedActiveDeliveryCategory + '"]');
+                    if (targetRadio) {
+                        targetRadio.checked = true;
+                        
+                        // Закрываем все категории
+                        var categoryItems = this.deliveryBlockNode.querySelectorAll('.bx-soa-delivery-category-items');
+                        for (var j = 0; j < categoryItems.length; j++) {
+                            BX.removeClass(categoryItems[j], 'active');
+                        }
+                        
+                        // Открываем сохраненную категорию
+                        var targetContainer = this.deliveryBlockNode.querySelector('.bx-soa-delivery-category-items[data-category="' + this.savedActiveDeliveryCategory + '"]');
+                        if (targetContainer) {
+                            BX.addClass(targetContainer, 'active');
+                        }
+                    }
+                }, this), 100);
+            }
         }
     };
 })();
