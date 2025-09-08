@@ -5143,6 +5143,19 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 this.getDeliveryLocationInput(hiddenLocationContainer);
 
                 deliveryNode = BX.create('DIV', { props: { className: 'bx-soa-pp row' } });
+                
+                // Добавляем новую колонку с заголовком
+                var deliveryTitleColumn = BX.create('DIV', { 
+                    props: { className: 'col-sm-3 bx-soa-delivery-title-column' },
+                    children: [
+                        BX.create('H3', {
+                            props: { className: 'bx-soa-delivery-title' },
+                            text: 'Способ доставки'
+                        })
+                    ]
+                });
+                deliveryNode.appendChild(deliveryTitleColumn);
+                
                 this.editDeliveryItems(deliveryNode);
                 deliveryContent.appendChild(deliveryNode);
                 this.editDeliveryInfo(deliveryNode);
@@ -5161,7 +5174,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             if (!this.result.DELIVERY || this.result.DELIVERY.length <= 0)
                 return;
 
-            var deliveryItemsContainer = BX.create('DIV', { props: { className: 'col-sm-7 bx-soa-pp-item-container' } }),
+            var deliveryItemsContainer = BX.create('DIV', { props: { className: 'col-sm-6 bx-soa-pp-item-container' } }),
                 deliveryItemNode, k, i;
 
             // Получаем текущий город для определения названия категории
@@ -5297,7 +5310,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             if (!this.result.DELIVERY)
                 return;
 
-            var deliveryInfoContainer = BX.create('DIV', { props: { className: 'col-sm-5 bx-soa-pp-desc-container' } }),
+            var deliveryInfoContainer = BX.create('DIV', { props: { className: 'col-sm-3 bx-soa-pp-desc-container' } }),
                 currentDelivery, logotype, name, logoNode,
                 subTitle, label, title, price, period,
                 clear, infoList, extraServices, extraServicesNode;
@@ -5393,7 +5406,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             deliveryInfoContainer.appendChild(
                 BX.create('DIV', {
                     props: { className: 'bx-soa-pp-company' },
-                    children: [subTitle, label, title, clear, extraServicesNode, infoList]
+                    children: [infoList, subTitle, label, title, clear, extraServicesNode]
                 })
             );
             deliveryNode.appendChild(deliveryInfoContainer);
@@ -5412,7 +5425,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 else
                     priceNodesArray = [
                         delivery.DELIVERY_DISCOUNT_PRICE_FORMATED,
-                        BX.create('BR'),
+                        ' ',
                         BX.create('SPAN', { props: { className: 'bx-price-old' }, html: delivery.PRICE_FORMATED })
                     ];
             } else {

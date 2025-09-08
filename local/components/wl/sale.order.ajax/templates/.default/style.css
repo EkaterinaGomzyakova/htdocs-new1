@@ -996,11 +996,6 @@
     padding-top: 7px;
 }
 
-.bx-soa-pp-desc-container .bx-soa-pp-company {
-    background: white;
-    border: 1px solid #d5dadc;
-    padding: 7px 15px;
-}
 
 .bx-soa-pp-company-logo {
     padding-top: 6px;
@@ -1015,7 +1010,8 @@
 }
 
 .bx-soa-pp-company.bx-selected .bx-soa-pp-company-graf-container {
-    border-color: #159ebb;
+    border-color: #285b4d !important;
+    background-color: #eee;
 }
 
 .bx-soa-pp-inner-ps.bx-selected .bx-soa-pp-company-graf-container {
@@ -2453,10 +2449,11 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-order .bx-soa-pp-item-container .bx-soa-pp-company-graf-container {
-    display: table-cell;
+
     vertical-align: middle;
-    padding: 5px 10px 3px 3px;
+    padding: 20px 20px 20px 20px;
     border-radius: 16px;
+    height: 64px;
 }
 
 #bx-soa-order .bx-soa-pp-item-container .bx-soa-pp-company-graf-container:before {
@@ -2490,8 +2487,8 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 #bx-soa-order .bx-soa-pp-company-graf-container .bx-soa-pp-company-image {
     position: relative;
     width: 70px;
-    height: 40px;
-    margin-left: 10px;
+
+    margin-left: 0px;
     top: auto;
     right: auto;
     bottom: auto;
@@ -2546,11 +2543,10 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-order .bx-soa-pp-desc-container .bx-soa-pp-company {
+    height: 100px;
     position: relative;
     padding: 15px;
-    border: 1px solid #f2f2f2;
     border-top: none;
-    background: white;
     border-bottom-right-radius: 2px;
     border-bottom-left-radius: 2px
 }
@@ -2749,11 +2745,36 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     line-height: 130%;
 }
 
+/* Стили для колонки с заголовком доставки */
+.bx-soa-delivery-title-column {
+    width: 270px;
+    padding: 10px 15px 0 0;
+    flex-shrink: 0;
+}
+
+.bx-soa-delivery-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Стили для сдвига третьей колонки правее */
+.bx-soa-pp-desc-container {
+    margin-left: 20px;
+}
+
 /* Стили для аккордеона категорий доставки */
 .bx-soa-delivery-category-wrapper {
-    margin-bottom: 20px;
-    border-radius: 8px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 0;
     overflow: hidden;
+}
+
+.bx-soa-delivery-category-wrapper:last-child {
+    border-bottom: none;
 }
 
 .bx-soa-delivery-category-header {
@@ -2854,6 +2875,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 /* Скрываем галочку (псевдо-элемент ::before) в карточках доставки */
+.bx-soa-delivery-category-items .bx-soa-pp-company-graf-container::after,
 .bx-soa-delivery-category-items .bx-soa-pp-company-graf-container::before {
     display: none !important;
 }
@@ -3946,7 +3968,6 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 #bx-soa-buyer-inside-delivery {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid #e0e0e0;
 }
 
 #bx-soa-buyer-inside-delivery .bx-soa-section-content {
@@ -4105,4 +4126,25 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 .bx-soa-pp-delivery-cost{
     display: none;
+}
+
+.bx-soa-pp-company-graf-container{
+    display: none;
+}
+
+#bx-soa-order .bx-soa-pp-desc-container .bx-soa-pp-company:before, #bx-soa-order .bx-soa-pp-desc-container .checkbox label:hover:before, #bx-soa-order .bx-soa-pp-desc-container .checkbox label.checked:before {
+    display: none;
+}
+
+.wl-delivery-selected-address {
+    background: #f5f5f7;
+    padding: 0px;
+    border-radius: 3px;
+    margin: 10px 0;
+    font-weight: 600;
+    color: black;
+}
+
+.bx-soa-pp-company-desc .btn{
+    border-radius: 8px;
 }
