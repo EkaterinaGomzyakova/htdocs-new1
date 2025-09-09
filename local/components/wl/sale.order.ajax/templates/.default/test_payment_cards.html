@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест карточек способов оплаты</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #285b4d;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .bx-soa-pp-item-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Тест карточек способов оплаты</h1>
+        
+        <div id="bx-soa-paysystem">
+            <div class="bx-soa-pp">
+                <div class="col-sm-7 bx-soa-pp-item-container">
+            <!-- QR-код в магазине -->
+            <div class="payment-card">
+                <div class="payment-card-container">
+                    <input type="checkbox" class="payment-card-checkbox" id="qr_store" value="1">
+                    <div class="payment-card-image" style="background-image: url('images/pay_system_logo.png')"></div>
+                </div>
+                <div class="payment-card-info">
+                    <div class="payment-card-title">QR-код в магазине</div>
+                    <div class="payment-card-description">Способ оплаты: QR-код в магазине</div>
+                </div>
+            </div>
+
+            <!-- Банковской картой в магазине -->
+            <div class="payment-card">
+                <div class="payment-card-container">
+                    <input type="checkbox" class="payment-card-checkbox" id="card_store" value="2">
+                    <div class="payment-card-image" style="background-image: url('images/pay_system_logo.png')"></div>
+                </div>
+                <div class="payment-card-info">
+                    <div class="payment-card-title">Банковской картой в магазине</div>
+                    <div class="payment-card-description">Оплата банковской картой онлайн</div>
+                </div>
+            </div>
+
+            <!-- Банковской картой на сайте (выбран) -->
+            <div class="payment-card bx-selected">
+                <div class="payment-card-container">
+                    <input type="checkbox" class="payment-card-checkbox" id="card_online" value="3" checked>
+                    <div class="payment-card-image" style="background-image: url('images/pay_system_logo.png')"></div>
+                </div>
+                <div class="payment-card-info">
+                    <div class="payment-card-title">Банковской картой на сайте</div>
+                    <div class="payment-card-description">Оплата банковской картой онлайн</div>
+                </div>
+            </div>
+
+            <!-- Сбер - Плати частями -->
+            <div class="payment-card">
+                <div class="payment-card-container">
+                    <input type="checkbox" class="payment-card-checkbox" id="sber_parts" value="4">
+                    <div class="payment-card-image" style="background-image: url('images/pay_system_logo.png')"></div>
+                </div>
+                <div class="payment-card-info">
+                    <div class="payment-card-title">Сбер - Плати частями</div>
+                    <div class="payment-card-description">Оплата через приложение Сбербанк Онлайн</div>
+                </div>
+            </div>
+
+            <!-- Долями - оплата покупок частями -->
+            <div class="payment-card">
+                <div class="payment-card-container">
+                    <input type="checkbox" class="payment-card-checkbox" id="dolyami" value="5">
+                    <div class="payment-card-image" style="background-image: url('images/pay_system_logo.png')"></div>
+                </div>
+                <div class="payment-card-info">
+                    <div class="payment-card-title">Долями - оплата покупок частями</div>
+                    <div class="payment-card-description">Оплата частями без переплат</div>
+                </div>
+            </div>
+
+            <!-- Наличные курьеру -->
+            <div class="payment-card">
+                <div class="payment-card-container">
+                    <input type="checkbox" class="payment-card-checkbox" id="cash_courier" value="6">
+                    <div class="payment-card-image" style="background-image: url('images/pay_system_logo.png')"></div>
+                </div>
+                <div class="payment-card-info">
+                    <div class="payment-card-title">Наличные курьеру</div>
+                    <div class="payment-card-description">Оплата наличными при получении</div>
+                </div>
+            </div>
+                </div>
+                
+                <div class="col-sm-5 bx-soa-pp-desc-container">
+                    <div class="payment-info-panel">
+                        <h3>Информация о способе оплаты</h3>
+                        <div class="no-selection">Выберите способ оплаты для просмотра информации</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Простой скрипт для демонстрации выбора карточек
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.payment-card');
+            const infoPanel = document.querySelector('.payment-info-panel');
+            
+            // Данные о способах оплаты
+            const paymentData = {
+                'qr_store': {
+                    name: 'QR-код в магазине',
+                    description: 'Способ оплаты: QR-код в магазине',
+                    features: [
+                        'Оплата по QR-коду в магазине',
+                        'Быстрое сканирование',
+                        'Без комиссии',
+                        'Мгновенное подтверждение'
+                    ]
+                },
+                'card_store': {
+                    name: 'Банковской картой в магазине',
+                    description: 'Оплата банковской картой онлайн',
+                    features: [
+                        'Оплата картой в магазине',
+                        'Безопасные транзакции',
+                        'Поддержка всех карт',
+                        'Чек на email'
+                    ]
+                },
+                'card_online': {
+                    name: 'Банковской картой на сайте',
+                    description: 'Оплата банковской картой онлайн',
+                    features: [
+                        'Безопасная оплата по протоколу 3D Secure',
+                        'Поддержка всех основных банковских карт',
+                        'Мгновенное подтверждение платежа',
+                        'Чек отправляется на email'
+                    ]
+                },
+                'sber_parts': {
+                    name: 'Сбер - Плати частями',
+                    description: 'Оплата через приложение Сбербанк Онлайн',
+                    features: [
+                        'Оплата через мобильное приложение',
+                        'Быстрое подтверждение через СМС',
+                        'Без комиссии для клиентов Сбербанка',
+                        'Доступно 24/7'
+                    ]
+                },
+                'dolyami': {
+                    name: 'Долями - оплата покупок частями',
+                    description: 'Оплата частями без переплат',
+                    features: [
+                        'Оплата частями без переплат',
+                        'Гибкие условия рассрочки',
+                        'Быстрое одобрение заявки',
+                        'Удобное управление платежами'
+                    ]
+                },
+                'cash_courier': {
+                    name: 'Наличные курьеру',
+                    description: 'Оплата наличными при получении',
+                    features: [
+                        'Оплата при получении заказа',
+                        'Без предоплаты',
+                        'Удобно для курьерской доставки',
+                        'Возможность оплаты картой курьеру'
+                    ]
+                }
+            };
+            
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Убираем выделение с других карточек
+                    cards.forEach(c => c.classList.remove('bx-selected'));
+                    
+                    // Выделяем текущую карточку
+                    this.classList.add('bx-selected');
+                    
+                    // Отмечаем чекбокс
+                    const checkbox = this.querySelector('.payment-card-checkbox');
+                    checkbox.checked = true;
+                    
+                    // Обновляем информационную панель
+                    const cardId = checkbox.id;
+                    const data = paymentData[cardId];
+                    
+                    if (data) {
+                        let featuresHtml = '';
+                        if (data.features && data.features.length > 0) {
+                            featuresHtml = '<ul class="payment-features">';
+                            data.features.forEach(feature => {
+                                featuresHtml += '<li>' + feature + '</li>';
+                            });
+                            featuresHtml += '</ul>';
+                        }
+                        
+                        infoPanel.innerHTML = 
+                            '<h3>' + data.name + '</h3>' +
+                            '<div class="payment-description">' + data.description + '</div>' +
+                            featuresHtml;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

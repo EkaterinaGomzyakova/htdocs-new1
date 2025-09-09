@@ -1026,6 +1026,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 }
             }
 
+            // Создаем двухколоночную структуру
+            this.createPaymentMethodsLayout();
+
             paySystemItemsContainer = this.paySystemBlockNode.querySelector('.bx-soa-pp-item-container');
             BX.cleanNode(paySystemItemsContainer);
 
@@ -1038,6 +1041,114 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             }
 
             this.showPagination('paySystem', paySystemItemsContainer);
+            
+            // Обновляем информационную панель
+            this.updatePaymentInfoPanel(selectedPaySystem);
+        },
+
+        createPaymentMethodsLayout: function () {
+            var paySystemContent = this.paySystemBlockNode.querySelector('.bx-soa-section-content');
+            if (!paySystemContent) return;
+
+            // Проверяем, не создана ли уже структура
+            if (paySystemContent.querySelector('.payment-info-panel')) return;
+
+            // Находим существующий контейнер с описанием
+            var descContainer = paySystemContent.querySelector('.bx-soa-pp-desc-container');
+            if (descContainer) {
+                // Очищаем существующий контент
+                BX.cleanNode(descContainer);
+                
+                // Создаем новую информационную панель
+                var infoPanel = BX.create('DIV', {
+                    props: { className: 'payment-info-panel' },
+                    children: [
+                        BX.create('H3', { text: 'Информация о способе оплаты' }),
+                        BX.create('DIV', {
+                            props: { className: 'no-selection' },
+                            text: 'Выберите способ оплаты для просмотра информации'
+                        })
+                    ]
+                });
+                
+                descContainer.appendChild(infoPanel);
+            }
+        },
+
+        updatePaymentInfoPanel: function (selectedPaySystem) {
+            var infoPanel = this.paySystemBlockNode.querySelector('.payment-info-panel');
+            if (!infoPanel) return;
+
+            if (!selectedPaySystem) {
+                infoPanel.innerHTML = '<h3>Информация о способе оплаты</h3><div class="no-selection">Выберите способ оплаты для просмотра информации</div>';
+                return;
+            }
+
+            var features = this.getPaymentFeatures(selectedPaySystem);
+            var featuresHtml = '';
+
+            if (features.length > 0) {
+                featuresHtml = '<ul class="payment-features">';
+                for (var i = 0; i < features.length; i++) {
+                    featuresHtml += '<li>' + features[i] + '</li>';
+                }
+                featuresHtml += '</ul>';
+            }
+
+            infoPanel.innerHTML = 
+                '<h3>' + selectedPaySystem.NAME + '</h3>' +
+                '<div class="payment-description">' + this.getPaymentCardDescription(selectedPaySystem) + '</div>' +
+                featuresHtml;
+        },
+
+        getPaymentFeatures: function (item) {
+            var name = item.NAME.toLowerCase();
+            var features = [];
+
+            if (name.indexOf('карт') !== -1 || name.indexOf('card') !== -1) {
+                features = [
+                    'Безопасная оплата по протоколу 3D Secure',
+                    'Поддержка всех основных банковских карт',
+                    'Мгновенное подтверждение платежа',
+                    'Чек отправляется на email'
+                ];
+            } else if (name.indexOf('сбер') !== -1 || name.indexOf('sber') !== -1) {
+                features = [
+                    'Оплата через мобильное приложение',
+                    'Быстрое подтверждение через СМС',
+                    'Без комиссии для клиентов Сбербанка',
+                    'Доступно 24/7'
+                ];
+            } else if (name.indexOf('сбп') !== -1 || name.indexOf('sbp') !== -1) {
+                features = [
+                    'Система быстрых платежей',
+                    'Оплата по QR-коду',
+                    'Мгновенное зачисление средств',
+                    'Без комиссии'
+                ];
+            } else if (name.indexOf('долями') !== -1 || name.indexOf('частями') !== -1) {
+                features = [
+                    'Оплата частями без переплат',
+                    'Гибкие условия рассрочки',
+                    'Быстрое одобрение заявки',
+                    'Удобное управление платежами'
+                ];
+            } else if (name.indexOf('налич') !== -1 || name.indexOf('cash') !== -1) {
+                features = [
+                    'Оплата при получении заказа',
+                    'Без предоплаты',
+                    'Удобно для курьерской доставки',
+                    'Возможность оплаты картой курьеру'
+                ];
+            } else {
+                features = [
+                    'Надежный способ оплаты',
+                    'Быстрое подтверждение',
+                    'Безопасные транзакции'
+                ];
+            }
+
+            return features;
         },
 
         showPickUpItemsPage: function (page) {
@@ -4732,43 +4843,62 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
             var checked = item.CHECKED == 'Y',
                 logotype, logoNode,
                 paySystemId = parseInt(item.ID),
-                title, label, itemNode;
+                title, label, itemNode, cardImage, cardContent;
 
-            logoNode = BX.create('DIV', { props: { className: 'bx-soa-pp-company-image' } });
-            logotype = this.getImageSources(item, 'PSA_LOGOTIP');
+            // Создаем карточку с изображением способа оплаты
+            cardImage = BX.create('DIV', { 
+                props: { className: 'payment-card-image' }
+            });
+            
+            // Получаем изображение с поддержкой Retina
+            var logotype = this.getImageSources(item, 'PSA_LOGOTIP');
             if (logotype && logotype.src_2x) {
-                logoNode.setAttribute('style',
+                cardImage.setAttribute('style',
                     'background-image: url(' + logotype.src_1x + ');' +
                     'background-image: -webkit-image-set(url(' + logotype.src_1x + ') 1x, url(' + logotype.src_2x + ') 2x)'
                 );
             } else {
-                logotype = logotype && logotype.src_1x || this.defaultPaySystemLogo;
-                logoNode.setAttribute('style', 'background-image: url(' + logotype + ');');
+                var imageSrc = logotype && logotype.src_1x || this.defaultPaySystemLogo;
+                cardImage.setAttribute('style', 'background-image: url(' + imageSrc + ');');
             }
+            
+            // Создаем контейнер для карточки
             label = BX.create('DIV', {
-                props: { className: 'bx-soa-pp-company-graf-container' },
+                props: { className: 'payment-card-container' },
                 children: [
                     BX.create('INPUT', {
                         props: {
                             id: 'ID_PAY_SYSTEM_ID_' + paySystemId,
                             name: 'PAY_SYSTEM_ID',
                             type: 'checkbox',
-                            className: 'bx-soa-pp-company-checkbox',
+                            className: 'payment-card-checkbox',
                             value: paySystemId,
                             checked: checked
                         }
                     }),
-                    logoNode
+                    cardImage
                 ]
             });
 
-            if (this.params.SHOW_PAY_SYSTEM_LIST_NAMES == 'Y') {
-                title = BX.create('DIV', { props: { className: 'bx-soa-pp-company-smalltitle' }, text: item.NAME });
-            }
+            // Создаем контейнер для информации о способе оплаты
+            cardContent = BX.create('DIV', {
+                props: { className: 'payment-card-info' },
+                children: [
+                    BX.create('DIV', { 
+                        props: { className: 'payment-card-title' }, 
+                        text: item.NAME 
+                    }),
+                    BX.create('DIV', { 
+                        props: { className: 'payment-card-description' }, 
+                        text: this.getPaymentCardDescription(item) 
+                    })
+                ]
+            });
 
+            // Создаем основной контейнер карточки
             itemNode = BX.create('DIV', {
-                props: { className: 'bx-soa-pp-company col-lg-4 col-sm-4 col-xs-6' },
-                children: [label, title],
+                props: { className: 'payment-card' },
+                children: [label, cardContent],
                 events: {
                     click: BX.proxy(this.selectPaySystem, this)
                 }
@@ -4778,6 +4908,37 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 BX.addClass(itemNode, 'bx-selected');
 
             return itemNode;
+        },
+
+        getPaymentCardImage: function (item) {
+            // Сначала пытаемся получить изображение из системы
+            var logotype = this.getImageSources(item, 'PSA_LOGOTIP');
+            
+            if (logotype && logotype.src_1x) {
+                return logotype.src_1x;
+            }
+            
+            // Если изображения нет в системе, используем дефолтное
+            return this.defaultPaySystemLogo;
+        },
+
+        getPaymentCardDescription: function (item) {
+            // Возвращаем описание для способа оплаты
+            var name = item.NAME.toLowerCase();
+            
+            if (name.indexOf('яндекс') !== -1 || name.indexOf('yandex') !== -1) {
+                return 'Быстрая и безопасная оплата через Яндекс.Пэй';
+            } else if (name.indexOf('сбер') !== -1 || name.indexOf('sber') !== -1) {
+                return 'Оплата через приложение СберБанк Онлайн';
+            } else if (name.indexOf('сбп') !== -1 || name.indexOf('sbp') !== -1) {
+                return 'Система быстрых платежей';
+            } else if (name.indexOf('карт') !== -1 || name.indexOf('card') !== -1) {
+                return 'Оплата банковской картой онлайн';
+            } else if (name.indexOf('долями') !== -1 || name.indexOf('частями') !== -1) {
+                return 'Оплата частями без переплат';
+            } else {
+                return 'Способ оплаты: ' + item.NAME;
+            }
         },
 
         editPaySystemInfo: function (paySystemNode) {
@@ -5112,6 +5273,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                     }
                 }
             }
+
+            // Обновляем информационную панель при выборе способа оплаты
+            var selectedPaySystem = this.getSelectedPaySystem();
+            this.updatePaymentInfoPanel(selectedPaySystem);
 
             this.sendRequest();
         },
