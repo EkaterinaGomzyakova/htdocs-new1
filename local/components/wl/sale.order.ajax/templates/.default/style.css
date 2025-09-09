@@ -109,8 +109,9 @@
 .bx-soa-section-title {
     border-radius: 2px;
     margin-top: 35px;
+    margin-left: 5px;
     margin-bottom: 35px;
-    color: #000;
+    color: #285b4d;
     line-height: 15px;
     min-height: 20px;
     vertical-align: middle;
@@ -1763,7 +1764,7 @@ label[data-bx-user-consent] input {
 #bx-soa-order .bx-soa-section .bx-soa-section-title {
     position: relative;
     font-size: 44px;
-    color: #333;
+    color: #285b4d;
     padding-left: 0 !important;
     padding-top: 1px;
     font-weight: 500
@@ -2760,7 +2761,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 /* Стили для сдвига третьей колонки правее */
 .bx-soa-pp-desc-container {
-    margin-left: 20px;
+    margin-left: 5px;
 }
 
 /* Стили для аккордеона категорий доставки */
@@ -3885,15 +3886,6 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     display: none !important;
 }
 
-/* Обеспечиваем, что контент всегда раскрытых блоков всегда отображается */
-#bx-soa-properties .bx-soa-section-content,
-#bx-soa-delivery .bx-soa-section-content,
-#bx-soa-paysystem .bx-soa-section-content {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
-
 
 
 
@@ -4124,6 +4116,31 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     display: none !important;
 }
 
+/* Стили для заголовка "Способ оплаты" - делаем простым текстом */
+#bx-soa-paysystem .bx-soa-section-title-container {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    cursor: default !important;
+}
+
+#bx-soa-paysystem .bx-soa-section-title {
+    color: #2D2D2D;
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%; /* 48.4px */
+}
+
+#bx-soa-paysystem .bx-soa-section-title:before {
+    display: none !important;
+}
+
+#bx-soa-paysystem .bx-soa-editstep {
+    display: none !important;
+}
+
 /* Скрываем все кнопки редактирования (Назад/Далее) */
 .bx-soa-editstep {
     display: none !important;
@@ -4276,45 +4293,38 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 /* Новые стили для карточек способов оплаты - только для блока оплаты */
 #bx-soa-paysystem .payment-card {
     display: flex;
+    flex-direction: column;
     margin-bottom: 15px;
-    border: 1px solid #e0e0e0;
     border-radius: 8px;
     background: #fff;
     transition: all 0.3s ease;
     cursor: pointer;
     overflow: hidden;
-    height: 80px;
+    height: 100px;
+    width: 200px;
 }
 
-#bx-soa-paysystem .payment-card:hover {
-    border-color: #285b4d;
-    box-shadow: 0 2px 8px rgba(40, 91, 77, 0.1);
+#bx-soa-paysystem .payment-card:hover:not(.bx-selected) {
+    border: 1px solid #285b4d !important;
 }
 
 #bx-soa-paysystem .payment-card.bx-selected {
-    border-color: #285b4d;
-    background-color: #f8f9fa;
-    box-shadow: 0 2px 8px rgba(40, 91, 77, 0.15);
+    border: 1px solid #285b4d !important;
+    background-color: #fff !important;
 }
+
 
 #bx-soa-paysystem .payment-card-container {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 24px;
+    height: 24px;
     flex-shrink: 0;
-    background: #f5f5f5;
-    border-right: 1px solid #e0e0e0;
+    margin: 20px auto 2px 20px;
+    align-self: center;
 }
 
 #bx-soa-paysystem .payment-card-checkbox {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    z-index: 10;
-    margin: 0;
-    padding: 0;
-    width: 16px;
-    height: 16px;
+    display: none;
 }
 
 #bx-soa-paysystem .payment-card-image {
@@ -4336,10 +4346,11 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 #bx-soa-paysystem .payment-card-info {
     flex: 1;
-    padding: 8px 12px;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    margin-top: 12px;
+    margin-left: 20px;
 }
 
 #bx-soa-paysystem .payment-card-title {
@@ -4357,7 +4368,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-paysystem .payment-card.bx-selected .payment-card-title {
-    color: #285b4d;
+    color: #333;
 }
 
 #bx-soa-paysystem .payment-card.bx-selected .payment-card-description {
@@ -4371,14 +4382,14 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     }
     
     #bx-soa-paysystem .payment-card-container {
-        width: 100%;
-        height: 60px;
-        border-right: none;
-        border-bottom: 1px solid #e0e0e0;
+        width: 24px;
+        height: 24px;
+        margin: 8px auto 4px auto;
     }
     
     #bx-soa-paysystem .payment-card-info {
-        padding: 12px 15px;
+        padding: 4px 15px 12px 15px;
+        text-align: center;
     }
     
     #bx-soa-paysystem .payment-card-title {
@@ -4393,7 +4404,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 /* Двухколоночная структура для способов оплаты - используем существующую Bootstrap структуру */
 #bx-soa-paysystem .bx-soa-pp {
     display: flex;
-    gap: 30px;
+    gap: 10px;
     margin-top: 20px;
 }
 
@@ -4410,7 +4421,6 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 /* Информационная панель */
 #bx-soa-paysystem .payment-info-panel {
     background: #f8f9fa;
-    border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 20px;
     min-height: 200px;
@@ -4447,7 +4457,6 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 #bx-soa-paysystem .payment-features li {
     padding: 8px 0;
-    border-bottom: 1px solid #eee;
     position: relative;
     padding-left: 25px;
 }
@@ -4475,9 +4484,8 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 #bx-soa-paysystem .bx-soa-pp-item-container .payment-card {
     margin-bottom: 0;
     border-radius: 8px;
-    border: 1px solid #e0e0e0;
     flex: 0 0 calc(33.333% - 7px);
-    min-width: 180px;
+    min-width: 200px;
 }
 
 /* Адаптивность для способов оплаты */
@@ -4510,4 +4518,21 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
         flex: none;
         min-width: auto;
     }
+}
+
+
+.btn.btn-default {
+    background-color: #285b4d;
+    border-color: #285b4d;
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+
+#bx-soa-properties .bx-soa-section-content{
+    display: none;
+}
+
+#bx-soa-paysystem {
+    height: 420px;
 }

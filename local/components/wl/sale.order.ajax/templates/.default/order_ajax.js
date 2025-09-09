@@ -4887,10 +4887,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                     BX.create('DIV', { 
                         props: { className: 'payment-card-title' }, 
                         text: item.NAME 
-                    }),
-                    BX.create('DIV', { 
-                        props: { className: 'payment-card-description' }, 
-                        text: this.getPaymentCardDescription(item) 
+                    
                     })
                 ]
             });
@@ -5238,6 +5235,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
             var innerPsAction = BX.hasClass(target, 'bx-soa-pp-inner-ps') ? target : BX.findParent(target, { className: 'bx-soa-pp-inner-ps' }),
                 actionSection = BX.hasClass(target, 'bx-soa-pp-company') ? target : BX.findParent(target, { className: 'bx-soa-pp-company' }),
+                paymentCard = BX.hasClass(target, 'payment-card') ? target : BX.findParent(target, { className: 'payment-card' }),
                 actionInput, selectedSection;
 
             if (innerPsAction) {
@@ -5250,6 +5248,29 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 } else {
                     BX.addClass(innerPaySystemSection, 'bx-selected');
                     innerPaySystemCheckbox.checked = true;
+                }
+            } else if (paymentCard) {
+                // Обработка клика по новой карточке способа оплаты
+                if (BX.hasClass(paymentCard, 'bx-selected'))
+                    return BX.PreventDefault(event);
+
+                // Убираем выделение с других карточек
+                var allPaymentCards = this.paySystemBlockNode.querySelectorAll('.payment-card.bx-selected');
+                for (var i = 0; i < allPaymentCards.length; i++) {
+                    BX.removeClass(allPaymentCards[i], 'bx-selected');
+                    var checkbox = allPaymentCards[i].querySelector('input[type=checkbox]');
+                    if (checkbox) checkbox.checked = false;
+                }
+
+                // Выделяем текущую карточку
+                BX.addClass(paymentCard, 'bx-selected');
+                var currentCheckbox = paymentCard.querySelector('input[type=checkbox]');
+                if (currentCheckbox) currentCheckbox.checked = true;
+
+                // Убираем выделение с внутренней системы оплаты
+                if (innerPaySystemCheckbox && innerPaySystemCheckbox.checked) {
+                    BX.removeClass(innerPaySystemSection, 'bx-selected');
+                    innerPaySystemCheckbox.checked = false;
                 }
             } else if (actionSection) {
                 if (BX.hasClass(actionSection, 'bx-selected'))
