@@ -594,12 +594,13 @@
 .bx-soa-cart-total {
     border-radius: 3px;
     padding: 20px;
-    transition: opacity .2s ease;
+    transition: opacity .2s ease, transform .3s ease, position .3s ease;
 }
 
 .bx-soa-cart-total.bx-soa-cart-total-fixed {
     position: fixed;
-    top: 10px;
+    top: 100px;
+    transition: all .1s ease;
 }
 
 .bx-soa-cart-total.bx-soa-cart-total-bottom {
@@ -1743,7 +1744,7 @@ label[data-bx-user-consent] input {
 }
 
 #bx-soa-order .bx-soa-section {
-    border-radius: 0;
+    border-radius: 20px !important;
 }
 
 #bx-soa-order .bx-soa-section .bx-soa-section-title-container {
@@ -1751,7 +1752,7 @@ label[data-bx-user-consent] input {
     border-bottom: 1px solid #f2f2f2;
     background: white;
     cursor: pointer;
-    border-radius: 16px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -2025,53 +2026,53 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 /* ========================================
-   СТИЛИ ДЛЯ БЛОКА ГОРОДА
+   Ð¡Ð¢Ð˜Ð›Ð˜ Ð”Ð›Ð¯ Ð‘Ð›ÐžÐšÐ Ð“ÐžÐ ÐžÐ”Ð
    ======================================== */
 
-/* Основной контейнер блока города */
+/* ÐžÑÐ½Ð¾Ð²Ð½Ð¾Ð¹ ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€ Ð±Ð»Ð¾ÐºÐ° Ð³Ð¾Ñ€Ð¾Ð´Ð° */
 .region-display-container {
     margin-top: 35px;
-    margin-bottom: 35px;           /* Отступ снизу от блока */
-    display: flex;                 /* Flexbox для двухколоночной верстки */
-    align-items: flex-start;       /* Выравнивание по верхнему краю */
-    gap: 170px;                      /* Расстояние между левой и правой колонкой */
+    margin-bottom: 35px;           /* ÐžÑ‚ÑÑ‚ÑƒÐ¿ ÑÐ½Ð¸Ð·Ñƒ Ð¾Ñ‚ Ð±Ð»Ð¾ÐºÐ° */
+    display: flex;                 /* Flexbox Ð´Ð»Ñ Ð´Ð²ÑƒÑ…ÐºÐ¾Ð»Ð¾Ð½Ð¾Ñ‡Ð½Ð¾Ð¹ Ð²ÐµÑ€ÑÑ‚ÐºÐ¸ */
+    align-items: flex-start;       /* Ð’Ñ‹Ñ€Ð°Ð²Ð½Ð¸Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾ Ð²ÐµÑ€Ñ…Ð½ÐµÐ¼Ñƒ ÐºÑ€Ð°ÑŽ */
+    gap: 170px;                      /* Ð Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ Ð»ÐµÐ²Ð¾Ð¹ Ð¸ Ð¿Ñ€Ð°Ð²Ð¾Ð¹ ÐºÐ¾Ð»Ð¾Ð½ÐºÐ¾Ð¹ */
 }
 
-/* Левый столбец - метка "Город" */
+/* Ð›ÐµÐ²Ñ‹Ð¹ ÑÑ‚Ð¾Ð»Ð±ÐµÑ† - Ð¼ÐµÑ‚ÐºÐ° "Ð“Ð¾Ñ€Ð¾Ð´" */
 .region-city-label {
-    font-weight: bold;             /* Жирный шрифт */
-    color: #333;                   /* Цвет текста (темно-серый) */
-    margin-bottom: 0;              /* Убираем отступ снизу */
-    display: block;                /* Блочный элемент */
-    min-width: 80px;               /* Минимальная ширина левой колонки */
-    flex-shrink: 0;                /* Не сжимается при уменьшении экрана */
+    font-weight: bold;             /* Ð–Ð¸Ñ€Ð½Ñ‹Ð¹ ÑˆÑ€Ð¸Ñ„Ñ‚ */
+    color: #333;                   /* Ð¦Ð²ÐµÑ‚ Ñ‚ÐµÐºÑÑ‚Ð° (Ñ‚ÐµÐ¼Ð½Ð¾-ÑÐµÑ€Ñ‹Ð¹) */
+    margin-bottom: 0;              /* Ð£Ð±Ð¸Ñ€Ð°ÐµÐ¼ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿ ÑÐ½Ð¸Ð·Ñƒ */
+    display: block;                /* Ð‘Ð»Ð¾Ñ‡Ð½Ñ‹Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ */
+    min-width: 80px;               /* ÐœÐ¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð°Ñ ÑˆÐ¸Ñ€Ð¸Ð½Ð° Ð»ÐµÐ²Ð¾Ð¹ ÐºÐ¾Ð»Ð¾Ð½ÐºÐ¸ */
+    flex-shrink: 0;                /* ÐÐµ ÑÐ¶Ð¸Ð¼Ð°ÐµÑ‚ÑÑ Ð¿Ñ€Ð¸ ÑƒÐ¼ÐµÐ½ÑŒÑˆÐµÐ½Ð¸Ð¸ ÑÐºÑ€Ð°Ð½Ð° */
 }
 
-/* Правый столбец - контейнер для информации о городе */
+/* ÐŸÑ€Ð°Ð²Ñ‹Ð¹ ÑÑ‚Ð¾Ð»Ð±ÐµÑ† - ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€ Ð´Ð»Ñ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ð³Ð¾Ñ€Ð¾Ð´Ðµ */
 .region-city-info {
-    display: flex;                 /* Flexbox для вертикального расположения */
-    flex-direction: column;        /* Вертикальное направление */
-    gap: 32px;                     /* Расстояние между элементами */
+    display: flex;                 /* Flexbox Ð´Ð»Ñ Ð²ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ñ€Ð°ÑÐ¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ */
+    flex-direction: column;        /* Ð’ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒÐ½Ð¾Ðµ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ */
+    gap: 32px;                     /* Ð Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°Ð¼Ð¸ */
 }
 
-/* Название города */
+/* ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð³Ð¾Ñ€Ð¾Ð´Ð° */
 .region-city-name {
-    color: #333;                   /* Цвет текста (темно-серый) */
-    margin-bottom: 0;              /* Убираем отступ снизу */
-    display: block;                /* Блочный элемент */
-    font-weight: 500;              /* Полужирный шрифт */
+    color: #333;                   /* Ð¦Ð²ÐµÑ‚ Ñ‚ÐµÐºÑÑ‚Ð° (Ñ‚ÐµÐ¼Ð½Ð¾-ÑÐµÑ€Ñ‹Ð¹) */
+    margin-bottom: 0;              /* Ð£Ð±Ð¸Ñ€Ð°ÐµÐ¼ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿ ÑÐ½Ð¸Ð·Ñƒ */
+    display: block;                /* Ð‘Ð»Ð¾Ñ‡Ð½Ñ‹Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ */
+    font-weight: 500;              /* ÐŸÐ¾Ð»ÑƒÐ¶Ð¸Ñ€Ð½Ñ‹Ð¹ ÑˆÑ€Ð¸Ñ„Ñ‚ */
 }
 
-/* Название области/региона */
+/* ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸/Ñ€ÐµÐ³Ð¸Ð¾Ð½Ð° */
 .region-city-region {
     color:  #A9A9A9;
     font-size: 17px;
     font-style: normal;
     font-weight: 400;
-    line-height: 130%; /* 22.1px */               /* Блочный элемент */
+    line-height: 130%; /* 22.1px */               /* Ð‘Ð»Ð¾Ñ‡Ð½Ñ‹Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ */
     }
 
-/* Кнопка "Изменить" (обычное состояние) */
+/* ÐšÐ½Ð¾Ð¿ÐºÐ° "Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ" (Ð¾Ð±Ñ‹Ñ‡Ð½Ð¾Ðµ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ) */
 .region-edit-btn {
     display: flex;
     height: 60px;
@@ -2084,40 +2085,40 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     color: #696969;
 }
 
-/* Кнопка "Изменить" при наведении */
+/* ÐšÐ½Ð¾Ð¿ÐºÐ° "Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ" Ð¿Ñ€Ð¸ Ð½Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸ */
 .region-edit-btn:hover {
-    background-color: #ebeaea;     /* Цвет фона при наведении (чуть темнее) */
-    border-color: #adb5bd;         /* Цвет границы при наведении */
-    color: #333;                   /* Цвет текста при наведении */
-    text-decoration: none;         /* Убираем подчеркивание */
+    background-color: #ebeaea;     /* Ð¦Ð²ÐµÑ‚ Ñ„Ð¾Ð½Ð° Ð¿Ñ€Ð¸ Ð½Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸ (Ñ‡ÑƒÑ‚ÑŒ Ñ‚ÐµÐ¼Ð½ÐµÐµ) */
+    border-color: #adb5bd;         /* Ð¦Ð²ÐµÑ‚ Ð³Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð¿Ñ€Ð¸ Ð½Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸ */
+    color: #333;                   /* Ð¦Ð²ÐµÑ‚ Ñ‚ÐµÐºÑÑ‚Ð° Ð¿Ñ€Ð¸ Ð½Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸ */
+    text-decoration: none;         /* Ð£Ð±Ð¸Ñ€Ð°ÐµÐ¼ Ð¿Ð¾Ð´Ñ‡ÐµÑ€ÐºÐ¸Ð²Ð°Ð½Ð¸Ðµ */
     border-radius: 8px;
 }
 
 
 /* ========================================
-   СТИЛИ ДЛЯ КНОПКИ "ПРИМЕНИТЬ"
+   Ð¡Ð¢Ð˜Ð›Ð˜ Ð”Ð›Ð¯ ÐšÐÐžÐŸÐšÐ˜ "ÐŸÐ Ð˜ÐœÐ•ÐÐ˜Ð¢Ð¬"
    ======================================== */
 
-/* Кнопка "Применить" (активное состояние) */
+/* ÐšÐ½Ð¾Ð¿ÐºÐ° "ÐŸÑ€Ð¸Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ" (Ð°ÐºÑ‚Ð¸Ð²Ð½Ð¾Ðµ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ðµ) */
 .region-edit-btn[data-state="apply"] {
-    background-color: #285b4d;     /* Цвет фона (синий) */
-    border-color: #285b4d;         /* Цвет границы (синий) */
-    color: white;                  /* Цвет текста (белый) */
+    background-color: #285b4d;     /* Ð¦Ð²ÐµÑ‚ Ñ„Ð¾Ð½Ð° (ÑÐ¸Ð½Ð¸Ð¹) */
+    border-color: #285b4d;         /* Ð¦Ð²ÐµÑ‚ Ð³Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ (ÑÐ¸Ð½Ð¸Ð¹) */
+    color: white;                  /* Ð¦Ð²ÐµÑ‚ Ñ‚ÐµÐºÑÑ‚Ð° (Ð±ÐµÐ»Ñ‹Ð¹) */
 }
 
-/* Кнопка "Применить" при наведении */
+/* ÐšÐ½Ð¾Ð¿ÐºÐ° "ÐŸÑ€Ð¸Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ" Ð¿Ñ€Ð¸ Ð½Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸ */
 .region-edit-btn[data-state="apply"]:hover {
-    background-color: #285b4d;     /* Цвет фона при наведении (темно-синий) */
-    border-color: #285b4d;         /* Цвет границы при наведении (темно-синий) */
-    color: white;                  /* Цвет текста при наведении (белый) */
+    background-color: #285b4d;     /* Ð¦Ð²ÐµÑ‚ Ñ„Ð¾Ð½Ð° Ð¿Ñ€Ð¸ Ð½Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸ (Ñ‚ÐµÐ¼Ð½Ð¾-ÑÐ¸Ð½Ð¸Ð¹) */
+    border-color: #285b4d;         /* Ð¦Ð²ÐµÑ‚ Ð³Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð¿Ñ€Ð¸ Ð½Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸ (Ñ‚ÐµÐ¼Ð½Ð¾-ÑÐ¸Ð½Ð¸Ð¹) */
+    color: white;                  /* Ð¦Ð²ÐµÑ‚ Ñ‚ÐµÐºÑÑ‚Ð° Ð¿Ñ€Ð¸ Ð½Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸ (Ð±ÐµÐ»Ñ‹Ð¹) */
 }
 
-/* Стили для формы редактирования города */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ñ„Ð¾Ñ€Ð¼Ñ‹ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ Ð³Ð¾Ñ€Ð¾Ð´Ð° */
 .region-edit-container {
     margin-bottom: 15px;
 }
 
-/* Скрываем лейбл "Город *" и подсказки в поле ввода города */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ Ð»ÐµÐ¹Ð±Ð» "Ð“Ð¾Ñ€Ð¾Ð´ *" Ð¸ Ð¿Ð¾Ð´ÑÐºÐ°Ð·ÐºÐ¸ Ð² Ð¿Ð¾Ð»Ðµ Ð²Ð²Ð¾Ð´Ð° Ð³Ð¾Ñ€Ð¾Ð´Ð° */
 #hidden-location-container .bx-soa-custom-label,
 .bx-soa-custom-label {
     display: none !important;
@@ -2133,7 +2134,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     margin-top: 0 !important;
 }
 
-/* Скрываем подсказки и описания в поле местоположения */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ Ð¿Ð¾Ð´ÑÐºÐ°Ð·ÐºÐ¸ Ð¸ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ñ Ð² Ð¿Ð¾Ð»Ðµ Ð¼ÐµÑÑ‚Ð¾Ð¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ */
 #hidden-location-container small,
 .bx-soa-location-input-container small {
     display: none !important;
@@ -2144,12 +2145,12 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     display: none !important;
 }
 
-/* Скругление углов для контейнера поля ввода города */
+/* Ð¡ÐºÑ€ÑƒÐ³Ð»ÐµÐ½Ð¸Ðµ ÑƒÐ³Ð»Ð¾Ð² Ð´Ð»Ñ ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€Ð° Ð¿Ð¾Ð»Ñ Ð²Ð²Ð¾Ð´Ð° Ð³Ð¾Ñ€Ð¾Ð´Ð° */
 .bx-soa-location-input-container {
     border-radius: 8px !important;
 }
 
-/* Дополнительные стили для скрытия элементов в поле местоположения */
+/* Ð”Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ ÑÑ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ ÑÐºÑ€Ñ‹Ñ‚Ð¸Ñ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð² Ð¿Ð¾Ð»Ðµ Ð¼ÐµÑÑ‚Ð¾Ð¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ */
 .bx-soa-location-input-container label {
     display: none !important;
 }
@@ -2215,7 +2216,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
-/* Стили для контейнера кнопки "Применить" */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€Ð° ÐºÐ½Ð¾Ð¿ÐºÐ¸ "ÐŸÑ€Ð¸Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ" */
 .city-apply-container {
     margin-top: 10px;
     text-align: right;
@@ -2744,7 +2745,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     line-height: 130%;
 }
 
-/* Стили для колонки с заголовком доставки */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ ÐºÐ¾Ð»Ð¾Ð½ÐºÐ¸ Ñ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ¾Ð¼ Ð´Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸ */
 .bx-soa-delivery-title-column {
     width: 270px;
     padding: 10px 15px 0 0;
@@ -2759,12 +2760,12 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     line-height: 1.2;
 }
 
-/* Стили для сдвига третьей колонки правее */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ ÑÐ´Ð²Ð¸Ð³Ð° Ñ‚Ñ€ÐµÑ‚ÑŒÐµÐ¹ ÐºÐ¾Ð»Ð¾Ð½ÐºÐ¸ Ð¿Ñ€Ð°Ð²ÐµÐµ */
 .bx-soa-pp-desc-container {
     margin-left: 5px;
 }
 
-/* Стили для аккордеона категорий доставки */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð°ÐºÐºÐ¾Ñ€Ð´ÐµÐ¾Ð½Ð° ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¹ Ð´Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸ */
 .bx-soa-delivery-category-wrapper {
     margin-bottom: 0;
     border-bottom: 1px solid #e0e0e0;
@@ -2829,14 +2830,14 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     padding: 16px 20px 20px 20px;
 }
 
-/* CSS-аккордеон: автоматическое переключение при выборе радио-кнопки */
+/* CSS-Ð°ÐºÐºÐ¾Ñ€Ð´ÐµÐ¾Ð½: Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð¿ÐµÑ€ÐµÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ð¿Ñ€Ð¸ Ð²Ñ‹Ð±Ð¾Ñ€Ðµ Ñ€Ð°Ð´Ð¸Ð¾-ÐºÐ½Ð¾Ð¿ÐºÐ¸ */
 .bx-soa-delivery-category-wrapper:has(input[type="radio"]:checked) .bx-soa-delivery-category-items {
     max-height: 1000px;
     opacity: 1;
     padding: 16px 20px 20px 20px;
 }
 
-/* Fallback для браузеров без поддержки :has() */
+/* Fallback Ð´Ð»Ñ Ð±Ñ€Ð°ÑƒÐ·ÐµÑ€Ð¾Ð² Ð±ÐµÐ· Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶ÐºÐ¸ :has() */
 .bx-soa-delivery-category-wrapper input[type="radio"]:checked + .bx-soa-delivery-category-title + .bx-soa-delivery-category-items,
 .bx-soa-delivery-category-wrapper input[type="radio"]:checked ~ .bx-soa-delivery-category-items {
     max-height: 1000px;
@@ -2844,7 +2845,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     padding: 16px 20px 20px 20px;
 }
 
-/* Стили для элементов доставки внутри аккордеона */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð´Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸ Ð²Ð½ÑƒÑ‚Ñ€Ð¸ Ð°ÐºÐºÐ¾Ñ€Ð´ÐµÐ¾Ð½Ð° */
 .bx-soa-delivery-category-items .bx-soa-pp-company {
     margin-bottom: 12px;
     border-radius: 6px;
@@ -2854,26 +2855,26 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     cursor: pointer;
 }
 
-/* Стили для выбранных карточек доставки */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ñ‹Ñ… ÐºÐ°Ñ€Ñ‚Ð¾Ñ‡ÐµÐº Ð´Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸ */
 .bx-soa-delivery-category-items .bx-soa-pp-company.bx-selected {
     border: 2px solid #fff7ec;
 }
 
-/* Стили для не выбранных карточек при наведении */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð½Ðµ Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ñ‹Ñ… ÐºÐ°Ñ€Ñ‚Ð¾Ñ‡ÐµÐº Ð¿Ñ€Ð¸ Ð½Ð°Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸ */
 
 
 .bx-soa-delivery-category-items .bx-soa-pp-company:last-child {
     margin-bottom: 0;
 }
 
-/* Стили для логотипов и элементов доставки */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð»Ð¾Ð³Ð¾Ñ‚Ð¸Ð¿Ð¾Ð² Ð¸ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð´Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸ */
 .bx-soa-delivery-category-items .bx-soa-pp-company-graf-container {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-/* Скрываем галочку (псевдо-элемент ::before) в карточках доставки */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ Ð³Ð°Ð»Ð¾Ñ‡ÐºÑƒ (Ð¿ÑÐµÐ²Ð´Ð¾-ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ ::before) Ð² ÐºÐ°Ñ€Ñ‚Ð¾Ñ‡ÐºÐ°Ñ… Ð´Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸ */
 .bx-soa-delivery-category-items .bx-soa-pp-company-graf-container::after,
 .bx-soa-delivery-category-items .bx-soa-pp-company-graf-container::before {
     display: none !important;
@@ -3182,9 +3183,11 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-order .bx-soa-cart-total {
+    margin-top: 7px;
+    margin-left: 10px;
     padding: 20px;
-    border-radius: 16px;
-    background: #fff
+    border-radius: 20px;
+    background: #f5f5f7
 }
 
 #bx-soa-order .bx-soa-cart-total .bx-soa-cart-total-line {
@@ -3213,7 +3216,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-order .bx-soa-cart-total .bx-soa-cart-total-line-total {
-    margin: 27px 0 0;
+    margin: 0px 0 0;
     padding: 25px 0 0;
     border-top: 1px solid #f2f2f2
 }
@@ -3225,7 +3228,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 #bx-soa-order .bx-soa-cart-total .bx-soa-cart-total-line-total .bx-soa-cart-d {
     font-size: 18px !important;
-    font-weight: 700
+    font-weight: 700;
 }
 
 #bx-soa-order .bx-soa-cart-total-button-container {
@@ -3234,8 +3237,12 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-order .bx-soa-cart-total-button-container .btn {
-    padding: 10px 12px 12px;
-    font-size: 17px !important
+    padding: 20px 12px;
+    font-size: 15px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
 }
 
 #bx-soa-order #bx-soa-basket .bx-soa-section-content {
@@ -3409,6 +3416,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-order .bx-soa-cart-total .change_basket {
+    display: none !important;
     font-size: 16px;
     font-weight: 600;
     position: relative;
@@ -3860,26 +3868,26 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     }
 }
 
-/* Скрывает блок "Товары в заказе" на странице оформления */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÑ‚ Ð±Ð»Ð¾Ðº "Ð¢Ð¾Ð²Ð°Ñ€Ñ‹ Ð² Ð·Ð°ÐºÐ°Ð·Ðµ" Ð½Ð° ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ðµ Ð¾Ñ„Ð¾Ñ€Ð¼Ð»ÐµÐ½Ð¸Ñ */
 #bx-soa-basket {
     display: none !important;
 }
 
-/* Блоки покупателя, доставки и оплаты всегда раскрыты */
+/* Ð‘Ð»Ð¾ÐºÐ¸ Ð¿Ð¾ÐºÑƒÐ¿Ð°Ñ‚ÐµÐ»Ñ, Ð´Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸ Ð¸ Ð¾Ð¿Ð»Ð°Ñ‚Ñ‹ Ð²ÑÐµÐ³Ð´Ð° Ñ€Ð°ÑÐºÑ€Ñ‹Ñ‚Ñ‹ */
 #bx-soa-properties,
 #bx-soa-delivery,
 #bx-soa-paysystem {
     display: block !important;
 }
 
-/* Убираем возможность сворачивания для этих блоков */
+/* Ð£Ð±Ð¸Ñ€Ð°ÐµÐ¼ Ð²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ÑÑ‚ÑŒ ÑÐ²Ð¾Ñ€Ð°Ñ‡Ð¸Ð²Ð°Ð½Ð¸Ñ Ð´Ð»Ñ ÑÑ‚Ð¸Ñ… Ð±Ð»Ð¾ÐºÐ¾Ð² */
 #bx-soa-properties .bx-soa-section-title-container,
 #bx-soa-delivery .bx-soa-section-title-container,
 #bx-soa-paysystem .bx-soa-section-title-container {
     cursor: default !important;
 }
 
-/* Скрываем кнопки редактирования для всегда раскрытых блоков */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÐ¸ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ Ð´Ð»Ñ Ð²ÑÐµÐ³Ð´Ð° Ñ€Ð°ÑÐºÑ€Ñ‹Ñ‚Ñ‹Ñ… Ð±Ð»Ð¾ÐºÐ¾Ð² */
 #bx-soa-properties .bx-soa-editstep,
 #bx-soa-delivery .bx-soa-editstep,
 #bx-soa-paysystem .bx-soa-editstep {
@@ -3890,37 +3898,37 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 
 
-/* Дополнительные стили для обязательных полей */
+/* Ð”Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ ÑÑ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ð¿Ð¾Ð»ÐµÐ¹ */
 
 
 
-/* Стили для полей с звездочкой обязательности */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð¿Ð¾Ð»ÐµÐ¹ Ñ Ð·Ð²ÐµÐ·Ð´Ð¾Ñ‡ÐºÐ¾Ð¹ Ð¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚Ð¸ */
 
 
-/* Стили для обязательных полей через класс */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ð¿Ð¾Ð»ÐµÐ¹ Ñ‡ÐµÑ€ÐµÐ· ÐºÐ»Ð°ÑÑ */
 
 
 
 
-/* Скрываем звездочки для полей ФИО и телефона */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ Ð·Ð²ÐµÐ·Ð´Ð¾Ñ‡ÐºÐ¸ Ð´Ð»Ñ Ð¿Ð¾Ð»ÐµÐ¹ Ð¤Ð˜Ðž Ð¸ Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð° */
 #bx-soa-order input[autocomplete="name"] + label .bx-authform-starrequired,
 #bx-soa-order input[autocomplete="tel"] + label .bx-authform-starrequired {
     display: none !important;
 }
 
-/* Дополнительное скрытие звездочек для полей ФИО и телефона */
+/* Ð”Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾Ðµ ÑÐºÑ€Ñ‹Ñ‚Ð¸Ðµ Ð·Ð²ÐµÐ·Ð´Ð¾Ñ‡ÐµÐº Ð´Ð»Ñ Ð¿Ð¾Ð»ÐµÐ¹ Ð¤Ð˜Ðž Ð¸ Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð° */
 #bx-soa-order .bx-soa-customer-field:has(input[autocomplete="name"]) .bx-authform-starrequired,
 #bx-soa-order .bx-soa-customer-field:has(input[autocomplete="tel"]) .bx-authform-starrequired {
     display: none !important;
 }
 
-/* Универсальное скрытие звездочек для полей с классом required-field */
+/* Ð£Ð½Ð¸Ð²ÐµÑ€ÑÐ°Ð»ÑŒÐ½Ð¾Ðµ ÑÐºÑ€Ñ‹Ñ‚Ð¸Ðµ Ð·Ð²ÐµÐ·Ð´Ð¾Ñ‡ÐµÐº Ð´Ð»Ñ Ð¿Ð¾Ð»ÐµÐ¹ Ñ ÐºÐ»Ð°ÑÑÐ¾Ð¼ required-field */
 #bx-soa-order .required-field + label .bx-authform-starrequired,
 #bx-soa-order .required-field ~ label .bx-authform-starrequired {
     display: none !important;
 }
 
-/* Стили для контейнера покупателя внутри блока доставки */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€Ð° Ð¿Ð¾ÐºÑƒÐ¿Ð°Ñ‚ÐµÐ»Ñ Ð²Ð½ÑƒÑ‚Ñ€Ð¸ Ð±Ð»Ð¾ÐºÐ° Ð´Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸ */
 #bx-soa-buyer-inside-delivery {
     margin-top: 20px;
     padding-top: 20px;
@@ -3930,7 +3938,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     padding: 0 !important;
 }
 
-/* Стили для полей ввода покупателя */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð¿Ð¾Ð»ÐµÐ¹ Ð²Ð²Ð¾Ð´Ð° Ð¿Ð¾ÐºÑƒÐ¿Ð°Ñ‚ÐµÐ»Ñ */
 .bx-soa-customer-field {
     display: flex;
     align-items: center;
@@ -3957,7 +3965,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     margin-right: auto;
 }
 
-/* Контейнер для картинки слева от полей */
+/* ÐšÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€ Ð´Ð»Ñ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ¸ ÑÐ»ÐµÐ²Ð° Ð¾Ñ‚ Ð¿Ð¾Ð»ÐµÐ¹ */
 .bx-soa-customer-image-container {
     background-color: #285b4d;
     position: absolute;
@@ -3976,14 +3984,14 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     overflow: hidden;
 }
 
-/* Контейнер для полей с отступом под картинку */
+/* ÐšÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€ Ð´Ð»Ñ Ð¿Ð¾Ð»ÐµÐ¹ Ñ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ð¾Ð¼ Ð¿Ð¾Ð´ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÑƒ */
 .bx-soa-customer-fields-wrapper {
     position: relative;
     margin-left: 380px;
     min-height: 150px;
 }
 
-/* Дополнительные стили для улучшения внешнего вида */
+/* Ð”Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ ÑÑ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ ÑƒÐ»ÑƒÑ‡ÑˆÐµÐ½Ð¸Ñ Ð²Ð½ÐµÑˆÐ½ÐµÐ³Ð¾ Ð²Ð¸Ð´Ð° */
 .bx-soa-customer input[type="text"],
 .bx-soa-customer input[type="email"],
 .bx-soa-customer input[type="tel"] {
@@ -3993,7 +4001,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     transition: border-color 0.3s ease;
 }
 
-/* Стили для placeholder'ов */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ placeholder'Ð¾Ð² */
 .bx-soa-customer input[type="text"]::placeholder,
 .bx-soa-customer input[type="email"]::placeholder,
 .bx-soa-customer input[type="tel"]::placeholder {
@@ -4009,7 +4017,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     opacity: 0.7;
 }
 
-/* Стили для tooltip'ов в полях покупателя */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ tooltip'Ð¾Ð² Ð² Ð¿Ð¾Ð»ÑÑ… Ð¿Ð¾ÐºÑƒÐ¿Ð°Ñ‚ÐµÐ»Ñ */
 .bx-soa-customer-field .bx-soa-tooltip {
     position: absolute;
     top: 50%;
@@ -4023,7 +4031,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     left: auto;
 }
 
-/* Скрываем tooltip'ы для полей города */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ tooltip'Ñ‹ Ð´Ð»Ñ Ð¿Ð¾Ð»ÐµÐ¹ Ð³Ð¾Ñ€Ð¾Ð´Ð° */
 .bx-soa-location-input-container .bx-soa-tooltip {
     display: none !important;
 }
@@ -4039,7 +4047,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 
-/* Адаптивность для мобильных устройств */
+/* ÐÐ´Ð°Ð¿Ñ‚Ð¸Ð²Ð½Ð¾ÑÑ‚ÑŒ Ð´Ð»Ñ Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ñ… ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð² */
 @media (max-width: 768px) {
     .bx-soa-customer-image-container {
         position: static;
@@ -4072,7 +4080,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
         width: 100%;
     }
     
-    /* На мобильных устройствах tooltip'ы отображаются снизу */
+    /* ÐÐ° Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ñ… ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°Ñ… tooltip'Ñ‹ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶Ð°ÑŽÑ‚ÑÑ ÑÐ½Ð¸Ð·Ñƒ */
     .bx-soa-customer-field .bx-soa-tooltip {
         position: absolute;
         bottom: -22px;
@@ -4084,13 +4092,13 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     }
 }
 
-/* Скрываем заголовок и кнопки навигации для блока покупателя */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº Ð¸ ÐºÐ½Ð¾Ð¿ÐºÐ¸ Ð½Ð°Ð²Ð¸Ð³Ð°Ñ†Ð¸Ð¸ Ð´Ð»Ñ Ð±Ð»Ð¾ÐºÐ° Ð¿Ð¾ÐºÑƒÐ¿Ð°Ñ‚ÐµÐ»Ñ */
 #bx-soa-properties .bx-soa-section-title-container,
 #bx-soa-properties .bx-soa-editstep {
     display: none !important;
 }
 
-/* Стили для заголовка "Способ получения" - делаем простым текстом */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ° "Ð¡Ð¿Ð¾ÑÐ¾Ð± Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ" - Ð´ÐµÐ»Ð°ÐµÐ¼ Ð¿Ñ€Ð¾ÑÑ‚Ñ‹Ð¼ Ñ‚ÐµÐºÑÑ‚Ð¾Ð¼ */
 #bx-soa-delivery .bx-soa-section-title-container {
 
     background: transparent !important;
@@ -4116,7 +4124,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     display: none !important;
 }
 
-/* Стили для заголовка "Способ оплаты" - делаем простым текстом */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ° "Ð¡Ð¿Ð¾ÑÐ¾Ð± Ð¾Ð¿Ð»Ð°Ñ‚Ñ‹" - Ð´ÐµÐ»Ð°ÐµÐ¼ Ð¿Ñ€Ð¾ÑÑ‚Ñ‹Ð¼ Ñ‚ÐµÐºÑÑ‚Ð¾Ð¼ */
 #bx-soa-paysystem .bx-soa-section-title-container {
     background: transparent !important;
     border: none !important;
@@ -4141,47 +4149,47 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     display: none !important;
 }
 
-/* Скрываем все кнопки редактирования (Назад/Далее) */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ Ð²ÑÐµ ÐºÐ½Ð¾Ð¿ÐºÐ¸ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ (ÐÐ°Ð·Ð°Ð´/Ð”Ð°Ð»ÐµÐµ) */
 .bx-soa-editstep {
     display: none !important;
 }
 
-/* Скрываем контейнеры с кнопками редактирования */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€Ñ‹ Ñ ÐºÐ½Ð¾Ð¿ÐºÐ°Ð¼Ð¸ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ */
 .col-xs-12.col-sm-3.text-right {
     display: none !important;
 }
 
-/* Скрываем кнопки навигации в футере блоков */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÐ¸ Ð½Ð°Ð²Ð¸Ð³Ð°Ñ†Ð¸Ð¸ Ð² Ñ„ÑƒÑ‚ÐµÑ€Ðµ Ð±Ð»Ð¾ÐºÐ¾Ð² */
 .bx-soa-more .btn,
 .bx-soa-more .pull-left,
 .bx-soa-more .pull-right {
     display: none !important;
 }
 
-/* Скрываем весь футер с кнопками навигации */
+/* Ð¡ÐºÑ€Ñ‹Ð²Ð°ÐµÐ¼ Ð²ÐµÑÑŒ Ñ„ÑƒÑ‚ÐµÑ€ Ñ ÐºÐ½Ð¾Ð¿ÐºÐ°Ð¼Ð¸ Ð½Ð°Ð²Ð¸Ð³Ð°Ñ†Ð¸Ð¸ */
 .bx-soa-more {
 	display: none !important;
 }
 
-/* Стили для блоков способ получения и способ оплаты */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð±Ð»Ð¾ÐºÐ¾Ð² ÑÐ¿Ð¾ÑÐ¾Ð± Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ð¸ ÑÐ¿Ð¾ÑÐ¾Ð± Ð¾Ð¿Ð»Ð°Ñ‚Ñ‹ */
 #bx-soa-delivery {
-	background-color: #f5f5f7 !important; /* Фиолетовый фон */
-	margin-bottom: 100px !important; /* Промежуток 100px снизу */
-	padding: 0px 46px 0px 46px !important; /* Внутренние отступы */
-	border-radius: 8px !important; /* Скругленные углы */
+	background-color: #f5f5f7 !important; /* Ð¤Ð¸Ð¾Ð»ÐµÑ‚Ð¾Ð²Ñ‹Ð¹ Ñ„Ð¾Ð½ */
+	margin-bottom: 100px !important; /* ÐŸÑ€Ð¾Ð¼ÐµÐ¶ÑƒÑ‚Ð¾Ðº 100px ÑÐ½Ð¸Ð·Ñƒ */
+	padding: 0px 46px 0px 46px !important; /* Ð’Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ðµ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ñ‹ */
+	border-radius: 8px !important; /* Ð¡ÐºÑ€ÑƒÐ³Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑƒÐ³Ð»Ñ‹ */
 }
 
 #bx-soa-paysystem {
-	background-color: #f5f5f7 !important; /* Фиолетовый фон */
-	padding: 20px !important; /* Внутренние отступы */
-	border-radius: 8px !important; /* Скругленные углы */
+	background-color: #f5f5f7 !important; /* Ð¤Ð¸Ð¾Ð»ÐµÑ‚Ð¾Ð²Ñ‹Ð¹ Ñ„Ð¾Ð½ */
+	padding: 20px !important; /* Ð’Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ðµ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ñ‹ */
+	border-radius: 8px !important; /* Ð¡ÐºÑ€ÑƒÐ³Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑƒÐ³Ð»Ñ‹ */
 }
 
 #bx-soa-total .bx-soa-legals-agreement {
-    margin-top: 15px; /* Отступ сверху от кнопки */
+    margin-top: 15px; /* ÐžÑ‚ÑÑ‚ÑƒÐ¿ ÑÐ²ÐµÑ€Ñ…Ñƒ Ð¾Ñ‚ ÐºÐ½Ð¾Ð¿ÐºÐ¸ */
     font-size: 10px;
     line-height: 1.4;
-    text-align: center; /* Выравнивание по центру */
+    text-align: center; /* Ð’Ñ‹Ñ€Ð°Ð²Ð½Ð¸Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾ Ñ†ÐµÐ½Ñ‚Ñ€Ñƒ */
     color: #555;
 }
 
@@ -4212,7 +4220,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     padding-bottom: 0px !important;
 }
 
-/* Стили для заголовка заказа */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ° Ð·Ð°ÐºÐ°Ð·Ð° */
 .order-title-container {
     margin-bottom: 50px;
     padding: 0 0px;
@@ -4290,7 +4298,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.0);
   }
 
-/* Новые стили для карточек способов оплаты - только для блока оплаты */
+/* ÐÐ¾Ð²Ñ‹Ðµ ÑÑ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ ÐºÐ°Ñ€Ñ‚Ð¾Ñ‡ÐµÐº ÑÐ¿Ð¾ÑÐ¾Ð±Ð¾Ð² Ð¾Ð¿Ð»Ð°Ñ‚Ñ‹ - Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð´Ð»Ñ Ð±Ð»Ð¾ÐºÐ° Ð¾Ð¿Ð»Ð°Ñ‚Ñ‹ */
 #bx-soa-paysystem .payment-card {
     display: flex;
     flex-direction: column;
@@ -4375,7 +4383,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     color: #555;
 }
 
-/* Адаптивность для мобильных устройств - только для блока оплаты */
+/* ÐÐ´Ð°Ð¿Ñ‚Ð¸Ð²Ð½Ð¾ÑÑ‚ÑŒ Ð´Ð»Ñ Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ñ… ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð² - Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð´Ð»Ñ Ð±Ð»Ð¾ÐºÐ° Ð¾Ð¿Ð»Ð°Ñ‚Ñ‹ */
 @media (max-width: 768px) {
     #bx-soa-paysystem .payment-card {
         flex-direction: column;
@@ -4401,7 +4409,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     }
 }
 
-/* Двухколоночная структура для способов оплаты - используем существующую Bootstrap структуру */
+/* Ð”Ð²ÑƒÑ…ÐºÐ¾Ð»Ð¾Ð½Ð¾Ñ‡Ð½Ð°Ñ ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° Ð´Ð»Ñ ÑÐ¿Ð¾ÑÐ¾Ð±Ð¾Ð² Ð¾Ð¿Ð»Ð°Ñ‚Ñ‹ - Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÑŽÑ‰ÑƒÑŽ Bootstrap ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ñƒ */
 #bx-soa-paysystem .bx-soa-pp {
     display: flex;
     gap: 10px;
@@ -4418,7 +4426,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     max-width: 40%;
 }
 
-/* Информационная панель */
+/* Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¾Ð½Ð½Ð°Ñ Ð¿Ð°Ð½ÐµÐ»ÑŒ */
 #bx-soa-paysystem .payment-info-panel {
     background: #f8f9fa;
     border-radius: 8px;
@@ -4462,7 +4470,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 #bx-soa-paysystem .payment-features li:before {
-    content: "✓";
+    content: "âœ“";
     position: absolute;
     left: 0;
     color: #285b4d;
@@ -4473,7 +4481,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     border-bottom: none;
 }
 
-/* Стили для контейнера способов оплаты - только для блока оплаты */
+/* Ð¡Ñ‚Ð¸Ð»Ð¸ Ð´Ð»Ñ ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€Ð° ÑÐ¿Ð¾ÑÐ¾Ð±Ð¾Ð² Ð¾Ð¿Ð»Ð°Ñ‚Ñ‹ - Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð´Ð»Ñ Ð±Ð»Ð¾ÐºÐ° Ð¾Ð¿Ð»Ð°Ñ‚Ñ‹ */
 #bx-soa-paysystem .bx-soa-pp-item-container {
     display: flex;
     flex-wrap: wrap;
@@ -4488,7 +4496,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     min-width: 200px;
 }
 
-/* Адаптивность для способов оплаты */
+/* ÐÐ´Ð°Ð¿Ñ‚Ð¸Ð²Ð½Ð¾ÑÑ‚ÑŒ Ð´Ð»Ñ ÑÐ¿Ð¾ÑÐ¾Ð±Ð¾Ð² Ð¾Ð¿Ð»Ð°Ñ‚Ñ‹ */
 @media (max-width: 1200px) {
     #bx-soa-paysystem .bx-soa-pp-item-container .payment-card {
         flex: 0 0 calc(50% - 7.5px);
@@ -4496,7 +4504,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 }
 
 @media (max-width: 768px) {
-    /* Двухколоночная структура на мобильных */
+    /* Ð”Ð²ÑƒÑ…ÐºÐ¾Ð»Ð¾Ð½Ð¾Ñ‡Ð½Ð°Ñ ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° Ð½Ð° Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ñ… */
     #bx-soa-paysystem .bx-soa-pp {
         flex-direction: column;
         gap: 20px;
