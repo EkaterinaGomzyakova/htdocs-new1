@@ -7916,7 +7916,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 if (total.DISCOUNT_PERCENT_FORMATED && parseFloat(total.DISCOUNT_PERCENT_FORMATED) > 0)
                     discText += total.DISCOUNT_PERCENT_FORMATED;
 
-                this.totalInfoBlockNode.appendChild(this.createTotalUnit(discText + ':', total.DISCOUNT_PRICE_FORMATED, { highlighted: true }));
+                this.totalInfoBlockNode.appendChild(this.createTotalUnit(discText, total.DISCOUNT_PRICE_FORMATED, { highlighted: true }));
             }
 
             if (this.options.showPayedFromInnerBudget) {
@@ -7924,7 +7924,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
                 this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_PAYED'), total.PAYED_FROM_ACCOUNT_FORMATED));
                 this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_LEFT_TO_PAY'), total.ORDER_TOTAL_LEFT_TO_PAY_FORMATED, { total: true }));
             } else {
-                this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_IT'), total.ORDER_TOTAL_PRICE_FORMATED + ' <span style="color: #999; text-decoration: line-through; font-size: 14px; margin-left: 10px;">' + (total.PRICE_WITHOUT_DISCOUNT || '2 500 ₽') + '</span>', { total: true }));
+                this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_IT'), total.ORDER_TOTAL_PRICE_FORMATED + ' <span style="color: #999; text-decoration: line-through; font-size: 14px; margin-left: 2px;">' + (total.PRICE_WITHOUT_DISCOUNT || '2 500 ₽') + '</span>', { total: true }));
             }
 
             if (parseFloat(total.PAY_SYSTEM_PRICE) >= 0 && this.result.DELIVERY.length) {
