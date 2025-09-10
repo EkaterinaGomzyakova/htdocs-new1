@@ -62,10 +62,69 @@ $APPLICATION->IncludeComponent(
 	?>
 </div>
 
-<div class="super_simple_menu">
+<div class="maxwidth-theme">
+    <div class="feature-blocks-container">
+        <!-- Блок 1: Регистрация и персональные функции -->
+        <div class="feature-block feature-block-large">
+            <div class="feature-header">
+                <div class="feature-icon">
+                    <img src="<?=SITE_TEMPLATE_PATH?>/images/1_icon.svg" alt="Подарок">
+                </div>
+                <div class="feature-text">
+                    <a href="/personal/" class="feature-link">Зарегистрируйтесь</a> и получите доступ к персональным функциям
+                </div>
+            </div>
+            <div class="feature-items">
+                <div class="feature-item">
+                    <img src="<?=SITE_TEMPLATE_PATH?>/images/Data.svg" alt="Баллы">
+                    <div class="feature-item-text">Бьюти-баллы за покупки</div>
+                </div>
+                <div class="feature-item">
+                    <img src="<?=SITE_TEMPLATE_PATH?>/images/Tag.svg" alt="Реферальная программа">
+                    <div class="feature-item-text">Реферальная программа</div>
+                </div>
+                <div class="feature-item">
+                    <img src="<?=SITE_TEMPLATE_PATH?>/images/Puzzle.svg" alt="Промокоды">
+                    <div class="feature-item-text">Индивидуальные промокоды и скидки</div>
+                </div>
+                <div class="feature-item">
+                    <img src="<?=SITE_TEMPLATE_PATH?>/images/Bell_Notification.svg" alt="Уведомления">
+                    <div class="feature-item-text">Отслеживание статуса заказов</div>
+                </div>
+            </div>
+        </div>
 
-    <div class="simple_menu">
-        <img src="<?=SITE_TEMPLATE_PATH?>/images/my-new-ban.svg">
+        <!-- Блок 2: Тест -->
+        <div class="feature-block feature-block-medium">
+            <div class="feature-header">
+                <div class="feature-icon">
+                    <img src="<?=SITE_TEMPLATE_PATH?>/images/Rectangle 1904.svg" alt="Косметика">
+                </div>
+                <div class="feature-text">
+                    Пройдите тест, узнайте, что вам подходит и соберите свой уникальный набор
+                </div>
+            </div>
+            <div class="feature-action">
+                <a href="/test/" class="feature-button">Пройти тест</a>
+            </div>
+        </div>
+
+        <!-- Блок 3: Telegram -->
+        <div class="feature-block feature-block-telegram">
+            <div class="feature-header">
+                <div class="feature-icon">
+                    <img src="<?=SITE_TEMPLATE_PATH?>/images/Rectangle 1910.svg" alt="Косметика">
+                </div>
+                <div class="feature-text">
+                    Подпишитесь на наш <a href="https://t.me/clanbeauty" target="_blank" class="feature-link">Telegram-канал</a> и узнавайте обновления быстрее всех
+                </div>
+            </div>
+            <div class="feature-action">
+                <a href="https://t.me/clanbeauty" target="_blank" class="feature-telegram-icon">
+                    <img src="<?=SITE_TEMPLATE_PATH?>/images/Frame 76.svg" alt="Telegram">
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 <!-- Блок с кнопками-картинками "Бренды" и "Sale" -->
