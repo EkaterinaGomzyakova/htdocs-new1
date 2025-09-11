@@ -27347,3 +27347,8 @@ body.detail_page .menu-row.middle-block {
     }
 }
 
+
+
+.wrapper-form-comment .btn.btn-default:hover {
+    color: #fff !important;
+}

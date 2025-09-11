@@ -554,9 +554,10 @@ button.button, input.button, .button, #header ul.menu.full.opened li:not(.search
 }
 
 .btn.btn-default:hover {
-    background-color: #fff7ec;
+    background-color: #5f806a;
     border-color: #285b4d;
     color: #285b4d !important;
+    text-decoration-color: #fff;
 }
 
 .btn.btn-default:active, .btn.btn-default:focus {
