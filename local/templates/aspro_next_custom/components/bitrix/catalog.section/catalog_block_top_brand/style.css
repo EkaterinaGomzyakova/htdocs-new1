@@ -489,11 +489,11 @@ span.price_measure {
 
 /* Эффект при наведении курсора (остается без изменений) */
 .top-brand-button:hover {
-    background-color: #5f806a !important;
+    background-color: #fff !important;
     color: #fff !important;
-    border-color: #5f806a00 !important;
+    border-color: #fff !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.0);
+    box-shadow: 0 4px 10px rgb(255 255 255 / 0%);
 }
 /* Правая часть с товарами */
 .top-brand-products {

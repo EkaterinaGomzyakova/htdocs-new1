@@ -488,11 +488,11 @@ span.price_measure {
 
 /* Эффект при наведении (остается без изменений) */
 .discounts-block-button:hover {
-    background-color: #5f806a !important;
-    color: #285b4d !important;
-    border-color: #5f806a00 !important;
+    background-color: #fff !important;
+    color: #285B4D !important;
+    border-color: #fff !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.0);
+    box-shadow: 0 4px 10px rgb(255 255 255 / 0%);
 }
 /* Правая часть с товарами */
 .discounts-products {
