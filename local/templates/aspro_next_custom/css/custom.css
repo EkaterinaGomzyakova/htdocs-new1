@@ -601,6 +601,10 @@
 
 .reviews-section {
     font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 20px;
 }
 
 .reviews-section .reviews-count {
@@ -614,8 +618,170 @@
     border-radius: 8px;
     text-align: center;
     display: inline-block;
-    margin-top: -8px;
+    margin-top: 0;
     font-weight: initial;
+}
+
+/* Фиксированное позиционирование цены и отзывов для горизонтального листания */
+.catalog_item .item_info {
+    display: flex;
+    flex-direction: column;
+    height: 200px; /* Фиксированная высота для всех карточек */
+    position: relative;
+}
+
+.catalog_item .item-title {
+    flex: 1;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.catalog_item .item-title a {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+}
+
+.catalog_item .item-title p,
+.catalog_item .item-title span {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Ограничиваем название 3 строками */
+    line-clamp: 3; /* Стандартное свойство для совместимости */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+    margin: 0;
+}
+
+/* Выравнивание отзывов по одной линии во всех блоках каталога */
+.item_info_main_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px; /* Фиксированная высота для строки с ценой и отзывами */
+    position: absolute;
+    bottom: 80px; /* Позиционируем выше информации об остатках */
+    left: 0;
+    right: 0;
+    padding: 0px 10px 0px 0px;
+    box-sizing: border-box;
+}
+
+.item_info_main_row .cost.prices {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+.item_info_main_row .reviews-section {
+    flex-shrink: 0;
+    align-items: center;
+}
+
+/* Фиксированное позиционирование кнопки */
+.catalog_item .footer_button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Скрываем только таймер акции, информацию об остатках оставляем */
+.catalog_item .view_sale_block {
+    display: none !important;
+}
+
+/* Стили для информации об остатках */
+.catalog_item .item-stock-wrapper,
+.catalog_item .item-stock,
+.catalog_item .stock-info,
+.catalog_item .quantity-info {
+    position: absolute;
+    bottom: 50px; /* Позиционируем над кнопкой */
+    left: 0;
+    right: 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 12px;
+    color: #ff6b6b;
+    font-weight: 500;
+    z-index: 10;
+}
+
+/* Стили для текста "остался последний" - убираем рамки */
+.catalog_item .item-stock-wrapper span,
+.catalog_item .item-stock span,
+.catalog_item .stock-info span,
+.catalog_item .quantity-info span {
+    display: block;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0 auto;
+    max-width: none;
+    font-size: 12px;
+    color: #000000;
+    font-weight: 500;
+}
+
+/* Обеспечиваем одинаковую высоту всех карточек товаров */
+.catalog_item_wrapp {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.catalog_item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.catalog_item .inner_wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.catalog_item .image_wrapper_block {
+    flex-shrink: 0;
+    height: 250px; /* Фиксированная высота изображения */
+    overflow: hidden;
+}
+
+.catalog_item .image_wrapper_block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Обеспечиваем одинаковую высоту всех слайдов в swiper */
+.swiper-slide {
+    height: auto;
+    display: flex;
+}
+
+.swiper-slide .catalog_item_wrapp {
+    width: 100%;
+    height: 100%;
+}
+
+/* Фиксированная высота для всех карточек товаров в слайдере */
+.a-products-slider .swiper-slide {
+    height: 400px; /* Общая высота карточки: 250px (изображение) + 200px (информация) - 50px (перекрытие) */
+}
+
+.a-products-slider .swiper-slide .catalog_item_wrapp {
+    height: 100%;
 }
 
 .mobile-menu-footer {
