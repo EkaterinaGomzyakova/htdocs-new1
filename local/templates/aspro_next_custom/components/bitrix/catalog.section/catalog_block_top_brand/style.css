@@ -484,7 +484,7 @@ span.price_measure {
     transition: all 0.25s ease-out;
 
     /* <<-- ВОТ ИЗМЕНЕНИЕ -->> */
-    margin-top: 400px !important; /* Вместо "auto", задаем конкретный отступ сверху */
+    margin-top: auto !important; /* Вместо "auto", задаем конкретный отступ сверху */
 }
 
 /* Эффект при наведении курсора (остается без изменений) */

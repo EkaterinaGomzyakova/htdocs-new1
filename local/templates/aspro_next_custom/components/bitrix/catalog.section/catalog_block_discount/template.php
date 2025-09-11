@@ -124,7 +124,7 @@
                                         <!-- СТРОКА 1: Цена + Экономия + Отзывы -->
                                         <div class="item_info_main_row">
                                             
-                                            <!-- Левая часть: Цена и стикеры экономии -->
+                                            <!-- Цена и стикеры экономии + Отзывы в одной строке -->
                                             <div class="cost prices clearfix">
                                                 <? if ($arItem["OFFERS"]) { ?>
                                                     <? \Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id, array(), 'N'); ?>
@@ -145,14 +145,14 @@
                                                         \Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id, 'N');
                                                     } ?>
                                                 <? } ?>
+                                                
+                                                <!-- Отзывы внутри блока цен -->
+                                                <? if ($arItem['REVIEWS_COUNT'] > 0) { ?>
+                                                    <div class="reviews-section">
+                                                        <span><?= GetMessage("CATALOG_REVIEWS_COUNT"); ?>:</span><span class="reviews-count"><?= $arItem['REVIEWS_COUNT'] ?></span>
+                                                    </div>
+                                                <? } ?>
                                             </div>
-
-                                            <!-- Правая часть: Отзывы -->
-                                            <? if ($arItem['REVIEWS_COUNT'] > 0) { ?>
-                                                <div class="reviews-section">
-                                                   
-                                                </div>
-                                            <? } ?>
                                         </div>
 
                                         <!-- СТРОКА 2: Таймер акции -->
