@@ -4797,6 +4797,32 @@ div#basket-root div.row {
   .swiper-slide{
 	margin-right: 12px !important;
   }
+  .basket-main-header {
+	display: flex;
+	align-items: end;   /* Выравнивает все элементы по центру */
+	justify-content: space-between; /* Распределяет элементы по ширине */
+	margin-bottom: 25px;   /* Отступ снизу до списка товаров */
+	padding-bottom: 15px;  /* Отступ до нижней границы */
+	border-bottom: 0px solid #f2f2f2; /* Разделительная линия */
+  }
+  .basket-main-header__count {
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-weight: 400;      /* Обычное начертание */
+	color: #6c757d;       /* Серый цвет текста */
+	margin-right: auto;    /* Прижимает счетчик к левой части, а кнопку к правой */
+  }
+  basket-clear-all-btn{
+	margin-bottom: 10px;
+   /* Прижимает счетчик к левой части, а кнопку к правой */
+  }
+  .basket-main-header__title {
+	font-size: 60px;
+	font-weight: 600;      /* Полужирное начертание */
+	line-height: 1.2;
+	margin: 0 15px 0 0;  /* Убираем стандартные отступы и добавляем справа */
+	color: #285b4d;
+  }
 }
 
 
@@ -4806,6 +4832,33 @@ div#basket-root div.row {
 
 /* === МОБИЛЬНАЯ ВЕРСИЯ: ИЗМЕНЕНИЕ ПОРЯДКА БЛОКОВ === */
 @media (max-width: 768px) {
+	.basket-main-header__title {
+		font-size: 60px;
+		font-weight: 600;      /* Полужирное начертание */
+		line-height: 1.2;
+		margin: 0 15px 0 0;  /* Убираем стандартные отступы и добавляем справа */
+		color: #285b4d;
+	  }
+	.basket-clear-all-btn{
+		margin-bottom: 10px;
+	   /* Прижимает счетчик к левой части, а кнопку к правой */
+	  }
+	
+	.basket-main-header__count {
+		margin-bottom: 10px;
+		font-size: 16px;
+		font-weight: 400;      /* Обычное начертание */
+		color: #6c757d;       /* Серый цвет текста */
+		margin-right: auto;    /* Прижимает счетчик к левой части, а кнопку к правой */
+	  }
+	.basket-main-header {
+		display: flex;
+		align-items: end;   /* Выравнивает все элементы по центру */
+		justify-content: space-between; /* Распределяет элементы по ширине */
+		margin-bottom: 25px;   /* Отступ снизу до списка товаров */
+		padding-bottom: 15px;  /* Отступ до нижней границы */
+		border-bottom: 0px solid #f2f2f2; /* Разделительная линия */
+	  }
   /* Делаем .row flex-контейнером с вертикальным направлением */
   .row {
     flex-direction: column !important;
