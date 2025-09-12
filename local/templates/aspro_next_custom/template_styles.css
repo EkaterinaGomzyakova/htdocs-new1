@@ -27345,6 +27345,22 @@ body.detail_page .menu-row.middle-block {
         -webkit-line-clamp: 2 !important;
         line-clamp: 2 !important;
     }
+    .see-all-link{
+        margin-right: 60px;
+    
+    }
+    .custom-products-block .title-container a.see-all-link {
+    
+        /* === Возвращаем ваши стили === */
+        color: #285B4D;              /* <<-- Ваш зеленый цвет */
+        font-size: 17px;             /* <<-- Ваш размер шрифта */
+        text-decoration: underline;  /* <<-- Возвращаем подчеркивание */
+        
+        /* Дополнительные стили для аккуратности */
+        font-family: "Open Sans", Arial, sans-serif;
+        margin-left: 0px; /* Добавляем отступ от заголовка */
+    }
+    
 }
 
 
@@ -27352,3 +27368,5 @@ body.detail_page .menu-row.middle-block {
 .wrapper-form-comment .btn.btn-default:hover {
     color: #fff !important;
 }
+
+

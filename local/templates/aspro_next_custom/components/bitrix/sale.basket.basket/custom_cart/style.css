@@ -624,7 +624,7 @@
 	}
 
 	.basket-items-list-item-descriptions-inner {
-		flex-direction: column;
+		flex-direction: row;
 	}
 
 	.basket-items-list-wrapper-compact .basket-item-block-image {
@@ -948,7 +948,7 @@
 	flex-direction: column;
 	gap: 12px;
 	align-items: flex-start;
-	justify-content: flex-end;
+	justify-content: flex-start;
 }
 
 /* Контейнер для зачёркнутой и текущей цены в одной строке */
@@ -1706,7 +1706,6 @@ h2.basket-item-info-name {
 
 	.basket-items-list-table tr.basket-items-list-item-container:first-child,
 	.basket-items-list-table tbody tr.basket-items-list-item-container:first-child {
-		border: none;
 		padding-bottom: 0px;
 	}
 
@@ -4706,9 +4705,188 @@ div#basket-root div.row {
 	margin-bottom: 130px;
 }
 
+/* === МОБИЛЬНАЯ ВЕРСИЯ: ИЗМЕНЕНИЕ ПОРЯДКА БЛОКОВ === */
+@media (max-width: 768px) {
+  /* Делаем .row flex-контейнером с вертикальным направлением */
+  .row {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Блок с товарами (col-xs-9) - первый по порядку */
+  .col-xs-9 {
+    order: 1 !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  /* Блок с ценой и промокодом (col-xs-3) - второй по порядку */
+  .col-xs-3 {
+    order: 2 !important;
+    width: 100% !important;
+    padding-top: 20px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
 
+/* === ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ === */
+@media (max-width: 480px) {
+  /* Уменьшаем отступы для очень маленьких экранов */
+  .col-xs-3 {
+    padding-top: 15px !important;
+  }
+  
+  /* Убираем лишние отступы у блока с товарами */
+  .col-xs-9 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
 
+/* === ИСПРАВЛЕНИЕ ВЕРТИКАЛЬНОГО ТЕКСТА НАЗВАНИЯ ТОВАРА === */
+@media (max-width: 768px) {
+  /* Исправляем размер шрифта для мобильных устройств */
+  .basket-item-info-name,
+  .basket-item-info-name-link {
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+    max-width: 100% !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+  .basket-item-block-image {
+	flex-shrink: 0;           /* Запрещаем контейнеру сжиматься */
+	flex-grow: 0;             /* Запрещаем расти */
+	width: 126px;             /* Задаем фиксированную ширину */
+	height: 126px;            /* Фиксированная высота */
+	min-width: 126px;         /* Минимальная ширина - не даем сжиматься */
+	margin-right: 12px;       /* Отступ справа до текста с описанием товара */
+	
+	/* Стилизация фона */
+	background-color: #fff5e9;/* Светло-бежевый фон */
+	border-radius: 16px;      /* Скругление углов */
+	
+	/* Центрируем изображение */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+  }
+  .basket-item-image {
+	width: 105px;           /* Фиксированная ширина изображения */
+	height: 105px;          /* Фиксированная высота изображения */
+	object-fit: contain;    /* Сохраняет пропорции изображения, вписывая его в блок */
+  }
+  .basket-item-block-info {
+	flex-grow: 1;             /* Занимает оставшееся место */
+	flex-shrink: 1;           /* Может сжиматься */
+	min-width: 0;             /* Позволяет сжиматься меньше естественной ширины контента */
+	max-width: 100% ; /* Максимальная ширина = полная ширина минус ширина фото и отступ */
+  }
+  
+}
 
+/* === ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ - НАЗВАНИЕ ТОВАРА === */
+@media (max-width: 480px) {
+  .basket-item-info-name,
+  .basket-item-info-name-link {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+    padding-right: 10px !important;
+  }
+  .basket-item-block-image {
+	flex-shrink: 0;           /* Запрещаем контейнеру сжиматься */
+	flex-grow: 0;             /* Запрещаем расти */
+	width: 126px;             /* Задаем фиксированную ширину */
+	height: 126px;            /* Фиксированная высота */
+	min-width: 126px;         /* Минимальная ширина - не даем сжиматься */
+	margin-right: 12px;       /* Отступ справа до текста с описанием товара */
+	
+	/* Стилизация фона */
+	background-color: #fff5e9;/* Светло-бежевый фон */
+	border-radius: 16px;      /* Скругление углов */
+	
+	/* Центрируем изображение */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+  }
+  .basket-item-image {
+	width: 105px;           /* Фиксированная ширина изображения */
+	height: 105px;          /* Фиксированная высота изображения */
+	object-fit: contain;    /* Сохраняет пропорции изображения, вписывая его в блок */
+  }
+  .basket-item-block-info {
+	flex-grow: 1;             /* Занимает оставшееся место */
+	flex-shrink: 1;           /* Может сжиматься */
+	min-width: 0;             /* Позволяет сжиматься меньше естественной ширины контента */
+	max-width: 100% ; /* Максимальная ширина = полная ширина минус ширина фото и отступ */
+  }
+ 
+}
+
+/* === СКРЫТИЕ БЛОКА СВОЙСТВ ТОВАРА НА МОБИЛЬНЫХ УСТРОЙСТВАХ === */
+@media (max-width: 768px) {
+	.basket-item-block-properties {
+	  display: none !important;
+	}
+	.basket-item-counter-price-container {
+	  display: flex;
+	  align-items: flex-end;
+	  gap: 20px;
+	  margin: 15px 0 0 0;
+	  margin-top: 0 !important;
+  }
+  .basket-item-block-info,
+  .basket-items-list-item-descriptions-inner,
+  .basket-items-list-item-descriptions {
+	height: 180px;
+	display: flex;       /* Включаем Flexbox, чтобы картинка и текст встали в ряд */
+	align-items: flex-start; /* Выравниваем по верху */
+	flex-grow: 1;        /* Заставляем этот блок занять всё доступное место в строке */
+	width: 100%;         /* Задаем полную ширину */
+	max-width: 100%;     /* Не даем выходить за пределы */
+  }
+  .basket-item-counter-price-container:not(:has(.basket-item-price-discount)) {
+	align-items: flex-start;
+	margin-top: auto;
+	padding-top: 0px;
+}
+}
+  
+  /* === ДОПОЛНИТЕЛЬНОЕ СКРЫТИЕ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ === */
+  @media (max-width: 480px) {
+	.basket-item-block-properties {
+	  display: none !important;
+	}
+	.basket-item-counter-price-container {
+	  display: flex;
+	  align-items: flex-end;
+	  gap: 20px;
+	  margin: 15px 0 0 0;
+	  margin-top: 0 !important;
+  }
+  .basket-item-block-info,
+  .basket-items-list-item-descriptions-inner,
+  .basket-items-list-item-descriptions {
+	height: 180px;
+	display: flex;       /* Включаем Flexbox, чтобы картинка и текст встали в ряд */
+	align-items: flex-start; /* Выравниваем по верху */
+	flex-grow: 1;        /* Заставляем этот блок занять всё доступное место в строке */
+	width: 100%;         /* Задаем полную ширину */
+	max-width: 100%;     /* Не даем выходить за пределы */
+  }
+  .basket-item-counter-price-container:not(:has(.basket-item-price-discount)) {
+	align-items: flex-start;
+	margin-top: auto;
+	padding-top: 0px;
+}
+
+}  
 
 
 

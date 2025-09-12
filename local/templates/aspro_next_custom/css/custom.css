@@ -1391,7 +1391,10 @@ body {
     line-height: 1 !important;
 }
 
-/* === ПЕРЕОПРЕДЕЛЕНИЕ ДЛЯ КАРТОЧЕК ТОВАРОВ В КОРЗИНЕ === */
+
+
+/* Дополнительно для мобильных устройств */
+@media (max-width: 768px) {/* === ПЕРЕОПРЕДЕЛЕНИЕ ДЛЯ КАРТОЧЕК ТОВАРОВ В КОРЗИНЕ === */
 /* Убираем все ограничения на текст в карточках товаров корзины */
 .custom-products-block .catalog_item_wrapp .catalog_item .item_info .item-title,
 .custom-products-block .catalog_item_wrapp .catalog_item .item_info .dark_link,
@@ -1406,9 +1409,6 @@ body {
     line-clamp: unset !important;
     -webkit-box-orient: unset !important;
 }
-
-/* Дополнительно для мобильных устройств */
-@media (max-width: 768px) {
     .custom-products-block .catalog_item_wrapp .catalog_item .item_info .item-title,
     .custom-products-block .catalog_item_wrapp .catalog_item .item_info .dark_link,
     .custom-products-block .catalog_item_wrapp .catalog_item .item_info .item-title a,
