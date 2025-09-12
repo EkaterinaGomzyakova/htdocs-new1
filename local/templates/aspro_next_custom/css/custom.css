@@ -1391,6 +1391,55 @@ body {
     line-height: 1 !important;
 }
 
+/* === ПЕРЕОПРЕДЕЛЕНИЕ ДЛЯ КАРТОЧЕК ТОВАРОВ В КОРЗИНЕ === */
+/* Убираем все ограничения на текст в карточках товаров корзины */
+.custom-products-block .catalog_item_wrapp .catalog_item .item_info .item-title,
+.custom-products-block .catalog_item_wrapp .catalog_item .item_info .dark_link,
+.custom-products-block .catalog_item_wrapp .catalog_item .item_info .item-title a,
+.custom-products-block .catalog_item_wrapp .catalog_item .item_info .dark_link a {
+    max-height: none !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal !important;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+}
+
+/* Дополнительно для мобильных устройств */
+@media (max-width: 768px) {
+    .custom-products-block .catalog_item_wrapp .catalog_item .item_info .item-title,
+    .custom-products-block .catalog_item_wrapp .catalog_item .item_info .dark_link,
+    .custom-products-block .catalog_item_wrapp .catalog_item .item_info .item-title a,
+    .custom-products-block .catalog_item_wrapp .catalog_item .item_info .dark_link a {
+        max-height: none !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+        white-space: normal !important;
+        display: block !important;
+        -webkit-line-clamp: unset !important;
+        line-clamp: unset !important;
+        -webkit-box-orient: unset !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .custom-products-block .catalog_item_wrapp .catalog_item .item_info .item-title,
+    .custom-products-block .catalog_item_wrapp .catalog_item .item_info .dark_link,
+    .custom-products-block .catalog_item_wrapp .catalog_item .item_info .item-title a,
+    .custom-products-block .catalog_item_wrapp .catalog_item .item_info .dark_link a {
+        max-height: none !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+        white-space: normal !important;
+        display: block !important;
+        -webkit-line-clamp: unset !important;
+        line-clamp: unset !important;
+        -webkit-box-orient: unset !important;
+    }
+}
+
 
 
 

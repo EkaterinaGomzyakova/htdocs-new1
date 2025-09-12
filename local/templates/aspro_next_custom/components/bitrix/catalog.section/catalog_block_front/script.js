@@ -35,8 +35,8 @@
                     // ИЗМЕНЕНИЕ 1: Говорим Swiper брать ширину из CSS
                     slidesPerView: 'auto', 
                     
-                    // ИЗМЕНЕНИЕ 2: Устанавливаем отступ между слайдами
-                    spaceBetween: 30,
+                    // ИЗМЕНЕНИЕ 2: Устанавливаем отступ между слайдами (убираем, так как используем CSS margin)
+                    spaceBetween: 0,
 
                     navigation: {
                         nextEl: nextEl,

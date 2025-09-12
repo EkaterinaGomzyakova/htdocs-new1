@@ -4145,12 +4145,567 @@ div#basket-root div.row {
   .basket-recommendations-container .catalog-section-title {
     font-size: 20px;
   }
+ 
+  .custom-products-block .catalog_item_wrapp .image_wrapper_block {
+    width: 171px !important;
+    height: 171px !important;
+    padding: 17px !important;
+  }
+  /* === МОБИЛЬНЫЕ СТИЛИ ДЛЯ КАРТОЧЕК ТОВАРОВ В СЛАЙДЕРАХ КОРЗИНЫ === */
+  
+  /* ОБЩЕЕ ПРАВИЛО: Убираем все ограничения на текст в карточках товаров */
+  .custom-products-block .catalog_item_wrapp * {
+    text-overflow: unset !important;
+    -o-text-overflow: unset !important;
+    -ms-text-overflow: unset !important;
+  }
+  
+  /* НАЗВАНИЕ ТОВАРА - показываем полностью без сокращений */
+  .custom-products-block .catalog_item_wrapp .item-title,
+  .custom-products-block .catalog_item_wrapp .dark_link,
+  .custom-products-block .catalog_item_wrapp .item-title a,
+  .custom-products-block .catalog_item_wrapp .dark_link a {
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal !important;
+    max-height: none !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    display: block !important;
+    -webkit-box-orient: unset !important;
+  }
+  
+  /* ОСНОВНОЕ НАЗВАНИЕ ТОВАРА (тег <p>) - показываем полностью */
+  .custom-products-block .catalog_item_wrapp .item-title p,
+  .custom-products-block .catalog_item_wrapp .dark_link p {
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal !important;
+    max-height: none !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    display: block !important;
+    -webkit-box-orient: unset !important;
+    margin-bottom: 5px !important;
+  }
+  
+  /* ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ О ТОВАРЕ (тег <span>) - увеличиваем высоту чтобы текст не обрезался */
+  .custom-products-block .catalog_item_wrapp .item-title span,
+  .custom-products-block .catalog_item_wrapp .dark_link span {
+    max-height: 48px !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    text-overflow: ellipsis !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
+    font-size: 12px !important;
+    color: #666 !important;
+    padding-bottom: 2px !important;
+  }
+  
+  /* БЛОК С ОТЗЫВАМИ - обеспечиваем достаточное место */
+  .custom-products-block .catalog_item_wrapp .item_info .reviews-section {
+    margin-top: 8px !important;
+    margin-bottom: 5px !important;
+    padding: 0 !important;
+    min-height: 20px !important;
+  }
+  
+  /* ДОПОЛНИТЕЛЬНО: Переопределяем специфичные правила из template_styles.css */
+  .custom-products-block .bx_item_set_hor_item .item_info .item-title,
+  .custom-products-block .bx_modal_body .item_wrapp .item-title,
+  .custom-products-block .bx_modal_body .bx_kit_item .item-title {
+    overflow: visible !important;
+    text-overflow: unset !important;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+    white-space: normal !important;
+  }
+  
+  .custom-products-block div.item-title {
+    overflow: visible !important;
+    text-overflow: unset !important;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+  }
+ 
+  /* Адаптируем стрелки навигации слайдера */
+  .custom-products-block .a-slider-btn-prev,
+  .custom-products-block .a-slider-btn-next {
+    top: -25px !important;
+    font-size: 16px !important;
+  }
+  
+  .custom-products-block .a-slider-btn-prev {
+    right: 30px !important;
+  }
+  
+  .custom-products-block .a-slider-btn-next {
+    right: 5px !important;
+  }
+  
+  /* 1. Адаптируем размеры карточек товаров для мобильных устройств - УВЕЛИЧЕННАЯ ВЫСОТА */
+  .custom-products-block .catalog_item_wrapp .catalog_item.item_wrap {
+    width: 171px !important;
+    height: 400px !important;
+    min-height: 400px !important;
+    max-height: 400px !important;
+  }
+  
+  /* 2. Адаптируем размер блока с изображением под новые размеры карточки */
+  .custom-products-block .catalog_item_wrapp .image_wrapper_block {
+    width: 120px !important;
+    height: 120px !important;
+    padding: 15px !important;
+    margin: 0 auto 15px auto !important;
+  }
+  
+  /* 3. Адаптируем блок с информацией под новые размеры - БОЛЬШЕ МЕСТА ДЛЯ ТЕКСТА */
+  .custom-products-block .catalog_item_wrapp .item_info {
+    height: auto !important;
+    min-height: 180px !important;
+    padding: 8px !important;
+  }
+  
+  /* 4. Уменьшаем размеры кнопок и счетчиков */
+  .custom-products-block .catalog_item_wrapp .counter_wrapp {
+    top: 100px !important;
+    right: 10px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .button_block > span {
+    width: 40px !important;
+    height: 40px !important;
+    background-size: 18px !important;
+  }
+  
+  /* Уменьшаем кнопку "В корзине" */
+  .custom-products-block .catalog_item_wrapp .button_block .btn.in-cart {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+    border-radius: 20px !important;
+    min-height: 32px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .button_block .btn.in-cart i {
+    margin-right: 4px !important;
+    font-size: 12px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .counter_block {
+    width: 90px !important;
+    height: 40px !important;
+    padding: 0 10px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .counter_block .minus,
+  .custom-products-block .catalog_item_wrapp .counter_block .plus {
+    font-size: 20px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .counter_block input.text {
+    width: 25px !important;
+    font-size: 14px !important;
+  }
+  
+  /* 5. Адаптируем кнопку избранного */
+  .custom-products-block .catalog_item_wrapp .like_icons {
+    top: 10px !important;
+    right: 10px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .wish_item_button {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .wish_item_button .wish_item i {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  
+  /* 6. Адаптируем слайдер под точные размеры карточек */
+  .custom-products-block .a-products-slider .swiper-slide {
+    width: 183px !important; /* 171px + 12px отступ */
+    flex-shrink: 0 !important;
+  }
+  
+  /* 7. Адаптируем заголовки и цены - ПОКАЗЫВАЕМ ПОЛНОЕ НАЗВАНИЕ */
+  .custom-products-block .catalog_item_wrapp .item-title,
+  .custom-products-block .catalog_item_wrapp .dark_link {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    -webkit-box-orient: unset !important;
+    white-space: normal !important;
+    text-overflow: unset !important;
+    -o-text-overflow: unset !important;
+    -ms-text-overflow: unset !important;
+  }
+  
+  /* ДОПОЛНИТЕЛЬНО: Переопределяем любые возможные ограничения на текст */
+  .custom-products-block .catalog_item_wrapp .item-title a,
+  .custom-products-block .catalog_item_wrapp .dark_link a {
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal !important;
+    max-height: none !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .price_matrix_wrapper {
+    gap: 3px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .price_matrix_wrapper .price {
+    font-size: 14px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .price_matrix_wrapper .price.old_price {
+    font-size: 12px !important;
+  }
+  
+  /* Исправляем позиционирование цен - они должны быть видимы */
+  .custom-products-block .catalog_item_wrapp .item_info .item_info_main_row {
+    margin-top: 8px !important;
+    margin-bottom: 5px !important;
+    padding: 0 !important;
+    min-height: 25px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices {
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .price_matrix_wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+  }
+  
+  /* 8. Скрываем таймер на мобильных (слишком маленький экран) */
+  .custom-products-block .catalog_item_wrapp .view_sale_block {
+    display: none !important;
+  }
+  
+  /* Скрываем желтые стикеры экономии и проценты скидки */
+  .custom-products-block .catalog_item_wrapp .stickers .sticker_sale_text {
+    display: none !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .sale_block {
+    display: none !important;
+  }
+  
+  /* Показываем зачеркнутую цену сверху от основной цены */
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price.discount {
+    display: block !important;
+    order: -1 !important;
+    margin-bottom: 3px !important;
+    font-size: 12px !important;
+    color: #999 !important;
+    text-decoration: none !important;
+    font-weight: 400 !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price.discount strike,
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price.discount del {
+    text-decoration: line-through !important;
+    color: #999 !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price_matrix_wrapper .price.discount {
+    display: block !important;
+    order: -1 !important;
+    margin-bottom: 3px !important;
+    font-size: 12px !important;
+    color: #999 !important;
+    text-decoration: none !important;
+    font-weight: 400 !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price_matrix_wrapper .price.discount strike,
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price_matrix_wrapper .price.discount del {
+    text-decoration: line-through !important;
+    color: #999 !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price_matrix_wrapper .sale_block {
+    display: none !important;
+  }
+  
+  /* 9. Адаптируем стикеры */
+  .custom-products-block .catalog_item_wrapp .stickers [class*="sticker_"] {
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+  }
+
+  .swiper-slide{
+	margin-right: 12px !important;
+  }
+}
+
+/* === ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ (до 480px) === */
+@media (max-width: 480px) {
+  /* Карточки для очень маленьких экранов - УВЕЛИЧЕННАЯ ВЫСОТА */
+  .custom-products-block .catalog_item_wrapp .catalog_item.item_wrap {
+    width: 171px !important;
+    height: 400px !important;
+    min-height: 400px !important;
+    max-height: 400px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .image_wrapper_block {
+    width: 171px !important;
+    height: 171px !important;
+    padding: 17px !important;
+  }
+  
+  /* Компактная информация - БОЛЬШЕ МЕСТА ДЛЯ ТЕКСТА */
+  .custom-products-block .catalog_item_wrapp .item_info {
+    min-height: 160px !important;
+    padding: 5px !important;
+  }
+  
+  /* Еще меньше кнопки */
+  .custom-products-block .catalog_item_wrapp .button_block > span {
+    width: 35px !important;
+    height: 35px !important;
+    background-size: 16px !important;
+  }
+  
+  /* Уменьшаем кнопку "В корзине" для маленьких экранов */
+  .custom-products-block .catalog_item_wrapp .button_block .btn.in-cart {
+    font-size: 11px !important;
+    padding: 6px 10px !important;
+    border-radius: 18px !important;
+    min-height: 28px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .button_block .btn.in-cart i {
+    margin-right: 3px !important;
+    font-size: 11px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .counter_block {
+    width: 80px !important;
+    height: 35px !important;
+    padding: 0 8px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .counter_block .minus,
+  .custom-products-block .catalog_item_wrapp .counter_block .plus {
+    font-size: 18px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .counter_block input.text {
+    width: 20px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Слайды для очень маленьких экранов - сохраняем точные размеры */
+  .custom-products-block .a-products-slider .swiper-slide {
+    width: 183px !important; /* 171px + 12px отступ */
+  }
+  
+  /* НАЗВАНИЕ ТОВАРА для очень маленьких экранов - ПОКАЗЫВАЕМ ПОЛНОЕ НАЗВАНИЕ */
+  .custom-products-block .catalog_item_wrapp .item-title,
+  .custom-products-block .catalog_item_wrapp .dark_link {
+    font-size: 15px !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
+    white-space: normal !important;
+    text-overflow: unset !important;
+    -o-text-overflow: unset !important;
+    -ms-text-overflow: unset !important;
+  }
+  
+  /* ОСНОВНОЕ НАЗВАНИЕ ТОВАРА (тег <p>) для маленьких экранов - показываем полностью */
+  .custom-products-block .catalog_item_wrapp .item-title p,
+  .custom-products-block .catalog_item_wrapp .dark_link p {
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal !important;
+    max-height: none !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    display: block !important;
+    -webkit-box-orient: unset !important;
+    margin-bottom: 3px !important;
+    font-size: 15px !important;
+  }
+  
+  /* ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ О ТОВАРЕ (тег <span>) для маленьких экранов - увеличиваем высоту */
+  .custom-products-block .catalog_item_wrapp .item-title span,
+  .custom-products-block .catalog_item_wrapp .dark_link span {
+    max-height: 44px !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    text-overflow: ellipsis !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+    font-size: 15px !important;
+    color: #666 !important;
+    padding-bottom: 2px !important;
+  }
+  
+  /* БЛОК С ОТЗЫВАМИ для маленьких экранов - обеспечиваем достаточное место */
+  .custom-products-block .catalog_item_wrapp .item_info .reviews-section {
+    margin-top: 6px !important;
+    margin-bottom: 3px !important;
+    padding: 0 !important;
+    min-height: 18px !important;
+  }
+  
+  /* ДОПОЛНИТЕЛЬНО для маленьких экранов: Переопределяем любые возможные ограничения на текст */
+  .custom-products-block .catalog_item_wrapp .item-title a,
+  .custom-products-block .catalog_item_wrapp .dark_link a {
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal !important;
+    max-height: none !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .price_matrix_wrapper .price {
+    font-size: 13px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .price_matrix_wrapper .price.old_price {
+    font-size: 11px !important;
+  }
+  
+  /* Исправляем позиционирование цен для очень маленьких экранов */
+  .custom-products-block .catalog_item_wrapp .item_info .item_info_main_row {
+    margin-top: 6px !important;
+    margin-bottom: 3px !important;
+    padding: 0 !important;
+    min-height: 22px !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices {
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .price_matrix_wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: row-reverse!important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    gap: 5px !important;
+  }
+  
+  /* Скрываем желтые стикеры экономии и проценты скидки для очень маленьких экранов */
+  .custom-products-block .catalog_item_wrapp .stickers .sticker_sale_text {
+    display: none !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .sale_block {
+    display: none !important;
+  }
+  
+  /* Показываем зачеркнутую цену сверху от основной цены для маленьких экранов */
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price.discount {
+    display: block !important;
+    order: -1 !important;
+    margin-bottom: 2px !important;
+    font-size: 11px !important;
+    color: #999 !important;
+    text-decoration: none !important;
+    font-weight: 400 !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price.discount strike,
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price.discount del {
+    text-decoration: line-through !important;
+    color: #999 !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price_matrix_wrapper .price.discount {
+    display: block !important;
+    order: -1 !important;
+    margin-bottom: 2px !important;
+    font-size: 11px !important;
+    color: #999 !important;
+    text-decoration: none !important;
+    font-weight: 400 !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price_matrix_wrapper .price.discount strike,
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price_matrix_wrapper .price.discount del {
+    text-decoration: line-through !important;
+    color: #999 !important;
+  }
+  
+  .custom-products-block .catalog_item_wrapp .item_info .cost.prices .price_matrix_wrapper .sale_block {
+    display: none !important;
+  }
+  
+  /* Еще меньше стикеры */
+  .custom-products-block .catalog_item_wrapp .stickers [class*="sticker_"] {
+    font-size: 9px !important;
+    padding: 2px 6px !important;
+  }
+
+  .swiper-slide{
+	margin-right: 12px !important;
+  }
 }
 
 
 .bx-sbb-empty-cart-container{
 	margin-bottom: 130px;
 }
+
 
 
 
