@@ -280,6 +280,7 @@ span.price_measure {
     max-height: none !important;     /* <<-- Убираем ограничение по максимальной высоте */
     overflow: visible !important;    /* <<-- "Выключаем ножницы", чтобы текст был виден */
     -webkit-line-clamp: unset !important; /* Убираем возможное ограничение по числу строк */
+    line-clamp: unset !important; /* Стандартное свойство для совместимости */
 }
 
 /* --- [ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ] Принудительное удаление отступа у цены --- */
@@ -421,4 +422,22 @@ span.price_measure {
 .catalog_item_wrapp .item_info_main_row .cost.prices {
     position: relative; /* Включаем возможность сдвига */
     top: 4px;           /* <<-- Сдвигаем его вниз на 2 пикселя */
+}
+
+/* === МОБИЛЬНЫЕ СТИЛИ: УБИРАЕМ ОТСТУПЫ МЕЖДУ СЛАЙДАМИ === */
+@media (max-width: 768px) {
+    .a-products-slider .swiper-slide {
+        margin-right: 0 !important;
+    }
+    
+    /* Переопределяем spaceBetween для мобильных устройств через CSS переменную */
+    .a-products-slider {
+        --swiper-navigation-size: 0px;
+    }
+}
+
+@media (max-width: 480px) {
+    .a-products-slider .swiper-slide {
+        margin-right: 0 !important;
+    }
 }

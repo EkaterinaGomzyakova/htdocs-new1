@@ -27358,7 +27358,7 @@ body.detail_page .menu-row.middle-block {
         
         /* Дополнительные стили для аккуратности */
         font-family: "Open Sans", Arial, sans-serif;
-        margin-left: 0px; /* Добавляем отступ от заголовка */
+        margin-left: 0; /* Добавляем отступ от заголовка */
     }
     
 }

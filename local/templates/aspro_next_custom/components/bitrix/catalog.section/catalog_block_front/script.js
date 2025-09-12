@@ -31,19 +31,32 @@
                 // Проверяем, не висит ли на элементе уже созданный Swiper
                 if (sliderEl.swiper) return;
 
+                // Определяем отступ между слайдами в зависимости от размера экрана
+                const getSpaceBetween = () => {
+                    return window.innerWidth <= 768 ? 0 : 30;
+                };
+
                 new Swiper(sliderEl, {
                     // ИЗМЕНЕНИЕ 1: Говорим Swiper брать ширину из CSS
                     slidesPerView: 'auto', 
                     
-                    // ИЗМЕНЕНИЕ 2: Устанавливаем отступ между слайдами (убираем, так как используем CSS margin)
-                    spaceBetween: 0,
+                    // ИЗМЕНЕНИЕ 2: Устанавливаем отступ между слайдами в зависимости от размера экрана
+                    spaceBetween: getSpaceBetween(),
 
                     navigation: {
                         nextEl: nextEl,
                         prevEl: prevEl,
                     },
                     observer: true,
-                    observeParents: true
+                    observeParents: true,
+                    
+                    // Обновляем отступы при изменении размера окна
+                    on: {
+                        resize: function() {
+                            this.params.spaceBetween = getSpaceBetween();
+                            this.update();
+                        }
+                    }
                 });
             }
         });
