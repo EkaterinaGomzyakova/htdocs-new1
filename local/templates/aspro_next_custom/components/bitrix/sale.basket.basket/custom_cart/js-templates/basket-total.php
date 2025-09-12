@@ -11,7 +11,10 @@ use Bitrix\Main\Localization\Loc;
 
         <? if ($arParams['HIDE_COUPON'] !== 'Y') { ?>
         <div class="checkout-card_promo">
-            <input type="text" class="form-control" placeholder="Промокод" data-entity="basket-coupon-input">
+            <div class="promo-input-wrapper">
+                <input type="text" class="form-control" placeholder="Промокод" data-entity="basket-coupon-input">
+                <button type="button" class="promo-apply-btn" data-entity="basket-coupon-apply"></button>
+            </div>
             <div class="basket-coupon-alert-section">
                 <div class="basket-coupon-alert-inner">
                     {{#COUPON_LIST}}

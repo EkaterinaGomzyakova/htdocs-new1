@@ -563,9 +563,26 @@
 				BX.bind(this.getEntity(node, 'basket-checkout-button'), 'click', BX.proxy(this.checkOutAction, this));
 			}
 
-			BX.bind(this.getEntity(node, 'basket-coupon-input'), 'change', BX.proxy(this.addCouponAction, this));
-			BX.bind(this.getEntity(node, 'basket-coupon-input'), 'paste', BX.proxy(this.pasteCouponAction, this));
-			BX.bind(this.getEntity(node, 'basket-coupon-input'), 'keypress', BX.proxy(this.couponKeypressAction, this));
+			// Убираем автоматическое применение промокода
+			// BX.bind(this.getEntity(node, 'basket-coupon-input'), 'change', BX.proxy(this.addCouponAction, this));
+			// BX.bind(this.getEntity(node, 'basket-coupon-input'), 'paste', BX.proxy(this.pasteCouponAction, this));
+			// BX.bind(this.getEntity(node, 'basket-coupon-input'), 'keypress', BX.proxy(this.couponKeypressAction, this));
+			
+			// Обработчик для кнопки применения промокода
+			var applyCouponBtn = this.getEntity(node, 'basket-coupon-apply');
+			if (applyCouponBtn) {
+				BX.bind(applyCouponBtn, 'click', BX.proxy(this.applyCouponAction, this));
+			}
+			
+			// Обработчик для динамического изменения состояния кнопки
+			var couponInput = this.getEntity(node, 'basket-coupon-input');
+			var promoWrapper = couponInput ? couponInput.closest('.promo-input-wrapper') : null;
+			if (couponInput && promoWrapper) {
+				BX.bind(couponInput, 'input', BX.proxy(this.updatePromoButtonState, this));
+				BX.bind(couponInput, 'keyup', BX.proxy(this.updatePromoButtonState, this));
+				// Инициализируем состояние при загрузке
+				this.updatePromoButtonState();
+			}
 
 			var couponNodes = this.getEntities(node, 'basket-coupon-delete');
 			for (var i = 0, l = couponNodes.length; i < l; i++)
@@ -602,6 +619,63 @@
 			if (event.keyCode === 13 || event.which === 13) { // Enter key
 				event.preventDefault();
 				this.addCouponAction(event);
+			}
+		},
+
+		updatePromoButtonState: function()
+		{
+			var couponInput = this.getEntity(this.nodes.total, 'basket-coupon-input');
+			var promoWrapper = couponInput ? couponInput.closest('.promo-input-wrapper') : null;
+			
+			if (couponInput && promoWrapper) {
+				var hasText = couponInput.value && couponInput.value.trim() !== '';
+				
+				if (hasText) {
+					promoWrapper.classList.add('has-text');
+				} else {
+					promoWrapper.classList.remove('has-text');
+				}
+			}
+		},
+
+		applyCouponAction: function(event)
+		{
+			// Находим поле ввода промокода и кнопку из текущего контекста
+			var target = BX.proxy_context;
+			var promoWrapper = target ? target.closest('.promo-input-wrapper') : null;
+			var couponInput = promoWrapper ? promoWrapper.querySelector('[data-entity="basket-coupon-input"]') : null;
+			var applyBtn = target;
+			
+			// Проверяем, что поле не пустое и не заблокировано
+			if (couponInput && couponInput.value && couponInput.value.trim() !== '' && !couponInput.disabled) {
+				// Добавляем визуальную обратную связь
+				if (applyBtn) {
+					applyBtn.disabled = true;
+					applyBtn.style.opacity = '0.5';
+					applyBtn.style.transform = 'translateY(-50%) scale(0.9)';
+				}
+				
+				this.actionPool.addCoupon(couponInput.value.trim());
+				couponInput.disabled = true;
+				
+				// Восстанавливаем кнопку через некоторое время
+				setTimeout(function() {
+					if (applyBtn) {
+						applyBtn.disabled = false;
+						applyBtn.style.opacity = '1';
+						applyBtn.style.transform = 'translateY(-50%) scale(1)';
+					}
+				}, 2000);
+			} else {
+				// Если поле пустое, показываем легкую анимацию "нет"
+				if (applyBtn) {
+					applyBtn.style.transform = 'translateY(-50%) scale(0.95)';
+					setTimeout(function() {
+						if (applyBtn) {
+							applyBtn.style.transform = 'translateY(-50%) scale(1)';
+						}
+					}, 150);
+				}
 			}
 		},
 
