@@ -2047,12 +2047,15 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     min-width: 80px;               /* ÐœÐ¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð°Ñ ÑˆÐ¸Ñ€Ð¸Ð½Ð° Ð»ÐµÐ²Ð¾Ð¹ ÐºÐ¾Ð»Ð¾Ð½ÐºÐ¸ */
     flex-shrink: 0;                /* ÐÐµ ÑÐ¶Ð¸Ð¼Ð°ÐµÑ‚ÑÑ Ð¿Ñ€Ð¸ ÑƒÐ¼ÐµÐ½ÑŒÑˆÐµÐ½Ð¸Ð¸ ÑÐºÑ€Ð°Ð½Ð° */
 }
+.region-city-region{
+    margin-bottom: 20px;
+}
 
 /* ÐŸÑ€Ð°Ð²Ñ‹Ð¹ ÑÑ‚Ð¾Ð»Ð±ÐµÑ† - ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€ Ð´Ð»Ñ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ð³Ð¾Ñ€Ð¾Ð´Ðµ */
 .region-city-info {
     display: flex;                 /* Flexbox Ð´Ð»Ñ Ð²ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ñ€Ð°ÑÐ¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ */
     flex-direction: column;        /* Ð’ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒÐ½Ð¾Ðµ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ */
-    gap: 32px;                     /* Ð Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°Ð¼Ð¸ */
+    gap: 12px;                     /* Ð Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°Ð¼Ð¸ */
 }
 
 /* ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð³Ð¾Ñ€Ð¾Ð´Ð° */
@@ -4049,35 +4052,61 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 /* ÐÐ´Ð°Ð¿Ñ‚Ð¸Ð²Ð½Ð¾ÑÑ‚ÑŒ Ð´Ð»Ñ Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ñ… ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð² */
 @media (max-width: 768px) {
+    /* Контейнер клиента - горизонтальное расположение на мобильных */
+    .col-sm-12.bx-soa-customer {
+        display: flex !important;
+        align-items: center !important;
+        gap: 20px !important;
+    }
+    
     .bx-soa-customer-image-container {
         position: static;
-        width: 120px;
-        height: 120px;
-        margin: 0 auto 20px auto;
-        border: 15px solid #4ecdc4;
+        width: 80px;
+        height: 80px;
+        margin: 0;
+        border: 15px solid #285b4d;
+        flex-shrink: 0;
     }
     
     .bx-soa-customer-fields-wrapper {
         margin-left: 0;
         min-height: auto;
+        flex: 1;
     }
     
-    .bx-soa-customer-field {
-        flex-direction: column;
-        align-items: flex-start;
-        max-width: 100%;
-        padding-right: 0;
-    }
+    
     
     .bx-soa-customer-field label {
         min-width: auto;
         margin-right: 0;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #285b4d;
+        display: block;
     }
     
     .bx-soa-customer-field input {
         max-width: 100%;
         width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 16px;
+        background-color: #ffffff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+    
+    .bx-soa-customer-field input:focus {
+        border-color: #285b4d;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(40, 91, 77, 0.1);
+    }
+    
+    .bx-soa-customer-field input::placeholder {
+        color: #999;
+        font-style: italic;
     }
     
     /* ÐÐ° Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ñ… ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°Ñ… tooltip'Ñ‹ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶Ð°ÑŽÑ‚ÑÑ ÑÐ½Ð¸Ð·Ñƒ */
@@ -4237,11 +4266,12 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 
 @media (max-width: 767px) {
     .order-title {
-        font-size: 24px;
+        font-size: 40px;
+        color: #285b4d;
     }
     
     .order-title-container {
-        margin-bottom: 15px;
+        margin-bottom: 59px;
         padding: 0 10px;
     }
 }
@@ -4525,6 +4555,274 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     #bx-soa-paysystem .bx-soa-pp-item-container .payment-card {
         flex: none;
         min-width: auto;
+    }
+    #bx-soa-order>.bx-soa {
+		width: 430px;
+	}
+    .wrapper_inner, .maxwidth-theme {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    #bx-soa-order .bx-soa-section .bx-soa-section-title {
+        position: relative;
+        font-size: 24px;
+        color: #285b4d;
+        padding-left: 0 !important;
+        padding-top: 1px;
+        font-weight: 500
+    }
+    #bx-soa-delivery {
+        background-color: #f5f5f7 !important; /* Ð¤Ð¸Ð¾Ð»ÐµÑ‚Ð¾Ð²Ñ‹Ð¹ Ñ„Ð¾Ð½ */
+        margin-bottom: 100px !important; /* ÐŸÑ€Ð¾Ð¼ÐµÐ¶ÑƒÑ‚Ð¾Ðº 100px ÑÐ½Ð¸Ð·Ñƒ */
+        padding: 0px 15px 0px 15px !important; /* Ð’Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ðµ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ñ‹ */
+        border-radius: 8px !important; /* Ð¡ÐºÑ€ÑƒÐ³Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑƒÐ³Ð»Ñ‹ */
+    }
+    .region-city-label{
+        color: #285b4d;
+        font-size: 19px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 31.2px */
+    }
+    .region-display-container {
+        margin-top: 0px;
+        margin-bottom: 64px;           /* ÐžÑ‚ÑÑ‚ÑƒÐ¿ ÑÐ½Ð¸Ð·Ñƒ Ð¾Ñ‚ Ð±Ð»Ð¾ÐºÐ° */
+        display: flex;                 /* Flexbox Ð´Ð»Ñ Ð´Ð²ÑƒÑ…ÐºÐ¾Ð»Ð¾Ð½Ð¾Ñ‡Ð½Ð¾Ð¹ Ð²ÐµÑ€ÑÑ‚ÐºÐ¸ */
+        align-items: flex-start;       /* Ð’Ñ‹Ñ€Ð°Ð²Ð½Ð¸Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾ Ð²ÐµÑ€Ñ…Ð½ÐµÐ¼Ñƒ ÐºÑ€Ð°ÑŽ */
+        gap: 170px;                      /* Ð Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ Ð»ÐµÐ²Ð¾Ð¹ Ð¸ Ð¿Ñ€Ð°Ð²Ð¾Ð¹ ÐºÐ¾Ð»Ð¾Ð½ÐºÐ¾Ð¹ */
+    }
+    .region-city-label {
+        margin-bottom: 32px !important;     /* Отступ снизу от метки "Город" */
+    }
+    .region-city-info {
+        display: flex;                 /* Flexbox Ð´Ð»Ñ Ð²ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ñ€Ð°ÑÐ¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ */
+        flex-direction: column;        /* Ð’ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒÐ½Ð¾Ðµ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ */
+        gap: 12px;                     /* Ð Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°Ð¼Ð¸ */
+    }
+    .region-city-region{
+        margin-bottom: 20px;
+    }
+    .bx-soa-delivery-title{
+        margin-bottom: 16px;
+        color: #285b4d;
+    }
+    .wrapper, .wrapper_inner, .wrapp, .wrapper1>div {
+        width: 100%;
+        margin: auto;
+        box-sizing: border-box;
+        position: relative;
+        z-index: 2
+    }
+    #bx-soa-order .bx-soa-cart-total {
+        margin-top: 500px;
+        margin-left: 10px;
+        padding: 20px;
+        border-radius: 20px;
+        background: #f5f5f7
+    }
+    .bx-soa-section-title {
+        border-radius: 2px;
+        margin-top: 35px;
+        margin-left: 0px;
+        margin-bottom: 35px;
+        color: #285b4d;
+        line-height: 15px;
+        min-height: 20px;
+        vertical-align: middle;
+        font-size: 16px;
+        font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+        padding-top: 3px;
+    }
+    .col-sm-12.bx-soa-customer {
+        display: flex !important;
+        align-items: center !important;
+        gap: 15px !important;
+    }
+    .bx-soa-customer-field {
+        margin-bottom: 0px !important;
+        width: 290px !important;
+    }
+    .bx-soa-tooltip{
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .bx-soa-tooltip{
+        display: none !important;
+    }
+    
+    .bx-soa-customer-field {
+        margin-bottom: 0px !important;
+        width: 290px !important;
+    }
+    .col-sm-12.bx-soa-customer {
+        display: flex !important;
+        align-items: center !important;
+        gap: 15px !important;
+    }
+    .bx-soa-section-title {
+        border-radius: 2px;
+        margin-top: 35px;
+        margin-left: 0px;
+        margin-bottom: 35px;
+        color: #285b4d;
+        line-height: 15px;
+        min-height: 20px;
+        vertical-align: middle;
+        font-size: 16px;
+        font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+        padding-top: 3px;
+    }
+    #bx-soa-order .bx-soa-cart-total {
+        margin-top: 500px;
+        margin-left: 10px;
+        padding: 20px;
+        border-radius: 20px;
+        background: #f5f5f7
+    }
+    .wrapper, .wrapper_inner, .wrapp, .wrapper1>div {
+        width: 100% !important;
+        margin: auto !important;
+        box-sizing: border-box !important;
+        position: relative !important;
+        z-index: 2 !important
+    }
+    .bx-soa-delivery-title{
+        margin-bottom: 16px;
+        color: #285b4d;
+    }
+    .region-city-region{
+        margin-bottom: 20px;
+    }
+    .region-city-info {
+        display: flex;                 /* Flexbox Ð´Ð»Ñ Ð²ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ñ€Ð°ÑÐ¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ */
+        flex-direction: column;        /* Ð’ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒÐ½Ð¾Ðµ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ */
+        gap: 12px;                     /* Ð Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°Ð¼Ð¸ */
+    }
+    .region-display-container {
+        margin-top: 0px;
+        margin-bottom: 64px;           /* ÐžÑ‚ÑÑ‚ÑƒÐ¿ ÑÐ½Ð¸Ð·Ñƒ Ð¾Ñ‚ Ð±Ð»Ð¾ÐºÐ° */
+        display: flex;                 /* Flexbox Ð´Ð»Ñ Ð´Ð²ÑƒÑ…ÐºÐ¾Ð»Ð¾Ð½Ð¾Ñ‡Ð½Ð¾Ð¹ Ð²ÐµÑ€ÑÑ‚ÐºÐ¸ */
+        align-items: flex-start;       /* Ð’Ñ‹Ñ€Ð°Ð²Ð½Ð¸Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾ Ð²ÐµÑ€Ñ…Ð½ÐµÐ¼Ñƒ ÐºÑ€Ð°ÑŽ */
+        gap: 170px;                      /* Ð Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ Ð»ÐµÐ²Ð¾Ð¹ Ð¸ Ð¿Ñ€Ð°Ð²Ð¾Ð¹ ÐºÐ¾Ð»Ð¾Ð½ÐºÐ¾Ð¹ */
+    }
+    #bx-soa-delivery {
+        background-color: #f5f5f7 !important; /* Ð¤Ð¸Ð¾Ð»ÐµÑ‚Ð¾Ð²Ñ‹Ð¹ Ñ„Ð¾Ð½ */
+        margin-bottom: 100px !important; /* ÐŸÑ€Ð¾Ð¼ÐµÐ¶ÑƒÑ‚Ð¾Ðº 100px ÑÐ½Ð¸Ð·Ñƒ */
+        padding: 0px 15px 0px 15px !important; /* Ð’Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ðµ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ñ‹ */
+        border-radius: 8px !important; /* Ð¡ÐºÑ€ÑƒÐ³Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑƒÐ³Ð»Ñ‹ */
+    }
+    #bx-soa-order .bx-soa-section .bx-soa-section-title {
+        position: relative;
+        font-size: 24px;
+        color: #285b4d;
+        padding-left: 0 !important;
+        padding-top: 1px;
+        font-weight: 500
+    }
+    .order-title {
+        font-size: 40px;
+        color: #285b4d;
+    }
+    /* Ð”Ð²ÑƒÑ…ÐºÐ¾Ð»Ð¾Ð½Ð¾Ñ‡Ð½Ð°Ñ ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° Ð½Ð° Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ñ… */
+    #bx-soa-paysystem .bx-soa-pp {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    #bx-soa-paysystem .col-sm-7.bx-soa-pp-item-container,
+    #bx-soa-paysystem .col-sm-5.bx-soa-pp-desc-container {
+        flex: none;
+        max-width: 100%;
+    }
+    
+    #bx-soa-paysystem .bx-soa-pp-item-container {
+        flex-direction: column;
+        margin: 0;
+        gap: 10px;
+    }
+    
+    #bx-soa-paysystem .bx-soa-pp-item-container .payment-card {
+        flex: none;
+        min-width: auto;
+    }
+    #bx-soa-order>.bx-soa {
+		width: 430px;
+	}
+    .wrapper_inner, .maxwidth-theme {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    
+    /* Мобильная версия блока города - вертикальное расположение */
+    .region-display-container {
+        flex-direction: column !important;  /* Вертикальное расположение */
+        gap: 10px !important;              /* Уменьшенный отступ между элементами */
+        align-items: flex-start !important; /* Выравнивание по левому краю */
+    }
+    
+    .region-city-label {
+        margin-bottom: 32px !important;     /* Отступ снизу от метки "Город" */
+    }
+    .region-city-label{
+        color: #285b4d;
+        font-size: 19px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 31.2px */
+    }
+    
+    /* Контейнер клиента - горизонтальное расположение на мобильных */
+    .col-sm-12.bx-soa-customer {
+        display: flex !important;
+        align-items: center  !important;
+        gap: 15px !important;
+    }
+    
+    .bx-soa-customer-image-container {
+        position: static !important;
+        width: 70px !important;
+        height: 70px !important;
+        margin: 0 !important;
+        border: 12px solid #285b4d !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .bx-soa-customer-fields-wrapper {
+        margin-left: 0 !important;
+        min-height: auto !important;
+        flex: 1 !important;
+    }
+    
+    /* Стили полей клиента для маленьких экранов */
+    
+    
+    .bx-soa-customer-field label {
+        font-size: 13px !important;
+        margin-bottom: 6px !important;
+        color: #285b4d !important;
+    }
+    
+    .bx-soa-customer-field input {
+        padding: 10px 14px !important;
+        font-size: 15px !important;
+        border: 2px solid #e0e0e0 !important;
+        border-radius: 6px !important;
+        background-color: #ffffff !important;
+        transition: all 0.3s ease !important;
+        box-sizing: border-box !important;
+    }
+    
+    .bx-soa-customer-field input:focus {
+        border-color: #285b4d !important;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(40, 91, 77, 0.1) !important;
+    }
+    
+    .bx-soa-customer-field input::placeholder {
+        color: #999 !important;
+        font-style: italic !important;
     }
 }
 
