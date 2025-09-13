@@ -3511,7 +3511,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
 	}
 
 	#bx-soa-order .bx-soa-cart-total-button-container {
-		display: none !important;
+		display: block !important;
 	}
 
 	#bx-soa-order>.bx-soa {
@@ -4686,7 +4686,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     #bx-soa-order .bx-soa-cart-total {
         margin-top: 50px;
         margin-bottom: 100px;
-        margin-left: 10px;
+        margin-left: 0px;
         padding: 20px;
         border-radius: 20px;
         background: #f5f5f7
@@ -4837,7 +4837,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     #bx-soa-order .bx-soa-cart-total {
         margin-top: 50px;
         margin-bottom: 100px;
-        margin-left: 10px;
+        margin-left: 0px;
         padding: 20px;
         border-radius: 20px;
         background: #f5f5f7
