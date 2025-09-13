@@ -4109,6 +4109,76 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
         font-style: italic;
     }
     
+    /* Стили ячеек способов оплаты для планшетов */
+    #bx-soa-paysystem .payment-card {
+        width: 100% !important;
+        height: 54px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 0 12px !important;
+        margin-bottom: 0px !important;
+        border: 1px solid #e0e0e0 !important;
+        border-radius: 4px !important;
+        background: #fff !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    #bx-soa-paysystem .payment-card:hover:not(.bx-selected) {
+        border-color: #285b4d !important;
+        background-color: #f8f9fa !important;
+    }
+    
+    #bx-soa-paysystem .payment-card.bx-selected {
+        border-color: #285b4d !important;
+        background-color: #f0f8f5 !important;
+    }
+    
+    #bx-soa-paysystem .payment-card-container {
+        width: 18px !important;
+        height: 18px !important;
+        margin: 0 !important;
+        margin-right: 10px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    #bx-soa-paysystem .payment-card-title {
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        color: #333 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin: 0 !important;
+        text-align: left !important;
+    }
+    
+    #bx-soa-paysystem .payment-card-description {
+        display: none !important;
+    }
+    
+    /* Радиокнопка для выбора способа оплаты на планшетах */
+    #bx-soa-paysystem .payment-card::before {
+        content: '' !important;
+        width: 18px !important;
+        height: 18px !important;
+        border: 2px solid #e0e0e0 !important;
+        border-radius: 50% !important;
+        margin-right: 10px !important;
+        flex-shrink: 0 !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    #bx-soa-paysystem .payment-card.bx-selected::before {
+        border-color: #285b4d !important;
+        background-color: #285b4d !important;
+        background-image: radial-gradient(circle, #fff 4px, transparent 4px) !important;
+    }
+    
+    #bx-soa-paysystem .payment-card:hover:not(.bx-selected)::before {
+        border-color: #285b4d !important;
+    }
+    
     /* ÐÐ° Ð¼Ð¾Ð±Ð¸Ð»ÑŒÐ½Ñ‹Ñ… ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°Ñ… tooltip'Ñ‹ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶Ð°ÑŽÑ‚ÑÑ ÑÐ½Ð¸Ð·Ñƒ */
     .bx-soa-customer-field .bx-soa-tooltip {
         position: absolute;
@@ -4373,7 +4443,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     bottom: 0;
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: left center;
     opacity: 0.8;
     transition: opacity 0.3s ease;
 }
@@ -4549,7 +4619,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     #bx-soa-paysystem .bx-soa-pp-item-container {
         flex-direction: column;
         margin: 0;
-        gap: 10px;
+        gap: 0px;
     }
     
     #bx-soa-paysystem .bx-soa-pp-item-container .payment-card {
@@ -4573,8 +4643,8 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     }
     #bx-soa-delivery {
         background-color: #f5f5f7 !important; /* Ð¤Ð¸Ð¾Ð»ÐµÑ‚Ð¾Ð²Ñ‹Ð¹ Ñ„Ð¾Ð½ */
-        margin-bottom: 100px !important; /* ÐŸÑ€Ð¾Ð¼ÐµÐ¶ÑƒÑ‚Ð¾Ðº 100px ÑÐ½Ð¸Ð·Ñƒ */
-        padding: 0px 15px 0px 15px !important; /* Ð’Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ðµ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ñ‹ */
+        margin-bottom: 32px !important; /* ÐŸÑ€Ð¾Ð¼ÐµÐ¶ÑƒÑ‚Ð¾Ðº 100px ÑÐ½Ð¸Ð·Ñƒ */
+        padding: 28px 15px 43px 15px !important; /* Ð’Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ðµ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ñ‹ */
         border-radius: 8px !important; /* Ð¡ÐºÑ€ÑƒÐ³Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑƒÐ³Ð»Ñ‹ */
     }
     .region-city-label{
@@ -4585,7 +4655,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
         line-height: 130%; /* 31.2px */
     }
     .region-display-container {
-        margin-top: 0px;
+        margin-top: 32px;
         margin-bottom: 64px;           /* ÐžÑ‚ÑÑ‚ÑƒÐ¿ ÑÐ½Ð¸Ð·Ñƒ Ð¾Ñ‚ Ð±Ð»Ð¾ÐºÐ° */
         display: flex;                 /* Flexbox Ð´Ð»Ñ Ð´Ð²ÑƒÑ…ÐºÐ¾Ð»Ð¾Ð½Ð¾Ñ‡Ð½Ð¾Ð¹ Ð²ÐµÑ€ÑÑ‚ÐºÐ¸ */
         align-items: flex-start;       /* Ð’Ñ‹Ñ€Ð°Ð²Ð½Ð¸Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾ Ð²ÐµÑ€Ñ…Ð½ÐµÐ¼Ñƒ ÐºÑ€Ð°ÑŽ */
@@ -4614,7 +4684,8 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
         z-index: 2
     }
     #bx-soa-order .bx-soa-cart-total {
-        margin-top: 500px;
+        margin-top: 50px;
+        margin-bottom: 100px;
         margin-left: 10px;
         padding: 20px;
         border-radius: 20px;
@@ -4622,16 +4693,16 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     }
     .bx-soa-section-title {
         border-radius: 2px;
-        margin-top: 35px;
+        margin-top: 0px;
         margin-left: 0px;
-        margin-bottom: 35px;
+        margin-bottom: 0px;
         color: #285b4d;
         line-height: 15px;
         min-height: 20px;
         vertical-align: middle;
         font-size: 16px;
         font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
-        padding-top: 3px;
+        padding-bottom: 0px;
     }
     .col-sm-12.bx-soa-customer {
         display: flex !important;
@@ -4649,17 +4720,92 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
         position: relative;
         min-height: 1px;
         padding-left: 0px;
-        padding-bottom: 43px;
+        padding-bottom: 0px;
         padding-right: 0px;
       }
+      #bx-soa-paysystem .bx-soa-pp {
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+    }
+    #bx-soa-paysystem {
+        background-color: #f5f5f7 !important; /* Ð¤Ð¸Ð¾Ð»ÐµÑ‚Ð¾Ð²Ñ‹Ð¹ Ñ„Ð¾Ð½ */
+        padding: 15px !important; /* Ð’Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ðµ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ñ‹ */
+        border-radius: 8px !important; /* Ð¡ÐºÑ€ÑƒÐ³Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑƒÐ³Ð»Ñ‹ */
+    }
+    #bx-soa-paysystem .bx-soa-pp-item-container {
+        flex-direction: column;
+        margin: 0;
+        gap: 0px;
+    }
+    #bx-soa-paysystem .payment-card-container {
+        max-width: 50px;
+        width: 100% !important;
+        height: 24px !important;
+        margin: 0 !important;
+        margin-right: 8px !important;
+        flex-shrink: 0 !important;
+    }
+    #bx-soa-paysystem .payment-card-info {
+        flex: 1;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    .bx-soa-pp .col-sm-5{
+        display: none;
+    }
+    #bx-soa-paysystem {
+        height: 100% !important;
+    }
+      
 }
 
 @media (max-width: 480px) {
+    #bx-soa-paysystem {
+        height: 100% !important;
+    }
+    .bx-soa-pp .col-sm-5{
+        display: none;
+    }
+    #bx-soa-paysystem .payment-card-info {
+        flex: 1;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    #bx-soa-paysystem .payment-card-container {
+        max-width: 50px;
+        width: 100% !important;
+        height: 24px !important;
+        margin: 0 !important;
+        margin-right: 8px !important;
+        flex-shrink: 0 !important;
+    }
+    #bx-soa-paysystem .bx-soa-pp-item-container {
+        flex-direction: column;
+        margin: 0;
+        gap: 0px;
+    }
+    #bx-soa-paysystem {
+        background-color: #f5f5f7 !important; /* Ð¤Ð¸Ð¾Ð»ÐµÑ‚Ð¾Ð²Ñ‹Ð¹ Ñ„Ð¾Ð½ */
+        padding: 15px !important; /* Ð’Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ðµ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ñ‹ */
+        border-radius: 8px !important; /* Ð¡ÐºÑ€ÑƒÐ³Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑƒÐ³Ð»Ñ‹ */
+    }
+    #bx-soa-paysystem .bx-soa-pp {
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+    }
     .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
         position: relative;
         min-height: 1px;
         padding-left: 0px;
-        padding-bottom: 43px;
+        padding-bottom: 0px;
         padding-right: 0px;
       }
     .bx-soa-tooltip{
@@ -4677,19 +4823,20 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     }
     .bx-soa-section-title {
         border-radius: 2px;
-        margin-top: 35px;
+        margin-top: 0px;
         margin-left: 0px;
-        margin-bottom: 35px;
+        margin-bottom: 0px;
         color: #285b4d;
         line-height: 15px;
         min-height: 20px;
         vertical-align: middle;
         font-size: 16px;
         font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
-        padding-top: 3px;
+        padding-bottom: 0px;
     }
     #bx-soa-order .bx-soa-cart-total {
-        margin-top: 500px;
+        margin-top: 50px;
+        margin-bottom: 100px;
         margin-left: 10px;
         padding: 20px;
         border-radius: 20px;
@@ -4715,7 +4862,7 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
         gap: 12px;                     /* Ð Ð°ÑÑÑ‚Ð¾ÑÐ½Ð¸Ðµ Ð¼ÐµÐ¶Ð´Ñƒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°Ð¼Ð¸ */
     }
     .region-display-container {
-        margin-top: 0px;
+        margin-top: 32px;
         margin-bottom: 64px;           /* ÐžÑ‚ÑÑ‚ÑƒÐ¿ ÑÐ½Ð¸Ð·Ñƒ Ð¾Ñ‚ Ð±Ð»Ð¾ÐºÐ° */
         display: flex;                 /* Flexbox Ð´Ð»Ñ Ð´Ð²ÑƒÑ…ÐºÐ¾Ð»Ð¾Ð½Ð¾Ñ‡Ð½Ð¾Ð¹ Ð²ÐµÑ€ÑÑ‚ÐºÐ¸ */
         align-items: flex-start;       /* Ð’Ñ‹Ñ€Ð°Ð²Ð½Ð¸Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾ Ð²ÐµÑ€Ñ…Ð½ÐµÐ¼Ñƒ ÐºÑ€Ð°ÑŽ */
@@ -4723,8 +4870,8 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     }
     #bx-soa-delivery {
         background-color: #f5f5f7 !important; /* Ð¤Ð¸Ð¾Ð»ÐµÑ‚Ð¾Ð²Ñ‹Ð¹ Ñ„Ð¾Ð½ */
-        margin-bottom: 100px !important; /* ÐŸÑ€Ð¾Ð¼ÐµÐ¶ÑƒÑ‚Ð¾Ðº 100px ÑÐ½Ð¸Ð·Ñƒ */
-        padding: 0px 15px 0px 15px !important; /* Ð’Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ðµ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ñ‹ */
+        margin-bottom: 32px !important; /* ÐŸÑ€Ð¾Ð¼ÐµÐ¶ÑƒÑ‚Ð¾Ðº 100px ÑÐ½Ð¸Ð·Ñƒ */
+        padding: 28px 15px 43px 15px !important; /* Ð’Ð½ÑƒÑ‚Ñ€ÐµÐ½Ð½Ð¸Ðµ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ñ‹ */
         border-radius: 8px !important; /* Ð¡ÐºÑ€ÑƒÐ³Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑƒÐ³Ð»Ñ‹ */
     }
     #bx-soa-order .bx-soa-section .bx-soa-section-title {
@@ -4751,11 +4898,6 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
         max-width: 100%;
     }
     
-    #bx-soa-paysystem .bx-soa-pp-item-container {
-        flex-direction: column;
-        margin: 0;
-        gap: 10px;
-    }
     
     #bx-soa-paysystem .bx-soa-pp-item-container .payment-card {
         flex: none;
@@ -4837,6 +4979,87 @@ div[class*="bx-sls"] .bx-ui-sls-clear:hover:before {
     .bx-soa-customer-field input::placeholder {
         color: #999 !important;
         font-style: italic !important;
+    }
+    
+    /* Стили ячеек способов оплаты для мобильных устройств */
+    #bx-soa-paysystem .payment-card {
+        width: 100% !important;
+        height: 54px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 0 12px !important;
+        margin-bottom: 0px !important;
+        border: 1px solid #e0e0e0 !important;
+        border-radius: 4px !important;
+        background: #fff !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+    }
+
+    
+    
+    #bx-soa-paysystem .payment-card:hover:not(.bx-selected) {
+        border-color: #285b4d !important;
+        background-color: #f8f9fa !important;
+    }
+    
+    #bx-soa-paysystem .payment-card.bx-selected {
+        border-color: #285b4d !important;
+        background-color: #f0f8f5 !important;
+    }
+    
+    
+    
+    #bx-soa-paysystem .payment-card-image {
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 1 !important;
+        background-position: left center !important;
+    }
+    
+    #bx-soa-paysystem .payment-card-info {
+        flex: 1 !important;
+        display: flex !important;
+        gap: 8px !important;
+        overflow: hidden !important;
+        text-align: left !important;
+    }
+    
+    #bx-soa-paysystem .payment-card-title {
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        color: #333 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin: 0 !important;
+        text-align: left !important;
+    }
+    
+    #bx-soa-paysystem .payment-card-description {
+        display: none !important;
+    }
+    
+    /* Радиокнопка для выбора способа оплаты */
+    #bx-soa-paysystem .payment-card::before {
+        content: '' !important;
+        width: 16px !important;
+        height: 16px !important;
+        border: 2px solid #e0e0e0 !important;
+        border-radius: 50% !important;
+        margin-right: 8px !important;
+        flex-shrink: 0 !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    #bx-soa-paysystem .payment-card.bx-selected::before {
+        border-color: #285b4d !important;
+        background-color: #285b4d !important;
+        background-image: radial-gradient(circle, #fff 4px, transparent 4px) !important;
+    }
+    
+    #bx-soa-paysystem .payment-card:hover:not(.bx-selected)::before {
+        border-color: #285b4d !important;
     }
     
 }
