@@ -105,7 +105,7 @@ $APPLICATION->IncludeComponent(
                 </div>
             </div>
             <div class="feature-action">
-                <a href="/test/" class="feature-button">Пройти тест</a>
+                <a href="http://t.me/ClanBeauty_bot" class="feature-button">Пройти тест</a>
             </div>
         </div>
 
