@@ -1,5 +1,7 @@
 .banner-top-swiper {
     height: 600px;
+    position: relative;
+    overflow: hidden;
 }
 @media (min-width: 992px) {
     .banner-top-swiper {
@@ -29,6 +31,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Стили для текста поверх изображения */
+.banner-top-slide__content--image .banner-top-slide-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
 }
 
 @media (min-width: 992px) {
@@ -166,5 +182,59 @@
 
     .banner-top-slide-image {
         background-color: transparent;
+    }
+}
+
+/* Стили для кнопки "За покупками" */
+.banner-top-slide-text__buttons .banner-shopping-button {
+    display: inline-block !important;
+    padding: 12px 24px;
+    background-color: #ffffff !important;
+    color: #285B4D !important;
+    text-decoration: none !important;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 2px solid #285B4D !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 15px;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 10;
+    position: relative;
+}
+
+.banner-shopping-button:hover {
+    background-color: #285B4D;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 91, 77, 0.3);
+    text-decoration: none;
+}
+
+.banner-shopping-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(40, 91, 77, 0.3);
+}
+
+/* Адаптивность для кнопки */
+@media (max-width: 768px) {
+    .banner-shopping-button {
+        padding: 10px 18px;
+        font-size: 14px;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-shopping-button {
+        padding: 8px 16px;
+        font-size: 13px;
+        border-radius: 18px;
+        margin-top: 8px;
     }
 }

@@ -139,3 +139,4 @@ function showFavoritesToast(message) {
     document.querySelector('#toast-container').append(el);
     $(el).find('.toast').toast('show');
 }
+

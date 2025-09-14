@@ -8,17 +8,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
     if ($arItem['TITLE'] && !$arItem['HIDE_TITLE']) { ?>
         <div class="banner-top-slide-text__title">
             <span>
-                <?php
-                if ($arItem['URL']) { ?>
-                    <a href="<?= $arItem['URL'] ?>" <?= $arItem['TARGET'] ? "target=\"{$arItem['TARGET']}\"" : '' ?>>
-                <?php
-                }
-                echo $arItem['TITLE_NOTAGS'];
-                if ($arItem['URL']) { ?>
-                    </a>
-                <?php
-                }
-                ?>
+                <!-- Убираем ссылку с заголовка, делаем его некликабельным -->
+                <?= $arItem['TITLE_NOTAGS'] ?>
             </span>
         </div>
         <?php
@@ -27,6 +18,24 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
         <div class="banner-top-slide-text__content"><?= $arItem['TEXT'] ?></div>
         <?php
     }
+    
+    // Добавляем кнопку "За покупками" для всех баннеров
+    // Показываем кнопку всегда, даже если нет URL (тогда ведем на главную)
+    $buttonUrl = $arItem['URL'] ?: '/';
+    $buttonTarget = $arItem['TARGET'] ? "target=\"{$arItem['TARGET']}\"" : '';
+    
+    // Отладочная информация (можно убрать после проверки)
+    if (isset($_GET['debug_banner'])) {
+        echo "<!-- DEBUG: URL = " . ($arItem['URL'] ?: 'НЕТ') . ", TARGET = " . ($arItem['TARGET'] ?: 'НЕТ') . " -->";
+    }
+    ?>
+    <div class="banner-top-slide-text__buttons">
+        <a href="<?= $buttonUrl ?>" <?= $buttonTarget ?> class="banner-shopping-button">
+            За покупками
+        </a>
+    </div>
+    <?php
+    
     if ($arItem['BUTTONS']) { ?>
         <div class="banner-top-slide-text__buttons"><?= $arItem['BUTTONS'] ?></div>
         <?php

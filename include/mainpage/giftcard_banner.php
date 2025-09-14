@@ -4,7 +4,7 @@
     <!-- Левая часть с текстом -->
     <div class="gift-card-banner__content">
         <h2 class="gift-card-banner__title">Подарочные сертификаты</h2>
-        <p class="gift-card-banner__subtitle">От 500 до 30 000 ₽</p>
+        <p class="gift-card-banner__subtitle">От 500 ₽ до бесконечности</p>
         <a href="/catalog/gift-certificates/" class="btn btn-default">Купить</a>
     </div>
 

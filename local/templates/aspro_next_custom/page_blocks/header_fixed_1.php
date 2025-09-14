@@ -22,7 +22,7 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
 					<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 						array(
 							"COMPONENT_TEMPLATE" => ".default",
-							"PATH" => SITE_DIR."include/menu/menu.top_fixed_field.php",
+							"PATH" => SITE_DIR."include/menu/menu.unified_fixed.php",
 							"AREA_FILE_SHOW" => "file",
 							"AREA_FILE_SUFFIX" => "",
 							"AREA_FILE_RECURSIVE" => "Y",

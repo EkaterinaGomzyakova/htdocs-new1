@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест брендов и sale плашек</title>
+    <link rel="stylesheet" href="local/templates/aspro_next_custom/template_styles.css">
+    <link rel="stylesheet" href="brands-sale-mobile.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .test-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .debug-info {
+            background: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        /* ПРИНУДИТЕЛЬНЫЕ СТИЛИ ДЛЯ БРЕНДОВ И SALE */
+        .brands-sale-container {
+            display: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            .brands-sale-container {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 12px !important;
+                padding: 0 16px !important;
+                margin: 16px 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+                border: 3px solid red !important;
+                background: yellow !important;
+            }
+            
+            .brands-sale-item {
+                height: 98px !important;
+                max-height: 98px !important;
+                min-height: 98px !important;
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                align-items: center !important;
+                gap: 12px !important;
+                padding: 0 16px !important;
+                background: #fff !important;
+                border-radius: 8px !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+                flex: 1 !important;
+                min-width: 0 !important;
+                max-width: calc(50% - 6px) !important;
+                width: calc(50% - 6px) !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+                float: none !important;
+                clear: none !important;
+                border: 2px solid blue !important;
+            }
+            
+            .brands-sale-item img {
+                width: 48px !important;
+                height: 48px !important;
+                max-width: 48px !important;
+                max-height: 48px !important;
+                min-width: 48px !important;
+                min-height: 48px !important;
+                object-fit: contain !important;
+                flex-shrink: 0 !important;
+                display: block !important;
+            }
+            
+            .brands-sale-item .text {
+                font-size: 15px !important;
+                font-weight: 500 !important;
+                color: #333 !important;
+                line-height: 1.2 !important;
+                flex: 1 !important;
+                min-width: 0 !important;
+                word-wrap: break-word !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
+            }
+            
+            .brands-sale-item.sale {
+                background: linear-gradient(135deg, #ff6b6b, #ff8e8e) !important;
+                color: #fff !important;
+            }
+            
+            .brands-sale-item.sale .text {
+                color: #fff !important;
+            }
+            
+            .brands-sale-item.brand {
+                background: #f8f9fa !important;
+                border: 1px solid #e9ecef !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Тест брендов и sale плашек</h1>
+        
+        <div class="debug-info">
+            <strong>Отладка:</strong><br>
+            Ширина экрана: <span id="screen-width"></span>px<br>
+            Медиа-запрос: <span id="media-query"></span><br>
+            Контейнер: <span id="container-info"></span><br>
+            Элементы: <span id="items-info"></span>
+        </div>
+        
+        <div class="brands-sale-container">
+            <div class="brands-sale-item brand">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iNCIgZmlsbD0iIzMzMzMzMyIvPgo8dGV4dCB4PSIyNCIgeT0iMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkI8L3RleHQ+Cjwvc3ZnPgo=" alt="Бренд">
+                <div class="text">Nike</div>
+            </div>
+            <div class="brands-sale-item sale">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iNCIgZmlsbD0iI2ZmN2I2YiIvPgo8dGV4dCB4PSIyNCIgeT0iMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlM8L3RleHQ+Cjwvc3ZnPgo=" alt="Скидка">
+                <div class="text">Скидки до 50%</div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-radius: 5px;">
+            <h3>Инструкции для тестирования:</h3>
+            <ol>
+                <li>Откройте инструменты разработчика (F12)</li>
+                <li>Переключитесь в режим мобильного устройства</li>
+                <li>Установите ширину экрана менее 768px</li>
+                <li>Плашки должны появиться в одну строку с высотой 98px</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        function updateDebugInfo() {
+            const width = window.innerWidth;
+            const mediaQuery = width <= 768 ? 'Активен (≤768px)' : 'Неактивен (>768px)';
+            
+            const container = document.querySelector('.brands-sale-container');
+            const items = document.querySelectorAll('.brands-sale-item');
+            
+            let containerInfo = 'Не найден';
+            let itemsInfo = 'Не найдены';
+            
+            if (container) {
+                const styles = window.getComputedStyle(container);
+                containerInfo = `display: ${styles.display}, flex-direction: ${styles.flexDirection}, width: ${styles.width}`;
+            }
+            
+            if (items.length > 0) {
+                const firstItem = items[0];
+                const styles = window.getComputedStyle(firstItem);
+                itemsInfo = `${items.length} элементов, display: ${styles.display}, width: ${styles.width}`;
+            }
+            
+            document.getElementById('screen-width').textContent = width;
+            document.getElementById('media-query').textContent = mediaQuery;
+            document.getElementById('container-info').textContent = containerInfo;
+            document.getElementById('items-info').textContent = itemsInfo;
+        }
+        
+        updateDebugInfo();
+        window.addEventListener('resize', updateDebugInfo);
+        
+        // Дополнительная отладка через 1 секунду
+        setTimeout(updateDebugInfo, 1000);
+    </script>
+</body>
+</html>

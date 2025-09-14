@@ -1,6 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Хиты косметики");
+$APPLICATION->SetPageProperty("HIDE_LEFT_BLOCK", "Y");
 $GLOBALS['arFilter'] = ['PROPERTY_HIT' => CATALOG_HIT_VALUE_ID];
 $isAjax = "N";
 if (isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == "xmlhttprequest" && isset($_GET["ajax_get"]) && $_GET["ajax_get"] == "Y" || (isset($_GET["ajax_basket"]) && $_GET["ajax_basket"] == "Y")) {
@@ -8,7 +9,20 @@ if (isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER['HTTP_X_REQU
 }
 ?>
 <? if ($isAjax == "N") { ?>
-    <div class="ajax_load">
+    <!-- Табы для навигации по разделам offers -->
+    <div class="offers-tabs-container">
+        <ul class="offers-tabs">
+            <li><a href="/offers/hits/" class="offers-tab active">Хит</a></li>
+            <li><a href="/offers/novelty/" class="offers-tab">Новинки</a></li>
+            <li><a href="/offers/recommend/" class="offers-tab">К лету</a></li>
+            <li><a href="/offers/discount/" class="offers-tab">Скидки</a></li>
+            <li><a href="/offers/to70discount/" class="offers-tab">До -70%</a></li>
+            <li><a href="/offers/top/" class="offers-tab">Топ 2024</a></li>
+            <li><a href="/offers/for_him/" class="offers-tab">Для него</a></li>
+            <li><a href="/offers/blogger_advice/" class="offers-tab">Блогеры советуют</a></li>
+        </ul>
+    </div>
+    <div class="ajax_load offers">
 <? } ?>
 <? $APPLICATION->IncludeComponent(
     "bitrix:catalog.section",

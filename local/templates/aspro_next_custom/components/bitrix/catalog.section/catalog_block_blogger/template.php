@@ -36,7 +36,7 @@
                     <!-- ИЗМЕНЕНИЕ: Каждый товар теперь .swiper-slide. Классы с колонками (col-*) убраны -->
                     <div class="swiper-slide"> 
                         <div class="catalog_item_wrapp item"> <!-- Убран класс с колонкой -->
-                            <div class="catalog_item item_wrap " id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
+                            <div class="catalog_item item_wrap unified-product-card" id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
                                 <div class="inner_wrap">
                                     <div class="image_wrapper_block shine">
                                         <div class="stickers">

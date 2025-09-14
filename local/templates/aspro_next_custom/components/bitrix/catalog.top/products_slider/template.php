@@ -36,7 +36,7 @@ $arNotify = unserialize($notifyOption);
 						$elementName = ((isset($arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE']) && $arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE']) ? $arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'] : $arItem['NAME']);
 						?>
 						<?$arAddToBasketData = CNext::GetAddToBasketArray($arItem, $totalCount, $arParams["DEFAULT_COUNT"], $arParams["BASKET_URL"], true);?>
-						<li id="<?=$this->GetEditAreaId($arItem['ID']);?>" class="catalog_item visible">
+						<li id="<?=$this->GetEditAreaId($arItem['ID']);?>" class="catalog_item visible unified-product-card">
 							<div class="inner_wrap">
 								<div class="image_wrapper_block">
 									<div class="stickers">

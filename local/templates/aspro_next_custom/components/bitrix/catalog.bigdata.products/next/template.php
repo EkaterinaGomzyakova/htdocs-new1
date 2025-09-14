@@ -58,7 +58,7 @@ if($arResult['ITEMS']){?>
 					<ul class="tabs_slider slides catalog_block">
 						<?foreach ($arResult['ITEMS'] as $key => $arItem){?>
 							<?$strMainID = $this->GetEditAreaId($arItem['ID'] . $key);?>
-							<li class="catalog_item visible" id="<?=$strMainID;?>">
+							<li class="catalog_item visible unified-product-card" id="<?=$strMainID;?>">
 								<?$strTitle = (
 									isset($arItem["IPROPERTY_VALUES"]["ELEMENT_PREVIEW_PICTURE_FILE_TITLE"]) && '' != isset($arItem["IPROPERTY_VALUES"]["ELEMENT_PREVIEW_PICTURE_FILE_TITLE"])
 									? $arItem["IPROPERTY_VALUES"]["ELEMENT_PREVIEW_PICTURE_FILE_TITLE"]

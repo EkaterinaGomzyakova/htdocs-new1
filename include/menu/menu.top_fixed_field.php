@@ -1,10 +1,10 @@
 <?global $arTheme;?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:menu",
-	"top_fixed_field",
+	"unified_fixed",
 	Array(
-		"COMPONENT_TEMPLATE" => "top_fixed_field",
-		"MENU_CACHE_TIME" => "3600000",
+		"COMPONENT_TEMPLATE" => "unified_fixed",
+		"MENU_CACHE_TIME" => "3600",
 		"MENU_CACHE_TYPE" => "A",
 		"MENU_CACHE_USE_GROUPS" => "Y",
 		"MENU_CACHE_GET_VARS" => array(

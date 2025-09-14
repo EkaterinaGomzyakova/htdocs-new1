@@ -130,7 +130,7 @@ if (!empty($arResult['ITEMS'])){
 							}
 							$elementName = ((isset($arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE']) && $arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE']) ? $arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'] : $arItem['NAME']);
 							?>
-							<li class="catalog_item visible main_item_wrapper" id="<?=$arItem["strMainID"];?>">
+							<li class="catalog_item visible main_item_wrapper unified-product-card" id="<?=$arItem["strMainID"];?>">
 								<div class="inner_wrap">
 									<div class="image_wrapper_block">
 										<div class="stickers">

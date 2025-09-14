@@ -27,6 +27,9 @@
 				<?}?>
 			</li>
 		<?}?>
+		<li class="tracking-order">
+			<a href="/tracking/">Отследить заказ</a>
+		</li>
 		<li class="more">
 			<a href="javascript:;" rel="nofollow"></a>
 			<ul class="dropdown"></ul>
@@ -48,6 +51,9 @@
 					<?}?>
 				</li>
 			<?}?>
+			<li class="tracking-order">
+				<a href="/tracking/">Отследить заказ</a>
+			</li>
 			<li class="search">
 				<div class="search-input-div">
 					<input class="search-input" type="text" autocomplete="off" maxlength="50" size="40" placeholder="<?=GetMessage("CT_BST_SEARCH_BUTTON")?>" value="" name="q">

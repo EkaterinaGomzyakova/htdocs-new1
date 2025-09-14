@@ -549,4 +549,312 @@ while($arStoreProduct=$rsStoreProduct->fetch()) {
         'CACHE_CONTROL_STORE_STATUS' => $arProductInStores
     ),
 	false
-);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);?>
+
+<style>
+/* Применяем стили выпадающего меню к странице каталога */
+.catalog-page-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 0;
+}
+
+.catalog-page-content {
+    background: #ffffff;
+    border-radius: 0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    overflow: hidden;
+    animation: catalogDropdownSlideIn 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes catalogDropdownSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.catalog-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    border-bottom: 3px solid #1a4d3a;
+    background: #ffffff;
+    flex-shrink: 0;
+    box-shadow: 0 2px 10px rgba(26, 77, 58, 0.1);
+}
+
+.catalog-page-header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a4d3a;
+    text-shadow: none;
+}
+
+.catalog-page-close {
+    display: flex;
+    align-items: center;
+}
+
+.catalog-page-back-btn {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: #1a4d3a;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid #1a4d3a;
+}
+
+.catalog-page-back-btn:hover {
+    background: #ffffff;
+    color: #1a4d3a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 77, 58, 0.3);
+    text-decoration: none;
+}
+
+.catalog-page-back-btn i {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.catalog-page-body {
+    padding: 40px;
+    flex: 1;
+    overflow-y: auto;
+    background: #ffffff;
+}
+
+.catalog-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.catalog-category-item {
+    border: 2px solid #e8f5e8;
+    border-radius: 16px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(26, 77, 58, 0.08);
+}
+
+.catalog-category-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 77, 58, 0.05) 0%, rgba(26, 77, 58, 0.02) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.catalog-category-item:hover {
+    border-color: #1a4d3a;
+    box-shadow: 0 8px 32px rgba(26, 77, 58, 0.15);
+    transform: translateY(-4px) scale(1.02);
+}
+
+.catalog-category-item:hover::before {
+    opacity: 1;
+}
+
+.catalog-category-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #1a4d3a;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.catalog-category-link:hover {
+    color: #1a4d3a;
+    transform: translateX(5px);
+    text-decoration: none;
+}
+
+.catalog-category-link i {
+    margin-right: 16px;
+    font-size: 24px;
+    color: #1a4d3a;
+}
+
+.catalog-subcategories {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+}
+
+.catalog-subcategory-link {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #666666;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+    border-left: 3px solid transparent;
+}
+
+.catalog-subcategory-link:hover {
+    background: #e8f5e8;
+    color: #1a4d3a;
+    padding-left: 24px;
+    border-left-color: #1a4d3a;
+    transform: translateX(8px);
+    text-decoration: none;
+}
+
+.catalog-page-footer {
+    padding: 30px 40px;
+    border-top: 3px solid #1a4d3a;
+    background: #ffffff;
+    text-align: center;
+    flex-shrink: 0;
+    box-shadow: 0 -2px 10px rgba(26, 77, 58, 0.1);
+}
+
+.catalog-view-all {
+    display: inline-block;
+    padding: 16px 40px;
+    background: #1a4d3a;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(26, 77, 58, 0.2);
+    border: 2px solid #1a4d3a;
+}
+
+.catalog-view-all:hover {
+    background: #ffffff;
+    color: #1a4d3a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26, 77, 58, 0.3);
+    border-color: #1a4d3a;
+    text-decoration: none;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .catalog-page-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+    
+    .catalog-categories-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 20px;
+    }
+    
+    .catalog-page-header {
+        padding: 20px 30px;
+    }
+    
+    .catalog-page-header h1 {
+        font-size: 24px;
+    }
+    
+    .catalog-page-body {
+        padding: 30px 20px;
+    }
+    
+    .catalog-category-item {
+        padding: 25px;
+    }
+    
+    .catalog-category-link {
+        font-size: 20px;
+    }
+    
+    .catalog-category-link i {
+        font-size: 20px;
+    }
+    
+    .catalog-subcategory-link {
+        font-size: 14px;
+        padding: 10px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .catalog-page-header {
+        padding: 15px 20px;
+    }
+    
+    .catalog-page-header h1 {
+        font-size: 20px;
+    }
+    
+    .catalog-page-back-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+    
+    .catalog-page-body {
+        padding: 20px 15px;
+    }
+    
+    .catalog-categories-grid {
+        gap: 20px;
+        padding: 0 10px;
+    }
+    
+    .catalog-category-item {
+        padding: 20px;
+    }
+    
+    .catalog-category-link {
+        font-size: 18px;
+    }
+    
+    .catalog-subcategory-link {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+}
+</style>
+
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -1,5 +1,6 @@
 <? CNext::checkRestartBuffer(); ?>
 <? IncludeTemplateLangFile(__FILE__); ?>
+
 <? if (!$isIndex): ?>
     <? if ($isBlog): ?>
         </div> <? // class=col-md-9 col-sm-9 col-xs-8 content-md?>

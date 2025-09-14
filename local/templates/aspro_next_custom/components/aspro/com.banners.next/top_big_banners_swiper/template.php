@@ -12,17 +12,17 @@ if ($arResult['ITEMS']) { ?>
             <?php
             foreach ($arResult["ITEMS"][$arParams["BANNER_TYPE_THEME"]] as $arItem) {
                 $blockText = '';
-                if ($arItem['TEXT_POSITION'] !== 'image') {
-                    ob_start();
-                    include('block_text.php');
-                    $blockText = ob_get_clean();
-                }
+                // Всегда подключаем текст, чтобы кнопка "За покупками" отображалась
+                ob_start();
+                include('block_text.php');
+                $blockText = ob_get_clean();
+                
                 ob_start();
                 include('block_image.php');
                 $blockImage = ob_get_clean();
                 $content = match ($arItem['TEXT_POSITION']) {
                     'left', 'right', '' => $blockImage . $blockText,
-                    'image' => $blockImage,
+                    'image' => $blockImage . $blockText, // Добавляем текст даже для позиции 'image'
                     'center' => $blockText,
                     default => $blockText,
                 };

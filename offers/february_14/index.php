@@ -11,7 +11,7 @@ if (isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER['HTTP_X_REQU
 }
 ?>
 <? if ($isAjax == "N") { ?>
-    <div class="ajax_load">
+    <div class="ajax_load offers">
 <? } ?>
 <? $APPLICATION->IncludeComponent(
     "bitrix:catalog.section",

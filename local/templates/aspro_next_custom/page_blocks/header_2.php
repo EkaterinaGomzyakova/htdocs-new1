@@ -26,7 +26,7 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
                 ); ?>
             </div>
             <div class="col-md-6">
-            <? include($_SERVER['DOCUMENT_ROOT'] .  "/include/menu/menu.topest.php"); ?>
+            <? include($_SERVER['DOCUMENT_ROOT'] .  "/include/menu/menu.desktop_unified.php"); ?>
             </div>
             <div class="top-block-item pull-right show-fixed top-ctrl">
                 <div class="personal_wrap">
@@ -71,9 +71,11 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
                 <div class="row">
 
                     <!-- Блок каталога слева -->
-                   <!-- Блок каталога слева (теперь кастомная картинка-кнопка) -->
                     <div class="header-catalog-button-wrapper">
-                        <a href="/catalog/" class="header-catalog-button" title="Перейти в каталог"></a>
+                        <a href="/catalog/" class="header-catalog-button" 
+                           tabindex="0"
+                           role="button"
+                           title="Перейти в каталог"></a>
                     </div>
 
                     <!-- Центральный блок с логотипом -->
@@ -173,7 +175,7 @@ $logoClass = ($arTheme['COLORED_LOGO']['VALUE'] !== 'Y' ? '' : ' colored');
                 <div class="col-md-12">
                     <div class="menu-only">
                         <nav class="mega-menu sliced">
-                        <? include($_SERVER['DOCUMENT_ROOT'] . "/include/menu/menu.top_catalog_wide.php"); ?>
+                        <? include($_SERVER['DOCUMENT_ROOT'] . "/include/menu/menu.desktop_unified.php"); ?>
                         </nav>
                     </div>
                 </div>

@@ -128,7 +128,7 @@ $APPLICATION->IncludeComponent(
     </div>
 </div>
 <!-- Блок с кнопками-картинками "Бренды" и "Sale" -->
-<div class="homepage-buttons-container">
+<div class="homepage-buttons-container hidden-lg hidden-md">
 
     <!-- Ссылка-кнопка "Бренды" -->
     <a href="/info/brands/index.php" class="homepage-button-link">

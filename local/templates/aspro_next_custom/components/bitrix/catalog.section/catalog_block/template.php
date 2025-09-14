@@ -120,7 +120,7 @@
                         }
                         $elementName = ((isset($arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE']) && $arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE']) ? $arItem['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'] : $arItem['NAME']);
                         ?>
-                        <div class="catalog_item main_item_wrapper item_wrap <?= (($_GET['q'])) ? 's' : '' ?>" id="<?= $arItemIDs["strMainID"]; ?>">
+                        <div class="catalog_item main_item_wrapper item_wrap unified-product-card <?= (($_GET['q'])) ? 's' : '' ?>" id="<?= $arItemIDs["strMainID"]; ?>">
                             <div>
                                 <div class="image_wrapper_block">
                                     <div class="stickers">

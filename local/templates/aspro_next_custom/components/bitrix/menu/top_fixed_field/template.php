@@ -52,5 +52,8 @@
 				<?endif;?>
 			</li>
 		<?endforeach;?>
+		<li class="tracking-order">
+			<a href="/tracking/" title="Отследить заказ">Отследить заказ</a>
+		</li>
 	</ul>
 <?endif;?>

@@ -3,6 +3,7 @@ global $APPLICATION;
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Косметика со скидкой ClanBeauty.ru");
 $APPLICATION->SetPageProperty('title', "Косметика со скидкой в интернет-магазине ClanBeauty.ru");
+$APPLICATION->SetPageProperty("HIDE_LEFT_BLOCK", "Y");
 
 $GLOBALS['arFilter']['PROPERTY_HIT'] = 101;
 $GLOBALS['arFilter']['!SECTION_ID'] = 167; //Пробники
@@ -18,7 +19,20 @@ $isAjax = (
 
 if ($isAjax === 'N') {
     ?>
-    <div class="ajax_load">
+    <!-- Табы для навигации по разделам offers -->
+    <div class="offers-tabs-container">
+        <ul class="offers-tabs">
+            <li><a href="/offers/hits/" class="offers-tab">Хит</a></li>
+            <li><a href="/offers/novelty/" class="offers-tab">Новинки</a></li>
+            <li><a href="/offers/recommend/" class="offers-tab">К лету</a></li>
+            <li><a href="/offers/discount/" class="offers-tab active">Скидки</a></li>
+            <li><a href="/offers/to70discount/" class="offers-tab">До -70%</a></li>
+            <li><a href="/offers/top/" class="offers-tab">Топ 2024</a></li>
+            <li><a href="/offers/for_him/" class="offers-tab">Для него</a></li>
+            <li><a href="/offers/blogger_advice/" class="offers-tab">Блогеры советуют</a></li>
+        </ul>
+    </div>
+    <div class="ajax_load offers">
     <?php
 }
 $APPLICATION->IncludeComponent(

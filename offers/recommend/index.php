@@ -1,6 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Наши рекомендации");
+$APPLICATION->SetPageProperty("HIDE_LEFT_BLOCK", "Y");
 $APPLICATION->SetPageProperty('description', 'В этом разделе мы собрали коллекцию сезонных средств, которые будут максимально актуальны для данного сезона — выбирайте солнцезащитные средства, освежающие тонеры и кремы, противовоспалительные сыворотки и средства против черных точек! Все то, что так нужно летом.');
 
 $GLOBALS['arFilter']['PROPERTY_HIT'] = 99;
@@ -16,7 +17,20 @@ if (isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER['HTTP_X_REQU
         <p>В этом разделе мы собрали коллекцию сезонных средств, которые будут максимально актуальны для данного сезона — выбирайте солнцезащитные средства, освежающие тонеры и кремы, противовоспалительные сыворотки и средства против черных точек!</p>
         <p>Все то, что так нужно летом.</p>
     </div>
-    <div class="ajax_load">
+    <!-- Табы для навигации по разделам offers -->
+    <div class="offers-tabs-container">
+        <ul class="offers-tabs">
+            <li><a href="/offers/hits/" class="offers-tab">Хит</a></li>
+            <li><a href="/offers/novelty/" class="offers-tab">Новинки</a></li>
+            <li><a href="/offers/recommend/" class="offers-tab active">К лету</a></li>
+            <li><a href="/offers/discount/" class="offers-tab">Скидки</a></li>
+            <li><a href="/offers/to70discount/" class="offers-tab">До -70%</a></li>
+            <li><a href="/offers/top/" class="offers-tab">Топ 2024</a></li>
+            <li><a href="/offers/for_him/" class="offers-tab">Для него</a></li>
+            <li><a href="/offers/blogger_advice/" class="offers-tab">Блогеры советуют</a></li>
+        </ul>
+    </div>
+    <div class="ajax_load offers">
 <? } ?>
 <? $APPLICATION->IncludeComponent(
     "bitrix:catalog.section",

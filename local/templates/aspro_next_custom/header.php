@@ -57,6 +57,7 @@ $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
 	<? $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH . '/js/owl.carousel.js'); ?>
 	<? $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH . '/css/owl.carousel.css'); ?>
 	<? CNext::Start(SITE_ID); ?>
+	
 </head>
 
 <body class="fill_bg_<?= strtolower(CNext::GetFrontParametrValue('SHOW_BG_BLOCK')) ?>" id="main">
@@ -68,6 +69,7 @@ $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
 	<? SnailShop::getOptionsValuesJS(['basket_comment_is_active']); ?>
 
 	<? include($_SERVER['DOCUMENT_ROOT'] . "/include/menu/mobileappmenu.php"); ?>
+	
 
 	<? if ($APPLICATION->GetCurDir() == "/") { ?>
 		<? $APPLICATION->IncludeComponent(
